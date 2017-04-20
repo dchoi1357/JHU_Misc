@@ -1,3 +1,10 @@
+%% Configuration
+cdir = 'C:\Users\johnw\Documents\JHU\JHU_Misc';
+cd(cdir);
+
+%%
+
+
 % distance
 d = [1e6 10 20 5 18; 10 1e6 15 32 10; 20 15 1e6 25 16;
 	5 32 25 1e6 35; 18 10 16 35 1e6];
@@ -19,3 +26,6 @@ for n = 1:length(rteDist) % loop over all possible routes
 	% calculate total distance on the n-th trip
 	rteDist(n) = sum( d(sub2ind(size(d), a(:), b(:) ))  );
 end
+
+m = min(rteDist); % minimum distance of all routes
+z = find(rteDist == m); % find all routes matching minimum distance
