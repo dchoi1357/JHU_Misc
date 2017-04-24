@@ -31,7 +31,7 @@ for it = 1 : maxIter % iterate set number of times
 	[i,j] = deal(randi(5), 1+randi(4)); % select coordinate of x to change
 	
 	% marginal chg in energy of turning on/off this perceptron
-	E = (-x(i,j)*2 + 1) * -EnergyAtPt(D, x, i, j, pen); % negate if currently on
+	E = (-x(i,j)*2 + 1) * EnergyAtPt(D, x, i, j, pen); % negate if currently on
 	
 	if E < 0 % accept if chg in energy less than 0
 		x(i,j) = ~x(i,j);
