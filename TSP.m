@@ -6,7 +6,7 @@ cd(cdir);
 
 %% Initialize parameters
 cities = ['A', 'B', 'C', 'D', 'E']; % text for print-visualizaion
-pen = 40; % penalty distance
+pen = 100; % penalty distance
 % distance: diagonal is 0 because penalty imposed through other ways
 D = [0 10 20 5 18; 10 0 15 32 10; 20 15 0 25 16;
 	5 32 25 0 35; 18 10 16 35 0]; 
@@ -14,7 +14,6 @@ D = [0 10 20 5 18; 10 0 15 32 10; 20 15 0 25 16;
 
 pm = [1, 0]; % parameter of sigmoidal membership function
 T = 101; % starting temperature
-it = 1; % counter for current iteration
 maxIter = 1000; % maximum 1000 iterations
 dT = (T-1)/maxIter; % change in temperature every iteration
 
@@ -27,17 +26,20 @@ x(:,2:5) = rand(5,4) < 0.5; % randomly generate initial state
 x(1,[1,6]) = true; % force first and last epoch to city A
 xOrig = x;
 
-%% 
-while it < maxIter
-	[i,j] = deal(randi(5), 1+randi(4)); % random select x to change
-	E = EnergyAtPt(D, x, i, j, pen);
+%%
+for it = 1 : maxIter % iterate set number of times
+	[i,j] = deal(randi(5), 1+randi(4)); % select coordinate of x to change
 	
-	rej = rand > sigmf(E/T, pm); % reject if random > Pr from sigmf
-	x(i,j) = ~rej; % Turn x(i,j) to 1 if not rejected	
-	nRej = 0 + rej*(nRej+1); % increment nRej if rejected
+	% marginal chg in energy of turning on/off this perceptron
+	E = (-x(i,j)*2 + 1) * -EnergyAtPt(D, x, i, j, pen); % negate if currently on
 	
-	T = T - dT;
-	it = it + 1;
+	if E < 0 % accept if chg in energy less than 0
+		x(i,j) = ~x(i,j);
+	else
+		x(i,j) = xor( rand<exp(-E/T), x(i,j) ); % flip the state if prob < MAC
+	end
+	
+	T = T - dT; % decrease temperature
 end
 
 disp( [x; nan(1,6); xOrig] );
@@ -45,8 +47,8 @@ disp( [x; nan(1,6); xOrig] );
 %% Brute forcing
 %{
 % generate all possible routes
-routes = perms(1:5);
-routes(:,end+1) = routes(:,1); % force return to home
+routes = perms(2:5);
+routes = [ones(size(routes,1),1) routes ones(size(routes,1),1)];
 
 rteDist = NaN(length(routes),1);
 

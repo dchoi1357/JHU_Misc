@@ -7,9 +7,9 @@ function E = EnergyAtPt(D, x, i, j, pen)
 
 [E1, E2, E3, E4] = deal(0); % Set default at 0 for easy debugging
 
-E1 = D(i,:)*x(:,j-1);
-E2 = x(:,j+1)' * D(:,i);
-E3 = ( sum(x(:,j)) + sum(x(i,:)) - 2.*x(i,j) ) * pen;
-E4 = pen/2;
+E1 = D(i,:)*x(:,j-1); % distance from previous epoch to selected one
+E2 = x(:,j+1)' * D(:,i); % distance from current node to next epoch
+E3 = ( sum(x(:,j)) + sum(x(i,:)) - 2.*x(i,j) ) * pen; % penalties
+E4 = pen/2; % offset (bonus for turning on this perceptron)
 
-E = -(E1 + E2 + E3)/2 + E4;
+E = (E1 + E2 + E3)/2 - E4;
