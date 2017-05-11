@@ -4,7 +4,7 @@ global ramp eta
 x_j = ramp(wtHidd * x_i);
 y = ramp(wtOuter * x_j);
 
-gamma_k = (d-y) * (1 - exp(-y));
+gamma_k = (d-y) * (1 - exp(-y)); e = d-y;
 wtOuter_chg = eta .* gamma_k .* x_j';
 
 gamma_j = (1 - exp(-x_j)) .* (gamma_k .* wtOuter');

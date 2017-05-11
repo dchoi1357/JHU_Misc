@@ -12,7 +12,8 @@ LAC_range = [1 3]; % range of LAC = 1-3
 
 raw.GI_n = (raw.GI - min(GI_range)) ./ 10; % normalize input
 raw.LAC_n = raw.LAC - mean(LAC_range); % "normalize" the input
-% raw.LAC_n = raw.LAC ; % "normalize" the input
+raw.SOW_n = log(raw.SOW)/4; % logarithmic transform of SOW
+
 est = raw(1:2:end, :); % estimation set
 test = raw(2:2:end, :); % testing set
 
@@ -20,19 +21,18 @@ test = raw(2:2:end, :); % testing set
 global ramp sigm eta % Make function handle global variables
 ramp = @(x) log( 1 + exp(x) ); % SoftPlus ramp activation function
 sigm = @(x) 1 ./ (1 + exp(-x)); % Sigmoid activation function
-eta = 1; % step size
 
 % Calculate the range so that the results stay reasonable under Sigmoid
 n_hid = 5; % number of hidden layer nodes
-z = 8; % maximum weights to ensure sigmoid results are reasonable
-GI_wt_range = z / ( (max(GI_range)-min(GI_range))/10 * n_hid); % range
-LAC_wt_range = z / ( (max(LAC_range)-min(LAC_range)) * n_hid); % range
+rn = 8; % maximum weights to ensure sigmoid results are reasonable
+GI_wt_range = rn / ( (max(GI_range)-min(GI_range))/10 * n_hid); % range
+LAC_wt_range = rn / ( (max(LAC_range)-min(LAC_range)) * n_hid); % range
 
-%% Random weights for TACA neural networks
+%% Train TACA network using Sigmoid
+eta = 2; % step size
 wtHidd1 = [(rand(n_hid,1)*2-1).*GI_wt_range  (rand(n_hid,1)*2-1).*LAC_wt_range];
-wtOuter1 = (rand(1,n_hid)*2-1) * z/n_hid;
+wtOuter1 = (rand(1,n_hid)*2-1) * rn/n_hid;
 
-%% Train TACA using Sigmoid
 for z = 1:30
 	for n = 1: height(est)
 		d = est.TACA(n);
@@ -45,13 +45,37 @@ for z = 1:30
 end
 
 %% Evaluate TACA
-test.TACA_y = nan(size(test.TACA)); % variable for evaluation results
-test.TACA_ev = nan(size(test.TACA));
+test.TACA_y = nan(size(test.TACA)); % variable for sigmoid probabilities
+
 for n = 1: height(test)
-	d = test.TACA(n);
 	x_i = [test.GI_n(n); test.LAC_n(n)];
-	
 	test.TACA_y(n) = sigm(wtOuter1 * sigm(wtHidd1 * x_i));
-	test.TACA_ev(n) = test.TACA_y(n) > 0.4;
 end
+test.TACA_ev = ceil(test.TACA_y - 0.4); % transformed binary results
 % disp(test)
+
+%% Train SOW using SoftPlus ramp
+eta = 0.5;
+wtHidd2 = [rand(n_hid,1)/5 rand(n_hid,1)/5];
+wtOuter2 = rand(1,n_hid)/5;
+
+for z = 1:30
+	for n = 1: height(est)
+		d = est.SOW_n(n);
+		x_i = [est.GI_n(n); est.LAC_n(n)];
+		[chgOut, chgHidd] = FFBPramp(x_i, d, wtHidd2, wtOuter2);
+		
+		wtHidd2 = wtHidd2 + chgHidd;
+		wtOuter2 = wtOuter2 + chgOut;
+	end
+end
+
+%% Evaluate TACA
+test.SOW_y = nan(size(test.SOW)); % variable for transformed test result
+
+for n = 1: height(test)
+	x_i = [test.GI_n(n); test.LAC_n(n)];
+	test.SOW_y(n) = ramp(wtOuter2 * ramp(wtHidd2 * x_i));
+end
+test.SOW_ev = exp( test.SOW_y*4 ); % raw results
+% disp(test);
