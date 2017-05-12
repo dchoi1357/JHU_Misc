@@ -1,6 +1,6 @@
 function [t, roc] = EvalTACA(t, wtHidd, wtOut)
 % t = test data; wtHidd = hidden layer weights; wtOut = output layer weights
-global sigm binThresh % global vars
+global sigm binThresh % activation function
 oneVec = ones(height(t),1); % vector of ones for biases
 
 xi = sigm(wtHidd * [t.GI_n t.LAC_n oneVec]'); % hidden layer outputs 

@@ -29,23 +29,12 @@ xlabel('Gross Income');
 ylabel ('Size of Wallet'); 
 title ('SOW by GI, separated by LAC');
 
-%%
+%% Visualize activation functions
 figs{3} = figure('OuterPosition', [50 50 600 300]);
 subplot(1,2,1);
 ezplot(sigm, [-6, 6], figs{3})
-% xL = xlim;
-% yL = ylim;
-% line([0 0], yL, 'LineStyle', ':', 'Color', 'k');  %x-axis
-% line(xL, [0 0], 'LineStyle', ':', 'Color', 'k');  %y-axis
 grid on;
 
 subplot(1,2,2);
 ezplot(ramp, [-5, 10], figs{3})
-% xL = xlim;
-% yL = ylim;
-% line([0 0], yL, 'LineStyle', ':', 'Color', 'k');  %x-axis
-% line(xL, [0 0], 'LineStyle', ':', 'Color', 'k');  %y-axis
 grid on;
-
-%% clean up 
-close('all');
