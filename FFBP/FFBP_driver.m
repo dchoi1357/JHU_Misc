@@ -24,10 +24,11 @@ est = repmat(est, 10, 1); % repeat data 10 times to train in batch of 10
 test = raw(2:2:end, :); % testing set
 
 %% Setup
-global ramp sigm eta % Make function handle global variables
+global ramp sigm eta binThresh; % Make function handle global variables
 ramp = @(x) log( 1 + exp(x) ); % SoftPlus ramp activation function
 sigm = @(x) 1 ./ (1 + exp(-x)); % Sigmoid activation function
-rand1 = @(x,y) rand(x,y) .* 2 -1; 
+rand1 = @(x,y) rand(x,y) .* 2 -1; % func to generate random uniform in (-1, 1)
+binThresh = 0.5; % threshold of "on" for predictive nodes
 
 % Calculate the range so that the results stay reasonable under Sigmoid
 n_hid = 5; % number of hidden layer nodes
@@ -38,51 +39,44 @@ LAC_wt_range = rn / ( (max(LAC_range)-min(LAC_range)) * n_hid); % range
 %% Train TACA network using Sigmoid
 eta = 2; % step size
 wtHidd1 = [rand1(n_hid,1).*GI_wt_range, rand1(n_hid,2).*LAC_wt_range];
-wtOuter1 = rand1(1,n_hid+1) * rn/n_hid;
+wtOut1 = rand1(1,n_hid+1) * rn/n_hid;
 
-for z = 1:30 % train at most 30x10 rounds
+for z = 1:3 % train at most 30x10 rounds
 	for n = 1: height(est)
 		d = est.TACA(n);
 		x_i = [est.GI_n(n); est.LAC_n(n)];
-		[chgOut, chgHidd] = FFBPsigmoid(x_i, d, wtHidd1, wtOuter1);
+		[chgOut, chgHidd] = FFBPsigmoid(x_i, d, wtHidd1, wtOut1);
 		
 		wtHidd1 = wtHidd1 + chgHidd;
-		wtOuter1 = wtOuter1 + chgOut;
+		wtOut1 = wtOut1 + chgOut;
 	end
 end
 
 %% Evaluate TACA
-test.TACA_y = nan(size(test.TACA)); % variable for sigmoid probabilities
-
-for n = 1: height(test)
-	x_i = [test.GI_n(n); test.LAC_n(n)];
-	test.TACA_y(n) = sigm(wtOuter1 * [sigm(wtHidd1 * [x_i; 1]); 1]);
-end
-test.TACA_ev = ceil(test.TACA_y - 0.4); % transformed binary results
-% disp(test)
+[test, roc] = EvalTACA(test, wtHidd1, wtOut1);
 
 %% Train SOW using SoftPlus ramp
 eta = 0.1;
-wtHidd2 = [rand(n_hid,1)/5 rand(n_hid,1)/5];
-wtOuter2 = rand(1,n_hid)/5;
+wtHidd2 = [rand1(n_hid,1).*GI_wt_range, rand1(n_hid,2).*LAC_wt_range];
+wtOut2 = rand1(1,n_hid+1) * rn/n_hid;
+% wtHidd2 = [rand(n_hid,1)/5 rand(n_hid,1)/5];
+% wtOut2 = rand(1,n_hid)/5;
 
-for z = 1:100
+RMSEhist = Inf(1,5);
+
+for z = 1:100 % train maximum of 100x10 rounds
 	for n = 1: height(est)
 		d = est.SOW_n(n);
 		x_i = [est.GI_n(n); est.LAC_n(n)];
-		[chgOut, chgHidd] = FFBPramp(x_i, d, wtHidd2, wtOuter2);
+		[chgOut, chgHidd] = FFBPramp(x_i, d, wtHidd2, wtOut2);
 		
 		wtHidd2 = wtHidd2 + chgHidd;
-		wtOuter2 = wtOuter2 + chgOut;
+		wtOut2 = wtOut2 + chgOut;
+	end
+	
+	[test, RMSE] = EvalSOW(test, wtHidd2, wtOut2); % Evaluate TACA
+	RMSEhist = [RMSE RMSEhist(1:end-1)]; % add new RMSE to history
+	if sum(RMSEhist(2:end)-RMSEhist(1:end-1) < 0) > 2 
+		break % stop if RMSE increased more than twice in last 5 trainings
 	end
 end
-
-%% Evaluate TACA
-test.SOW_y = nan(size(test.SOW)); % variable for transformed test result
-
-for n = 1: height(test)
-	x_i = [test.GI_n(n); test.LAC_n(n)];
-	test.SOW_y(n) = ramp(wtOuter2 * ramp(wtHidd2 * x_i));
-end
-test.SOW_ev = exp( test.SOW_y*4 ); % raw results
-% disp(test);
