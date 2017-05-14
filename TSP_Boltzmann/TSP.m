@@ -51,7 +51,7 @@ for it = 1 : maxIter % iterate set number of times
 		% calculate total distance on the n-th trip
 		currDist = sum( D( sub2ind(size(D),a(:),b(:)) )  );
 		tmpStr = num2cell(cities(cityIdx));
-		fprintf('Route discovered: %s->%s->%s->%s->%s->%s, ', z{:} )
+		fprintf('Route discovered: %s->%s->%s->%s->%s->%s, ', tmpStr{:} )
 		fprintf('total dist: %u\n', currDist);
 		if currDist < minDist % if distance better than best distance so far
 			fprintf('Dist of route, %u, better than previous best, %u\n', ...
