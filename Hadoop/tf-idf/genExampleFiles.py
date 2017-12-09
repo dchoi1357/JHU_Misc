@@ -1,14 +1,9 @@
-import textwrap, sys, random
+import textwrap, sys, random, getTerms
 import numpy as np
 
-electronics = ['iPhone', 'LCD', 'HDTV', 'laptop', 'Xbox']
-countries = ['England', 'China', 'Japan', 'France', 'Russia']
-math = ['algebra', 'geometry', 'factorial', 'calculus', 'derivative', 'pi']
-cs = ['sorting', 'optimization', 'queue', 'DFS', 'flops']
-finance = ['options', 'commodities', 'futures', 'ETF', 'bonds']
-
-subjects = ['electronics', 'countries', 'math', 'cs', 'finance']
-terms = [electronics, countries, math, cs, finance]
+t = getTerms.get() # get terms from getTerms.py
+subjects = t.keys() # subjects
+terms = [t[s] for s in t] # list of list of terms
 punctuations = [' ', ', ', '. ']
 
 wordCt = [100, 300]
@@ -19,7 +14,7 @@ p = np.true_divide(words['frequency'], np.sum(words['frequency']))
 probs1 = np.array([0.8, 0.05, 0.15]) # texts, terms, specific terms
 probs2 = np.array([0.8, 0.1, 0.1]) # prob of space vs comma vs period
 
-def genDoc(spec):
+def genDoc(spec): # spec argument is a list of specialized terms
 	ct = np.random.randint(wordCt[0], wordCt[1]) # word count for doc
 	strc = np.random.choice(range(3), ct, True, probs1) # 0=wrd, 1=trm, 2=spec
 
