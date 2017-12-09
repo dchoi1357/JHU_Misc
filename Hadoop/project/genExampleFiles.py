@@ -16,7 +16,7 @@ wordCt = [100, 300]
 words = np.recfromcsv('common_words_freq.csv') # read CSV
 p = np.true_divide(words['frequency'], np.sum(words['frequency']))
 
-probs1 = np.array([0.9, 0.05, 0.05]) # texts, terms, specific terms
+probs1 = np.array([0.8, 0.05, 0.15]) # texts, terms, specific terms
 probs2 = np.array([0.8, 0.1, 0.1]) # prob of space vs comma vs period
 
 def genDoc(spec):
