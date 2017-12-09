@@ -3,3 +3,14 @@
 *.pyc
 *~
 .*#
+
+*.class
+*.log
+*.ctxt
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+

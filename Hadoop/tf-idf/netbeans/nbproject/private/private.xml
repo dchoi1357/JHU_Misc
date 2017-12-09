@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>src/bdpuh/project/if_tdf.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>98</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/home/hdadmin/hw/bdpuh.project/src/bdpuh/project/FirstKeyMapper.java</file>
+            <file>file:/home/hdadmin/hw/bdpuh.project/src/bdpuh/project/TermCountMapper.java</file>
+            <file>file:/home/hdadmin/hw/bdpuh.project/src/bdpuh/project/tf_idf.java</file>
+            <file>file:/home/hdadmin/hw/bdpuh.project/src/bdpuh/project/TermCountReducer.java</file>
+            <file>file:/home/hdadmin/hw/bdpuh.project/src/bdpuh/project/idfReducer.java</file>
+            <file>file:/home/hdadmin/hw/bdpuh.project/src/bdpuh/project/TopNReducer.java</file>
+            <file>file:/home/hdadmin/hw/bdpuh.project/src/bdpuh/project/TermFreqReducer.java</file>
+        </group>
+    </open-files>
+</project-private>
