@@ -22,9 +22,7 @@ class TopNReducer extends Reducer<Text, Text, Text, Text> {
 		}
 
 		@Override
-		public String toString() {
-			return term + ": " + tf_idf;
-		}
+		public String toString() { return term + ": " + tf_idf; }
 
 		@Override
 		public int compareTo(term_tfidf other) {

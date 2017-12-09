@@ -7,10 +7,8 @@ import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.*;
 import org.apache.hadoop.mapreduce.Job;
-import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
-import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
-import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
-import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
+import org.apache.hadoop.mapreduce.lib.input.*;
+import org.apache.hadoop.mapreduce.lib.output.*;
 
 public class tf_idf {
 	static Random r = new Random();
@@ -46,7 +44,8 @@ public class tf_idf {
 		for (int n=0; n<tmpDs.length; n++) {
 			tmpDs[n] = new Path(cdir, "t_" + Integer.toHexString(r.nextInt()));
 		}
-
+		
+//		cfg.set("mapreduce.framework.name", "local");
 		termCount(inPath, tmpDs[0]); // count word freq per doc
 		termFreq(tmpDs[0], tmpDs[1]); // count word freq across all docs
 		idf(tmpDs[1], tmpDs[2]); // combine previous 2, calculate tf-idf
@@ -58,62 +57,58 @@ public class tf_idf {
 
 	private static void termCount(Path in, Path out) throws IOException,
 			InterruptedException, ClassNotFoundException {
-		Job jb = genSkeletonJob(in, out, nReducer, "Term Count per Doc");
+		Job jb = genSkeletonJob(in, out, nReducer, "Term Count per Doc",
+				TextInputFormat.class, SequenceFileOutputFormat.class);
 
-		jb.setOutputValueClass(IntWritable.class);
+		jb.setMapOutputValueClass(IntWritable.class);
 		jb.setMapperClass(TermCountMapper.class); // Map/Reduce classes
 		jb.setReducerClass(TermCountReducer.class);
-
 		jb.waitForCompletion(true); // start run
 	}
 
 	private static void termFreq(Path in, Path out) throws IOException,
 			InterruptedException, ClassNotFoundException {
-		Job jb = genSkeletonJob(in, out, nReducer, "Term Freq");
+		Job jb = genSkeletonJob(in, out, nReducer, "Term Freq",
+				SequenceFileInputFormat.class, SequenceFileOutputFormat.class);
 
-		jb.setOutputValueClass(Text.class);
 		jb.setMapperClass(FirstKeyMapper.class); // Map/Reduce classes
 		jb.setReducerClass(TermFreqReducer.class);
-
 		jb.waitForCompletion(true); // start run
 	}
 
 	private static void idf(Path in, Path out) throws IOException,
 			InterruptedException, ClassNotFoundException {
-		Job jb = genSkeletonJob(in, out, nReducer, "Inverse Doc Freq");
+		Job jb = genSkeletonJob(in, out, nReducer, "Inverse Doc Freq",
+				SequenceFileInputFormat.class, SequenceFileOutputFormat.class);
 
-		jb.setMapOutputKeyClass(Text.class);
-		jb.setMapOutputValueClass(Text.class);
-		jb.setOutputValueClass(DoubleWritable.class);
 		jb.setMapperClass(FirstKeyMapper.class); // Map/Reduce classes
 		jb.setReducerClass(idfReducer.class);
-
 		jb.waitForCompletion(true); // start run
 	}
 
 	private static void takeTopN(Path in, Path out) throws IOException,
 			InterruptedException, ClassNotFoundException {
-		Job jb = genSkeletonJob(in, out, 1, "Top N Terms");
+		Job jb = genSkeletonJob(in, out, 1, "Top N Terms",
+				SequenceFileInputFormat.class, TextOutputFormat.class);
 
-		jb.setMapOutputKeyClass(Text.class);
-		jb.setMapOutputValueClass(Text.class);
-		jb.setOutputValueClass(Text.class);
 		jb.setMapperClass(FirstKeyMapper.class); // Map/Reduce classes
 		jb.setReducerClass(TopNReducer.class);
 //		jb.setCombinerClass(TopNcombiner.class);
-
 		jb.waitForCompletion(true); // start run
 	}
 	
-	private static Job genSkeletonJob(Path in, Path out, int n, String title) 
+	private static Job genSkeletonJob(Path in, Path out, int n, String title,
+			Class inFormat, Class outFormat) 
 			throws IOException {
 		Job jb = new Job(cfg, title);
 		FileInputFormat.addInputPath(jb, in);
 		FileOutputFormat.setOutputPath(jb, out);
 		
-		jb.setInputFormatClass(TextInputFormat.class); // I/O classes
-		jb.setOutputFormatClass(TextOutputFormat.class);
+		jb.setMapOutputKeyClass(Text.class);
 		jb.setOutputKeyClass(Text.class);
+		jb.setOutputValueClass(Text.class);
+		jb.setInputFormatClass(inFormat); // I/O classes
+		jb.setOutputFormatClass(outFormat);
 		
 		jb.setNumReduceTasks(n);
 		jb.setJarByClass(bdpuh.project.tf_idf.class);		
