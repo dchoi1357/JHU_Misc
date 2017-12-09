@@ -5,8 +5,8 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
-class TermCountReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
-	IntWritable count = new IntWritable();
+class TermCountReducer extends Reducer<Text, IntWritable, Text, Text> {
+	Text count = new Text();
 	
 	@Override
 	protected void reduce(Text key, Iterable<IntWritable> values, 
@@ -15,7 +15,7 @@ class TermCountReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
 		for (IntWritable v : values) {
 			sum += v.get();
 		}
-		count.set(sum);
+		count.set(Integer.toString(sum));
 		context.write(key, count);
 	}
 }

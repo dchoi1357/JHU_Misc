@@ -3,13 +3,13 @@ package bdpuh.project;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
-import org.apache.hadoop.io.DoubleWritable;
+//import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
-class idfReducer extends Reducer<Text, Text, Text, DoubleWritable> {
+class idfReducer extends Reducer<Text, Text, Text, Text> {
 	Text outKey = new Text();
-	DoubleWritable tf_idf = new DoubleWritable();
+	Text tf_idf = new Text();
 	double nDocsInCorpus;
 	LinkedList<String> docTerms;
 	LinkedList<Double> termFreq;
@@ -44,7 +44,8 @@ class idfReducer extends Reducer<Text, Text, Text, DoubleWritable> {
 		Iterator<Double> tf = termFreq.iterator();
 		while (dt.hasNext() && tf.hasNext()) {
 			outKey.set(dt.next());
-			tf_idf.set(tf.next() * Math.log(nDocsInCorpus / nAppearence));
+			double tmp = tf.next() * Math.log(nDocsInCorpus / nAppearence);
+			tf_idf.set(Double.toString(tmp));
 			context.write(outKey, tf_idf);
 		}
 	}
