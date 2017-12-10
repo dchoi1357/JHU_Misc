@@ -1,14 +1,11 @@
 import textwrap, sys, random, getTerms
 import numpy as np
 
-t = getTerms.get() # get terms from getTerms.py
-subjects = t.keys() # subjects
-terms = [t[s] for s in t] # list of list of terms
+terms = getTerms.get() # get terms from getTerms.py
 punctuations = [' ', ', ', '. ']
-
 wordCt = [100, 300]
 
-words = np.recfromcsv('common_words_freq.csv') # read CSV
+words = np.recfromcsv('common_words_freq.csv') # read CSV of Eng. terms and freq
 p = np.true_divide(words['frequency'], np.sum(words['frequency']))
 
 probs1 = np.array([0.8, 0.05, 0.15]) # texts, terms, specific terms
@@ -49,11 +46,11 @@ else:
 	nDocs = 20
 
 fileNames = np.char.add(genRandName(10, nDocs), '.txt')
-subjIdx = np.random.randint(len(subjects), size=nDocs)
-name_x_subj = np.vstack( (fileNames,np.array(subjects)[subjIdx]) ).T
+docSubjs = np.random.choice(terms.keys(), nDocs)
+name_x_subj = np.vstack( (fileNames,docSubjs) ).T
 
-for n,idx in enumerate(subjIdx):
-	printListOfTxt(genDoc(terms[idx]), fileNames[n])
+for n,sbj in enumerate(docSubjs):
+	printListOfTxt(genDoc(terms[sbj]), fileNames[n])
 
 np.savetxt('filename_subject_list.csv', name_x_subj, fmt='%s', delimiter=',',
 	header='fileName,subject', comments='')
