@@ -93,7 +93,6 @@ public class tf_idf {
 
 		jb.setMapperClass(FirstKeyMapper.class); // Map/Reduce classes
 		jb.setReducerClass(TopNReducer.class);
-//		jb.setCombinerClass(TopNcombiner.class);
 		jb.waitForCompletion(true); // start run
 	}
 	

@@ -1,7 +1,6 @@
 package bdpuh.project;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.PriorityQueue;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
@@ -54,7 +53,7 @@ class TopNReducer extends Reducer<Text, Text, Text, Text> {
 		for (int n = topNterms; n > 0; n--) {
 			topTerms[n - 1] = pq.remove().term;
 		}
-		outTerms.set( Arrays.toString(topTerms) );
+		outTerms.set( String.join("\t", topTerms) );
 		context.write(docName, outTerms);
 	}
 }
