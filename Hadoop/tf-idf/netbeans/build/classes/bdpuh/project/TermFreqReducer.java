@@ -16,7 +16,6 @@ class TermFreqReducer extends Reducer <Text, Text, Text, Text> {
 	protected void reduce(Text key, Iterable<Text> values, 
 			Context context) throws IOException, InterruptedException {
 		int docWordCount = 0, tmp; // total words in this doc
-		String term;
 		
 		terms = new LinkedList<>();
 		counts = new LinkedList<>();

@@ -49,8 +49,8 @@ class TopNReducer extends Reducer<Text, Text, Text, Text> {
 			}
 		}
 
-		String[] topTerms = new String[topNterms];
-		for (int n = topNterms; n > 0; n--) {
+		String[] topTerms = new String[Math.min(topNterms,pq.size())];
+		for (int n = topTerms.length; n > 0; n--) {
 			topTerms[n - 1] = pq.remove().term;
 		}
 		outTerms.set( String.join("\t", topTerms) );

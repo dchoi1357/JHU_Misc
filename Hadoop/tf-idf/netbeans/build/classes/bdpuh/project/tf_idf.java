@@ -37,7 +37,7 @@ public class tf_idf {
 		FileSystem fs = FileSystem.newInstance(cfg);
 		nInputs = fs.listStatus(inPath).length; // number of input files
 		cfg.setInt("nDocs", nInputs); // pass no. of total input docs via cfg
-		nReducer = nInputs / 10; // each reducer gets 1/10th of share
+		nReducer = (int) Math.round(Math.sqrt(nInputs)); // sqrt share
 		cfg.setInt("topN", topN); // top N terms to pick for each doc
 		
 		Path[] tmpDs = new Path[3];

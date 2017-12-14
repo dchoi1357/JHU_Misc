@@ -3,7 +3,6 @@ package bdpuh.project;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
-//import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
@@ -42,10 +41,10 @@ class idfReducer extends Reducer<Text, Text, Text, Text> {
 		// Loop over cached values and write out results
 		Iterator<String> dt = docTerms.iterator();
 		Iterator<Double> tf = termFreq.iterator();
+		double idf = Math.log(nDocsInCorpus / nAppearence); // idf for term
 		while (dt.hasNext() && tf.hasNext()) {
 			outKey.set(dt.next());
-			double tmp = tf.next() * Math.log(nDocsInCorpus / nAppearence);
-			tf_idf.set(Double.toString(tmp));
+			tf_idf.set(Double.toString(tf.next() * idf));
 			context.write(outKey, tf_idf);
 		}
 	}

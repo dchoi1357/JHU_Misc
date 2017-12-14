@@ -23,9 +23,10 @@ public class TermCountMapper extends Mapper<LongWritable, Text,
 	@Override
 	protected void map(LongWritable key, Text value, Context context) 
 			throws IOException, InterruptedException {
-		String[] toks = value.toString().split("[,.\\s]+", 0); // split by \s,.
+		// Split input by any consecutive whitespace, numbers or punctuations
+		String[] toks = value.toString().split("[\\d\\s.*\\p{Punct}]+", 0); 
 		for (String tok : toks) {
-			outKey.set(fileInName + "\t" + tok); // filename and word
+			outKey.set(fileInName + "\t" + tok.toLowerCase()); // fileName, term 
 			context.write(outKey, ONE);
 		}
 	}
