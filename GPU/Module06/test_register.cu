@@ -33,8 +33,8 @@ __host__ cudaEvent_t get_time(void) {
 }
 
 // Simulate a AR(n) process saving temp results to registers
-__global__ void sim_w_register(float *x0, float *x1, float *x2, float *x_out, 
-								const unsigned int N, const unsigned int T) {
+__global__ void sim_register(float *x0, float *x1, float *x2, float *x_out, 
+							const unsigned int N, const unsigned int T) {
 	unsigned int const tid = (blockIdx.x * blockDim.x) + threadIdx.x;
 	
 	if (tid < N) {
@@ -60,8 +60,8 @@ __global__ void sim_w_register(float *x0, float *x1, float *x2, float *x_out,
 }
 
 // Simulate a AR(n) process saving work to global mem directly
-__global__ void sim_w_gmem(float *x0, float *x1, float *x2, float *x_out, 
-								const unsigned int N, const unsigned int T) {
+__global__ void sim_gmem(float *x0, float *x1, float *x2, float *x_out, 
+						const unsigned int N, const unsigned int T) {
 	unsigned int const i = (blockIdx.x * blockDim.x) + threadIdx.x;
 	
 	if (i < N) {
@@ -79,26 +79,12 @@ __global__ void sim_w_gmem(float *x0, float *x1, float *x2, float *x_out,
 	}
 }
 
-
-int main(int argc, char* argv[]) {
-	if (argc == 3) { // get number of simulations based on CMDLINE input
-		N_SIMS = atoi(argv[1]);
-		T_MAX = atoi(argv[2]);
-	} else {
-		printf("Usage: %s [nSimulations] [maxTimePeriods].\n", argv[0]);
-		return EXIT_FAILURE;
-	}
-	N_BLK = N_SIMS / MAX_THREADS + 1; // min of one block
-	N_THRD = std::min(N_SIMS, MAX_THREADS); // num of threads per block
-	N_BYTES = N_SIMS * sizeof(float); // size of array 
-	printf("Running %u simulations over %u time periods...\n", N_SIMS, T_MAX);
-	
-	float *h_x0, *h_x1, *h_x2, *h_x_reg, *h_x_gmem; 
+void simulate(const unsigned int type) {
+	float *h_x0, *h_x1, *h_x2, *h_x; 
 	h_x0 = (float*) malloc(N_BYTES); // allocate input
 	h_x1 = (float*) malloc(N_BYTES); // allocate input
 	h_x2 = (float*) malloc(N_BYTES); // allocate input
-	h_x_reg = (float*) malloc(N_BYTES); // allocate output for register run
-	h_x_gmem = (float*) malloc(N_BYTES); // allocate output for gmem run
+	h_x = (float*) malloc(N_BYTES); // allocate output 
 		
 	float start_x [N_AR] = {START_X};
 	for (int i = 0; i < N_SIMS; i++) { // set all host Xs to the same number
@@ -116,41 +102,51 @@ int main(int argc, char* argv[]) {
 	float h_phi [N_AR] = {PHI}; // constant for AR parms
 	cudaMemcpyToSymbol(c_phi, h_phi, N_BYTES_PARM); // copy params to constant
 	
-	/**** Simulate with Registers *****/
-	cudaEvent_t start1 = get_time(); // start time 
+	/**** Simulation *****/
+	char *typeName;
+	cudaEvent_t start = get_time(); // start time 
 	cudaMemcpy(d_x0, h_x0, N_BYTES, cudaMemcpyHostToDevice); //copy to device
 	cudaMemcpy(d_x1, h_x1, N_BYTES, cudaMemcpyHostToDevice); //copy to device
 	cudaMemcpy(d_x2, h_x2, N_BYTES, cudaMemcpyHostToDevice); //copy to device
-
-	sim_w_register<<<N_BLK, N_THRD>>>(d_x0, d_x1, d_x2, d_out, N_SIMS, T_MAX); 
-	cudaMemcpy(h_x_reg, d_out, N_BYTES, cudaMemcpyDeviceToHost ); // copy back
-	cudaEvent_t stop1 = get_time(); // stop time
-	cudaEventSynchronize(stop1);
 	
-	/**** Simulate with Global Memory *****/
-	cudaEvent_t start2 = get_time(); // start time 
-	cudaMemcpy(d_x0, h_x0, N_BYTES, cudaMemcpyHostToDevice); //copy to device
-	cudaMemcpy(d_x1, h_x1, N_BYTES, cudaMemcpyHostToDevice); //copy to device
-	cudaMemcpy(d_x2, h_x2, N_BYTES, cudaMemcpyHostToDevice); //copy to device
-
-	sim_w_gmem<<<N_BLK, N_THRD>>>(d_x0, d_x1, d_x2, d_out, N_SIMS, T_MAX); 
-	cudaMemcpy(h_x_gmem, d_out, N_BYTES, cudaMemcpyDeviceToHost ); // copy back
-	cudaEvent_t stop2 = get_time(); // stop time
-	cudaEventSynchronize(stop2);
+	if (type == 1){ // if simulating with registers
+		typeName = "registers";
+		sim_register<<<N_BLK, N_THRD>>>(d_x0, d_x1, d_x2, d_out, N_SIMS, T_MAX); 
+		
+	} else { // if simulating with global memory 
+		typeName = "global mem";
+		sim_gmem<<<N_BLK, N_THRD>>>(d_x0, d_x1, d_x2, d_out, N_SIMS, T_MAX); 
+	}	
+	cudaMemcpy(h_x, d_out, N_BYTES, cudaMemcpyDeviceToHost ); // copy back
+	cudaEvent_t stop = get_time(); // stop time
+	cudaEventSynchronize(stop);
 	
 	// Calculate and print simulation results and timing
-	float mean1= calcMean(h_x_reg, N_SIMS);
-	float tmp1 = 0;
-	cudaEventElapsedTime(&tmp1, start1, stop1);
-	printf("\twith registers, result=%f, %.3f ms taken, \n", mean1, tmp1);
+	float x_mu = calcMean(h_x, N_SIMS);
+	float dur = 0;
+	cudaEventElapsedTime(&dur, start, stop);
+	printf("\twith %s, result=%f, %.3f ms taken, \n", typeName, x_mu, dur);
 	
-	float mean2 = calcMean(h_x_gmem, N_SIMS);
-	float tmp2 = 0;
-	cudaEventElapsedTime(&tmp2, start2, stop2);
-	printf("\twith global memory, result=%f, %.3f ms taken, \n", mean2, tmp2);
-	printf("\n");
+	// Free up memory
+	cudaFree(d_x2); cudaFree(d_x1); cudaFree(d_x0); 
+	cudaFree(d_out); cudaFree(c_phi);
+	free(h_x0); free(h_x1); free(h_x2); free(h_x);
+}
+
+int main(int argc, char* argv[]) {
+	if (argc == 3) { // get number of simulations based on CMDLINE input
+		N_SIMS = atoi(argv[1]);
+		T_MAX = atoi(argv[2]);
+	} else {
+		printf("Usage: %s [nSimulations] [maxTimePeriods].\n", argv[0]);
+		return EXIT_FAILURE;
+	}
+	N_BLK = N_SIMS / MAX_THREADS + 1; // min of one block
+	N_THRD = std::min(N_SIMS, MAX_THREADS); // num of threads per block
+	N_BYTES = N_SIMS * sizeof(float); // size of array 
+	printf("Running %u simulations over %u time periods...\n", N_SIMS, T_MAX);
 	
-	cudaFree(d_x2); cudaFree(d_x1); cudaFree(d_x0); cudaFree(d_out);
-	free(h_x0); free(h_x1); free(h_x2); free(h_x_reg); free(h_x_gmem);
+	simulate(1); // simulating with registers
+	simulate(2); // simulating with global memory
 	return EXIT_SUCCESS;
 }
