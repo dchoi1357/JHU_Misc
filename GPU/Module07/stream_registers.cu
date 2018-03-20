@@ -31,11 +31,12 @@ __host__ cudaEvent_t get_time(void) {
 	return time;
 }
 
+// Based on parameter, draw poisson random number as frequency of losses
 __global__ void sim_freq(unsigned int *f_out, float *prm, unsigned int N) {
 	unsigned int const tid = (blockIdx.x * blockDim.x) + threadIdx.x;
 	
 	if (tid < N) {
-		float lambda = prm[0];
+		float lambda = prm[0]; // lambda for poisson
 		curandState_t state; // initialize rand state
 		curand_init(tid, 0, 0, &state); // set seed to thread index
 
@@ -43,23 +44,22 @@ __global__ void sim_freq(unsigned int *f_out, float *prm, unsigned int N) {
 	}
 }
 
+// Based on parameter and freq, draw and sum pareto loss amounts
 __global__ void sim_severity(float *loss_out, unsigned int *freq, float *prm,
 							const unsigned int N) {
 	unsigned int const tid = (blockIdx.x * blockDim.x) + threadIdx.x;
 	
 	if (tid < N) {
-		double A = prm[1];
-		double B = prm[2];
-		
+		double A = prm[1]; double B = prm[2]; // two pareto parameters
 		curandState_t state; // initialize rand state
 		curand_init(tid, 0, 0, &state); // set seed to thread index
 		double sum = 0.0;
 		double unif = 0.0; // temp var for storing uniform rand 
 		for (int f=0; f < freq[tid]; f++) {
-			unif = curand_uniform_double(&state);
-			sum += B / pow(1-unif, 1/A);
+			unif = curand_uniform_double(&state); // draw unif rand as double
+			sum += B / pow(1-unif, 1/A); // quantile function (inverse CDF)
 		}		
-		loss_out[tid] = (float) sum;
+		loss_out[tid] = (float) sum; // sum of all losses
 	}
 }
 
@@ -89,15 +89,15 @@ int main(int argc, char* argv[]) {
 	float h_prm2 [N_PARAMS] = {PARAM2};
 	cudaHostRegister(h_prm1, N_BYTES_PRM, cudaHostRegisterDefault);
 	cudaHostRegister(h_prm2, N_BYTES_PRM, cudaHostRegisterDefault);
-	float *d_prm1, *d_prm2;
-	cudaMalloc((void **)&d_prm1, N_BYTES_PRM);
+	float *d_prm1, *d_prm2; // parameter on device memory
+	cudaMalloc((void **)&d_prm1, N_BYTES_PRM); // allocate and copy
 	cudaMalloc((void **)&d_prm2, N_BYTES_PRM);
 	cudaMemcpyAsync(d_prm1, h_prm1, N_BYTES_PRM, cudaMemcpyHostToDevice, s1); 
 	cudaMemcpyAsync(d_prm2, h_prm2, N_BYTES_PRM, cudaMemcpyHostToDevice, s2); 
 	
 	unsigned int *h_freq1, *d_freq1, *h_freq2, *d_freq2; // frequency arrays 
 	float *h_loss1, *d_loss1, *h_loss2, *d_loss2; // loss arrays
-	cudaMalloc((void **)&d_freq1, N_BYTES_I); // device array 
+	cudaMalloc((void **)&d_freq1, N_BYTES_I); // device mem for freq and loss 
 	cudaMalloc((void **)&d_loss1, N_BYTES_F);
 	cudaMalloc((void **)&d_freq2, N_BYTES_I);
 	cudaMalloc((void **)&d_loss2, N_BYTES_F);
@@ -108,27 +108,30 @@ int main(int argc, char* argv[]) {
 
 	float dur, mean1, mean2; // to record duration and averages
 	
-	// ---- asynchronus run ----
-	cudaEvent_t start = get_time();
-	cudaEvent_t copyEnd1, copyEnd2;
+	/****** asynchronus run ******
+	******************************/
+	cudaEvent_t start = get_time(); // start clock
+	cudaEvent_t copyEnd1, copyEnd2; // event to ensure copying loss is finished
 	cudaEventCreate(&copyEnd1); cudaEventCreate(&copyEnd2); 
-	sim_freq<<<N_BLK, N_THRD, 0, s1>>>(d_freq1, d_prm1, N_SIMS);
+	// first simulate frequency of losses in two streams
+	sim_freq<<<N_BLK, N_THRD, 0, s1>>>(d_freq1, d_prm1, N_SIMS); 
 	sim_freq<<<N_BLK, N_THRD, 0, s2>>>(d_freq2, d_prm2, N_SIMS);
+	// based on frequency, draw pareto loss amounts and sum
 	sim_severity<<<N_BLK, N_THRD, 0, s1>>>(d_loss1, d_freq1, d_prm1, N_SIMS);
 	sim_severity<<<N_BLK, N_THRD, 0, s2>>>(d_loss2, d_freq2, d_prm2, N_SIMS); 
 	cudaMemcpyAsync(h_loss1, d_loss1, N_BYTES_F, cudaMemcpyDeviceToHost, s1);
-	cudaEventRecord(copyEnd1, s1);
+	cudaEventRecord(copyEnd1, s1); // finish copying result in stream 1
 	cudaMemcpyAsync(h_loss2, d_loss2, N_BYTES_F, cudaMemcpyDeviceToHost, s2);
-	cudaEventRecord(copyEnd2, s2);
+	cudaEventRecord(copyEnd2, s2); // finish copying result in stream 2
 	cudaMemcpyAsync(h_freq1, d_freq1, N_BYTES_I, cudaMemcpyDeviceToHost, s1);
 	cudaMemcpyAsync(h_freq2, d_freq2, N_BYTES_I, cudaMemcpyDeviceToHost, s2);
-	cudaEventSynchronize(copyEnd1);
+	cudaEventSynchronize(copyEnd1); // wait for result copy before calculation
 	mean1 = calcMean(h_loss1, N_SIMS);
-	cudaEventSynchronize(copyEnd2);
+	cudaEventSynchronize(copyEnd2); // wait for result copy before calculation
 	mean2 = calcMean(h_loss2, N_SIMS);
 	cudaStreamSynchronize( s1 );
 	cudaStreamSynchronize( s2 );
-	cudaEvent_t stop = get_time(); // stop time
+	cudaEvent_t stop = get_time(); // stop clock
 	cudaEventSynchronize(stop);
 	cudaEventElapsedTime(&dur, start, stop);
 	
@@ -136,7 +139,8 @@ int main(int argc, char* argv[]) {
 			mean1, mean2, dur);
 	
 	
-	// ---- synchronus run ----
+	/****** synchronus run *******
+	******************************/
 	start = get_time();
 	sim_freq<<<N_BLK, N_THRD>>>(d_freq1, d_prm1, N_SIMS);
 	sim_severity<<<N_BLK, N_THRD>>>(d_loss1, d_freq1, d_prm1, N_SIMS);
