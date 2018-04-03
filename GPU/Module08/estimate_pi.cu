@@ -1,8 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <algorithm>
 #include <cstdlib>
 #include <curand.h>
 #include <curand_kernel.h>
+#include <math.h>
 
 unsigned int N_SIMS, N_RANDS, N_BLK, N_THRD, N_BYTES;
 const unsigned int MAX_THREADS = 512; // max threads per block 
@@ -14,6 +16,16 @@ float calcMean(float arr[], unsigned int const n) {
 		sum += (arr[i] / n);
 	}
 	return sum; 
+}
+
+float calcRMSE(float arr[], unsigned int const n) {
+	double sum = 0.0;
+	double err = 0.0;
+	for (unsigned int i=0; i<n; i++) {
+		err = abs(arr[i] - M_PI);
+		sum += err * err;
+	}
+	return (float) (sum / n);
 }
 
 __host__ cudaEvent_t get_time(void) {
@@ -66,11 +78,13 @@ int main(int argc, char* argv[]) {
 	cudaEvent_t stop = get_time(); // stop clock
 	cudaEventSynchronize(stop);
 	
-	float dur, mean_pi;
+	float dur, mean_pi, rmse;
 	mean_pi = calcMean(h_pi, N_SIMS);
+	rmse = calcRMSE(h_pi, N_SIMS);
 	cudaEventElapsedTime(&dur, start, stop);
 	
-	printf("\tTook %.3f ms, output = %f\n", dur, mean_pi);
+	printf("\tTook %.3f ms, output = %f, RMSE = %f, total error = %f\n", dur, 
+		mean_pi, rmse, abs(mean_pi-M_PI));
 	
 	return EXIT_SUCCESS;
 }

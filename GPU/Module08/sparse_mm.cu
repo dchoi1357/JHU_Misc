@@ -7,12 +7,10 @@
 #include <cusolverDn.h>
 #include <cusolverSp.h>
 
-// look into cusparseXcsrgemmNnz 
-
 unsigned int N_BYTES_MAT;
 
-void printMatrix(int m, int n, const double*A, int lda, const char* name)
-{
+void printMatrix(int m, int n, const float *A, const char* name) {
+	printf("Printing matrix %s: \n", name);
 	for(int row = 0 ; row < m ; row++){
 		for(int col = 0 ; col < n ; col++){
 			double Areg = A[row + col*lda];
@@ -21,29 +19,28 @@ void printMatrix(int m, int n, const double*A, int lda, const char* name)
 	}
 }
 
-
 int main(int argc, char*argv[]) {
 	cusparseHandle_t cuSpHdl; // cuSparse handle
 	cusparseCreate(&cuSpHdl);
 	
-/*  	| 2  0  0 |
-	A = | 0  0 -1 |
+/*		| 2  0  0 |
+	A =	| 0  0 -1 |
 		| 3 -2  0 |
 		| 0  1  0 |
 	
-	x = (2.1034 2.7241 1.0000)'
-	b = (4 -1 1 3)'
+	x = (2.0 3.0 1.0)'
+	b = (4 -1 0 3)'
 */
     const int nrows = 4; // rows of matrix A
     const int ncols = 3; // rows of matrix A
-	N_BYTES_MAT = sizeof(float)*nrows*ncols;
 	
 	// Generate host side dense matrix
 	float h_denseA[nrows*ncols] = {2.0, 0.0, 3.0, 0.0,   0.0, 0.0, -2.0, 1.0, 
 		0.0, -1.0, 0.0, 0.0};
 	float *d_denseA;
-	cudaMalloc((void**)&d_denseA, N_BYTES_MAT);
-	cudaMemcpy(d_denseA, h_denseA, N_BYTES_MAT, cudaMemcpyHostToDevice);
+	cudaMalloc((void**)&d_denseA,  sizeof(float)*nrows*ncols);
+	cudaMemcpy(d_denseA, h_denseA,  sizeof(float)*nrows*ncols, 
+		cudaMemcpyHostToDevice);
 	
 	// Set descriptions of sparse matrix A
 	cusparseMatDescr_t descrA;
@@ -97,35 +94,27 @@ int main(int argc, char*argv[]) {
 	for (int i = 0; i < non0; ++i) {\
 		printf("col_ptr[%i] = %i \n", i, h_colPtr[i]);
 	}
+		
+	// allocate solution vector
+	float h_x[ncols] = {2.0, 3.0, 1.0};
+	float *d_x;
+	cudaMalloc(&d_x, ncols*sizeof(float));
+	cudaMemcpy(d_x, h_x, ncols*sizeof(float), cudaMemcpyHostToDevice);
 	
 	// define b vector on host and device
-	float h_b[nrows] = {4.0, -1.0, 1.0, 3.0};
-	float *d_b;
+	float *d_b, *h_b;
 	cudaMalloc(&d_b, nrows*sizeof(float));
-	cudaMemcpy(d_b, h_b, nrows*sizeof(float), cudaMemcpyHostToDevice);
+	h_b = (float*) malloc(nrows*sizeof(float));
 	
-	// allocate solution vector
-	float *d_x, *h_x;
-	cudaMalloc(&d_x, ncols*sizeof(float));
-	h_x = (float*) malloc(ncols*sizeof(float));
+	float a = 1.0f; float b = 0.0f;
+	cusparseScsrmv(cuSpHdl, CUSPARSE_OPERATION_NON_TRANSPOSE, nrows, ncols, 
+		non0, &a, descrA, d_sprsA, d_rowIdx, d_colPtr, d_x, &b, d_b);
+	cudaMemcpy(h_b, d_b, nrows*sizeof(float), cudaMemcpyDeviceToHost);
 	
-	
-	// initialize cuSolver
-	cusolverSpHandle_t cuSolvHdl;
-    cusolverSpCreate(&cuSolvHdl);
-	int *d_p, *h_p;
-	cudaMalloc(&d_p, ncols*sizeof(int));
-	h_p = (int*) malloc(ncols*sizeof(int));
-	int rankA;
-	float minNorm;
-	
-	/*
-	cusolverSpScsrlsqvqr(cuSolvHdl, nrows, ncols, non0, descrA, d_sprsA, 
-		d_rowIdx, d_colPtr, d_b, 1e-6, rankA, d_x, d_p, &minNorm);
-	*/
-	cusolverSpScsrlsqvqrHost(cuSolvHdl, nrows, ncols, non0, descrA, h_sprsA, 
-		h_rowIdx, h_colPtr, h_b, 1e-6, &rankA, h_x, h_p, &minNorm);
-	
+	for (int i=0; i < nrows; i++) {
+		printf("b[%u] = %f", i, h_b[i]);
+	}
+
 	printf("Good!\n");
 	return EXIT_SUCCESS;
 }
