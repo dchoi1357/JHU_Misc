@@ -9,16 +9,6 @@
 
 unsigned int N_BYTES_MAT;
 
-void printMatrix(int m, int n, const float *A, const char* name) {
-	printf("Printing matrix %s: \n", name);
-	for(int row = 0 ; row < m ; row++){
-		for(int col = 0 ; col < n ; col++){
-			double Areg = A[row + col*lda];
-			printf("%s(%d,%d) = %f\n", name, row+1, col+1, Areg);
-		}
-	}
-}
-
 int main(int argc, char*argv[]) {
 	cusparseHandle_t cuSpHdl; // cuSparse handle
 	cusparseCreate(&cuSpHdl);
@@ -60,12 +50,11 @@ int main(int argc, char*argv[]) {
 	int *h_non0vec; 
 	h_non0vec = (int*) malloc(sizeof(int)*nrows);
 	cudaMemcpy(h_non0vec, d_non0vec, sizeof(int)*nrows, cudaMemcpyDeviceToHost); 
+	printf("Non-zero elements per row: ");
 	for (int i=0; i < nrows; i++) {
 		printf("%u ", h_non0vec[i]);
 	}
 	printf("\n");
-	printf("Non-zero: %u\n", non0);
-	
 	
 	// Device side sparse matrix;
 	float *d_sprsA;
@@ -112,9 +101,9 @@ int main(int argc, char*argv[]) {
 	cudaMemcpy(h_b, d_b, nrows*sizeof(float), cudaMemcpyDeviceToHost);
 	
 	for (int i=0; i < nrows; i++) {
-		printf("b[%u] = %f", i, h_b[i]);
+		printf("b[%u] = %.3f\n", i, h_b[i]);
 	}
 
-	printf("Good!\n");
+	printf("Done!\n");
 	return EXIT_SUCCESS;
 }
