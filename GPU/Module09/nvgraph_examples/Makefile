@@ -200,13 +200,13 @@ SAMPLE_ENABLED := 1
 
 # This sample is not supported on ARMv7
 ifeq ($(TARGET_ARCH),armv7l)
-  $(info >>> WARNING - nvgraph_Pagerank is not supported on ARMv7 - waiving sample <<<)
+  $(info >>> WARNING - nvgraph_SSSP is not supported on ARMv7 - waiving sample <<<)
   SAMPLE_ENABLED := 0
 endif
 
 # This sample is not supported on aarch64
 ifeq ($(TARGET_ARCH),aarch64)
-  $(info >>> WARNING - nvgraph_Pagerank is not supported on aarch64 - waiving sample <<<)
+  $(info >>> WARNING - nvgraph_SSSP is not supported on aarch64 - waiving sample <<<)
   SAMPLE_ENABLED := 0
 endif
 
@@ -216,7 +216,7 @@ ALL_LDFLAGS += $(addprefix -Xlinker ,$(LDFLAGS))
 ALL_LDFLAGS += $(addprefix -Xlinker ,$(EXTRA_LDFLAGS))
 
 # Common includes and paths for CUDA
-INCLUDES  := -I../../common/inc
+INCLUDES  := -I../common/inc
 LIBRARIES :=
 
 ################################################################################
@@ -251,7 +251,7 @@ endif
 # Target rules
 all: build
 
-build: nvgraph_Pagerank
+build: nvgraph_SSSP
 
 check.deps:
 ifeq ($(SAMPLE_ENABLED),0)
@@ -260,19 +260,19 @@ else
 	@echo "Sample is ready - all dependencies have been met"
 endif
 
-nvgraph_Pagerank.o:nvgraph_Pagerank.cpp
+nvgraph_SSSP.o:nvgraph_SSSP.cpp
 	$(EXEC) $(NVCC) $(INCLUDES) $(ALL_CCFLAGS) $(GENCODE_FLAGS) -o $@ -c $<
 
-nvgraph_Pagerank: nvgraph_Pagerank.o
+nvgraph_SSSP: nvgraph_SSSP.o
 	$(EXEC) $(NVCC) $(ALL_LDFLAGS) $(GENCODE_FLAGS) -o $@ $+ $(LIBRARIES)
 	$(EXEC) mkdir -p ../../bin/$(TARGET_ARCH)/$(TARGET_OS)/$(BUILD_TYPE)
 	$(EXEC) cp $@ ../../bin/$(TARGET_ARCH)/$(TARGET_OS)/$(BUILD_TYPE)
 
 run: build
-	$(EXEC) ./nvgraph_Pagerank
+	$(EXEC) ./nvgraph_SSSP
 
 clean:
-	rm -f nvgraph_Pagerank nvgraph_Pagerank.o
-	rm -rf ../../bin/$(TARGET_ARCH)/$(TARGET_OS)/$(BUILD_TYPE)/nvgraph_Pagerank
+	rm -f nvgraph_SSSP nvgraph_SSSP.o
+	rm -rf ../../bin/$(TARGET_ARCH)/$(TARGET_OS)/$(BUILD_TYPE)/nvgraph_SSSP
 
 clobber: clean
