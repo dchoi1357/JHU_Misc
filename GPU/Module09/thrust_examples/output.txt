@@ -1,16 +1,16 @@
-Running SAXPY on two random vectors of 32 elements                                                                                                  
-        Host vector operation took 0.014000 ms                                                                                                      
-        Device vector operation took 0.057000 ms                                                                                                    
-        Operation on device and host vector produced same results                                                                                   
-Running SAXPY on two random vectors of 1024 elements                                                                                                
-        Host vector operation took 0.289000 ms                                                                                                      
-        Device vector operation took 0.054000 ms                                                                                                    
-        Operation on device and host vector produced same results                                                                                   
-Running SAXPY on two random vectors of 32768 elements                                                                                               
-        Host vector operation took 9.294000 ms                                                                                                      
-        Device vector operation took 0.067000 ms                                                                                                    
-        Operation on device and host vector produced same results                                                                                   
-Running SAXPY on two random vectors of 1048576 elements                                                                                             
-        Host vector operation took 290.332000 ms                                                                                                    
-        Device vector operation took 0.097000 ms                                                                                                    
-        Operation on device and host vector produced same results          
+Running SAXPY on two random vectors of 32 elements
+		Host vector operation took 0.014000 ms
+		Device vector operation took 0.057000 ms
+		Operation on device and host vector produced same results
+Running SAXPY on two random vectors of 1024 elements
+		Host vector operation took 0.289000 ms
+		Device vector operation took 0.054000 ms
+		Operation on device and host vector produced same results
+Running SAXPY on two random vectors of 32768 elements
+		Host vector operation took 9.294000 ms
+		Device vector operation took 0.067000 ms
+		Operation on device and host vector produced same results
+Running SAXPY on two random vectors of 1048576 elements
+		Host vector operation took 290.332000 ms
+		Device vector operation took 0.097000 ms
+		Operation on device and host vector produced same results
