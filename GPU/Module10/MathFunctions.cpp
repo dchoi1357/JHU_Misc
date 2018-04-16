@@ -97,7 +97,8 @@ cl_command_queue CreateCommandQueue(cl_context context, cl_device_id *device) {
 	// In this example, we just choose the first available device.  In a
 	// real program, you would likely use all available devices or choose
 	// the highest performance device based on OpenCL device queries
-	commandQueue = clCreateCommandQueue(context, devices[0], 0, NULL);
+	commandQueue = clCreateCommandQueue(context, devices[0], 
+		CL_QUEUE_PROFILING_ENABLE, NULL);
 	if (commandQueue == NULL)
 	{
 		delete [] devices;
@@ -278,14 +279,17 @@ int main(int argc, char** argv) {
 	size_t localWorkSize[1] = { 1 };
 
 	// Queue the kernel up for execution across the array
+	cl_event event;
 	errNum = clEnqueueNDRangeKernel(commandQueue, kernel, 1, NULL,
 									globalWorkSize, localWorkSize,
-									0, NULL, NULL);
+									0, NULL, &event);
 	if (errNum != CL_SUCCESS){
 		std::cerr << "Error queuing kernel for execution." << std::endl;
 		Cleanup(context, commandQueue, program, kernel, memObjects);
 		return 1;
 	}
+	clWaitForEvents(1, &event);
+	clFinish(commandQueue);
 
 	// Read the output buffer back to the Host
 	errNum = clEnqueueReadBuffer(commandQueue, memObjects[2], CL_TRUE,
@@ -297,6 +301,15 @@ int main(int argc, char** argv) {
 		return 1;
 	}
 
+	// Calculate time elapsed from profile
+	cl_ulong time_start;
+	cl_ulong time_end;
+	clGetEventProfilingInfo(event, CL_PROFILING_COMMAND_START, 
+							sizeof(time_start), &time_start, NULL);
+	clGetEventProfilingInfo(event, CL_PROFILING_COMMAND_END,
+							sizeof(time_end), &time_end, NULL);
+	double elapsed = time_end-time_start;
+
 	// Calculate the estimated results
 	int sum = 0;
 	for (int i = 0; i < ARRAY_SIZE; i++) {
@@ -305,8 +318,8 @@ int main(int argc, char** argv) {
 	}
 	float est = ((float) sum / ARRAY_SIZE) * 6 * 6;
 	
-	
-	printf("Estimation=%.6f, error=%.6f\n", est, fabs(-2.27700868095657-est));
+	printf("Running %zu estimations, elapsed %f ms\n", ARRAY_SIZE, elapsed/1000000.0);
+	printf("\tEstimte=%.6f, error=%.6f\n", est, fabs(-2.27700868095657-est));
 	
 	Cleanup(context, commandQueue, program, kernel, memObjects);
 	return 0;

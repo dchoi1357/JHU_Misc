@@ -1,0 +1,8 @@
+Running 100 estimations, elapsed 0.043136 ms
+	Estimte=-1.440000, error=0.837009
+Running 1000 estimations, elapsed 0.050592 ms
+	Estimte=-2.268000, error=0.009009
+Running 10000 estimations, elapsed 0.259136 ms
+	Estimte=-2.422800, error=0.145791
+Running 100000 estimations, elapsed 2.492704 ms
+	Estimte=-2.207160, error=0.069849
