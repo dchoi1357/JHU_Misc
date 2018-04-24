@@ -17,29 +17,20 @@
 const unsigned int inputSignalWidth  = 8;
 const unsigned int inputSignalHeight = 8;
 
-cl_uint inputSignal[inputSignalWidth][inputSignalHeight] =
-{
-	{3, 1, 1, 4, 8, 2, 1, 3},
-	{4, 2, 1, 1, 2, 1, 2, 3},
-	{4, 4, 4, 4, 3, 2, 2, 2},
-	{9, 8, 3, 8, 9, 0, 0, 0},
-	{9, 3, 3, 9, 0, 0, 0, 0},
-	{0, 9, 0, 8, 0, 0, 0, 0},
-	{3, 0, 8, 8, 9, 4, 4, 4},
-	{5, 9, 8, 1, 8, 1, 1, 1}
-};
+cl_uint inputSignal[inputSignalWidth][inputSignalHeight];
 
-const unsigned int outputSignalWidth  = 6;
-const unsigned int outputSignalHeight = 6;
+const unsigned int outputSignalWidth  = 4;
+const unsigned int outputSignalHeight = 4;
 
 cl_uint outputSignal[outputSignalWidth][outputSignalHeight];
 
-const unsigned int maskWidth  = 3;
-const unsigned int maskHeight = 3;
+const unsigned int maskWidth  = 5;
+const unsigned int maskHeight = 5;
 
 cl_uint mask[maskWidth][maskHeight] =
 {
-	{0, 0, 0}, {0, 1, 0}, {0, 0, 0},
+	{0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 1, 0, 0},
+	{0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}
 };
 
 ///
@@ -68,14 +59,22 @@ void CL_CALLBACK contextCallback(
 ///
 //	main() for Convoloution example
 //
-int main(int argc, char** argv)
-{
-    cl_int errNum;
-    cl_uint numPlatforms;
+int main(int argc, char** argv) {
+	// allocate 0 < x < 9 for all elements
+	for (int i=0; i<inputSignalHeight; i++) {
+		for (int j=0; j<inputSignalWidth; j++) {
+			inputSignal[i][j] = rand() % 10;
+			printf("%3u", inputSignal[i][j]);
+		}
+		printf("\n");
+	}
+
+	cl_int errNum;
+	cl_uint numPlatforms;
 	cl_uint numDevices;
-    cl_platform_id * platformIDs;
+	cl_platform_id * platformIDs;
 	cl_device_id * deviceIDs;
-    cl_context context = NULL;
+	cl_context context = NULL;
 	cl_command_queue queue;
 	cl_program program;
 	cl_kernel kernel;
@@ -83,17 +82,17 @@ int main(int argc, char** argv)
 	cl_mem outputSignalBuffer;
 	cl_mem maskBuffer;
 
-    // First, select an OpenCL platform to run on.  
+	// First, select an OpenCL platform to run on.  
 	errNum = clGetPlatformIDs(0, NULL, &numPlatforms);
 	checkErr( 
 		(errNum != CL_SUCCESS) ? errNum : (numPlatforms <= 0 ? -1 : CL_SUCCESS), 
 		"clGetPlatformIDs"); 
- 
-	platformIDs = (cl_platform_id *)alloca(
-       		sizeof(cl_platform_id) * numPlatforms);
 
-    errNum = clGetPlatformIDs(numPlatforms, platformIDs, NULL);
-    checkErr( 
+	platformIDs = (cl_platform_id *)alloca(
+			sizeof(cl_platform_id) * numPlatforms);
+
+	errNum = clGetPlatformIDs(numPlatforms, platformIDs, NULL);
+	checkErr( 
 	   (errNum != CL_SUCCESS) ? errNum : (numPlatforms <= 0 ? -1 : CL_SUCCESS), 
 	   "clGetPlatformIDs");
 
@@ -104,18 +103,18 @@ int main(int argc, char** argv)
 	for (i = 0; i < numPlatforms; i++)
 	{
 		errNum = clGetDeviceIDs(
-            platformIDs[i], 
-            CL_DEVICE_TYPE_GPU, 
-            0,
-            NULL,
-            &numDevices);
+			platformIDs[i], 
+			CL_DEVICE_TYPE_GPU, 
+			0,
+			NULL,
+			&numDevices);
 		if (errNum != CL_SUCCESS && errNum != CL_DEVICE_NOT_FOUND)
-	    {
+		{
 			checkErr(errNum, "clGetDeviceIDs");
-        }
-	    else if (numDevices > 0) 
-	    {
-		   	deviceIDs = (cl_device_id *)alloca(sizeof(cl_device_id) * numDevices);
+		}
+		else if (numDevices > 0) 
+		{
+			deviceIDs = (cl_device_id *)alloca(sizeof(cl_device_id) * numDevices);
 			errNum = clGetDeviceIDs(
 				platformIDs[i],
 				CL_DEVICE_TYPE_GPU,
@@ -134,27 +133,27 @@ int main(int argc, char** argv)
 // 	}
 
     // Next, create an OpenCL context on the selected platform.  
-    cl_context_properties contextProperties[] =
-    {
-        CL_CONTEXT_PLATFORM,
-        (cl_context_properties)platformIDs[i],
-        0
-    };
-    context = clCreateContext(
+	cl_context_properties contextProperties[] =
+	{
+		CL_CONTEXT_PLATFORM,
+		(cl_context_properties)platformIDs[i],
+		0
+	};
+	context = clCreateContext(
 		contextProperties, 
 		numDevices,
-        deviceIDs, 
+		deviceIDs, 
 		&contextCallback,
 		NULL, 
 		&errNum);
 	checkErr(errNum, "clCreateContext");
 
 	std::ifstream srcFile("Convolution.cl");
-    checkErr(srcFile.is_open() ? CL_SUCCESS : -1, "reading Convolution.cl");
+	checkErr(srcFile.is_open() ? CL_SUCCESS : -1, "reading Convolution.cl");
 
 	std::string srcProg(
-        std::istreambuf_iterator<char>(srcFile),
-        (std::istreambuf_iterator<char>()));
+		std::istreambuf_iterator<char>(srcFile),
+		(std::istreambuf_iterator<char>()));
 
 	const char * src = srcProg.c_str();
 	size_t length = srcProg.length();
@@ -176,22 +175,22 @@ int main(int argc, char** argv)
 		NULL,
 		NULL,
 		NULL);
-    if (errNum != CL_SUCCESS)
-    {
-        // Determine the reason for the error
-        char buildLog[16384];
-        clGetProgramBuildInfo(
+	if (errNum != CL_SUCCESS)
+	{
+		// Determine the reason for the error
+		char buildLog[16384];
+		clGetProgramBuildInfo(
 			program, 
 			deviceIDs[0], 
 			CL_PROGRAM_BUILD_LOG,
-            sizeof(buildLog), 
+			sizeof(buildLog), 
 			buildLog, 
 			NULL);
 
-        std::cerr << "Error in kernel: " << std::endl;
-        std::cerr << buildLog;
+		std::cerr << "Error in kernel: " << std::endl;
+		std::cerr << buildLog;
 		checkErr(errNum, "clBuildProgram");
-    }
+	}
 
 	// Create kernel object
 	kernel = clCreateKernel(
@@ -233,43 +232,43 @@ int main(int argc, char** argv)
 		&errNum);
 	checkErr(errNum, "clCreateCommandQueue");
 
-    errNum  = clSetKernelArg(kernel, 0, sizeof(cl_mem), &inputSignalBuffer);
+	errNum  = clSetKernelArg(kernel, 0, sizeof(cl_mem), &inputSignalBuffer);
 	errNum |= clSetKernelArg(kernel, 1, sizeof(cl_mem), &maskBuffer);
-    errNum |= clSetKernelArg(kernel, 2, sizeof(cl_mem), &outputSignalBuffer);
+	errNum |= clSetKernelArg(kernel, 2, sizeof(cl_mem), &outputSignalBuffer);
 	errNum |= clSetKernelArg(kernel, 3, sizeof(cl_uint), &inputSignalWidth);
 	errNum |= clSetKernelArg(kernel, 4, sizeof(cl_uint), &maskWidth);
 	errNum |= clSetKernelArg(kernel, 5, sizeof(cl_uint), &outputSignalWidth);
 	checkErr(errNum, "clSetKernelArg");
 
 	const size_t globalWorkSize[1] = { outputSignalWidth * outputSignalHeight };
-    const size_t localWorkSize[1]  = { 1 };
+	const size_t localWorkSize[1]  = { 1 };
 
-    // Queue the kernel up for execution across the array
-    errNum = clEnqueueNDRangeKernel(
+	// Queue the kernel up for execution across the array
+	errNum = clEnqueueNDRangeKernel(
 		queue, 
 		kernel, 
 		1, 
 		NULL,
-        globalWorkSize, 
+		globalWorkSize, 
 		localWorkSize,
-        0, 
+		0, 
 		NULL, 
 		NULL);
 	checkErr(errNum, "clEnqueueNDRangeKernel");
-    
+
 	errNum = clEnqueueReadBuffer(
 		queue, 
 		outputSignalBuffer, 
 		CL_TRUE,
-        0, 
+		0, 
 		sizeof(cl_uint) * outputSignalHeight * outputSignalHeight, 
 		outputSignal,
-        0, 
+		0, 
 		NULL, 
 		NULL);
 	checkErr(errNum, "clEnqueueReadBuffer");
 
-    // Output the result buffer
+	// Output the result buffer
 	for (int x = 0; x < outputSignalWidth; x++)	{
 		for (int y = 0; y < outputSignalHeight; y++) {
 			std::cout << outputSignal[x][y] << " ";
@@ -277,7 +276,7 @@ int main(int argc, char** argv)
 		std::cout << std::endl;
 	}
 
-    std::cout << std::endl << "Executed program succesfully." << std::endl;
+	std::cout << std::endl << "Executed program succesfully." << std::endl;
 
 	return 0;
 }
