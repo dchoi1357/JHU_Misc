@@ -14,26 +14,36 @@
 #endif
 
 // Constants
-const unsigned int inputSignalWidth  = 8;
-const unsigned int inputSignalHeight = 8;
-
+const unsigned int inputSignalWidth  = 49;
+const unsigned int inputSignalHeight = 49;
 cl_uint inputSignal[inputSignalWidth][inputSignalHeight];
 
-const unsigned int outputSignalWidth  = 4;
-const unsigned int outputSignalHeight = 4;
+const unsigned int outputSignalWidth  = 43;
+const unsigned int outputSignalHeight = 43;
 
 cl_uint outputSignal[outputSignalWidth][outputSignalHeight];
+cl_float outputNormed[outputSignalWidth][outputSignalHeight];
 
-const unsigned int maskWidth  = 5;
-const unsigned int maskHeight = 5;
-
+const unsigned int maskWidth  = 7;
+const unsigned int maskHeight = 7;
 cl_uint mask[maskWidth][maskHeight] =
 {
-	{0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 1, 0, 0},
-	{0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}
+	{0, 0, 0, 1, 0, 0, 0}, {0, 0, 1, 2, 1, 0, 0}, {0, 1, 2, 3, 2, 1, 0},
+	{1, 2, 3, 4, 3, 2, 1}, {0, 1, 2, 3, 2, 1, 0}, {0, 0, 1, 2, 1, 0, 0},
+	{0, 0, 0, 1, 0, 0, 0}
 };
+const float normalizingConst = 44.0;
 
-///
+template <class typ, unsigned int rows, unsigned int cols>
+void printArray(typ (&a)[rows][cols]) {
+	for (size_t i = 0; i < rows; ++i) {
+		for (size_t j = 0; j < cols; ++j)
+			std::cout << a[i][j] << " ";
+		std::cout << std::endl;
+	}
+}
+
+//////////////////////////////////////////////
 // Function to check and handle OpenCL errors
 inline void 
 checkErr(cl_int err, const char * name)
@@ -64,10 +74,11 @@ int main(int argc, char** argv) {
 	for (int i=0; i<inputSignalHeight; i++) {
 		for (int j=0; j<inputSignalWidth; j++) {
 			inputSignal[i][j] = rand() % 10;
-			printf("%3u", inputSignal[i][j]);
 		}
-		printf("\n");
 	}
+	std::cout << "The generated input array: " << std::endl;
+	printArray<cl_uint, inputSignalHeight, inputSignalWidth>(inputSignal);
+	std::cout << std::endl;
 
 	cl_int errNum;
 	cl_uint numPlatforms;
@@ -125,12 +136,6 @@ int main(int argc, char** argv) {
 			break;
 	   }
 	}
-
-	// Check to see if we found at least one CPU device, otherwise return
-// 	if (deviceIDs == NULL) {
-// 		std::cout << "No CPU device found" << std::endl;
-// 		exit(-1);
-// 	}
 
     // Next, create an OpenCL context on the selected platform.  
 	cl_context_properties contextProperties[] =
@@ -261,22 +266,27 @@ int main(int argc, char** argv) {
 		outputSignalBuffer, 
 		CL_TRUE,
 		0, 
-		sizeof(cl_uint) * outputSignalHeight * outputSignalHeight, 
+		sizeof(cl_uint) * outputSignalHeight * outputSignalWidth, 
 		outputSignal,
 		0, 
 		NULL, 
 		NULL);
 	checkErr(errNum, "clEnqueueReadBuffer");
 
-	// Output the result buffer
-	for (int x = 0; x < outputSignalWidth; x++)	{
-		for (int y = 0; y < outputSignalHeight; y++) {
-			std::cout << outputSignal[x][y] << " ";
+	// Output the raw result buffer
+	std::cout << "The raw output array " << std::endl;
+	printArray<cl_uint, outputSignalHeight, outputSignalWidth>(outputSignal);
+	std::cout << std::endl;
+	
+	std::cout << "The normalized output array " << std::endl;
+	for (int i=0; i < outputSignalHeight; i++) {
+		for (int j=0; j < outputSignalWidth; j++) {
+			outputNormed[i][j] = outputSignal[i][j] / normalizingConst;
 		}
-		std::cout << std::endl;
 	}
+	printArray<float, outputSignalHeight, outputSignalWidth>(outputNormed);
+	std::cout << std::endl;
 
 	std::cout << std::endl << "Executed program succesfully." << std::endl;
-
 	return 0;
 }
