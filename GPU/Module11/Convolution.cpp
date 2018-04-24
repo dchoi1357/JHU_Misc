@@ -1,19 +1,3 @@
-//
-// Book:      OpenCL(R) Programming Guide
-// Authors:   Aaftab Munshi, Benedict Gaster, Timothy Mattson, James Fung, Dan Ginsburg
-// ISBN-10:   0-321-74964-2
-// ISBN-13:   978-0-321-74964-2
-// Publisher: Addison-Wesley Professional
-// URLs:      http://safari.informit.com/9780132488006/
-//            http://www.openclprogrammingguide.com
-//
-
-
-// Convolution.cpp
-//
-//    This is a simple example that demonstrates OpenCL platform, device, and context
-//    use.
-
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -254,6 +238,7 @@ int main(int argc, char** argv)
     errNum |= clSetKernelArg(kernel, 2, sizeof(cl_mem), &outputSignalBuffer);
 	errNum |= clSetKernelArg(kernel, 3, sizeof(cl_uint), &inputSignalWidth);
 	errNum |= clSetKernelArg(kernel, 4, sizeof(cl_uint), &maskWidth);
+	errNum |= clSetKernelArg(kernel, 5, sizeof(cl_uint), &outputSignalWidth);
 	checkErr(errNum, "clSetKernelArg");
 
 	const size_t globalWorkSize[1] = { outputSignalWidth * outputSignalHeight };
