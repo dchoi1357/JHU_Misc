@@ -13,17 +13,12 @@
 #define CL_CALLBACK
 #endif
 
-// Constants
-const unsigned int inputSignalWidth  = 49;
-const unsigned int inputSignalHeight = 49;
-cl_uint inputSignal[inputSignalWidth][inputSignalHeight];
+// Constants denoting problem size
+unsigned int inputSignalWidth, inputSignalHeight;
+unsigned int outputSignalWidth, outputSignalHeight;
+bool toPrint;
 
-const unsigned int outputSignalWidth  = 43;
-const unsigned int outputSignalHeight = 43;
-
-cl_uint outputSignal[outputSignalWidth][outputSignalHeight];
-cl_float outputNormed[outputSignalWidth][outputSignalHeight];
-
+// Define kernel mask 
 const unsigned int maskWidth  = 7;
 const unsigned int maskHeight = 7;
 cl_uint mask[maskWidth][maskHeight] =
@@ -32,16 +27,7 @@ cl_uint mask[maskWidth][maskHeight] =
 	{1, 2, 3, 4, 3, 2, 1}, {0, 1, 2, 3, 2, 1, 0}, {0, 0, 1, 2, 1, 0, 0},
 	{0, 0, 0, 1, 0, 0, 0}
 };
-const float normalizingConst = 44.0;
-
-template <class typ, unsigned int rows, unsigned int cols>
-void printArray(typ (&a)[rows][cols]) {
-	for (size_t i = 0; i < rows; ++i) {
-		for (size_t j = 0; j < cols; ++j)
-			std::cout << a[i][j] << " ";
-		std::cout << std::endl;
-	}
-}
+const float normalizingConst = 44.0; // note: sum of all elements = 44
 
 //////////////////////////////////////////////
 // Function to check and handle OpenCL errors
@@ -66,20 +52,42 @@ void CL_CALLBACK contextCallback(
 	exit(1);
 }
 
-///
+///////////////////////////////////////////
 //	main() for Convoloution example
 //
 int main(int argc, char** argv) {
-	// allocate 0 < x < 9 for all elements
+	if (argc != 4) {
+		printf("Usage: %s [nRows] [nCols] [printOut 1/0]\n", argv[0]);
+		return 1;
+	} else { // parse command line input and calcualte output memory size
+		toPrint = atoi(argv[3]) > 0;
+		inputSignalHeight = atoi(argv[1]);
+		inputSignalWidth = atoi(argv[2]);
+		outputSignalHeight = inputSignalHeight - (maskHeight/2)*2;
+		outputSignalWidth = inputSignalWidth - (maskWidth/2)*2;
+	}
+	
+	// allocate memory for problem
+	cl_uint inputSignal[inputSignalHeight][inputSignalWidth];
+	cl_uint outputSignal[outputSignalHeight][outputSignalWidth];
+	cl_float outputNormed[outputSignalHeight][outputSignalWidth];
+
+	printf("Applying mask to %u-by-%u random data with%s printing...\n", 
+		inputSignalHeight, inputSignalWidth, toPrint?"":"out");
+	
+	// allocate 0 < x < 9 for all elements of inputs
+	if (toPrint) std::cout << "The generated input array: " << std::endl;
 	for (int i=0; i<inputSignalHeight; i++) {
 		for (int j=0; j<inputSignalWidth; j++) {
 			inputSignal[i][j] = rand() % 10;
+			if (toPrint) std::cout << inputSignal[i][j] << " ";
 		}
+		if (toPrint) std::cout << std::endl;
 	}
-	std::cout << "The generated input array: " << std::endl;
-	printArray<cl_uint, inputSignalHeight, inputSignalWidth>(inputSignal);
-	std::cout << std::endl;
-
+	if (toPrint) std::cout << std::endl;
+	
+	
+	// Set up OpenCL
 	cl_int errNum;
 	cl_uint numPlatforms;
 	cl_uint numDevices;
@@ -233,7 +241,7 @@ int main(int argc, char** argv) {
 	queue = clCreateCommandQueue(
 		context,
 		deviceIDs[0],
-		0,
+		CL_QUEUE_PROFILING_ENABLE,
 		&errNum);
 	checkErr(errNum, "clCreateCommandQueue");
 
@@ -249,6 +257,7 @@ int main(int argc, char** argv) {
 	const size_t localWorkSize[1]  = { 1 };
 
 	// Queue the kernel up for execution across the array
+	cl_event event;
 	errNum = clEnqueueNDRangeKernel(
 		queue, 
 		kernel, 
@@ -257,9 +266,19 @@ int main(int argc, char** argv) {
 		globalWorkSize, 
 		localWorkSize,
 		0, 
-		NULL, 
-		NULL);
+		NULL,
+		&event);
 	checkErr(errNum, "clEnqueueNDRangeKernel");
+	clWaitForEvents(1, &event);
+	clFinish(queue);
+	// Calculate time elapsed from profile
+	cl_ulong time_start;
+	cl_ulong time_end;
+	clGetEventProfilingInfo(event, CL_PROFILING_COMMAND_START, 
+							sizeof(time_start), &time_start, NULL);
+	clGetEventProfilingInfo(event, CL_PROFILING_COMMAND_END,
+							sizeof(time_end), &time_end, NULL);
+	double elapsed = time_end-time_start;
 
 	errNum = clEnqueueReadBuffer(
 		queue, 
@@ -274,19 +293,25 @@ int main(int argc, char** argv) {
 	checkErr(errNum, "clEnqueueReadBuffer");
 
 	// Output the raw result buffer
-	std::cout << "The raw output array " << std::endl;
-	printArray<cl_uint, outputSignalHeight, outputSignalWidth>(outputSignal);
-	std::cout << std::endl;
+	if (toPrint) std::cout << "The raw output array " << std::endl;
+	for (size_t i = 0; i < outputSignalHeight; ++i) {
+		for (size_t j = 0; j < outputSignalWidth; ++j)
+			if (toPrint) std::cout << outputSignal[i][j] << " ";
+		if (toPrint) std::cout << std::endl;
+	}
+	if (toPrint) std::cout << std::endl;
 	
-	std::cout << "The normalized output array " << std::endl;
+	if (toPrint) std::cout << "The normalized output array " << std::endl;
 	for (int i=0; i < outputSignalHeight; i++) {
 		for (int j=0; j < outputSignalWidth; j++) {
 			outputNormed[i][j] = outputSignal[i][j] / normalizingConst;
+			if (toPrint) std::cout << outputNormed[i][j] << " ";
 		}
+		if (toPrint) std::cout << std::endl;
 	}
-	printArray<float, outputSignalHeight, outputSignalWidth>(outputNormed);
-	std::cout << std::endl;
-
-	std::cout << std::endl << "Executed program succesfully." << std::endl;
+	if (toPrint) std::cout << std::endl;
+	
+	
+	printf("Executed program successfully in %f ms.\n\n", elapsed/1000000.0);
 	return 0;
 }
