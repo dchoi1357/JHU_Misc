@@ -1,19 +1,3 @@
-//
-// Book:      OpenCL(R) Programming Guide
-// Authors:   Aaftab Munshi, Benedict Gaster, Timothy Mattson, James Fung, Dan Ginsburg
-// ISBN-10:   0-321-74964-2
-// ISBN-13:   978-0-321-74964-2
-// Publisher: Addison-Wesley Professional
-// URLs:      http://safari.informit.com/9780132488006/
-//            http://www.openclprogrammingguide.com
-//
-
-
-// Convolution.cpp
-//
-//    This is a simple example that demonstrates OpenCL platform, device, and context
-//    use.
-
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -29,32 +13,23 @@
 #define CL_CALLBACK
 #endif
 
-// Constants
-const unsigned int inputSignalWidth  = 8;
-const unsigned int inputSignalHeight = 8;
-cl_uint inputSignal[inputSignalWidth][inputSignalHeight];
+// Constants denoting problem size
+unsigned int inputSignalWidth, inputSignalHeight;
+unsigned int outputSignalWidth, outputSignalHeight;
+bool toPrint;
 
-const unsigned int outputSignalWidth  = 4;
-const unsigned int outputSignalHeight = 4;
-cl_uint outputSignal[outputSignalWidth][outputSignalHeight];
-
-const unsigned int maskWidth  = 5;
-const unsigned int maskHeight = 5;
-
-// define masks according to insturction
-cl_uint mask[maskWidth][maskHeight] = { 
-	{0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 1, 0, 0},
-	{0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}
-};
-/*
-cl_uint mask[maskWidth][maskHeight] = { 
-	{0, 0, 0, 1, 0, 0, 0}, {0, 0, 1, 2, 1, 0, 0}, {0, 1, 2, 3, 2, 1, 0}, 
-	{1, 2, 3, 4, 3, 2, 1}, {0, 1, 2, 3, 2, 1, 0}, {0, 0, 1, 2, 1, 0, 0}, 
+// Define kernel mask 
+const unsigned int maskWidth  = 7;
+const unsigned int maskHeight = 7;
+cl_uint mask[maskWidth][maskHeight] =
+{
+	{0, 0, 0, 1, 0, 0, 0}, {0, 0, 1, 2, 1, 0, 0}, {0, 1, 2, 3, 2, 1, 0},
+	{1, 2, 3, 4, 3, 2, 1}, {0, 1, 2, 3, 2, 1, 0}, {0, 0, 1, 2, 1, 0, 0},
 	{0, 0, 0, 1, 0, 0, 0}
 };
-*/
+const float normalizingConst = 44.0; // note: sum of all elements = 44
 
-///////////////////////////////////////////////
+//////////////////////////////////////////////
 // Function to check and handle OpenCL errors
 inline void 
 checkErr(cl_int err, const char * name)
@@ -77,25 +52,48 @@ void CL_CALLBACK contextCallback(
 	exit(1);
 }
 
-///
+///////////////////////////////////////////
 //	main() for Convoloution example
 //
 int main(int argc, char** argv) {
-	// allocate 0 < x < 9 for all elements
+	if (argc != 4) {
+		printf("Usage: %s [nRows] [nCols] [printOut 1/0]\n", argv[0]);
+		return 1;
+	} else { // parse command line input and calcualte output memory size
+		toPrint = atoi(argv[3]) > 0;
+		inputSignalHeight = atoi(argv[1]);
+		inputSignalWidth = atoi(argv[2]);
+		outputSignalHeight = inputSignalHeight - (maskHeight/2)*2;
+		outputSignalWidth = inputSignalWidth - (maskWidth/2)*2;
+	}
+	
+	// allocate memory for problem
+	cl_uint inputSignal[inputSignalHeight][inputSignalWidth];
+	cl_uint outputSignal[outputSignalHeight][outputSignalWidth];
+	cl_float outputNormed[outputSignalHeight][outputSignalWidth];
+
+	printf("Applying mask to %u-by-%u random data with%s printing...\n", 
+		inputSignalHeight, inputSignalWidth, toPrint?"":"out");
+	
+	// allocate 0 < x < 9 for all elements of inputs
+	if (toPrint) std::cout << "The generated input array: " << std::endl;
 	for (int i=0; i<inputSignalHeight; i++) {
 		for (int j=0; j<inputSignalWidth; j++) {
 			inputSignal[i][j] = rand() % 10;
-			printf("%3u", inputSignal[i][j]);
+			if (toPrint) std::cout << inputSignal[i][j] << " ";
 		}
-		printf("\n");
+		if (toPrint) std::cout << std::endl;
 	}
+	if (toPrint) std::cout << std::endl;
 	
-    cl_int errNum;
-    cl_uint numPlatforms;
+	
+	// Set up OpenCL
+	cl_int errNum;
+	cl_uint numPlatforms;
 	cl_uint numDevices;
-    cl_platform_id * platformIDs;
+	cl_platform_id * platformIDs;
 	cl_device_id * deviceIDs;
-    cl_context context = NULL;
+	cl_context context = NULL;
 	cl_command_queue queue;
 	cl_program program;
 	cl_kernel kernel;
@@ -103,17 +101,17 @@ int main(int argc, char** argv) {
 	cl_mem outputSignalBuffer;
 	cl_mem maskBuffer;
 
-    // First, select an OpenCL platform to run on.  
+	// First, select an OpenCL platform to run on.  
 	errNum = clGetPlatformIDs(0, NULL, &numPlatforms);
 	checkErr( 
 		(errNum != CL_SUCCESS) ? errNum : (numPlatforms <= 0 ? -1 : CL_SUCCESS), 
 		"clGetPlatformIDs"); 
- 
-	platformIDs = (cl_platform_id *)alloca(
-       		sizeof(cl_platform_id) * numPlatforms);
 
-    errNum = clGetPlatformIDs(numPlatforms, platformIDs, NULL);
-    checkErr( 
+	platformIDs = (cl_platform_id *)alloca(
+			sizeof(cl_platform_id) * numPlatforms);
+
+	errNum = clGetPlatformIDs(numPlatforms, platformIDs, NULL);
+	checkErr( 
 	   (errNum != CL_SUCCESS) ? errNum : (numPlatforms <= 0 ? -1 : CL_SUCCESS), 
 	   "clGetPlatformIDs");
 
@@ -124,18 +122,18 @@ int main(int argc, char** argv) {
 	for (i = 0; i < numPlatforms; i++)
 	{
 		errNum = clGetDeviceIDs(
-            platformIDs[i], 
-            CL_DEVICE_TYPE_GPU, 
-            0,
-            NULL,
-            &numDevices);
+			platformIDs[i], 
+			CL_DEVICE_TYPE_GPU, 
+			0,
+			NULL,
+			&numDevices);
 		if (errNum != CL_SUCCESS && errNum != CL_DEVICE_NOT_FOUND)
-	    {
+		{
 			checkErr(errNum, "clGetDeviceIDs");
-        }
-	    else if (numDevices > 0) 
-	    {
-		   	deviceIDs = (cl_device_id *)alloca(sizeof(cl_device_id) * numDevices);
+		}
+		else if (numDevices > 0) 
+		{
+			deviceIDs = (cl_device_id *)alloca(sizeof(cl_device_id) * numDevices);
 			errNum = clGetDeviceIDs(
 				platformIDs[i],
 				CL_DEVICE_TYPE_GPU,
@@ -147,34 +145,28 @@ int main(int argc, char** argv) {
 	   }
 	}
 
-	// Check to see if we found at least one CPU device, otherwise return
-// 	if (deviceIDs == NULL) {
-// 		std::cout << "No CPU device found" << std::endl;
-// 		exit(-1);
-// 	}
-
     // Next, create an OpenCL context on the selected platform.  
-    cl_context_properties contextProperties[] =
-    {
-        CL_CONTEXT_PLATFORM,
-        (cl_context_properties)platformIDs[i],
-        0
-    };
-    context = clCreateContext(
+	cl_context_properties contextProperties[] =
+	{
+		CL_CONTEXT_PLATFORM,
+		(cl_context_properties)platformIDs[i],
+		0
+	};
+	context = clCreateContext(
 		contextProperties, 
 		numDevices,
-        deviceIDs, 
+		deviceIDs, 
 		&contextCallback,
 		NULL, 
 		&errNum);
 	checkErr(errNum, "clCreateContext");
 
 	std::ifstream srcFile("Convolution.cl");
-    checkErr(srcFile.is_open() ? CL_SUCCESS : -1, "reading Convolution.cl");
+	checkErr(srcFile.is_open() ? CL_SUCCESS : -1, "reading Convolution.cl");
 
 	std::string srcProg(
-        std::istreambuf_iterator<char>(srcFile),
-        (std::istreambuf_iterator<char>()));
+		std::istreambuf_iterator<char>(srcFile),
+		(std::istreambuf_iterator<char>()));
 
 	const char * src = srcProg.c_str();
 	size_t length = srcProg.length();
@@ -196,22 +188,22 @@ int main(int argc, char** argv) {
 		NULL,
 		NULL,
 		NULL);
-    if (errNum != CL_SUCCESS)
-    {
-        // Determine the reason for the error
-        char buildLog[16384];
-        clGetProgramBuildInfo(
+	if (errNum != CL_SUCCESS)
+	{
+		// Determine the reason for the error
+		char buildLog[16384];
+		clGetProgramBuildInfo(
 			program, 
 			deviceIDs[0], 
 			CL_PROGRAM_BUILD_LOG,
-            sizeof(buildLog), 
+			sizeof(buildLog), 
 			buildLog, 
 			NULL);
 
-        std::cerr << "Error in kernel: " << std::endl;
-        std::cerr << buildLog;
+		std::cerr << "Error in kernel: " << std::endl;
+		std::cerr << buildLog;
 		checkErr(errNum, "clBuildProgram");
-    }
+	}
 
 	// Create kernel object
 	kernel = clCreateKernel(
@@ -249,54 +241,77 @@ int main(int argc, char** argv) {
 	queue = clCreateCommandQueue(
 		context,
 		deviceIDs[0],
-		0,
+		CL_QUEUE_PROFILING_ENABLE,
 		&errNum);
 	checkErr(errNum, "clCreateCommandQueue");
 
-    errNum  = clSetKernelArg(kernel, 0, sizeof(cl_mem), &inputSignalBuffer);
+	errNum  = clSetKernelArg(kernel, 0, sizeof(cl_mem), &inputSignalBuffer);
 	errNum |= clSetKernelArg(kernel, 1, sizeof(cl_mem), &maskBuffer);
-    errNum |= clSetKernelArg(kernel, 2, sizeof(cl_mem), &outputSignalBuffer);
+	errNum |= clSetKernelArg(kernel, 2, sizeof(cl_mem), &outputSignalBuffer);
 	errNum |= clSetKernelArg(kernel, 3, sizeof(cl_uint), &inputSignalWidth);
 	errNum |= clSetKernelArg(kernel, 4, sizeof(cl_uint), &maskWidth);
+	errNum |= clSetKernelArg(kernel, 5, sizeof(cl_uint), &outputSignalWidth);
 	checkErr(errNum, "clSetKernelArg");
 
 	const size_t globalWorkSize[1] = { outputSignalWidth * outputSignalHeight };
-    const size_t localWorkSize[1]  = { 1 };
+	const size_t localWorkSize[1]  = { 1 };
 
-    // Queue the kernel up for execution across the array
-    errNum = clEnqueueNDRangeKernel(
+	// Queue the kernel up for execution across the array
+	cl_event event;
+	errNum = clEnqueueNDRangeKernel(
 		queue, 
 		kernel, 
 		1, 
 		NULL,
-        globalWorkSize, 
+		globalWorkSize, 
 		localWorkSize,
-        0, 
-		NULL, 
-		NULL);
+		0, 
+		NULL,
+		&event);
 	checkErr(errNum, "clEnqueueNDRangeKernel");
-    
+	clWaitForEvents(1, &event);
+	clFinish(queue);
+	// Calculate time elapsed from profile
+	cl_ulong time_start;
+	cl_ulong time_end;
+	clGetEventProfilingInfo(event, CL_PROFILING_COMMAND_START, 
+							sizeof(time_start), &time_start, NULL);
+	clGetEventProfilingInfo(event, CL_PROFILING_COMMAND_END,
+							sizeof(time_end), &time_end, NULL);
+	double elapsed = time_end-time_start;
+
 	errNum = clEnqueueReadBuffer(
 		queue, 
 		outputSignalBuffer, 
 		CL_TRUE,
-        0, 
-		sizeof(cl_uint) * outputSignalHeight * outputSignalHeight, 
+		0, 
+		sizeof(cl_uint) * outputSignalHeight * outputSignalWidth, 
 		outputSignal,
-        0, 
+		0, 
 		NULL, 
 		NULL);
 	checkErr(errNum, "clEnqueueReadBuffer");
 
-    // Output the result buffer
-	for (int x = 0; x < outputSignalWidth; x++)	{
-		for (int y = 0; y < outputSignalHeight; y++) {
-			std::cout << outputSignal[x][y] << " ";
-		}
-		std::cout << std::endl;
+	// Output the raw result buffer
+	if (toPrint) std::cout << "The raw output array " << std::endl;
+	for (size_t i = 0; i < outputSignalHeight; ++i) {
+		for (size_t j = 0; j < outputSignalWidth; ++j)
+			if (toPrint) std::cout << outputSignal[i][j] << " ";
+		if (toPrint) std::cout << std::endl;
 	}
-
-    std::cout << std::endl << "Executed program succesfully." << std::endl;
-
+	if (toPrint) std::cout << std::endl;
+	
+	if (toPrint) std::cout << "The normalized output array " << std::endl;
+	for (int i=0; i < outputSignalHeight; i++) {
+		for (int j=0; j < outputSignalWidth; j++) {
+			outputNormed[i][j] = outputSignal[i][j] / normalizingConst;
+			if (toPrint) std::cout << outputNormed[i][j] << " ";
+		}
+		if (toPrint) std::cout << std::endl;
+	}
+	if (toPrint) std::cout << std::endl;
+	
+	
+	printf("Executed program successfully in %f ms.\n\n", elapsed/1000000.0);
 	return 0;
 }
