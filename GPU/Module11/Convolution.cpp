@@ -32,33 +32,29 @@
 // Constants
 const unsigned int inputSignalWidth  = 8;
 const unsigned int inputSignalHeight = 8;
+cl_uint inputSignal[inputSignalWidth][inputSignalHeight];
 
-cl_uint inputSignal[inputSignalWidth][inputSignalHeight] =
-{
-	{3, 1, 1, 4, 8, 2, 1, 3},
-	{4, 2, 1, 1, 2, 1, 2, 3},
-	{4, 4, 4, 4, 3, 2, 2, 2},
-	{9, 8, 3, 8, 9, 0, 0, 0},
-	{9, 3, 3, 9, 0, 0, 0, 0},
-	{0, 9, 0, 8, 0, 0, 0, 0},
-	{3, 0, 8, 8, 9, 4, 4, 4},
-	{5, 9, 8, 1, 8, 1, 1, 1}
-};
-
-const unsigned int outputSignalWidth  = 6;
-const unsigned int outputSignalHeight = 6;
-
+const unsigned int outputSignalWidth  = 4;
+const unsigned int outputSignalHeight = 4;
 cl_uint outputSignal[outputSignalWidth][outputSignalHeight];
 
-const unsigned int maskWidth  = 3;
-const unsigned int maskHeight = 3;
+const unsigned int maskWidth  = 5;
+const unsigned int maskHeight = 5;
 
-cl_uint mask[maskWidth][maskHeight] =
-{
-	{0, 0, 0}, {0, 1, 0}, {0, 0, 0},
+// define masks according to insturction
+cl_uint mask[maskWidth][maskHeight] = { 
+	{0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 1, 0, 0},
+	{0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}
 };
+/*
+cl_uint mask[maskWidth][maskHeight] = { 
+	{0, 0, 0, 1, 0, 0, 0}, {0, 0, 1, 2, 1, 0, 0}, {0, 1, 2, 3, 2, 1, 0}, 
+	{1, 2, 3, 4, 3, 2, 1}, {0, 1, 2, 3, 2, 1, 0}, {0, 0, 1, 2, 1, 0, 0}, 
+	{0, 0, 0, 1, 0, 0, 0}
+};
+*/
 
-///
+///////////////////////////////////////////////
 // Function to check and handle OpenCL errors
 inline void 
 checkErr(cl_int err, const char * name)
@@ -84,8 +80,16 @@ void CL_CALLBACK contextCallback(
 ///
 //	main() for Convoloution example
 //
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv) {
+	// allocate 0 < x < 9 for all elements
+	for (int i=0; i<inputSignalHeight; i++) {
+		for (int j=0; j<inputSignalWidth; j++) {
+			inputSignal[i][j] = rand() % 10;
+			printf("%3u", inputSignal[i][j]);
+		}
+		printf("\n");
+	}
+	
     cl_int errNum;
     cl_uint numPlatforms;
 	cl_uint numDevices;
