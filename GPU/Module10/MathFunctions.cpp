@@ -2,6 +2,8 @@
 #include <fstream>
 #include <sstream>
 #include <math.h>
+#include <string>
+#include <cstring>
 
 #ifdef __APPLE__
 #include <OpenCL/cl.h>
@@ -13,6 +15,18 @@
 //  Constants
 //
 size_t ARRAY_SIZE;
+std::string ops = "";
+
+void printArray(const float * a, const char* name) {
+	printf("\tPrinting %s array:", name);
+	for (int i = 0; i < ARRAY_SIZE; i++) {
+		if (i%10 == 0) {
+			printf("\n");
+		}
+		printf("%8.3f", a[i]);
+	}
+	printf("\n");
+}
 
 ///
 //  Create an OpenCL context on the first available platform using
@@ -168,7 +182,7 @@ bool CreateMemObjects(cl_context context, cl_mem memObjects[3],
 	memObjects[1] = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR,
 								   sizeof(float) * ARRAY_SIZE, b, NULL);
 	memObjects[2] = clCreateBuffer(context, CL_MEM_READ_WRITE,
-								   sizeof(int) * ARRAY_SIZE, NULL, NULL);
+								   sizeof(float) * ARRAY_SIZE, NULL, NULL);
 
 	if (memObjects[0]==NULL || memObjects[1]==NULL || memObjects[2]==NULL) {
 		std::cerr << "Error creating memory objects." << std::endl;
@@ -204,12 +218,14 @@ void Cleanup(cl_context context, cl_command_queue commandQueue,
 
 //	main() for MathFunctions
 int main(int argc, char** argv) {
-	if (argc != 2) {
-		printf("Usage: %s [nSims]\n", argv[0]);
+	if (argc != 3) {
+		printf("Usage: %s [nSims] [add/subtract/multipl/divide/power]\n", argv[0]);
 		return 1;
 	} else {
 		ARRAY_SIZE = atoi(argv[1]);
+		ops = ops + argv[2] + ".cl";
 	}
+	printf("Performing %s, %zu elements...\n", ops.c_str(), ARRAY_SIZE);
 	
 	cl_context context = 0;
 	cl_command_queue commandQueue = 0;
@@ -235,7 +251,7 @@ int main(int argc, char** argv) {
 	}
 
 	// Create OpenCL program from MathFunctions.cl kernel source
-	program = CreateProgram(context, device, "MathFunctions.cl");
+	program = CreateProgram(context, device, ops.c_str());
 	if (program == NULL) {
 		Cleanup(context, commandQueue, program, kernel, memObjects);
 		return 1;
@@ -252,7 +268,7 @@ int main(int argc, char** argv) {
 	// Create memory objects that will be used as arguments to
 	// kernel.  First create host memory arrays that will be
 	// used to store the arguments to the kernel
-	int result[ARRAY_SIZE];
+	float result[ARRAY_SIZE];
 	float a[ARRAY_SIZE];
 	float b[ARRAY_SIZE];
 	for (int i = 0; i < ARRAY_SIZE; i++) {
@@ -293,7 +309,7 @@ int main(int argc, char** argv) {
 
 	// Read the output buffer back to the Host
 	errNum = clEnqueueReadBuffer(commandQueue, memObjects[2], CL_TRUE,
-								 0, ARRAY_SIZE * sizeof(int), result,
+								 0, ARRAY_SIZE * sizeof(float), result,
 								 0, NULL, NULL);
 	if (errNum != CL_SUCCESS) {
 		std::cerr << "Error reading result buffer." << std::endl;
@@ -310,16 +326,13 @@ int main(int argc, char** argv) {
 							sizeof(time_end), &time_end, NULL);
 	double elapsed = time_end-time_start;
 
-	// Calculate the estimated results
-	int sum = 0;
-	for (int i = 0; i < ARRAY_SIZE; i++) {
-		sum += result[i];
-		//std::cout << result[i] << " ";
-	}
-	float est = ((float) sum / ARRAY_SIZE) * 6 * 6;
+	// Print result
+	printArray(a, "Input 1");
+	printArray(b, "Input 2");
+	printArray(result, "results");
+
 	
-	printf("Running %zu estimations, elapsed %f ms\n", ARRAY_SIZE, elapsed/1000000.0);
-	printf("\tEstimte=%.6f, error=%.6f\n", est, fabs(-2.27700868095657-est));
+	printf("Array size %zu , elapsed %f ms\n\n", ARRAY_SIZE, elapsed/1000000.0);
 	
 	Cleanup(context, commandQueue, program, kernel, memObjects);
 	return 0;
