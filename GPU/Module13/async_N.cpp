@@ -6,9 +6,10 @@
 #include "info.hpp"
 
 #define DEFAULT_PLATFORM 0
-#define ARR_SIZE 20
+#define ARR_SIZE 10
 
 unsigned int nEvents;
+std::vector<int> eventList;
 
 // Function to check and handle OpenCL errors
 inline void 
@@ -31,7 +32,7 @@ void printArray(const double * a) {
 }
 
 
-double run_events(){
+double run_events(){	
 	cl_int errNum;
 	cl_uint numPlatforms;
 	cl_uint numDevices;
@@ -154,7 +155,7 @@ double run_events(){
 			&errNum);
 		checkErr(errNum, "clCreateKernel(infSum)");
 		
-		int t = (i+1) * 5;
+		int t = eventList[i];
 		errNum = clSetKernelArg(kernel, 0, sizeof(cl_mem), &inBuffer);
 		errNum |= clSetKernelArg(kernel, 1, sizeof(int), &t);
 		errNum |= clSetKernelArg(kernel, 2, sizeof(cl_mem), (void *)&outputs[i]);
@@ -194,9 +195,16 @@ double run_events(){
 		events.push_back(event);
 	}
 	
-	// Wait for events
+	// Wait for events and calculate time elapsed
 	clWaitForEvents(events.size(), &events[0]);
-	clFinish(queue);
+	clFinish(queue); // wait for all events to finish
+	cl_ulong time_start;
+	cl_ulong time_end;
+	clGetEventProfilingInfo(events[0], CL_PROFILING_COMMAND_START, 
+						sizeof(time_start), &time_start, NULL);
+	clGetEventProfilingInfo(events[events.size()-1], CL_PROFILING_COMMAND_END,
+						sizeof(time_end), &time_end, NULL);
+	double elapsed = time_end-time_start;
 	
 	// Print output
 	double output[ARR_SIZE];
@@ -215,23 +223,25 @@ double run_events(){
 		printf("Printing array with %u sums:", nSums[i]);
 		printArray(output);
 	}
-	
-	return 0.0;
+	return elapsed;
 }
 
 ///
 //	main() for simple buffer and sub-buffer example
 //
 int main(int argc, char** argv) {
-	if (argc != 2) {
-		printf("Usage: %s [nEvents]\n", argv[0]);
+	if (argc == 1) {
+		printf("Usage: %s [list of events]\n", argv[0]);
 		return 1;
 	} else {
-		nEvents = atoi(argv[1]);
+		nEvents = argc - 1;
+		for (int i=1; i < argc; i++) {
+			eventList.push_back( atoi(argv[i]) );
+		}
 	}
-	
+			
 	printf("Running %u events...\n", nEvents);
 	double timed = run_events();
-	printf("Program completed successfully in %.3f ms.\n", timed);
+	printf("Program completed successfully in %.3f ms.\n\n", timed);
 	return 0;
 }
