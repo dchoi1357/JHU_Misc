@@ -28,7 +28,7 @@ def processFile(fname):
 	
 		for wd in d: # loop over words in current doc
 			tmp = corp.get(wd, (0,0)) # get collection freq and document freq
-			corp[wd] = (tmp[0]+d[wd], tmp[1]+1) # add coll. freq and +1 doc freq
+			corp[wd] = (tmp[0]+d[wd], tmp[1]+1) # sum coll. freq and +1 doc freq
 
 	print('\tProcessed %d paragraphs'%len(paragraphs))
 	print('\tVocabulary size: %d'%len(corp))
