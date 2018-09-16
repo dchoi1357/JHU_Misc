@@ -1,3 +1,8 @@
+Processing file: headlines.txt
+	Processed 500000 paragraphs
+	Vocabulary size: 176299
+	Collection size: 4523687
+Wrote inverted file inv_headlines.dat, dict file dict_headlines.dat.
 heidelberg: df=8, postings=[(114330, 1), (135134, 1), (174781, 1), (221100, 1), (243838, 1), (452546, 1), (491140, 1), (491279, 1)]
 plutonium: df=6, postings=[(63765, 1), (202980, 1), (297335, 1), (314543, 1), (435698, 1), (480530, 1)]
 omarosa is not within corpus.

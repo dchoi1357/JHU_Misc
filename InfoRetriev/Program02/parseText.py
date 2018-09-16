@@ -25,25 +25,29 @@ def processDoc(rawTxt, docid):
 
 def writeInvertedFile(invFileName, dictFileName):
 	outDict = dict() # dictionary to be written out
-	count = 0 # running offset count
+	count, coll = 0,0 # running offset count and collection size
 	with open(invFileName, 'wb') as f:
 		for term in vcb:
 			outDict[term] = (len(vcb[term]), count)
 			count += 2*len(vcb[term]) # increment current count
 			for docid,n in vcb[term]: # write tuple of docid and tf(term,docid)
+				coll += n
 				f.write( docid.to_bytes(4, byteorder='little') )
 				f.write( n.to_bytes(4, byteorder='little') )
 
 	with open(dictFileName, 'wb') as h: # write dic out as pickle file
 		pickle.dump(outDict, h, protocol=pickle.HIGHEST_PROTOCOL)
-	return outDict
+	return outDict, coll
 
 def processFile(fname):
 	print('Processing file: %s'%fname)
 	paragraphs = getParagraphs(fname)
 	for n,doc in enumerate(paragraphs): # loop over all document
 		processDoc(doc, n+1) # parse each doc and update full dictionary
-	writeInvertedFile(sys.argv[2], sys.argv[3]) # write inv file and dic
+	_,coll = writeInvertedFile(sys.argv[2], sys.argv[3]) # write inv file and dic
+	print('\tProcessed %d paragraphs'%len(paragraphs))
+	print('\tVocabulary size: %d'%len(vcb))
+	print('\tCollection size: %d'%coll)
 
 	print('Wrote inverted file %s, dict file %s.' % (sys.argv[2],sys.argv[3]) )
 
