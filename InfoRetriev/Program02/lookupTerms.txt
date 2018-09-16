@@ -1,0 +1,9 @@
+2,Heidelberg
+2,plutonium
+2,Omarosa
+2,octopus
+0,Hopkins
+0,Harvard
+0,Stanford
+0,college
+1,Jeff,Bezos

@@ -51,4 +51,4 @@ def processFile(fname):
 if len(sys.argv) == 4:
 	processFile(sys.argv[1])
 else:
-	print("Usage: %s [fileName]"%sys.argv[0])
+	print("Usage: %s [inputFile] [outInvFileName] [outDictName]"%sys.argv[0])
