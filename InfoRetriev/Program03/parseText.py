@@ -3,8 +3,9 @@ if len(sys.argv) != 4: # check number of commandline inputs
 	print("Usage: %s [inputFile] [outInvFileName] [outDictName]"%sys.argv[0])
 	exit()
 
-import nltk, re, string, pickle
+import nltk, re, string, pickle, math
 from operator import itemgetter
+from collections import Counter
 import helperFuncs as funcs
 
 pct = re.compile('^['+string.punctuation+']+$') # match 1+ consec. punctuation
@@ -39,9 +40,7 @@ def processDocsFile(fname):
 
 def processDoc(txt, docid):
 	global vcb
-	d = dict() # temp dict to store info on this document
-	for tk in funcs.tokenizeNoPunct(txt, pct):
-		d[tk] = d.get(tk, 0) + 1
+	d = Counter( funcs.tokenizeNoPunct(txt, pct) ) # count of this doc
 	for tk in d: # merge dict of this doc with the bigger vocab dict
 		if tk not in vcb: # if not in vocab
 			vcb[tk] = [(docid, d[tk])] # add first posting 
@@ -54,16 +53,22 @@ def writeInvertedFile(invFileName, dictFileName):
 	global vcb, nDocs
 	outDict = dict() # dictionary to be written out
 	count, coll = 0,0 # running offset count and collection size
+	docLen = [0 for x in range(nDocs)] # list of vector lengths for documents
 	with open(invFileName, 'wb') as f:
 		for term in vcb:
-			outDict[term] = (len(vcb[term]), count)
-			count += 2*len(vcb[term]) # increment current count
-			for docid,n in vcb[term]: # write tuple of docid and tf(term,docid)
-				coll += n
+			posts = vcb[term]
+			idf = math.log(1.0 + nDocs/len(posts), 2) # +1.0 for term in all doc
+			outDict[term] = (len(posts), count, idf)
+			count += 2*len(posts) # increment current count
+			for docid,tf in posts: # write pair of docid and tf(term,docid)
+				coll += tf
 				f.write( docid.to_bytes(4, byteorder='little') )
-				f.write( n.to_bytes(4, byteorder='little') )
+				f.write( tf.to_bytes(4, byteorder='little') )
+				docLen[docid-1] += (tf*idf)**2
 
+	docLen = [math.sqrt(x) for x in docLen]
 	outDict['#nDocs#'] = nDocs # add entry for number of documents
+	outDict['#docLen#'] = docLen # add entry for document vector lengths
 	with open(dictFileName, 'wb') as h: # write dic out as pickle file
 		pickle.dump(outDict, h, protocol=pickle.HIGHEST_PROTOCOL)
 	return outDict, coll
