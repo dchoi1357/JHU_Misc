@@ -1,14 +1,17 @@
 import sys
-if len(sys.argv) != 4: # check number of commandline inputs
-	print("Usage: %s [inputFile] [outInvFileName] [outDictName]"%sys.argv[0])
+if len(sys.argv) != 5: # check number of commandline inputs
+	print(("Usage: %s [inputFile] [outInvFileName] [outDictName] " \
+		"[tokenizeAlgoNumber]") %sys.argv[0])
 	sys.exit()
 
 import nltk, re, string, pickle, math
 from operator import itemgetter
 from collections import Counter
-import helperFuncs as funcs
+import tokenHelper as tkn
 
-pct = re.compile('^['+string.punctuation+']+$') # match 1+ consec. punctuation
+inputFile,outInvFile,outDictFile,tokenizeAlgoNum = \
+	[ sys.argv[n] for n in range(1,len(sys.argv)) ]
+
 tg = re.compile(r'<p id=(\d+)>', re.IGNORECASE) # regex to capture docID
 vcb = dict() # dictionary for entire collection
 nDocs = 0 # number of documents processed
@@ -34,13 +37,19 @@ def processDocsFile(fname):
 					tmpDict = processDoc(' '.join(tmpTxts), docID) # process doc
 				else:
 					tmpTxts.append( tmp ) # add to list of lines for doc
-					
+			
+			if nDocs%100 == 0:
+				print('\tDocument processed: %10d'%nDocs, end='\r')
+				print('\b' * (10+len('Document processed: ')), end='\r')
+		print('\tDocument processed: %10d'%nDocs)
+
+
 	for term in vcb: # go through dict and sort the posting lists
 		vcb[term].sort(key=itemgetter(0)) # sort by first elem, or docID
 
 def processDoc(txt, docid):
 	global vcb
-	d = Counter( funcs.tokenizeNoPunct(txt) ) # count of this doc
+	d = Counter( tkn.tokenize(txt,tokenizeAlgoNum) )
 	for tk in d: # merge dict of this doc with the bigger vocab dict
 		if tk not in vcb: # if not in vocab
 			vcb[tk] = [(docid, d[tk])] # add first posting 
@@ -53,7 +62,7 @@ def writeInvertedFile(invFileName, dictFileName):
 	global vcb, nDocs
 	outDict = dict() # dictionary to be written out
 	count, coll = 0,0 # running offset count and collection size
-	docLen = [0 for x in range(nDocs)] # list of vector lengths for documents
+	docLen = Counter() # must use dict as docID may not be contiguous
 	with open(invFileName, 'wb') as f:
 		for term in vcb:
 			posts = vcb[term]
@@ -64,9 +73,10 @@ def writeInvertedFile(invFileName, dictFileName):
 				coll += tf
 				f.write( docid.to_bytes(4, byteorder='little') )
 				f.write( tf.to_bytes(4, byteorder='little') )
-				docLen[docid-1] += (tf*idf)**2
+				docLen[docid] += (tf*idf)**2
 
-	docLen = [math.sqrt(x) for x in docLen]
+	for docID in docLen:
+		docLen[docID] = math.sqrt(docLen[docID])
 	outDict['#nDocs#'] = nDocs # add entry for number of documents
 	outDict['#docLen#'] = docLen # add entry for document vector lengths
 	with open(dictFileName, 'wb') as h: # write dic out as pickle file
@@ -78,13 +88,12 @@ def processFile(fname):
 	print('Processing file: %s'%fname)
 	processDocsFile(fname)
 	# write inverted file and dictionary
-	_,coll = writeInvertedFile(sys.argv[2], sys.argv[3]) 
-	print('\tProcessed %d documents'%nDocs)
+	_,coll = writeInvertedFile(outInvFile, outDictFile) 
 	print('\tVocabulary size: %d'%len(vcb))
 	print('\tCollection size: %d'%coll)
+	
+	print('Wrote inverted file %s, dict file %s.' % (outInvFile,outDictFile) )
 
-	print('Wrote inverted file %s, dict file %s.' % (sys.argv[2],sys.argv[3]) )
 
-
-processFile(sys.argv[1])
+processFile(inputFile)
 
