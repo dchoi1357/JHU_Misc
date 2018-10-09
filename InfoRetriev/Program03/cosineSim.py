@@ -1,4 +1,10 @@
-import sys, pickle, struct, math
+import sys
+if len(sys.argv) != 5: # check number of commandline inputs
+	print("Usage: %s [queryFileName] [invFileName] [dictName] [outFileName]" \
+		%sys.argv[0])
+	sys.exit()
+
+import sys, pickle, struct, math, re
 import helperFuncs as funcs
 from collections import Counter
 
@@ -28,7 +34,6 @@ def lookupPostingIDF(term):
 	return ( posting, idf )
 
 def cosineSim(qDct):
-	qVecLen = 0
 	sims = Counter() # counter for storing simularity scores
 	for tk in qDct: 
 		if tk not in vcb: # if have not been looked up before
@@ -43,33 +48,19 @@ def getTopNSimDocs(qID, simScore, N=100):
 	fmt = '%d Q0 %d %d %f Wu'
 	return [fmt % (qID,docID,n,score) for n,(docID,score) in enumerate(topN)]
 
-def lookupAndPrint(srchTyp, terms):
-	terms = terms[0] if len(terms)==1 else terms # if only 1 term, then unnest
-	try:
-		if srchTyp == 0:
-			df, pst = lookupSingleTerm(terms)
-			print("%s: df=%d"%(terms,df))
-		elif srchTyp == 2:
-			df, pst = lookupSingleTerm(terms)
-			print("%s: df=%d, postings=%s"%(terms,df,str(pst)))
-		elif srchTyp == 1:
-			_, pst1 = lookupSingleTerm(terms[0]) # posting list for term 1
-			_, pst2 = lookupSingleTerm(terms[1]) # posting list for term 2
-			# give sorted list of intersection of doc ids
-			ids = sorted( set([x[0] for x in pst1]) & set([x[0] for x in pst2]) )
-			print("docs with %s & %s: %s"%(terms[0],terms[1],str(ids)))
-	except KeyError:
-		print('%s is not within corpus.'%str(terms))
-		
 
-if len(sys.argv) == 4:
-	invFilePath = sys.argv[2]
-	with open(sys.argv[3], 'rb') as h:
-		d = pickle.load(h)
-	nDocs = d['#nDocs#']
-	lookups = readLookupFile(sys.argv[1])
-	for x in lookups:
-		lookupAndPrint(x[0], x[1])
+invFilePath = sys.argv[2]
+with open(sys.argv[3], 'rb') as h:
+	d = pickle.load(h)
+nDocs = d['#nDocs#']
+docLen = d['#docLen#']
 
-else:
-	print("Usage: %s [lookupInput] [invFileName] [dictName]"%sys.argv[0])
+with open(sys.argv[5], 'w') as outFile:
+	for qInd,qTxt in enumerate(getQueries(sys.argv[1])):
+		qDict = parseQuery(qTxt)
+		simScores = cosineSim(qDict)
+		out = getTopNSimDocs(qInd, simScores)
+		outFile.writelines(out)
+
+# for x in lookups:
+# 	lookupAndPrint(x[0], x[1])

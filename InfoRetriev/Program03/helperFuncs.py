@@ -1,14 +1,12 @@
 import nltk, string, re
-#pct = re.compile('^['+string.punctuation+']+$') # match 1+ consec. punctuation
+punct = re.compile('^['+string.punctuation+']+$') # match 1+ consec. punctuation
+engStopWords =  set(nltk.word_tokenize( \
+	' '.join(nltk.corpus.stopwords.words('english')) ) )
 
-def getStopWordTokens():
-	z = nltk.corpus.stopwords.words('english')
-	return set(nltk.word_tokenize( ' '.join(z) ))
-
-def tokenizeNoPunct(txt, punct):
+def tokenizeNoPunct(txt):
 	return [tk for tk in nltk.word_tokenize(txt) if not punct.match(tk)]
 
-def tokenizeNoPunctStopword(txt, punctRegex, stopWordsSet):
+def tokenizeNoPunctStopword(txt):
 	return [tk for tk in nltk.word_tokenize(txt) if \
-		(tk not in stopWordsSet and not punctRegex.match(tk))]
+		(tk not in engStopWords and not punct.match(tk))]
 

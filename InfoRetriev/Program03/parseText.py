@@ -1,7 +1,7 @@
 import sys
 if len(sys.argv) != 4: # check number of commandline inputs
 	print("Usage: %s [inputFile] [outInvFileName] [outDictName]"%sys.argv[0])
-	exit()
+	sys.exit()
 
 import nltk, re, string, pickle, math
 from operator import itemgetter
@@ -40,7 +40,7 @@ def processDocsFile(fname):
 
 def processDoc(txt, docid):
 	global vcb
-	d = Counter( funcs.tokenizeNoPunct(txt, pct) ) # count of this doc
+	d = Counter( funcs.tokenizeNoPunct(txt) ) # count of this doc
 	for tk in d: # merge dict of this doc with the bigger vocab dict
 		if tk not in vcb: # if not in vocab
 			vcb[tk] = [(docid, d[tk])] # add first posting 
