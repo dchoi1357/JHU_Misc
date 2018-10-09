@@ -4,9 +4,9 @@ from collections import Counter
 import tokenHelper as tkn
 
 queryFileName = './data/cds14.topics.txt'
-invFileName = './data/cds14.inv'
-dictFileName = './data/cds14.dict'
-tokenizeAlgoNum = '2'
+invFileName = './data/cds14_nstem.inv'
+dictFileName = './data/cds14_nstem.dict'
+tokenizeAlgoNum = '3'
 tg = re.compile('<q id=\\d+>') # regex to match leading tag
 vcb = dict() # corpus to be added as queries are looked up
 
@@ -50,4 +50,3 @@ qDict = parseQuery( getQueries(queryFileName)[0] )
 z = cosineSimScore(qDict)
 o = [(tk,vcb[tk][1]*qDict[tk]) for tk in qDict]
 
-print(o)
