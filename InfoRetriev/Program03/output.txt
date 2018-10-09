@@ -1,0 +1,21 @@
+$ ./run.sh
+Tokenizing by removing punctuation and stop words:
+Processing file: ./data/cds14.txt
+        Document processed:      57982
+        Vocabulary size: 2273247
+        Collection size: 127347407
+Wrote inverted file ./data/cds14.inv, dict file ./data/cds14.dict.
+Parsing query file: ./data/cds14.topics.txt
+        Querying inverted file ./data/cds14.inv and dict ./data/cds14.dict
+Wrote out query results to: ./wu-a.txt
+
+Tokenizing by removing punctuation and stop words also using 5-stem:
+Processing file: ./data/cds14.txt
+        Document processed:      57982
+        Vocabulary size: 774419
+        Collection size: 127347407
+Wrote inverted file ./data/cds14_nstem.inv, dict file ./data/cds14_nstem.dict.
+Parsing query file: ./data/cds14.topics.txt
+        Querying inverted file ./data/cds14_nstem.inv and dict ./data/cds14_nstem.dict
+Wrote out query results to: ./wu-b.txt
+
