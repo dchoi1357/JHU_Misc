@@ -1,7 +1,7 @@
 import sys
 import pickle, struct, math, re
 from collections import Counter
-import tokenHelper as tkn
+import tokenHelper as tkn # import custom function for tokenization of text
 
 queryFileName = './data/cds14.topics.txt'
 invFileName = './data/cds14_nstem.inv'
