@@ -4,7 +4,7 @@ if len(sys.argv) != 6: # check number of commandline inputs
 		"[tokenizeAlgoNumber] [outFileName]") %  sys.argv[0])
 	sys.exit()
 
-import pickle, struct, math, re
+import pickle, struct, math, re, os.path
 from collections import Counter
 import tokenHelper as tkn # import custom function for tokenization of text
 
@@ -53,17 +53,23 @@ def getTopNSimDocs(qID, simScore, N=100): # return top N document for a query
 	fmt = '%d Q0 %d %d %f Wu\n' # format for output file lines
 	return [fmt % (qID,docID,n+1,score) for n,(docID,score) in enumerate(topN)]
 
-
 with open(dictFileName, 'rb') as h:
 	d = pickle.load(h) # load dictionary containing offset, DF, and idf
 docLen = d['#docLen#'] # document vector length
 print("Parsing query file: %s"%queryFileName)
 print("\tQuerying inverted file %s and dict %s"%(invFileName,dictFileName))
 with open(outFileName, 'w') as fh: # process each query while writing out
-	for qInd,qTxt in enumerate(getQueries( queryFileName )): # loop over queries
+	qs = getQueries( queryFileName )
+	scoreList = [Counter() for x in range(len(qs))]
+	for qInd,qTxt in enumerate( qs ): # loop over queries
 		qDict = parseQuery(qTxt) # parse query into tokens and counts
 		simScores = cosineSimScore(qDict) # calculate cosine sim for all docs
+		scoreList[qInd] = simScores
 		out = getTopNSimDocs(qInd+1, simScores) # get top N docs based on sim
 		fh.writelines(out) # write out lines for output
+
+f = os.path.splitext(outFileName)
+with open(f[0]+'_scores'+f[1], 'wb') as h: # write scores as pickle file
+	pickle.dump(scoreList, h, protocol=pickle.HIGHEST_PROTOCOL)
 print("Wrote out query results to: %s" % outFileName)
 

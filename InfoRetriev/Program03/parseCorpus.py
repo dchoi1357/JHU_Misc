@@ -10,7 +10,7 @@ from collections import Counter
 import tokenHelper as tkn # import custom function for tokenization of text
 
 # command line arguments
-inputFile,outInvFile,outDictFile,tokenizeAlgoNum = \ 
+inputFile,outInvFile,outDictFile,tokenizeAlgoNum = \
 	[ sys.argv[n] for n in range(1,len(sys.argv)) ]
 tg = re.compile(r'<p id=(\d+)>', re.IGNORECASE) # regex to capture docID
 vcb = dict() # dict for entire collection, contains term and posting list
