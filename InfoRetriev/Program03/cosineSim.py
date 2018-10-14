@@ -68,8 +68,7 @@ with open(outFileName, 'w') as fh: # process each query while writing out
 		out = getTopNSimDocs(qInd+1, simScores) # get top N docs based on sim
 		fh.writelines(out) # write out lines for output
 
-f = os.path.splitext(outFileName)
-with open(f[0]+'_scores'+f[1], 'wb') as h: # write scores as pickle file
+with open(os.path.splitext(outFileName)[0]+'_scores.dict', 'wb') as h: 
 	pickle.dump(scoreList, h, protocol=pickle.HIGHEST_PROTOCOL)
 print("Wrote out query results to: %s" % outFileName)
 
