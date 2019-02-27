@@ -1,8 +1,7 @@
 import os
 import numpy as np, pandas as pd
 from stepForwSelect import ForwardSelect
-
-
+from functions import prepData
 
 irisFile = os.path.join('./data/', 'iris.data')
 irisName = ['sepalLen', 'sepalWth', 'petalLen', 'petalWth', 'class']
