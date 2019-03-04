@@ -24,7 +24,7 @@ elif fName == 'spambase.data':
 		'pm', 'direct', 'cs', 'meeting', 'original', 'project', 're', 'edu', 
 		'table', 'conference', 'semicolon', 'paren', 'bracket', 'exclaim', 
 		'dollar', 'pound', 'capsAvg', 'capsMax', 'capsTotal', 'class']
-	dataMat,feats,nK,dataMeans = prepData(spamData,spamNames,slice(-1))
+	dataMat,feats,nK,dataMeans = prepData(spamData,spamNames,slice(-4))
 else:
 	pass
 
