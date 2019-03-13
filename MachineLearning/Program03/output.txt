@@ -1,0 +1,40 @@
+$ bash run.sh
+Running ecoli.data
+Result of KNN, Rescale=False:
+Best K=3
+Average Classification Errors: 0.155311
+St Dev of Classification Errors: 0.023136
+Result of KNN, Rescale=True:
+Best K=4
+Average Classification Errors: 0.140286
+St Dev of Classification Errors: 0.020338
+
+Running forestfires.data
+Result of KNN, Rescale=False:
+Best K=6
+Average Classification Errors: 3.474706
+St Dev of Classification Errors: 0.657929
+Result of KNN, Rescale=True:
+Best K=10
+Average Classification Errors: 3.209263
+St Dev of Classification Errors: 0.383528
+
+Running machine.data
+Result of KNN, Rescale=False:
+Best K=2
+Average Classification Errors: 72.509559
+St Dev of Classification Errors: 43.248475
+Result of KNN, Rescale=True:
+Best K=2
+Average Classification Errors: 63.066745
+St Dev of Classification Errors: 26.709099
+
+Running segmentation.data
+Result of KNN, Rescale=False:
+Best K=9
+Average Classification Errors: 0.223810
+St Dev of Classification Errors: 0.055533
+Result of KNN, Rescale=True:
+Best K=5
+Average Classification Errors: 0.152381
+St Dev of Classification Errors: 0.044160
