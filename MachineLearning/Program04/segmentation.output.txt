@@ -1,0 +1,99 @@
+Full Tree - Mean Error: 0.205714
+Full Tree - St Dev Error: 0.066148
+Pruned Tree - Mean Error: 0.199048
+Pruned Tree - St Dev Error: 0.051675
+
+===full tree===
+Attribute [exgreenMean]:
+    value < 0.888889, Attribute [centRow]:
+        value < 160.500000, Attribute [intenseMean]:
+            value < 79.037035, Attribute [valueMean]:
+                value < 40.166668, Attribute [saturateMean]:
+                    value < 0.625189, Attribute [centCol]:
+                        value < 151.000000, Attribute [exredMean]:
+                            value < -7.000000, Attribute [vegdeSD]:
+                                value < 8.898150, Attribute [hedgeMean]:
+                                    value < 0.916667, class: WINDOW
+                                    value >= 0.916667, Attribute [hedgeSD]:
+                                        value < 3.412824, class: CEMENT
+                                        value >= 3.412824, class: WINDOW
+                                value >= 8.898150, class: FOLIAGE
+                            value >= -7.000000, Attribute [rawgreenMean]:
+                                value < 1.500000, class: FOLIAGE
+                                value >= 1.500000, Attribute [vedgeMean]:
+                                    value < 2.555555, Attribute [rawredMean]:
+                                        value < 7.166667, Attribute [vegdeSD]:
+                                            value < 1.003704, class: BRICKFACE
+                                            value >= 1.003704, class: CEMENT
+                                        value >= 7.166667, class: BRICKFACE
+                                    value >= 2.555555, class: FOLIAGE
+                        value >= 151.000000, Attribute [exredMean]:
+                            value < 2.333333, Attribute [rawgreenMean]:
+                                value < 20.222223, class: WINDOW
+                                value >= 20.222223, Attribute [vegdeSD]:
+                                    value < 0.825769, class: WINDOW
+                                    value >= 0.825769, class: CEMENT
+                            value >= 2.333333, class: BRICKFACE
+                    value >= 0.625189, Attribute [rawredMean]:
+                        value < 0.277778, class: FOLIAGE
+                        value >= 0.277778, Attribute [hedgeMean]:
+                            value < 0.666667, class: WINDOW
+                            value >= 0.666667, Attribute [vedgeMean]:
+                                value < 0.555555, class: WINDOW
+                                value >= 0.555555, Attribute [exredMean]:
+                                    value < -3.111111, class: FOLIAGE
+                                    value >= -3.111111, class: WINDOW
+                value >= 40.166668, Attribute [hedgeMean]:
+                    value < 26.527779, class: CEMENT
+                    value >= 26.527779, class: FOLIAGE
+            value >= 79.037035, class: SKY
+        value >= 160.500000, class: PATH
+    value >= 0.888889, class: GRASS
+
+===pruned tree===
+Attribute [exgreenMean]:
+    value < 0.888889, Attribute [centRow]:
+        value < 160.500000, Attribute [intenseMean]:
+            value < 79.037035, Attribute [valueMean]:
+                value < 40.166668, Attribute [saturateMean]:
+                    value < 0.625189, Attribute [centCol]:
+                        value < 151.000000, Attribute [exredMean]:
+                            value < -7.000000, Attribute [vegdeSD]:
+                                value < 8.898150, Attribute [hedgeMean]:
+                                    value < 0.916667, class: WINDOW
+                                    value >= 0.916667, Attribute [hedgeSD]:
+                                        value < 3.412824, class: CEMENT
+                                        value >= 3.412824, class: WINDOW
+                                value >= 8.898150, class: FOLIAGE
+                            value >= -7.000000, Attribute [rawgreenMean]:
+                                value < 1.500000, class: FOLIAGE
+                                value >= 1.500000, Attribute [vedgeMean]:
+                                    value < 2.555555, Attribute [rawredMean]:
+                                        value < 7.166667, Attribute [vegdeSD]:
+                                            value < 1.003704, class: BRICKFACE
+                                            value >= 1.003704, class: CEMENT
+                                        value >= 7.166667, class: BRICKFACE
+                                    value >= 2.555555, class: FOLIAGE
+                        value >= 151.000000, Attribute [exredMean]:
+                            value < 2.333333, Attribute [rawgreenMean]:
+                                value < 20.222223, class: WINDOW
+                                value >= 20.222223, Attribute [vegdeSD]:
+                                    value < 0.825769, class: WINDOW
+                                    value >= 0.825769, class: CEMENT
+                            value >= 2.333333, class: BRICKFACE
+                    value >= 0.625189, Attribute [rawredMean]:
+                        value < 0.277778, class: FOLIAGE
+                        value >= 0.277778, Attribute [hedgeMean]:
+                            value < 0.666667, class: WINDOW
+                            value >= 0.666667, Attribute [vedgeMean]:
+                                value < 0.555555, class: WINDOW
+                                value >= 0.555555, Attribute [exredMean]:
+                                    value < -3.111111, class: FOLIAGE
+                                    value >= -3.111111, class: WINDOW
+                value >= 40.166668, Attribute [hedgeMean]:
+                    value < 26.527779, class: CEMENT
+                    value >= 26.527779, class: FOLIAGE
+            value >= 79.037035, class: SKY
+        value >= 160.500000, class: PATH
+    value >= 0.888889, class: GRASS
+

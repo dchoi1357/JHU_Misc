@@ -10,32 +10,15 @@ if len(sys.argv) > 2: # to print the trees or not
 else:
 	printTree = False # no print
 
-if fName == 'car.data':
-	carPath = os.path.join(path,fName)
-	carNames = ['buying', 'maint', 'doors', 'persons', 'lug_boot', 'safety',
-				'accept']
-	data,features,classes = prepData(carPath, carNames, slice(-1),'accept')
-
-elif fName == 'segmentation.data':
-	segPD = os.path.join(path,fName)
-	segVars = ['class', 'centCol', 'centRow', 'pixelCount', 'slDensity5', 
-            'slDensity2', 'vedgeMean', 'vegdeSD', 'hedgeMean', 'hedgeSD',
-            'intenseMean', 'rawredMean', 'rawblueMean', 'rawgreenMean',
-             'exredMean', 'exblueMean', 'exgreenMean', 'valueMean', 
-             'saturateMean', 'hueMean']
-
-	segFeatIdx = [1,2] + list(range(4,19))
-	data,features,classes = prepData(segPD, segVars, segFeatIdx, 'class')
-
-elif fName == 'abalone.data':
+if fName == 'abalone.data':
 	abalonePath = os.path.join(path,fName)
 	abaloneNames = ['sex', 'length', 'diameter', 'height', 'wholeHt',
 					'shuckWt', 'visceraWt', 'shellWt', 'rings']
 	data,features,classNum = prepData(abalonePath, abaloneNames, 
 									  slice(-1), 'rings')
 	classes = classNum.astype(str)
-	classes[classNum<=5] = '<5'
-	classes[classNum>=16] = '16+'
+	classes[classNum<=8] = '1-8'
+	classes[classNum>=11] = '11+'
 
 else:
 	sys.exit("No such data set.")

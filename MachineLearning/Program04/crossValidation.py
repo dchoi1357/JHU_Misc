@@ -11,7 +11,7 @@ def errRate(pred, actual, categorical=True):
 def getXVFolds(dataMat, classVec, nFolds=5, categorical=False):
 	''' Cut N-fold cross validation of the data set
 	Given a data matrix, a class vector, and the number of folds, the function
-	randomly cuts a 5-fold cross validation. If the data is categorical, 
+	randomly cuts a n-fold cross validation. If the data is categorical, 
 	stratified sampling is used.
 	'''
 	
@@ -30,15 +30,16 @@ def getXVFolds(dataMat, classVec, nFolds=5, categorical=False):
 
 	return chunks # return the prediction of the last fold
 
-def crossValidate(data, labels, pruneSet, chunks, categ=True):
+
+def crossValidate(data, labels, pruneSet, chunks, printTree=False):
     ''' Perform n-fold cross validation.
-    Given data matrix, labels, the chunks as folds, the function performs
+    Given data array, labels, the chunks as folds, the function performs
     cross validation by using 4 out of 5 folds as training and the fifth as 
     testing set. This is repeated 5 times with a different chunk of the fold 
-    serving as testing set. The error is returned.
+    serving as testing set. With each fold, a full tree is first constructued.
+    The tree is then pruned with a pruning set. The validation error with both
+    trees are returned
     '''
-	
-    prnData,prnLabels = pruneSet
 
     errFull = np.empty(len(chunks))
     errPrune = np.empty(len(chunks))
@@ -52,7 +53,7 @@ def crossValidate(data, labels, pruneSet, chunks, categ=True):
         tr = TrainDTree(dataTrain, labelTrain) # train DTree
         tr.combineChildNodes() # combine subtrees with homogeneous classes
         pred1 = PredictDTree(tr, dataTest) # predict with full tree
-        
+
         PruneDTree(tr, pruneSet[0], pruneSet[1]) # prune with pruning set
         pred2 = PredictDTree(tr, dataTest) # predict with pruned tree
         
