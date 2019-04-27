@@ -1,0 +1,5 @@
+Logistic Regression - Mean Error: 0.020000
+Logistic Regression - St Dev Error: 0.026667
+Logistic Regression - Mean N Iters: 63746.000000
+Naive Bayes - Mean Error: 0.246667
+Naive Bayes - St Dev Error: 0.068638
