@@ -5,7 +5,6 @@ from NN_1hidd import train_1hidd, pred_1hidd
 from NN_2hidd import train_2hidd, pred_2hidd
 
 eta = 2.5 # learning rate
-rand = False # whether to use stochastic gradient descent
 
 def getXVFolds(dataMat, classVec, nFolds=5, categorical=True):
     ''' Cut N-fold cross validation of the data set
@@ -32,7 +31,7 @@ def getXVFolds(dataMat, classVec, nFolds=5, categorical=True):
 
     return chunks # return the prediction of the last fold
 
-def tuneNHiddNodes(dataMat, classMat, folds):
+def tuneNHiddNodes(dataMat, classMat, folds, rand):
     ''' Find the optimal number of hidden nodes for use with ANN.
     For ANN with 1 and 2 hidden layers, choose 1/5 of the data as testing set, 
     with the rest as training set. For each structure, find the optimal number 
@@ -74,7 +73,7 @@ def tuneNHiddNodes(dataMat, classMat, folds):
 
     return hiddNodes[nHiddErr.argmin(axis=1)] # return nNode w/ lowest err
 
-def doCrossValidate(data, labels, chunks, nHiddNd):
+def doCrossValidate(data, labels, chunks, nHiddNd, rand):
     ''' Perform n-fold cross validation.
     Given data array, labels, the chunks as folds, the function performs
     cross validation by using 4 out of 5 folds as training and the fifth as 

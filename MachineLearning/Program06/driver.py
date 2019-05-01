@@ -5,6 +5,10 @@ from crossValidate import getXVFolds, doCrossValidate, tuneNHiddNodes
 
 path,fName = os.path.split(sys.argv[1])
 
+stochastic = False
+if len(sys.argv) > 2:
+    stochastic = int(sys.argv[2].strip()) > 0
+
 
 if fName == 'glass.txt':
     glassData = os.path.join(path, fName)
@@ -75,10 +79,11 @@ else:
 
 folds = getXVFolds(dataMat, classVec, categorical=True) # stratified sampling
 
-nHiddNodes = tuneNHiddNodes(dataMat, classVec, folds)
+nHiddNodes = tuneNHiddNodes(dataMat, classVec, folds, stochastic)
 print("N Hidden Nodes: %s"%nHiddNodes)
 
-errInSamp,errXV,nIters = doCrossValidate(dataMat, classVec, folds, nHiddNodes)
+errInSamp,errXV,nIters = doCrossValidate(dataMat, classVec, folds, nHiddNodes,
+                                         stochastic)
 
 print("In Sample Err - Mean Error: %s"%errInSamp.mean(axis=1))
 print("In Sample Err - Std Dev: %s"%errInSamp.std(axis=1))

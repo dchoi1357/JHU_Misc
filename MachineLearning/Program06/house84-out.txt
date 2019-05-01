@@ -1,0 +1,6 @@
+N Hidden Nodes: [20 29]
+In Sample Err - Mean Error: [0.02923741 0.00048027 0.00022409]
+In Sample Err - Std Dev: [1.74055091e-02 9.44509468e-05 6.06095749e-05]
+Cross Vald Err - Mean Error: [0.05515176 0.0621285  0.05279945]
+Cross Vald Err - Std Dev: [0.00434771 0.0156707  0.01143811]
+Mean N Iters to Convergence: [2216.4  571.   398.4]
