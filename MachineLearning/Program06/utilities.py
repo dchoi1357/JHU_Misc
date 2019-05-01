@@ -1,5 +1,11 @@
 import pandas as pd, numpy as np
 
+def errRate(pred, actual, categorical=True):
+    if categorical: # if categ., return classification err rate
+        return sum(pred!=actual) / pred.size
+    else: # if numeric, return RMSE
+        return np.linalg.norm(pred-actual)/np.sqrt(pred.size)
+
 def discretizeMean(inDF, useMed=False):
     ''' For the input data frame, which is assumed to be continuous, returns
     an output data frame where each feature is replaced by a feature where the 
