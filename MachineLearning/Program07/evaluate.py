@@ -20,7 +20,7 @@ def simulateRace(trk, TRs, startPt, pol, p_fail=0.2, trace=False):
     stepLimit = np.prod(trk.shape)*2/(1-p_fail) # step limit for non-viability
     
     st = startPt
-    if startPt is list: # if more than one start point provided
+    if type(startPt) is list: # if more than one start point provided
         st = random.choice(startPt) # choose starting point randomly        
     if len(st) != 4: # only location provided
         st = st + (0,0) # set starting state, 0 velocity
@@ -30,7 +30,7 @@ def simulateRace(trk, TRs, startPt, pol, p_fail=0.2, trace=False):
         if trace:
             clear_output(wait=True)
             print(trackToStr(trk,st))
-            time.sleep(0.5)
+            time.sleep(0.2)
         
         if trk[st[1],st[0]] == 'F': # if curr state is a goal
             viable = True

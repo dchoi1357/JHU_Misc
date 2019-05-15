@@ -72,4 +72,6 @@ ql_steps = ql_steps/len(trStarts)
 
 print("== Simulations ==")
 print("VI Mean Steps in Sim: Soft=%f, Hard=%f"%tuple(vi_steps.mean(axis=0)))
+print("VI Steps Std Dev in Sim: Soft=%f, Hard=%f"%tuple(vi_steps.std(axis=0)))
 print("QL Mean Steps in Sim: Soft=%f, Hard=%f"%tuple(ql_steps.mean(axis=0)))
+print("QL Steps Std Dev in Sim: Soft=%f, Hard=%f"%tuple(ql_steps.std(axis=0)))

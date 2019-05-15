@@ -1,0 +1,53 @@
+[00000]: diff=1.000000
+[00010]: diff=0.348678
+[00020]: diff=0.000093
+Total iters: 28, max util diff = 0.000000
+[00000]: diff=1.000000
+[00010]: diff=0.348678
+[00020]: diff=0.026066
+[00030]: diff=0.001621
+[00040]: diff=0.000113
+[00050]: diff=0.000009
+[00060]: diff=0.000001
+[00070]: diff=0.000000
+[00080]: diff=0.000000
+Total iters: 85, max util diff = 0.000000
+[00000] Episode len = 1
+[10000] Episode len = 6
+[20000] Episode len = 58
+[30000] Episode len = 79
+[40000] Episode len = 27
+[50000] Episode len = 27
+[60000] Episode len = 44
+[70000] Episode len = 23
+[80000] Episode len = 6
+[90000] Episode len = 8
+[99999] Last episode, len = 0
+[00000] Episode len = 51805
+[10000] Episode len = 98
+[20000] Episode len = 83
+[30000] Episode len = 88
+[40000] Episode len = 41
+[50000] Episode len = 35
+[60000] Episode len = 110
+[70000] Episode len = 134
+[80000] Episode len = 59
+[90000] Episode len = 27
+[99999] Last episode, len = 137
+== Soft Crash Comparison ==
+Policy Concordance Rate: 0.363378
+Mean Ratio of N Steps: 1.259950
+St Dev Ratio of N Steps: 0.615126
+% of Policies from Q-Learning Viable: 1.000000
+
+== Hard Crash Comparison ==
+Policy Concordance Rate: 0.235072
+Mean Ratio of N Steps: 5.209528
+St Dev Ratio of N Steps: 14.335195
+% of Policies from Q-Learning Viable: 1.000000
+
+== Simulations ==
+VI Mean Steps in Sim: Soft=12.555000, Hard=15.140000
+VI Steps Std Dev in Sim: Soft=0.772642, Hard=2.463818
+QL Mean Steps in Sim: Soft=14.910000, Hard=28.190000
+QL Steps Std Dev in Sim: Soft=0.946388, Hard=10.269075

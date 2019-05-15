@@ -47,9 +47,9 @@ def qLearning(states, accels, track, TRs, nEpisodes=100000, gamma=0.9, eta=0.1,
         Qs,epsLen[ep] = qEpisode(start, Qs, TRs, gamma, eta, pr_fail,
                                  track, trace)
         if trace and (ep%trace)==0:
-            print('[%05d] Episode len = %d'%(ep,epsLen[ep]))
+            print('[%06d] Episode len = %d'%(ep,epsLen[ep]))
     if trace:
-        print('[%05d] Last episode, len = %d'%(ep,epsLen[ep]))
+        print('[%06d] Last episode, len = %d'%(ep,epsLen[ep]))
     
     policy = dict() # pre-allocate policy
     for st in states: # loop over all states to get policy for each state
