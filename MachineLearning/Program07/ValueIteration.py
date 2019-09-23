@@ -16,6 +16,13 @@ def maxDiffTwoVs(v1, v2):
 
 def valueIteration(states, TRs_all, gamma=0.9, eps=1e-9, pr_fail=0.2,
                    trace=False):
+    ''' The main value iteration function.
+    Receives input of the complete state space, the transition table for the 
+    complete state space, and optional input of gamma (discount rate), epsilon 
+    (convergence criteria), and probability of a failed action. The algorithm 
+    stops when the max difference of values between successive runs falls 
+    below the convergence criteria
+    '''
     Vs = {k:0 for k in states}
     Qs = {k:None for k in states}
     pols = dict()

@@ -3,6 +3,11 @@ import itertools
 import numpy as np
 
 def readTrackFile(file, velocs):
+    ''' Read a specific track file, return the entire state space of locations
+    and velocities, as well as the list of goals, the track space as a numpy
+    2D array, and the set of starting points.
+    '''
+
     with open(file, 'r') as f:
         raw = [[s for s in l.strip()] for l in f.readlines()]
         track = np.array(raw[1:]) # strip out lines with world size

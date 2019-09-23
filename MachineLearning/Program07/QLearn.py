@@ -3,6 +3,8 @@ import numpy as np
 from utilities import getVPolicyFromQ
 
 def epsGreedy(Q, acts, temp=0.5):
+    ''' Epsilon greedy selection based on softmax.
+    '''
     qs = np.array( [Q[k] for k in acts] ) # all Q(s,a) values
     P_a = np.exp(qs / temp) # numerator of softmax, exp[Q(s,a)]
     P_a = P_a / P_a.sum() # array of probabilites
@@ -33,6 +35,13 @@ def qEpisode(st, Q, TRs, gm, et, prF, trk, trace):
 
 def qLearning(states, accels, track, TRs, nEpisodes=100000, gamma=0.9, eta=0.1,
               pr_fail=0.2, trace=None):
+    ''' The main Q-Learning function. 
+    Receives input of the complete state space, the possible accelerations 
+    (actiosn of the agent), the transition table (which is only used to 
+    derive new states from actions), with optional input of number of 
+    episodes, gamma (discount rate), eta (learning rate), probability of a 
+    failed action.
+    '''
     states = list(states)
     #states = [x for x in states if track[x[1],x[0]]!='F'] # remove goal states
     

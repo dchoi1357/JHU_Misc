@@ -1,3 +1,7 @@
+''' Implements the Bresenham's line algorithm according to the following page:
+https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
+'''
+
 def pathWide(x0, y0, x1, y1):
     dx = x1 - x0
     dy = y1 - y0
