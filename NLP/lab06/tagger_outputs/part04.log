@@ -1,0 +1,1132 @@
+setting:
+Namespace(batch_size=10, caseless=True, char_dim=30, char_hidden=300, char_layers=1, checkpoint='checkpoint/ner_', clip_grad=5.0, co_train=True, dev_file='/kaggle/input/conll003-englishversion/valid.txt', drop_out=0.55, emb_file='/kaggle/input/glove6b100dtxt/glove.6B.100d.txt', epoch=30, eva_matrix='fa', fine_tune=False, gpu=0, high_way=True, highway_layers=1, lambda0=1, least_iters=100, load_check_point='', load_opt=False, lr=0.015, lr_decay=0.05, mini_count=5, momentum=0.9, patience=15, rand_embedding=False, shrink_embedding=False, small_crf=True, start_epoch=0, test_file='/kaggle/input/conll003-englishversion/test.txt', train_file='./inputs/train04.txt', unk='unk', update='sgd', word_dim=100, word_hidden=300, word_layers=1)
+loading corpus
+constructing coding table
+feature size: '2733'
+loading embedding
+embedding size: '400033'
+constructing dataset
+building model
+device: 0
+ - Tot it 755 (epoch 0): 0it [00:00, ?it/s] - Tot it 755 (epoch 0): 68it [00:02, 33.70it/s] - Tot it 755 (epoch 0): 137it [00:04, 33.92it/s] - Tot it 755 (epoch 0): 205it [00:06, 33.91it/s] - Tot it 755 (epoch 0): 262it [00:08, 31.84it/s] - Tot it 755 (epoch 0): 311it [00:10, 29.03it/s] - Tot it 755 (epoch 0): 360it [00:12, 27.08it/s] - Tot it 755 (epoch 0): 408it [00:14, 25.86it/s] - Tot it 755 (epoch 0): 456it [00:16, 25.25it/s] - Tot it 755 (epoch 0): 504it [00:18, 24.31it/s] - Tot it 755 (epoch 0): 551it [00:21, 19.80it/s] - Tot it 755 (epoch 0): 592it [00:24, 17.51it/s] - Tot it 755 (epoch 0): 629it [00:27, 15.87it/s] - Tot it 755 (epoch 0): 663it [00:31, 12.32it/s] - Tot it 755 (epoch 0): 692it [00:35, 10.64it/s] - Tot it 755 (epoch 0): 717it [00:38,  9.82it/s] - Tot it 755 (epoch 0): 740it [00:41,  9.09it/s]                                                 DEV : total : dev_f1: 0.6908 dev_rec: 0.6141 dev_pre: 0.7895 dev_acc: 0.9284 | 
+
+DEV : B-LOC : dev_f1: 0.7675 dev_rec: 0.6603 dev_pre: 0.9162 dev_acc: 0.0000 | {'O': 454, 'B-ORG': 91, 'B-PER': 23, 'I-ORG': 3, 'B-MISC': 40, 'I-PER': 3, 'I-LOC': 10}
+
+DEV : O : dev_f1: 0.9658 dev_rec: 0.9864 dev_pre: 0.9461 dev_acc: 0.0000 | {'B-ORG': 43, 'B-LOC': 28, 'B-PER': 143, 'I-PER': 153, 'I-ORG': 74, 'I-LOC': 44, 'I-MISC': 56, 'B-MISC': 40}
+
+DEV : B-MISC : dev_f1: 0.6029 dev_rec: 0.4924 dev_pre: 0.7774 dev_acc: 0.0000 | {'O': 424, 'B-LOC': 11, 'B-ORG': 14, 'B-PER': 13, 'I-MISC': 5, 'I-ORG': 1}
+
+DEV : I-LOC : dev_f1: 0.4320 dev_rec: 0.3463 dev_pre: 0.5742 dev_acc: 0.0000 | {'O': 122, 'I-PER': 6, 'I-ORG': 17, 'B-LOC': 19, 'I-MISC': 3, 'B-PER': 1}
+
+DEV : B-ORG : dev_f1: 0.6058 dev_rec: 0.4922 dev_pre: 0.7876 dev_acc: 0.0000 | {'O': 516, 'B-LOC': 20, 'B-PER': 70, 'I-ORG': 34, 'B-MISC': 29, 'I-LOC': 2, 'I-PER': 9, 'I-MISC': 1}
+
+DEV : I-ORG : dev_f1: 0.4245 dev_rec: 0.3182 dev_pre: 0.6373 dev_acc: 0.0000 | {'O': 405, 'B-LOC': 21, 'B-ORG': 27, 'I-LOC': 9, 'I-PER': 42, 'B-PER': 4, 'B-MISC': 3, 'I-MISC': 1}
+
+DEV : I-MISC : dev_f1: 0.2720 dev_rec: 0.1879 dev_pre: 0.4924 dev_acc: 0.0000 | {'B-MISC': 16, 'O': 242, 'I-ORG': 7, 'B-LOC': 4, 'I-PER': 6, 'I-LOC': 1, 'B-ORG': 2, 'B-PER': 3}
+
+DEV : B-PER : dev_f1: 0.8499 dev_rec: 0.8578 dev_pre: 0.8422 dev_acc: 0.0000 | {'I-PER': 69, 'O': 181, 'B-ORG': 1, 'B-LOC': 8, 'I-MISC': 1, 'B-MISC': 2}
+
+DEV : I-PER : dev_f1: 0.8623 dev_rec: 0.9250 dev_pre: 0.8076 dev_acc: 0.0000 | {'O': 59, 'B-PER': 39}
+
+TEST : total : test_f1: 0.6776 test_rec: 0.6140 test_pre: 0.7559 test_acc: 0.9228 | 
+
+TEST : B-PER : test_f1: 0.8091 test_rec: 0.8244 test_pre: 0.7944 test_acc: 0.0000 | {'O': 170, 'I-PER': 94, 'B-LOC': 4, 'B-ORG': 16}
+
+TEST : I-PER : test_f1: 0.8478 test_rec: 0.9299 test_pre: 0.7790 test_acc: 0.0000 | {'O': 48, 'B-PER': 33}
+
+TEST : B-LOC : test_f1: 0.7467 test_rec: 0.6487 test_pre: 0.8797 test_acc: 0.0000 | {'B-ORG': 116, 'O': 382, 'B-PER': 36, 'I-LOC': 17, 'I-PER': 7, 'B-MISC': 22, 'I-ORG': 5, 'I-MISC': 1}
+
+TEST : O : test_f1: 0.9639 test_rec: 0.9791 test_pre: 0.9492 test_acc: 0.0000 | {'I-PER': 161, 'B-PER': 207, 'I-MISC': 45, 'B-LOC': 46, 'B-ORG': 117, 'I-ORG': 164, 'B-MISC': 37, 'I-LOC': 24}
+
+TEST : I-LOC : test_f1: 0.4826 test_rec: 0.4047 test_pre: 0.5977 test_acc: 0.0000 | {'B-MISC': 4, 'I-MISC': 4, 'I-ORG': 28, 'O': 85, 'I-PER': 7, 'B-LOC': 23, 'B-ORG': 1, 'B-PER': 1}
+
+TEST : B-MISC : test_f1: 0.6206 test_rec: 0.5185 test_pre: 0.7728 test_acc: 0.0000 | {'O': 285, 'B-ORG': 20, 'B-LOC': 11, 'B-PER': 16, 'I-MISC': 1, 'I-PER': 2, 'I-ORG': 3}
+
+TEST : I-MISC : test_f1: 0.4220 test_rec: 0.3380 test_pre: 0.5615 test_acc: 0.0000 | {'O': 108, 'I-ORG': 12, 'B-PER': 4, 'I-PER': 4, 'B-MISC': 12, 'I-LOC': 3}
+
+TEST : B-ORG : test_f1: 0.6383 test_rec: 0.5515 test_pre: 0.7577 test_acc: 0.0000 | {'B-PER': 44, 'O': 569, 'B-LOC': 51, 'B-MISC': 30, 'I-ORG': 41, 'I-PER': 8, 'I-LOC': 2}
+
+TEST : I-ORG : test_f1: 0.5187 test_rec: 0.4563 test_pre: 0.6009 test_acc: 0.0000 | {'O': 360, 'I-LOC': 24, 'I-MISC': 6, 'B-ORG': 23, 'B-LOC': 13, 'I-PER': 22, 'B-PER': 4, 'B-MISC': 2}
+
+(loss: 4.2441, epoch: 0, dev F1 = 0.6908, dev acc = 0.9284, F1 on test = 0.6776, acc on test= 0.9228), saving...
+epoch: 0	 in 30 take: 47.910747051239014 s
+ - Tot it 755 (epoch 1): 0it [00:00, ?it/s] - Tot it 755 (epoch 1): 69it [00:02, 34.24it/s] - Tot it 755 (epoch 1): 136it [00:04, 33.84it/s] - Tot it 755 (epoch 1): 202it [00:06, 33.48it/s] - Tot it 755 (epoch 1): 259it [00:08, 31.73it/s] - Tot it 755 (epoch 1): 307it [00:10, 28.90it/s] - Tot it 755 (epoch 1): 355it [00:12, 27.04it/s] - Tot it 755 (epoch 1): 403it [00:14, 25.97it/s] - Tot it 755 (epoch 1): 451it [00:16, 25.26it/s] - Tot it 755 (epoch 1): 500it [00:18, 24.89it/s] - Tot it 755 (epoch 1): 548it [00:21, 20.04it/s] - Tot it 755 (epoch 1): 590it [00:24, 17.74it/s] - Tot it 755 (epoch 1): 628it [00:27, 16.00it/s] - Tot it 755 (epoch 1): 663it [00:31, 12.34it/s] - Tot it 755 (epoch 1): 692it [00:35, 10.68it/s] - Tot it 755 (epoch 1): 717it [00:38,  9.73it/s] - Tot it 755 (epoch 1): 740it [00:41,  9.24it/s]                                                 DEV : total : dev_f1: 0.7538 dev_rec: 0.6637 dev_pre: 0.8722 dev_acc: 0.9409 | 
+
+DEV : B-LOC : dev_f1: 0.8295 dev_rec: 0.7588 dev_pre: 0.9147 dev_acc: 0.0000 | {'O': 353, 'B-ORG': 54, 'B-PER': 15, 'B-MISC': 15, 'I-PER': 2, 'I-LOC': 1, 'I-ORG': 3}
+
+DEV : O : dev_f1: 0.9709 dev_rec: 0.9954 dev_pre: 0.9475 dev_acc: 0.0000 | {'I-PER': 60, 'B-PER': 39, 'B-ORG': 9, 'I-ORG': 27, 'B-LOC': 6, 'I-MISC': 42, 'B-MISC': 6, 'I-LOC': 6}
+
+DEV : B-MISC : dev_f1: 0.6360 dev_rec: 0.4946 dev_pre: 0.8906 dev_acc: 0.0000 | {'O': 440, 'B-LOC': 8, 'B-ORG': 8, 'B-PER': 8, 'I-ORG': 1, 'I-MISC': 1}
+
+DEV : I-LOC : dev_f1: 0.5482 dev_rec: 0.4202 dev_pre: 0.7883 dev_acc: 0.0000 | {'O': 118, 'B-PER': 1, 'I-ORG': 10, 'B-LOC': 14, 'I-PER': 4, 'I-MISC': 2}
+
+DEV : B-ORG : dev_f1: 0.6452 dev_rec: 0.5086 dev_pre: 0.8823 dev_acc: 0.0000 | {'O': 509, 'B-LOC': 64, 'B-PER': 48, 'B-MISC': 22, 'I-ORG': 13, 'I-PER': 3}
+
+DEV : I-ORG : dev_f1: 0.4703 dev_rec: 0.3316 dev_pre: 0.8084 dev_acc: 0.0000 | {'O': 416, 'I-LOC': 14, 'B-LOC': 22, 'B-ORG': 16, 'B-PER': 4, 'I-PER': 30}
+
+DEV : I-MISC : dev_f1: 0.3708 dev_rec: 0.2572 dev_pre: 0.6642 dev_acc: 0.0000 | {'O': 216, 'B-ORG': 3, 'I-LOC': 8, 'B-MISC': 11, 'B-LOC': 9, 'I-PER': 5, 'I-ORG': 5}
+
+DEV : B-PER : dev_f1: 0.8861 dev_rec: 0.8550 dev_pre: 0.9194 dev_acc: 0.0000 | {'I-PER': 25, 'B-ORG': 1, 'O': 233, 'B-LOC': 6, 'B-MISC': 2}
+
+DEV : I-PER : dev_f1: 0.9146 dev_rec: 0.9258 dev_pre: 0.9037 dev_acc: 0.0000 | {'O': 73, 'B-PER': 23, 'B-LOC': 1}
+
+TEST : total : test_f1: 0.7396 test_rec: 0.6562 test_pre: 0.8473 test_acc: 0.9379 | 
+
+TEST : B-PER : test_f1: 0.8670 test_rec: 0.8324 test_pre: 0.9046 test_acc: 0.0000 | {'O': 215, 'I-PER': 41, 'B-LOC': 8, 'B-ORG': 7}
+
+TEST : I-PER : test_f1: 0.9183 test_rec: 0.9386 test_pre: 0.8989 test_acc: 0.0000 | {'O': 45, 'B-PER': 22, 'I-ORG': 4}
+
+TEST : B-LOC : test_f1: 0.8035 test_rec: 0.7428 test_pre: 0.8750 test_acc: 0.0000 | {'B-ORG': 76, 'O': 309, 'B-PER': 23, 'I-LOC': 3, 'B-MISC': 12, 'I-PER': 2, 'I-ORG': 3, 'I-MISC': 1}
+
+TEST : O : test_f1: 0.9705 test_rec: 0.9927 test_pre: 0.9493 test_acc: 0.0000 | {'I-PER': 57, 'B-PER': 57, 'I-MISC': 41, 'B-ORG': 26, 'I-ORG': 61, 'B-MISC': 26, 'B-LOC': 8, 'I-LOC': 5}
+
+TEST : I-LOC : test_f1: 0.5645 test_rec: 0.4514 test_pre: 0.7532 test_acc: 0.0000 | {'O': 81, 'B-LOC': 34, 'I-ORG': 19, 'I-PER': 5, 'I-MISC': 1, 'B-PER': 1}
+
+TEST : B-MISC : test_f1: 0.6241 test_rec: 0.5014 test_pre: 0.8263 test_acc: 0.0000 | {'O': 318, 'B-ORG': 13, 'B-LOC': 11, 'B-PER': 8}
+
+TEST : I-MISC : test_f1: 0.4665 test_rec: 0.3704 test_pre: 0.6299 test_acc: 0.0000 | {'O': 111, 'I-ORG': 8, 'I-PER': 3, 'B-PER': 1, 'B-MISC': 13}
+
+TEST : B-ORG : test_f1: 0.6699 test_rec: 0.5455 test_pre: 0.8678 test_acc: 0.0000 | {'B-PER': 28, 'O': 587, 'B-LOC': 98, 'B-MISC': 22, 'I-ORG': 17, 'I-PER': 3}
+
+TEST : I-ORG : test_f1: 0.5802 test_rec: 0.4635 test_pre: 0.7756 test_acc: 0.0000 | {'O': 366, 'I-LOC': 30, 'I-MISC': 4, 'B-ORG': 16, 'B-LOC': 18, 'I-PER': 11, 'B-PER': 2, 'B-MISC': 1}
+
+(loss: 2.7198, epoch: 1, dev F1 = 0.7538, dev acc = 0.9409, F1 on test = 0.7396, acc on test= 0.9379), saving...
+epoch: 1	 in 30 take: 95.76714372634888 s
+ - Tot it 755 (epoch 2): 0it [00:00, ?it/s] - Tot it 755 (epoch 2): 71it [00:02, 34.99it/s] - Tot it 755 (epoch 2): 141it [00:04, 34.94it/s] - Tot it 755 (epoch 2): 203it [00:06, 33.58it/s] - Tot it 755 (epoch 2): 261it [00:08, 32.03it/s] - Tot it 755 (epoch 2): 309it [00:10, 28.93it/s] - Tot it 755 (epoch 2): 357it [00:12, 27.10it/s] - Tot it 755 (epoch 2): 405it [00:14, 25.98it/s] - Tot it 755 (epoch 2): 454it [00:16, 25.35it/s] - Tot it 755 (epoch 2): 502it [00:18, 24.61it/s] - Tot it 755 (epoch 2): 550it [00:21, 19.79it/s] - Tot it 755 (epoch 2): 592it [00:24, 17.43it/s] - Tot it 755 (epoch 2): 629it [00:27, 15.90it/s] - Tot it 755 (epoch 2): 663it [00:31, 12.44it/s] - Tot it 755 (epoch 2): 692it [00:35, 10.77it/s] - Tot it 755 (epoch 2): 717it [00:38,  9.90it/s] - Tot it 755 (epoch 2): 740it [00:41,  9.17it/s]                                                 DEV : total : dev_f1: 0.8110 dev_rec: 0.7566 dev_pre: 0.8737 dev_acc: 0.9546 | 
+
+DEV : B-LOC : dev_f1: 0.8837 dev_rec: 0.8710 dev_pre: 0.8969 dev_acc: 0.0000 | {'O': 130, 'B-ORG': 71, 'B-PER': 15, 'B-MISC': 14, 'I-PER': 2, 'I-LOC': 3, 'I-ORG': 2}
+
+DEV : O : dev_f1: 0.9797 dev_rec: 0.9943 dev_pre: 0.9656 dev_acc: 0.0000 | {'I-PER': 39, 'B-PER': 30, 'B-ORG': 14, 'I-ORG': 76, 'B-LOC': 28, 'I-MISC': 34, 'I-LOC': 20, 'B-MISC': 3}
+
+DEV : B-MISC : dev_f1: 0.6921 dev_rec: 0.5510 dev_pre: 0.9304 dev_acc: 0.0000 | {'O': 354, 'B-LOC': 17, 'B-ORG': 27, 'B-PER': 8, 'I-MISC': 6, 'I-LOC': 2}
+
+DEV : I-LOC : dev_f1: 0.6031 dev_rec: 0.5292 dev_pre: 0.7010 dev_acc: 0.0000 | {'O': 72, 'I-PER': 4, 'I-ORG': 16, 'B-LOC': 24, 'I-MISC': 5}
+
+DEV : B-ORG : dev_f1: 0.7465 dev_rec: 0.6577 dev_pre: 0.8630 dev_acc: 0.0000 | {'B-LOC': 65, 'O': 306, 'B-PER': 43, 'B-MISC': 12, 'I-ORG': 32, 'I-PER': 1}
+
+DEV : I-ORG : dev_f1: 0.5976 dev_rec: 0.5033 dev_pre: 0.7354 dev_acc: 0.0000 | {'O': 283, 'I-LOC': 18, 'B-LOC': 23, 'B-ORG': 16, 'I-PER': 28, 'B-PER': 2, 'I-MISC': 2, 'B-MISC': 1}
+
+DEV : I-MISC : dev_f1: 0.4528 dev_rec: 0.3324 dev_pre: 0.7099 dev_acc: 0.0000 | {'O': 180, 'B-ORG': 7, 'I-LOC': 14, 'B-LOC': 9, 'I-ORG': 9, 'B-MISC': 6, 'I-PER': 5, 'B-PER': 1}
+
+DEV : B-PER : dev_f1: 0.9180 dev_rec: 0.9061 dev_pre: 0.9303 dev_acc: 0.0000 | {'I-PER': 12, 'B-ORG': 5, 'O': 137, 'B-LOC': 17, 'B-MISC': 2}
+
+DEV : I-PER : dev_f1: 0.9345 dev_rec: 0.9380 dev_pre: 0.9309 dev_acc: 0.0000 | {'O': 52, 'B-PER': 26, 'I-ORG': 1, 'B-LOC': 1, 'I-LOC': 1}
+
+TEST : total : test_f1: 0.7798 test_rec: 0.7295 test_pre: 0.8376 test_acc: 0.9482 | 
+
+TEST : B-PER : test_f1: 0.8916 test_rec: 0.8751 test_pre: 0.9088 test_acc: 0.0000 | {'I-PER': 26, 'O': 144, 'B-LOC': 14, 'B-ORG': 18}
+
+TEST : I-PER : test_f1: 0.9334 test_rec: 0.9403 test_pre: 0.9267 test_acc: 0.0000 | {'O': 31, 'B-PER': 28, 'I-ORG': 7, 'B-LOC': 2, 'I-LOC': 1}
+
+TEST : B-LOC : test_f1: 0.8563 test_rec: 0.8519 test_pre: 0.8607 test_acc: 0.0000 | {'B-ORG': 106, 'B-MISC': 13, 'O': 98, 'I-LOC': 5, 'B-PER': 20, 'I-ORG': 4, 'I-MISC': 1}
+
+TEST : O : test_f1: 0.9781 test_rec: 0.9896 test_pre: 0.9669 test_acc: 0.0000 | {'I-PER': 38, 'B-PER': 44, 'B-MISC': 28, 'I-MISC': 60, 'B-ORG': 54, 'I-ORG': 130, 'B-LOC': 27, 'I-LOC': 19}
+
+TEST : I-LOC : test_f1: 0.6708 test_rec: 0.6342 test_pre: 0.7118 test_acc: 0.0000 | {'O': 34, 'B-LOC': 27, 'I-ORG': 26, 'I-PER': 4, 'I-MISC': 2, 'B-PER': 1}
+
+TEST : B-MISC : test_f1: 0.6540 test_rec: 0.5385 test_pre: 0.8326 test_acc: 0.0000 | {'O': 268, 'B-ORG': 23, 'B-LOC': 13, 'B-PER': 14, 'I-MISC': 1, 'I-ORG': 5}
+
+TEST : I-MISC : test_f1: 0.5039 test_rec: 0.4491 test_pre: 0.5740 test_acc: 0.0000 | {'O': 88, 'I-ORG': 9, 'I-PER': 4, 'B-PER': 1, 'B-MISC': 14, 'B-LOC': 1, 'I-LOC': 2}
+
+TEST : B-ORG : test_f1: 0.7156 test_rec: 0.6285 test_pre: 0.8305 test_acc: 0.0000 | {'B-MISC': 21, 'B-LOC': 124, 'O': 401, 'I-ORG': 38, 'B-PER': 31, 'I-PER': 2}
+
+TEST : I-ORG : test_f1: 0.6461 test_rec: 0.6024 test_pre: 0.6967 test_acc: 0.0000 | {'I-MISC': 8, 'I-LOC': 39, 'O': 236, 'B-ORG': 12, 'B-LOC': 22, 'I-PER': 12, 'B-PER': 3}
+
+(loss: 2.1973, epoch: 2, dev F1 = 0.8110, dev acc = 0.9546, F1 on test = 0.7798, acc on test= 0.9482), saving...
+epoch: 2	 in 30 take: 143.49969267845154 s
+ - Tot it 755 (epoch 3): 0it [00:00, ?it/s] - Tot it 755 (epoch 3): 70it [00:02, 34.74it/s] - Tot it 755 (epoch 3): 141it [00:04, 34.88it/s] - Tot it 755 (epoch 3): 204it [00:06, 33.65it/s] - Tot it 755 (epoch 3): 262it [00:08, 32.00it/s] - Tot it 755 (epoch 3): 310it [00:10, 28.92it/s] - Tot it 755 (epoch 3): 358it [00:12, 27.12it/s] - Tot it 755 (epoch 3): 406it [00:14, 26.03it/s] - Tot it 755 (epoch 3): 455it [00:16, 25.47it/s] - Tot it 755 (epoch 3): 503it [00:18, 24.63it/s] - Tot it 755 (epoch 3): 551it [00:21, 19.96it/s] - Tot it 755 (epoch 3): 593it [00:24, 17.56it/s] - Tot it 755 (epoch 3): 631it [00:27, 15.72it/s] - Tot it 755 (epoch 3): 665it [00:32, 12.26it/s] - Tot it 755 (epoch 3): 694it [00:35, 10.61it/s] - Tot it 755 (epoch 3): 719it [00:38,  9.72it/s] - Tot it 755 (epoch 3): 742it [00:41,  9.17it/s]                                                 DEV : total : dev_f1: 0.8335 dev_rec: 0.7858 dev_pre: 0.8875 dev_acc: 0.9590 | 
+
+DEV : B-LOC : dev_f1: 0.8928 dev_rec: 0.8748 dev_pre: 0.9115 dev_acc: 0.0000 | {'O': 141, 'B-ORG': 60, 'B-PER': 12, 'B-MISC': 12, 'I-PER': 1, 'I-ORG': 3, 'I-LOC': 1}
+
+DEV : O : dev_f1: 0.9818 dev_rec: 0.9950 dev_pre: 0.9689 dev_acc: 0.0000 | {'I-PER': 30, 'B-PER': 26, 'B-ORG': 22, 'I-ORG': 47, 'B-LOC': 11, 'I-MISC': 60, 'B-MISC': 7, 'I-LOC': 9}
+
+DEV : B-MISC : dev_f1: 0.7452 dev_rec: 0.6280 dev_pre: 0.9161 dev_acc: 0.0000 | {'O': 289, 'B-LOC': 17, 'B-ORG': 23, 'B-PER': 9, 'I-MISC': 3, 'I-LOC': 2}
+
+DEV : I-LOC : dev_f1: 0.6282 dev_rec: 0.5292 dev_pre: 0.7727 dev_acc: 0.0000 | {'O': 78, 'I-PER': 1, 'B-LOC': 25, 'I-ORG': 14, 'I-MISC': 3}
+
+DEV : B-ORG : dev_f1: 0.7771 dev_rec: 0.6980 dev_pre: 0.8764 dev_acc: 0.0000 | {'O': 263, 'B-LOC': 54, 'B-PER': 44, 'B-MISC': 16, 'I-ORG': 27, 'I-PER': 1}
+
+DEV : I-ORG : dev_f1: 0.6225 dev_rec: 0.5126 dev_pre: 0.7922 dev_acc: 0.0000 | {'O': 271, 'I-LOC': 16, 'B-LOC': 25, 'B-ORG': 17, 'I-PER': 30, 'B-PER': 2, 'I-MISC': 4, 'B-MISC': 1}
+
+DEV : I-MISC : dev_f1: 0.5090 dev_rec: 0.4104 dev_pre: 0.6698 dev_acc: 0.0000 | {'O': 153, 'I-ORG': 9, 'I-LOC': 11, 'B-LOC': 7, 'B-MISC': 15, 'B-ORG': 3, 'I-PER': 5, 'B-PER': 1}
+
+DEV : B-PER : dev_f1: 0.9258 dev_rec: 0.9148 dev_pre: 0.9372 dev_acc: 0.0000 | {'I-PER': 10, 'B-ORG': 6, 'O': 123, 'B-LOC': 16, 'B-MISC': 2}
+
+DEV : I-PER : dev_f1: 0.9436 dev_rec: 0.9464 dev_pre: 0.9407 dev_acc: 0.0000 | {'O': 47, 'B-PER': 19, 'B-ORG': 1, 'I-ORG': 1, 'B-LOC': 1, 'I-LOC': 1}
+
+TEST : total : test_f1: 0.7944 test_rec: 0.7519 test_pre: 0.8420 test_acc: 0.9518 | 
+
+TEST : B-PER : test_f1: 0.9076 test_rec: 0.8868 test_pre: 0.9294 test_acc: 0.0000 | {'I-PER': 15, 'B-ORG': 26, 'O': 121, 'B-LOC': 21}
+
+TEST : I-PER : test_f1: 0.9475 test_rec: 0.9533 test_pre: 0.9419 test_acc: 0.0000 | {'O': 25, 'B-PER': 15, 'I-ORG': 10, 'B-LOC': 1, 'I-LOC': 2, 'B-ORG': 1}
+
+TEST : B-LOC : test_f1: 0.8583 test_rec: 0.8585 test_pre: 0.8580 test_acc: 0.0000 | {'B-ORG': 86, 'B-MISC': 11, 'O': 105, 'I-MISC': 2, 'I-LOC': 6, 'B-PER': 19, 'I-ORG': 7}
+
+TEST : O : test_f1: 0.9799 test_rec: 0.9899 test_pre: 0.9701 test_acc: 0.0000 | {'I-PER': 33, 'B-PER': 32, 'B-MISC': 43, 'I-MISC': 85, 'B-ORG': 68, 'B-LOC': 19, 'I-LOC': 13, 'I-ORG': 94}
+
+TEST : I-LOC : test_f1: 0.6611 test_rec: 0.6187 test_pre: 0.7098 test_acc: 0.0000 | {'O': 41, 'B-LOC': 28, 'I-ORG': 24, 'I-PER': 3, 'I-MISC': 2}
+
+TEST : B-MISC : test_f1: 0.7085 test_rec: 0.6197 test_pre: 0.8270 test_acc: 0.0000 | {'B-ORG': 23, 'O': 213, 'B-LOC': 16, 'B-PER': 11, 'I-MISC': 2, 'I-ORG': 2}
+
+TEST : I-MISC : test_f1: 0.5140 test_rec: 0.5093 test_pre: 0.5189 test_acc: 0.0000 | {'O': 81, 'I-ORG': 8, 'B-PER': 2, 'I-PER': 4, 'B-MISC': 9, 'I-LOC': 2}
+
+TEST : B-ORG : test_f1: 0.7321 test_rec: 0.6538 test_pre: 0.8315 test_acc: 0.0000 | {'B-MISC': 28, 'B-LOC': 131, 'O': 353, 'I-ORG': 33, 'B-PER': 27, 'I-MISC': 1, 'I-PER': 2}
+
+TEST : I-ORG : test_f1: 0.6627 test_rec: 0.6012 test_pre: 0.7382 test_acc: 0.0000 | {'I-MISC': 10, 'I-LOC': 42, 'O': 230, 'B-ORG': 16, 'B-LOC': 21, 'I-PER': 11, 'B-PER': 3}
+
+(loss: 1.8509, epoch: 3, dev F1 = 0.8335, dev acc = 0.9590, F1 on test = 0.7944, acc on test= 0.9518), saving...
+epoch: 3	 in 30 take: 191.38549208641052 s
+ - Tot it 755 (epoch 4): 0it [00:00, ?it/s] - Tot it 755 (epoch 4): 71it [00:02, 35.13it/s] - Tot it 755 (epoch 4): 142it [00:04, 35.15it/s] - Tot it 755 (epoch 4): 205it [00:06, 33.88it/s] - Tot it 755 (epoch 4): 263it [00:08, 32.02it/s] - Tot it 755 (epoch 4): 311it [00:10, 29.10it/s] - Tot it 755 (epoch 4): 360it [00:12, 27.42it/s] - Tot it 755 (epoch 4): 408it [00:14, 26.29it/s] - Tot it 755 (epoch 4): 456it [00:16, 25.51it/s] - Tot it 755 (epoch 4): 504it [00:18, 24.52it/s] - Tot it 755 (epoch 4): 552it [00:21, 19.87it/s] - Tot it 755 (epoch 4): 594it [00:24, 17.51it/s] - Tot it 755 (epoch 4): 632it [00:27, 15.63it/s] - Tot it 755 (epoch 4): 666it [00:31, 12.34it/s] - Tot it 755 (epoch 4): 695it [00:35, 10.61it/s] - Tot it 755 (epoch 4): 720it [00:38,  9.74it/s] - Tot it 755 (epoch 4): 743it [00:41,  9.17it/s]                                                 DEV : total : dev_f1: 0.8473 dev_rec: 0.8038 dev_pre: 0.8959 dev_acc: 0.9612 | 
+
+DEV : B-LOC : dev_f1: 0.9028 dev_rec: 0.8977 dev_pre: 0.9080 dev_acc: 0.0000 | {'O': 105, 'B-ORG': 44, 'B-PER': 16, 'B-MISC': 15, 'I-PER': 3, 'I-LOC': 3, 'I-ORG': 2}
+
+DEV : O : dev_f1: 0.9831 dev_rec: 0.9971 dev_pre: 0.9695 dev_acc: 0.0000 | {'I-PER': 19, 'B-ORG': 7, 'I-ORG': 25, 'B-PER': 18, 'B-LOC': 13, 'I-MISC': 14, 'B-MISC': 6, 'I-LOC': 20}
+
+DEV : B-MISC : dev_f1: 0.7656 dev_rec: 0.6605 dev_pre: 0.9103 dev_acc: 0.0000 | {'O': 268, 'B-LOC': 16, 'B-ORG': 14, 'B-PER': 13, 'I-MISC': 1, 'I-LOC': 1}
+
+DEV : I-LOC : dev_f1: 0.6498 dev_rec: 0.5992 dev_pre: 0.7097 dev_acc: 0.0000 | {'O': 68, 'I-PER': 2, 'B-LOC': 23, 'I-ORG': 7, 'I-MISC': 3}
+
+DEV : B-ORG : dev_f1: 0.7680 dev_rec: 0.6629 dev_pre: 0.9127 dev_acc: 0.0000 | {'B-LOC': 65, 'O': 287, 'B-PER': 63, 'B-MISC': 24, 'I-ORG': 12, 'I-PER': 1}
+
+DEV : I-ORG : dev_f1: 0.5694 dev_rec: 0.4261 dev_pre: 0.8579 dev_acc: 0.0000 | {'B-LOC': 27, 'I-LOC': 28, 'O': 319, 'B-ORG': 16, 'B-PER': 3, 'B-MISC': 2, 'I-PER': 35, 'I-MISC': 1}
+
+DEV : I-MISC : dev_f1: 0.5312 dev_rec: 0.3815 dev_pre: 0.8742 dev_acc: 0.0000 | {'O': 171, 'B-ORG': 3, 'I-LOC': 10, 'B-LOC': 7, 'B-MISC': 11, 'I-ORG': 6, 'I-PER': 5, 'B-PER': 1}
+
+DEV : B-PER : dev_f1: 0.9348 dev_rec: 0.9425 dev_pre: 0.9274 dev_acc: 0.0000 | {'O': 84, 'B-LOC': 15, 'I-PER': 4, 'B-MISC': 2, 'B-ORG': 1}
+
+DEV : I-PER : dev_f1: 0.9496 dev_rec: 0.9518 dev_pre: 0.9474 dev_acc: 0.0000 | {'O': 38, 'B-PER': 22, 'I-ORG': 1, 'B-LOC': 1, 'I-LOC': 1}
+
+TEST : total : test_f1: 0.8096 test_rec: 0.7679 test_pre: 0.8561 test_acc: 0.9549 | 
+
+TEST : B-PER : test_f1: 0.9153 test_rec: 0.9128 test_pre: 0.9179 test_acc: 0.0000 | {'O': 99, 'B-LOC': 19, 'B-ORG': 11, 'I-PER': 12}
+
+TEST : I-PER : test_f1: 0.9526 test_rec: 0.9567 test_pre: 0.9485 test_acc: 0.0000 | {'O': 23, 'B-PER': 21, 'I-ORG': 2, 'B-LOC': 2, 'I-LOC': 2}
+
+TEST : B-LOC : test_f1: 0.8682 test_rec: 0.8825 test_pre: 0.8543 test_acc: 0.0000 | {'B-ORG': 64, 'B-MISC': 16, 'I-MISC': 1, 'O': 80, 'B-PER': 25, 'I-LOC': 7, 'I-ORG': 3}
+
+TEST : O : test_f1: 0.9816 test_rec: 0.9933 test_pre: 0.9702 test_acc: 0.0000 | {'B-MISC': 42, 'I-MISC': 50, 'B-ORG': 31, 'B-LOC': 24, 'I-LOC': 28, 'B-PER': 28, 'I-PER': 24, 'I-ORG': 31}
+
+TEST : I-LOC : test_f1: 0.7042 test_rec: 0.7549 test_pre: 0.6599 test_acc: 0.0000 | {'I-ORG': 14, 'B-LOC': 18, 'O': 25, 'I-PER': 5, 'I-MISC': 1}
+
+TEST : B-MISC : test_f1: 0.7030 test_rec: 0.6254 test_pre: 0.8026 test_acc: 0.0000 | {'O': 211, 'B-ORG': 16, 'B-LOC': 18, 'B-PER': 16, 'I-MISC': 1, 'I-LOC': 1}
+
+TEST : I-MISC : test_f1: 0.5227 test_rec: 0.4537 test_pre: 0.6164 test_acc: 0.0000 | {'O': 92, 'I-ORG': 5, 'I-PER': 4, 'B-MISC': 13, 'I-LOC': 4}
+
+TEST : B-ORG : test_f1: 0.7336 test_rec: 0.6291 test_pre: 0.8796 test_acc: 0.0000 | {'B-MISC': 35, 'B-LOC': 150, 'O': 374, 'B-PER': 39, 'I-ORG': 14, 'I-MISC': 1, 'I-PER': 3}
+
+TEST : I-ORG : test_f1: 0.6607 test_rec: 0.5341 test_pre: 0.8660 test_acc: 0.0000 | {'I-MISC': 7, 'I-LOC': 58, 'B-ORG': 21, 'B-LOC': 20, 'O': 266, 'I-PER': 12, 'B-MISC': 2, 'B-PER': 3}
+
+(loss: 1.6611, epoch: 4, dev F1 = 0.8473, dev acc = 0.9612, F1 on test = 0.8096, acc on test= 0.9549), saving...
+epoch: 4	 in 30 take: 239.07604956626892 s
+ - Tot it 755 (epoch 5): 0it [00:00, ?it/s] - Tot it 755 (epoch 5): 70it [00:02, 34.90it/s] - Tot it 755 (epoch 5): 141it [00:04, 35.02it/s] - Tot it 755 (epoch 5): 205it [00:06, 33.91it/s] - Tot it 755 (epoch 5): 262it [00:08, 31.83it/s] - Tot it 755 (epoch 5): 310it [00:10, 28.97it/s] - Tot it 755 (epoch 5): 359it [00:12, 27.45it/s] - Tot it 755 (epoch 5): 408it [00:14, 26.40it/s] - Tot it 755 (epoch 5): 457it [00:16, 25.61it/s] - Tot it 755 (epoch 5): 506it [00:18, 24.47it/s] - Tot it 755 (epoch 5): 553it [00:21, 19.93it/s] - Tot it 755 (epoch 5): 595it [00:24, 17.63it/s] - Tot it 755 (epoch 5): 633it [00:27, 15.54it/s] - Tot it 755 (epoch 5): 667it [00:32, 12.12it/s] - Tot it 755 (epoch 5): 696it [00:35, 10.65it/s] - Tot it 755 (epoch 5): 721it [00:38,  9.76it/s] - Tot it 755 (epoch 5): 744it [00:41,  9.22it/s]                                                 DEV : total : dev_f1: 0.8620 dev_rec: 0.8317 dev_pre: 0.8946 dev_acc: 0.9664 | 
+
+DEV : B-LOC : dev_f1: 0.9082 dev_rec: 0.8966 dev_pre: 0.9201 dev_acc: 0.0000 | {'O': 81, 'B-ORG': 70, 'B-MISC': 21, 'B-PER': 11, 'I-PER': 1, 'I-LOC': 3, 'I-MISC': 1, 'I-ORG': 2}
+
+DEV : O : dev_f1: 0.9863 dev_rec: 0.9967 dev_pre: 0.9761 dev_acc: 0.0000 | {'B-MISC': 17, 'I-MISC': 45, 'I-PER': 14, 'B-ORG': 17, 'I-ORG': 20, 'I-LOC': 8, 'B-LOC': 11, 'B-PER': 10}
+
+DEV : B-MISC : dev_f1: 0.8068 dev_rec: 0.7430 dev_pre: 0.8827 dev_acc: 0.0000 | {'O': 195, 'B-LOC': 9, 'B-ORG': 17, 'B-PER': 11, 'I-MISC': 4, 'I-LOC': 1}
+
+DEV : I-LOC : dev_f1: 0.6847 dev_rec: 0.5914 dev_pre: 0.8128 dev_acc: 0.0000 | {'O': 55, 'I-MISC': 10, 'I-ORG': 16, 'B-LOC': 23, 'I-PER': 1}
+
+DEV : B-ORG : dev_f1: 0.8045 dev_rec: 0.7412 dev_pre: 0.8796 dev_acc: 0.0000 | {'B-LOC': 50, 'O': 211, 'B-PER': 43, 'B-MISC': 32, 'I-ORG': 10, 'I-PER': 1}
+
+DEV : I-ORG : dev_f1: 0.6391 dev_rec: 0.5047 dev_pre: 0.8713 dev_acc: 0.0000 | {'I-LOC': 16, 'O': 264, 'B-LOC': 24, 'B-ORG': 26, 'I-MISC': 16, 'I-PER': 22, 'B-PER': 2, 'B-MISC': 2}
+
+DEV : I-MISC : dev_f1: 0.6003 dev_rec: 0.5231 dev_pre: 0.7043 dev_acc: 0.0000 | {'O': 123, 'B-ORG': 3, 'B-MISC': 15, 'I-ORG': 7, 'B-LOC': 5, 'I-LOC': 6, 'I-PER': 5, 'B-PER': 1}
+
+DEV : B-PER : dev_f1: 0.9444 dev_rec: 0.9408 dev_pre: 0.9480 dev_acc: 0.0000 | {'O': 78, 'B-ORG': 3, 'B-LOC': 20, 'B-MISC': 4, 'I-PER': 4}
+
+DEV : I-PER : dev_f1: 0.9597 dev_rec: 0.9564 dev_pre: 0.9630 dev_acc: 0.0000 | {'O': 37, 'B-PER': 17, 'I-ORG': 1, 'B-LOC': 1, 'I-LOC': 1}
+
+TEST : total : test_f1: 0.8246 test_rec: 0.7964 test_pre: 0.8550 test_acc: 0.9596 | 
+
+TEST : B-PER : test_f1: 0.9209 test_rec: 0.9035 test_pre: 0.9389 test_acc: 0.0000 | {'B-ORG': 23, 'O': 97, 'B-LOC': 22, 'I-PER': 12, 'B-MISC': 2}
+
+TEST : I-PER : test_f1: 0.9560 test_rec: 0.9498 test_pre: 0.9623 test_acc: 0.0000 | {'O': 21, 'B-PER': 25, 'I-MISC': 2, 'I-ORG': 10}
+
+TEST : B-LOC : test_f1: 0.8802 test_rec: 0.8813 test_pre: 0.8792 test_acc: 0.0000 | {'B-ORG': 104, 'B-MISC': 22, 'I-MISC': 1, 'O': 47, 'I-LOC': 3, 'B-PER': 17, 'I-PER': 1, 'I-ORG': 3}
+
+TEST : O : test_f1: 0.9844 test_rec: 0.9918 test_pre: 0.9771 test_acc: 0.0000 | {'I-MISC': 111, 'B-MISC': 48, 'B-ORG': 38, 'I-ORG': 53, 'B-LOC': 15, 'I-LOC': 15, 'B-PER': 21, 'I-PER': 14}
+
+TEST : I-LOC : test_f1: 0.7470 test_rec: 0.7237 test_pre: 0.7718 test_acc: 0.0000 | {'I-ORG': 29, 'O': 25, 'B-LOC': 13, 'I-PER': 2, 'I-MISC': 2}
+
+TEST : B-MISC : test_f1: 0.7432 test_rec: 0.6966 test_pre: 0.7964 test_acc: 0.0000 | {'B-ORG': 24, 'B-LOC': 17, 'O': 156, 'B-PER': 10, 'I-MISC': 5, 'I-ORG': 1}
+
+TEST : I-MISC : test_f1: 0.5234 test_rec: 0.5694 test_pre: 0.4843 test_acc: 0.0000 | {'O': 69, 'I-ORG': 13, 'I-PER': 2, 'I-LOC': 2, 'B-MISC': 7}
+
+TEST : B-ORG : test_f1: 0.7825 test_rec: 0.7255 test_pre: 0.8492 test_acc: 0.0000 | {'B-MISC': 45, 'B-LOC': 118, 'O': 258, 'I-ORG': 13, 'B-PER': 20, 'I-MISC': 1, 'I-PER': 1}
+
+TEST : I-ORG : test_f1: 0.7033 test_rec: 0.6216 test_pre: 0.8097 test_acc: 0.0000 | {'I-MISC': 9, 'I-LOC': 35, 'B-ORG': 25, 'B-LOC': 17, 'O': 216, 'I-PER': 11, 'B-PER': 2, 'B-MISC': 1}
+
+(loss: 1.4331, epoch: 5, dev F1 = 0.8620, dev acc = 0.9664, F1 on test = 0.8246, acc on test= 0.9596), saving...
+epoch: 5	 in 30 take: 286.64537382125854 s
+ - Tot it 755 (epoch 6): 0it [00:00, ?it/s] - Tot it 755 (epoch 6): 70it [00:02, 34.66it/s] - Tot it 755 (epoch 6): 131it [00:04, 33.23it/s] - Tot it 755 (epoch 6): 194it [00:06, 32.67it/s] - Tot it 755 (epoch 6): 255it [00:08, 31.91it/s] - Tot it 755 (epoch 6): 303it [00:10, 28.93it/s] - Tot it 755 (epoch 6): 352it [00:12, 27.29it/s] - Tot it 755 (epoch 6): 400it [00:14, 26.20it/s] - Tot it 755 (epoch 6): 448it [00:16, 25.43it/s] - Tot it 755 (epoch 6): 496it [00:18, 24.96it/s] - Tot it 755 (epoch 6): 544it [00:21, 20.37it/s] - Tot it 755 (epoch 6): 586it [00:24, 17.88it/s] - Tot it 755 (epoch 6): 624it [00:27, 16.44it/s] - Tot it 755 (epoch 6): 659it [00:31, 12.82it/s] - Tot it 755 (epoch 6): 689it [00:35, 10.80it/s] - Tot it 755 (epoch 6): 715it [00:38,  9.87it/s] - Tot it 755 (epoch 6): 738it [00:41,  9.26it/s]                                                 DEV : total : dev_f1: 0.8873 dev_rec: 0.8840 dev_pre: 0.8906 dev_acc: 0.9758 | 
+
+DEV : B-LOC : dev_f1: 0.9268 dev_rec: 0.9309 dev_pre: 0.9228 dev_acc: 0.0000 | {'B-PER': 12, 'B-ORG': 77, 'O': 15, 'B-MISC': 14, 'I-PER': 1, 'I-ORG': 8}
+
+DEV : O : dev_f1: 0.9927 dev_rec: 0.9942 dev_pre: 0.9912 dev_acc: 0.0000 | {'I-PER': 21, 'B-MISC': 37, 'I-MISC': 66, 'I-LOC': 7, 'B-ORG': 36, 'B-LOC': 11, 'I-ORG': 49, 'B-PER': 21}
+
+DEV : B-MISC : dev_f1: 0.8503 dev_rec: 0.8102 dev_pre: 0.8946 dev_acc: 0.0000 | {'B-PER': 22, 'O': 82, 'B-LOC': 20, 'B-ORG': 41, 'I-MISC': 5, 'I-LOC': 4, 'I-ORG': 1}
+
+DEV : I-LOC : dev_f1: 0.7515 dev_rec: 0.7121 dev_pre: 0.7957 dev_acc: 0.0000 | {'O': 15, 'I-ORG': 38, 'B-LOC': 12, 'I-MISC': 8, 'I-PER': 1}
+
+DEV : B-ORG : dev_f1: 0.8567 dev_rec: 0.8494 dev_pre: 0.8642 dev_acc: 0.0000 | {'B-LOC': 57, 'O': 69, 'B-PER': 43, 'B-MISC': 14, 'I-ORG': 15, 'I-PER': 3, 'I-MISC': 1}
+
+DEV : I-ORG : dev_f1: 0.7848 dev_rec: 0.7696 dev_pre: 0.8006 dev_acc: 0.0000 | {'I-LOC': 22, 'O': 86, 'B-LOC': 15, 'B-ORG': 13, 'B-MISC': 4, 'I-MISC': 7, 'I-PER': 25, 'B-PER': 1}
+
+DEV : I-MISC : dev_f1: 0.6437 dev_rec: 0.5954 dev_pre: 0.7007 dev_acc: 0.0000 | {'O': 70, 'I-ORG': 28, 'B-MISC': 14, 'B-LOC': 7, 'I-LOC': 11, 'I-PER': 6, 'B-PER': 3, 'B-ORG': 1}
+
+DEV : B-PER : dev_f1: 0.9518 dev_rec: 0.9647 dev_pre: 0.9392 dev_acc: 0.0000 | {'B-ORG': 9, 'O': 22, 'B-LOC': 21, 'B-MISC': 4, 'I-PER': 8, 'I-ORG': 1}
+
+DEV : I-PER : dev_f1: 0.9598 dev_rec: 0.9686 dev_pre: 0.9512 dev_acc: 0.0000 | {'I-ORG': 4, 'B-PER': 13, 'O': 17, 'B-MISC': 1, 'B-ORG': 2, 'I-MISC': 1, 'I-LOC': 3}
+
+TEST : total : test_f1: 0.8456 test_rec: 0.8438 test_pre: 0.8474 test_acc: 0.9665 | 
+
+TEST : B-PER : test_f1: 0.9304 test_rec: 0.9301 test_pre: 0.9307 test_acc: 0.0000 | {'B-ORG': 29, 'O': 33, 'B-LOC': 28, 'I-PER': 16, 'B-MISC': 4, 'I-ORG': 3}
+
+TEST : I-PER : test_f1: 0.9658 test_rec: 0.9784 test_pre: 0.9536 test_acc: 0.0000 | {'O': 4, 'B-PER': 7, 'I-ORG': 11, 'I-MISC': 1, 'I-LOC': 2}
+
+TEST : B-LOC : test_f1: 0.8924 test_rec: 0.9101 test_pre: 0.8754 test_acc: 0.0000 | {'B-ORG': 101, 'B-MISC': 17, 'I-MISC': 1, 'O': 7, 'I-LOC': 2, 'B-PER': 13, 'I-ORG': 7, 'I-PER': 2}
+
+TEST : O : test_f1: 0.9897 test_rec: 0.9876 test_pre: 0.9918 test_acc: 0.0000 | {'I-MISC': 131, 'B-MISC': 72, 'B-ORG': 74, 'I-ORG': 115, 'B-LOC': 19, 'I-LOC': 15, 'B-PER': 36, 'I-PER': 15}
+
+TEST : I-LOC : test_f1: 0.7717 test_rec: 0.8288 test_pre: 0.7220 test_acc: 0.0000 | {'I-ORG': 27, 'O': 10, 'B-LOC': 4, 'I-PER': 3}
+
+TEST : B-MISC : test_f1: 0.7771 test_rec: 0.7550 test_pre: 0.8006 test_acc: 0.0000 | {'B-ORG': 53, 'B-LOC': 26, 'O': 59, 'B-PER': 18, 'I-MISC': 10, 'I-ORG': 4, 'I-PER': 1, 'I-LOC': 1}
+
+TEST : I-MISC : test_f1: 0.5462 test_rec: 0.6435 test_pre: 0.4744 test_acc: 0.0000 | {'O': 33, 'I-ORG': 25, 'B-MISC': 7, 'B-PER': 1, 'I-PER': 3, 'I-LOC': 8}
+
+TEST : B-ORG : test_f1: 0.8170 test_rec: 0.8049 test_pre: 0.8294 test_acc: 0.0000 | {'B-MISC': 31, 'B-LOC': 129, 'O': 101, 'I-ORG': 26, 'B-PER': 34, 'I-MISC': 2, 'I-PER': 1}
+
+TEST : I-ORG : test_f1: 0.7720 test_rec: 0.7928 test_pre: 0.7523 test_acc: 0.0000 | {'I-MISC': 9, 'I-LOC': 54, 'B-ORG': 18, 'B-LOC': 10, 'O': 64, 'I-PER': 14, 'B-PER': 3, 'B-MISC': 1}
+
+(loss: 1.1479, epoch: 6, dev F1 = 0.8873, dev acc = 0.9758, F1 on test = 0.8456, acc on test= 0.9665), saving...
+epoch: 6	 in 30 take: 334.60726046562195 s
+ - Tot it 755 (epoch 7): 0it [00:00, ?it/s] - Tot it 755 (epoch 7): 70it [00:02, 34.75it/s] - Tot it 755 (epoch 7): 140it [00:04, 34.80it/s] - Tot it 755 (epoch 7): 203it [00:06, 33.73it/s] - Tot it 755 (epoch 7): 261it [00:08, 31.94it/s] - Tot it 755 (epoch 7): 310it [00:10, 29.09it/s] - Tot it 755 (epoch 7): 358it [00:12, 27.27it/s] - Tot it 755 (epoch 7): 406it [00:14, 26.19it/s] - Tot it 755 (epoch 7): 454it [00:16, 25.47it/s] - Tot it 755 (epoch 7): 502it [00:18, 24.72it/s] - Tot it 755 (epoch 7): 550it [00:21, 19.98it/s] - Tot it 755 (epoch 7): 592it [00:24, 17.50it/s] - Tot it 755 (epoch 7): 630it [00:27, 15.72it/s] - Tot it 755 (epoch 7): 664it [00:31, 12.36it/s] - Tot it 755 (epoch 7): 693it [00:35, 10.65it/s] - Tot it 755 (epoch 7): 718it [00:38,  9.82it/s] - Tot it 755 (epoch 7): 741it [00:41,  9.09it/s]                                                 DEV : total : dev_f1: 0.8959 dev_rec: 0.8925 dev_pre: 0.8993 dev_acc: 0.9781 | 
+
+DEV : B-LOC : dev_f1: 0.9335 dev_rec: 0.9287 dev_pre: 0.9384 dev_acc: 0.0000 | {'B-PER': 16, 'B-ORG': 79, 'O': 10, 'I-PER': 1, 'B-MISC': 17, 'I-ORG': 7, 'I-LOC': 1}
+
+DEV : O : dev_f1: 0.9939 dev_rec: 0.9955 dev_pre: 0.9924 dev_acc: 0.0000 | {'I-MISC': 41, 'B-MISC': 31, 'I-PER': 12, 'B-ORG': 32, 'B-LOC': 11, 'I-ORG': 42, 'I-LOC': 4, 'B-PER': 19}
+
+DEV : B-MISC : dev_f1: 0.8521 dev_rec: 0.8124 dev_pre: 0.8959 dev_acc: 0.0000 | {'O': 71, 'B-LOC': 23, 'B-ORG': 49, 'B-PER': 18, 'I-MISC': 8, 'I-LOC': 2, 'I-ORG': 2}
+
+DEV : I-LOC : dev_f1: 0.7865 dev_rec: 0.7237 dev_pre: 0.8611 dev_acc: 0.0000 | {'O': 12, 'I-ORG': 40, 'B-LOC': 9, 'I-PER': 2, 'B-MISC': 1, 'I-MISC': 7}
+
+DEV : B-ORG : dev_f1: 0.8702 dev_rec: 0.8747 dev_pre: 0.8657 dev_acc: 0.0000 | {'O': 56, 'B-LOC': 30, 'B-MISC': 15, 'B-PER': 38, 'I-ORG': 26, 'I-MISC': 1, 'I-PER': 2}
+
+DEV : I-ORG : dev_f1: 0.8037 dev_rec: 0.8043 dev_pre: 0.8032 dev_acc: 0.0000 | {'O': 71, 'B-LOC': 14, 'I-LOC': 12, 'B-ORG': 9, 'I-MISC': 13, 'I-PER': 26, 'B-PER': 2}
+
+DEV : I-MISC : dev_f1: 0.6570 dev_rec: 0.5896 dev_pre: 0.7418 dev_acc: 0.0000 | {'O': 70, 'I-ORG': 26, 'B-MISC': 18, 'B-LOC': 7, 'I-LOC': 11, 'I-PER': 6, 'B-PER': 3, 'B-ORG': 1}
+
+DEV : B-PER : dev_f1: 0.9534 dev_rec: 0.9653 dev_pre: 0.9417 dev_acc: 0.0000 | {'B-ORG': 10, 'O': 21, 'B-LOC': 18, 'B-MISC': 5, 'I-PER': 9, 'I-ORG': 1}
+
+DEV : I-PER : dev_f1: 0.9639 dev_rec: 0.9717 dev_pre: 0.9563 dev_acc: 0.0000 | {'B-PER': 14, 'O': 16, 'B-ORG': 2, 'I-ORG': 4, 'I-MISC': 1}
+
+TEST : total : test_f1: 0.8672 test_rec: 0.8663 test_pre: 0.8680 test_acc: 0.9718 | 
+
+TEST : B-PER : test_f1: 0.9366 test_rec: 0.9357 test_pre: 0.9374 test_acc: 0.0000 | {'B-ORG': 27, 'O': 24, 'B-LOC': 28, 'I-PER': 18, 'B-MISC': 3, 'I-ORG': 4}
+
+TEST : I-PER : test_f1: 0.9673 test_rec: 0.9862 test_pre: 0.9492 test_acc: 0.0000 | {'B-PER': 3, 'I-ORG': 9, 'I-MISC': 1, 'O': 3}
+
+TEST : B-LOC : test_f1: 0.9051 test_rec: 0.9095 test_pre: 0.9008 test_acc: 0.0000 | {'B-ORG': 97, 'B-MISC': 21, 'I-MISC': 1, 'O': 6, 'I-LOC': 3, 'B-PER': 13, 'I-ORG': 7, 'I-PER': 3}
+
+TEST : O : test_f1: 0.9921 test_rec: 0.9901 test_pre: 0.9940 test_acc: 0.0000 | {'I-MISC': 88, 'B-MISC': 62, 'B-ORG': 68, 'B-LOC': 18, 'I-LOC': 9, 'B-PER': 33, 'I-PER': 17, 'I-ORG': 83}
+
+TEST : I-LOC : test_f1: 0.7841 test_rec: 0.8054 test_pre: 0.7638 test_acc: 0.0000 | {'I-ORG': 31, 'O': 10, 'B-LOC': 5, 'I-PER': 3, 'I-MISC': 1}
+
+TEST : B-MISC : test_f1: 0.8064 test_rec: 0.7920 test_pre: 0.8213 test_acc: 0.0000 | {'B-ORG': 53, 'B-LOC': 16, 'O': 40, 'B-PER': 21, 'I-MISC': 9, 'I-ORG': 5, 'I-PER': 1, 'I-LOC': 1}
+
+TEST : I-MISC : test_f1: 0.6173 test_rec: 0.6759 test_pre: 0.5681 test_acc: 0.0000 | {'O': 22, 'I-ORG': 30, 'B-MISC': 6, 'B-PER': 1, 'I-PER': 5, 'I-LOC': 6}
+
+TEST : B-ORG : test_f1: 0.8468 test_rec: 0.8471 test_pre: 0.8466 test_acc: 0.0000 | {'B-MISC': 28, 'B-LOC': 92, 'O': 75, 'I-ORG': 30, 'B-PER': 28, 'I-MISC': 1}
+
+TEST : I-ORG : test_f1: 0.8046 test_rec: 0.8335 test_pre: 0.7777 test_acc: 0.0000 | {'I-MISC': 10, 'I-LOC': 45, 'B-ORG': 10, 'I-PER': 14, 'O': 49, 'B-LOC': 8, 'B-PER': 2, 'B-MISC': 1}
+
+(loss: 0.8281, epoch: 7, dev F1 = 0.8959, dev acc = 0.9781, F1 on test = 0.8672, acc on test= 0.9718), saving...
+epoch: 7	 in 30 take: 382.40727615356445 s
+ - Tot it 755 (epoch 8): 0it [00:00, ?it/s] - Tot it 755 (epoch 8): 70it [00:02, 34.91it/s] - Tot it 755 (epoch 8): 141it [00:04, 35.07it/s] - Tot it 755 (epoch 8): 203it [00:06, 33.67it/s] - Tot it 755 (epoch 8): 261it [00:08, 31.97it/s] - Tot it 755 (epoch 8): 309it [00:10, 28.95it/s] - Tot it 755 (epoch 8): 358it [00:12, 27.28it/s] - Tot it 755 (epoch 8): 406it [00:14, 26.17it/s] - Tot it 755 (epoch 8): 455it [00:16, 25.53it/s] - Tot it 755 (epoch 8): 503it [00:18, 24.69it/s] - Tot it 755 (epoch 8): 551it [00:21, 19.94it/s] - Tot it 755 (epoch 8): 593it [00:24, 17.70it/s] - Tot it 755 (epoch 8): 631it [00:27, 15.88it/s] - Tot it 755 (epoch 8): 665it [00:31, 12.43it/s] - Tot it 755 (epoch 8): 694it [00:35, 10.58it/s] - Tot it 755 (epoch 8): 719it [00:38,  9.74it/s] - Tot it 755 (epoch 8): 742it [00:41,  9.22it/s]                                                 DEV : total : dev_f1: 0.8997 dev_rec: 0.8989 dev_pre: 0.9005 dev_acc: 0.9787 | 
+
+DEV : B-LOC : dev_f1: 0.9381 dev_rec: 0.9330 dev_pre: 0.9433 dev_acc: 0.0000 | {'B-PER': 14, 'B-ORG': 73, 'O': 10, 'I-PER': 1, 'B-MISC': 17, 'I-ORG': 6, 'I-LOC': 2}
+
+DEV : O : dev_f1: 0.9945 dev_rec: 0.9952 dev_pre: 0.9939 dev_acc: 0.0000 | {'I-MISC': 76, 'B-MISC': 32, 'I-PER': 9, 'B-ORG': 32, 'I-LOC': 4, 'B-LOC': 8, 'I-ORG': 28, 'B-PER': 16}
+
+DEV : B-MISC : dev_f1: 0.8636 dev_rec: 0.8341 dev_pre: 0.8952 dev_acc: 0.0000 | {'O': 41, 'B-LOC': 17, 'B-ORG': 63, 'B-PER': 17, 'I-MISC': 9, 'I-LOC': 2, 'I-ORG': 4}
+
+DEV : I-LOC : dev_f1: 0.7984 dev_rec: 0.7938 dev_pre: 0.8031 dev_acc: 0.0000 | {'O': 10, 'I-ORG': 25, 'B-LOC': 7, 'I-PER': 2, 'B-MISC': 2, 'I-MISC': 7}
+
+DEV : B-ORG : dev_f1: 0.8706 dev_rec: 0.8852 dev_pre: 0.8564 dev_acc: 0.0000 | {'O': 46, 'B-LOC': 32, 'I-ORG': 20, 'B-MISC': 19, 'B-PER': 35, 'I-MISC': 1, 'I-PER': 1}
+
+DEV : I-ORG : dev_f1: 0.7994 dev_rec: 0.7670 dev_pre: 0.8348 dev_acc: 0.0000 | {'O': 67, 'B-LOC': 12, 'I-LOC': 30, 'I-MISC': 23, 'B-ORG': 14, 'I-PER': 27, 'B-PER': 2}
+
+DEV : I-MISC : dev_f1: 0.6532 dev_rec: 0.6532 dev_pre: 0.6532 dev_acc: 0.0000 | {'O': 55, 'I-ORG': 25, 'B-MISC': 12, 'B-LOC': 7, 'I-LOC': 11, 'I-PER': 6, 'B-PER': 2, 'B-ORG': 2}
+
+DEV : B-PER : dev_f1: 0.9545 dev_rec: 0.9615 dev_pre: 0.9476 dev_acc: 0.0000 | {'B-ORG': 11, 'O': 19, 'B-LOC': 20, 'B-MISC': 8, 'I-PER': 11, 'I-MISC': 1, 'I-ORG': 1}
+
+DEV : I-PER : dev_f1: 0.9635 dev_rec: 0.9702 dev_pre: 0.9570 dev_acc: 0.0000 | {'I-ORG': 5, 'B-PER': 12, 'O': 14, 'B-ORG': 4, 'I-MISC': 3, 'I-LOC': 1}
+
+TEST : total : test_f1: 0.8653 test_rec: 0.8667 test_pre: 0.8639 test_acc: 0.9710 | 
+
+TEST : B-PER : test_f1: 0.9370 test_rec: 0.9289 test_pre: 0.9452 test_acc: 0.0000 | {'B-ORG': 45, 'O': 23, 'B-LOC': 25, 'I-MISC': 1, 'I-PER': 15, 'B-MISC': 1, 'I-LOC': 2, 'I-ORG': 3}
+
+TEST : I-PER : test_f1: 0.9692 test_rec: 0.9801 test_pre: 0.9585 test_acc: 0.0000 | {'B-PER': 4, 'O': 4, 'I-ORG': 11, 'I-MISC': 1, 'I-LOC': 3}
+
+TEST : B-LOC : test_f1: 0.9037 test_rec: 0.9083 test_pre: 0.8991 test_acc: 0.0000 | {'B-ORG': 97, 'B-MISC': 28, 'I-MISC': 1, 'O': 7, 'I-LOC': 2, 'I-ORG': 7, 'B-PER': 10, 'I-PER': 1}
+
+TEST : O : test_f1: 0.9923 test_rec: 0.9898 test_pre: 0.9949 test_acc: 0.0000 | {'I-MISC': 119, 'B-MISC': 62, 'B-ORG': 69, 'B-LOC': 16, 'B-PER': 28, 'I-ORG': 66, 'I-PER': 12, 'I-LOC': 19}
+
+TEST : I-LOC : test_f1: 0.7469 test_rec: 0.8327 test_pre: 0.6772 test_acc: 0.0000 | {'I-ORG': 26, 'O': 7, 'B-LOC': 5, 'I-PER': 3, 'I-MISC': 2}
+
+TEST : B-MISC : test_f1: 0.8029 test_rec: 0.7920 test_pre: 0.8141 test_acc: 0.0000 | {'B-ORG': 70, 'B-LOC': 16, 'O': 23, 'B-PER': 18, 'I-MISC': 12, 'I-ORG': 5, 'I-PER': 1, 'I-LOC': 1}
+
+TEST : I-MISC : test_f1: 0.5873 test_rec: 0.7083 test_pre: 0.5016 test_acc: 0.0000 | {'I-ORG': 28, 'O': 17, 'B-MISC': 4, 'B-PER': 1, 'I-PER': 4, 'I-LOC': 9}
+
+TEST : B-ORG : test_f1: 0.8380 test_rec: 0.8501 test_pre: 0.8262 test_acc: 0.0000 | {'B-MISC': 31, 'B-LOC': 98, 'O': 70, 'I-ORG': 21, 'B-PER': 24, 'I-LOC': 1, 'I-MISC': 3, 'I-PER': 1}
+
+TEST : I-ORG : test_f1: 0.8029 test_rec: 0.8048 test_pre: 0.8010 test_acc: 0.0000 | {'I-MISC': 13, 'I-LOC': 65, 'B-ORG': 16, 'B-LOC': 10, 'O': 44, 'I-PER': 12, 'B-PER': 2, 'B-MISC': 1}
+
+(loss: 0.7429, epoch: 8, dev F1 = 0.8997, dev acc = 0.9787, F1 on test = 0.8653, acc on test= 0.9710), saving...
+epoch: 8	 in 30 take: 430.1133668422699 s
+ - Tot it 755 (epoch 9): 0it [00:00, ?it/s] - Tot it 755 (epoch 9): 70it [00:02, 34.72it/s] - Tot it 755 (epoch 9): 135it [00:04, 33.96it/s] - Tot it 755 (epoch 9): 201it [00:06, 33.63it/s] - Tot it 755 (epoch 9): 260it [00:08, 32.09it/s] - Tot it 755 (epoch 9): 309it [00:10, 29.15it/s] - Tot it 755 (epoch 9): 357it [00:12, 27.39it/s] - Tot it 755 (epoch 9): 406it [00:14, 26.32it/s] - Tot it 755 (epoch 9): 455it [00:16, 25.58it/s] - Tot it 755 (epoch 9): 504it [00:18, 24.60it/s] - Tot it 755 (epoch 9): 552it [00:21, 19.88it/s] - Tot it 755 (epoch 9): 594it [00:24, 17.60it/s] - Tot it 755 (epoch 9): 632it [00:27, 15.56it/s] - Tot it 755 (epoch 9): 666it [00:32, 12.24it/s] - Tot it 755 (epoch 9): 695it [00:35, 10.62it/s] - Tot it 755 (epoch 9): 720it [00:38,  9.63it/s] - Tot it 755 (epoch 9): 743it [00:41,  9.17it/s]                                                 DEV : total : dev_f1: 0.9051 dev_rec: 0.9036 dev_pre: 0.9066 dev_acc: 0.9804 | 
+
+DEV : B-LOC : dev_f1: 0.9410 dev_rec: 0.9412 dev_pre: 0.9407 dev_acc: 0.0000 | {'B-PER': 15, 'B-ORG': 57, 'O': 8, 'B-MISC': 23, 'I-PER': 1, 'I-ORG': 3, 'I-LOC': 1}
+
+DEV : O : dev_f1: 0.9951 dev_rec: 0.9972 dev_pre: 0.9929 dev_acc: 0.0000 | {'I-PER': 6, 'B-MISC': 26, 'I-LOC': 2, 'B-ORG': 22, 'I-MISC': 20, 'B-LOC': 6, 'I-ORG': 25, 'B-PER': 11}
+
+DEV : B-MISC : dev_f1: 0.8639 dev_rec: 0.8503 dev_pre: 0.8779 dev_acc: 0.0000 | {'O': 53, 'B-LOC': 19, 'B-ORG': 39, 'B-PER': 17, 'I-MISC': 6, 'I-ORG': 3, 'I-LOC': 1}
+
+DEV : I-LOC : dev_f1: 0.8066 dev_rec: 0.7626 dev_pre: 0.8559 dev_acc: 0.0000 | {'O': 12, 'I-ORG': 29, 'B-LOC': 9, 'I-MISC': 9, 'B-MISC': 1, 'I-PER': 1}
+
+DEV : B-ORG : dev_f1: 0.8779 dev_rec: 0.8658 dev_pre: 0.8903 dev_acc: 0.0000 | {'O': 55, 'B-LOC': 31, 'B-MISC': 33, 'B-PER': 41, 'I-ORG': 17, 'I-PER': 2, 'I-MISC': 1}
+
+DEV : I-ORG : dev_f1: 0.8128 dev_rec: 0.7776 dev_pre: 0.8513 dev_acc: 0.0000 | {'O': 74, 'B-LOC': 15, 'I-LOC': 13, 'B-ORG': 12, 'B-MISC': 2, 'I-MISC': 22, 'I-PER': 27, 'B-PER': 2}
+
+DEV : I-MISC : dev_f1: 0.6882 dev_rec: 0.6156 dev_pre: 0.7802 dev_acc: 0.0000 | {'O': 61, 'I-ORG': 21, 'B-MISC': 20, 'B-LOC': 7, 'B-ORG': 4, 'I-LOC': 12, 'I-PER': 6, 'B-PER': 2}
+
+DEV : B-PER : dev_f1: 0.9558 dev_rec: 0.9674 dev_pre: 0.9444 dev_acc: 0.0000 | {'B-ORG': 8, 'B-LOC': 22, 'O': 22, 'B-MISC': 4, 'I-PER': 2, 'I-MISC': 1, 'I-ORG': 1}
+
+DEV : I-PER : dev_f1: 0.9660 dev_rec: 0.9663 dev_pre: 0.9656 dev_acc: 0.0000 | {'I-ORG': 3, 'B-PER': 17, 'O': 18, 'B-ORG': 1, 'I-MISC': 1, 'I-LOC': 4}
+
+TEST : total : test_f1: 0.8767 test_rec: 0.8766 test_pre: 0.8769 test_acc: 0.9741 | 
+
+TEST : B-PER : test_f1: 0.9429 test_rec: 0.9443 test_pre: 0.9414 test_acc: 0.0000 | {'B-ORG': 26, 'O': 24, 'B-LOC': 24, 'I-PER': 10, 'I-LOC': 2, 'B-MISC': 2, 'I-ORG': 2}
+
+TEST : I-PER : test_f1: 0.9764 test_rec: 0.9844 test_pre: 0.9685 test_acc: 0.0000 | {'O': 4, 'B-PER': 2, 'I-ORG': 11, 'I-LOC': 1}
+
+TEST : B-LOC : test_f1: 0.9098 test_rec: 0.9161 test_pre: 0.9036 test_acc: 0.0000 | {'B-ORG': 82, 'B-MISC': 30, 'I-MISC': 1, 'O': 6, 'I-LOC': 2, 'B-PER': 12, 'I-PER': 2, 'I-ORG': 5}
+
+TEST : O : test_f1: 0.9931 test_rec: 0.9925 test_pre: 0.9937 test_acc: 0.0000 | {'B-MISC': 66, 'I-MISC': 57, 'B-ORG': 54, 'B-LOC': 17, 'I-LOC': 11, 'B-PER': 23, 'I-ORG': 55, 'I-PER': 4}
+
+TEST : I-LOC : test_f1: 0.7910 test_rec: 0.8249 test_pre: 0.7599 test_acc: 0.0000 | {'I-ORG': 28, 'O': 7, 'B-LOC': 5, 'I-PER': 3, 'I-MISC': 2}
+
+TEST : B-MISC : test_f1: 0.8050 test_rec: 0.8177 test_pre: 0.7928 test_acc: 0.0000 | {'B-ORG': 42, 'B-LOC': 15, 'O': 35, 'B-PER': 23, 'I-MISC': 8, 'I-ORG': 4, 'I-LOC': 1}
+
+TEST : I-MISC : test_f1: 0.6455 test_rec: 0.6574 test_pre: 0.6339 test_acc: 0.0000 | {'I-ORG': 22, 'O': 28, 'B-MISC': 8, 'B-PER': 2, 'I-PER': 5, 'I-LOC': 8, 'B-LOC': 1}
+
+TEST : B-ORG : test_f1: 0.8495 test_rec: 0.8362 test_pre: 0.8633 test_acc: 0.0000 | {'B-MISC': 43, 'B-LOC': 91, 'O': 85, 'I-ORG': 21, 'B-PER': 30, 'I-MISC': 2}
+
+TEST : I-ORG : test_f1: 0.8228 test_rec: 0.8228 test_pre: 0.8228 test_acc: 0.0000 | {'I-MISC': 12, 'I-LOC': 42, 'B-ORG': 16, 'B-LOC': 10, 'I-PER': 13, 'O': 51, 'B-PER': 3, 'B-MISC': 1}
+
+(loss: 0.6709, epoch: 9, dev F1 = 0.9051, dev acc = 0.9804, F1 on test = 0.8767, acc on test= 0.9741), saving...
+epoch: 9	 in 30 take: 478.0449721813202 s
+ - Tot it 755 (epoch 10): 0it [00:00, ?it/s] - Tot it 755 (epoch 10): 70it [00:02, 34.82it/s] - Tot it 755 (epoch 10): 140it [00:04, 34.76it/s] - Tot it 755 (epoch 10): 204it [00:06, 33.86it/s] - Tot it 755 (epoch 10): 260it [00:08, 31.84it/s] - Tot it 755 (epoch 10): 308it [00:10, 28.97it/s] - Tot it 755 (epoch 10): 356it [00:12, 27.20it/s] - Tot it 755 (epoch 10): 404it [00:14, 25.87it/s] - Tot it 755 (epoch 10): 453it [00:16, 25.30it/s] - Tot it 755 (epoch 10): 501it [00:18, 24.59it/s] - Tot it 755 (epoch 10): 549it [00:21, 19.87it/s] - Tot it 755 (epoch 10): 591it [00:24, 17.46it/s] - Tot it 755 (epoch 10): 629it [00:27, 15.85it/s] - Tot it 755 (epoch 10): 663it [00:31, 12.33it/s] - Tot it 755 (epoch 10): 692it [00:35, 10.68it/s] - Tot it 755 (epoch 10): 717it [00:38,  9.67it/s] - Tot it 755 (epoch 10): 740it [00:41,  9.22it/s]                                                  DEV : total : dev_f1: 0.9068 dev_rec: 0.9047 dev_pre: 0.9089 dev_acc: 0.9803 | 
+
+DEV : B-LOC : dev_f1: 0.9405 dev_rec: 0.9385 dev_pre: 0.9426 dev_acc: 0.0000 | {'B-PER': 16, 'B-ORG': 56, 'O': 9, 'I-PER': 1, 'B-MISC': 25, 'I-ORG': 4, 'I-LOC': 2}
+
+DEV : O : dev_f1: 0.9955 dev_rec: 0.9976 dev_pre: 0.9933 dev_acc: 0.0000 | {'I-PER': 3, 'I-LOC': 2, 'B-ORG': 23, 'I-ORG': 17, 'B-LOC': 5, 'I-MISC': 24, 'B-MISC': 21, 'B-PER': 8}
+
+DEV : B-MISC : dev_f1: 0.8643 dev_rec: 0.8460 dev_pre: 0.8834 dev_acc: 0.0000 | {'O': 58, 'B-LOC': 15, 'B-ORG': 38, 'B-PER': 20, 'I-MISC': 7, 'I-ORG': 3, 'I-LOC': 1}
+
+DEV : I-LOC : dev_f1: 0.7814 dev_rec: 0.7860 dev_pre: 0.7769 dev_acc: 0.0000 | {'O': 10, 'I-ORG': 21, 'B-LOC': 7, 'I-PER': 2, 'B-MISC': 2, 'I-MISC': 13}
+
+DEV : B-ORG : dev_f1: 0.8779 dev_rec: 0.8635 dev_pre: 0.8928 dev_acc: 0.0000 | {'B-LOC': 44, 'O': 44, 'B-MISC': 30, 'B-PER': 47, 'I-ORG': 16, 'I-MISC': 1, 'I-PER': 1}
+
+DEV : I-ORG : dev_f1: 0.7919 dev_rec: 0.7270 dev_pre: 0.8694 dev_acc: 0.0000 | {'I-LOC': 41, 'O': 74, 'B-LOC': 11, 'B-ORG': 12, 'I-MISC': 34, 'I-PER': 28, 'B-PER': 2, 'B-MISC': 3}
+
+DEV : I-MISC : dev_f1: 0.6861 dev_rec: 0.6474 dev_pre: 0.7296 dev_acc: 0.0000 | {'O': 58, 'I-ORG': 18, 'B-MISC': 17, 'B-LOC': 7, 'B-ORG': 4, 'I-LOC': 9, 'I-PER': 6, 'B-PER': 3}
+
+DEV : B-PER : dev_f1: 0.9578 dev_rec: 0.9745 dev_pre: 0.9418 dev_acc: 0.0000 | {'B-LOC': 16, 'O': 17, 'B-ORG': 5, 'B-MISC': 5, 'I-PER': 2, 'I-MISC': 1, 'I-ORG': 1}
+
+DEV : I-PER : dev_f1: 0.9683 dev_rec: 0.9694 dev_pre: 0.9672 dev_acc: 0.0000 | {'B-PER': 15, 'O': 16, 'I-MISC': 3, 'B-ORG': 1, 'I-ORG': 2, 'I-LOC': 3}
+
+TEST : total : test_f1: 0.8808 test_rec: 0.8805 test_pre: 0.8811 test_acc: 0.9747 | 
+
+TEST : B-PER : test_f1: 0.9432 test_rec: 0.9499 test_pre: 0.9366 test_acc: 0.0000 | {'B-ORG': 27, 'O': 18, 'B-LOC': 20, 'I-PER': 10, 'I-MISC': 1, 'B-MISC': 4, 'I-ORG': 1}
+
+TEST : I-PER : test_f1: 0.9756 test_rec: 0.9844 test_pre: 0.9669 test_acc: 0.0000 | {'B-PER': 4, 'O': 4, 'I-ORG': 8, 'I-MISC': 1, 'I-LOC': 1}
+
+TEST : B-LOC : test_f1: 0.9132 test_rec: 0.9173 test_pre: 0.9091 test_acc: 0.0000 | {'B-ORG': 74, 'B-MISC': 32, 'I-MISC': 1, 'O': 8, 'I-LOC': 3, 'B-PER': 12, 'I-PER': 3, 'I-ORG': 5}
+
+TEST : O : test_f1: 0.9937 test_rec: 0.9932 test_pre: 0.9941 test_acc: 0.0000 | {'B-MISC': 61, 'I-MISC': 57, 'B-ORG': 40, 'B-LOC': 16, 'I-LOC': 13, 'B-PER': 24, 'I-ORG': 44, 'I-PER': 5}
+
+TEST : I-LOC : test_f1: 0.7823 test_rec: 0.8599 test_pre: 0.7175 test_acc: 0.0000 | {'I-ORG': 21, 'O': 6, 'B-LOC': 3, 'I-PER': 4, 'I-MISC': 2}
+
+TEST : B-MISC : test_f1: 0.8023 test_rec: 0.8091 test_pre: 0.7955 test_acc: 0.0000 | {'B-ORG': 45, 'O': 32, 'B-LOC': 15, 'B-PER': 29, 'I-MISC': 9, 'I-ORG': 3, 'I-LOC': 1}
+
+TEST : I-MISC : test_f1: 0.6462 test_rec: 0.6806 test_pre: 0.6151 test_acc: 0.0000 | {'O': 27, 'B-MISC': 7, 'B-PER': 2, 'I-ORG': 19, 'I-PER': 5, 'I-LOC': 8, 'B-LOC': 1}
+
+TEST : B-ORG : test_f1: 0.8556 test_rec: 0.8417 test_pre: 0.8699 test_acc: 0.0000 | {'B-MISC': 41, 'B-LOC': 90, 'O': 82, 'I-ORG': 18, 'B-PER': 30, 'I-MISC': 2}
+
+TEST : I-ORG : test_f1: 0.8186 test_rec: 0.7916 test_pre: 0.8474 test_acc: 0.0000 | {'I-MISC': 19, 'I-LOC': 61, 'B-ORG': 23, 'O': 47, 'I-PER': 12, 'B-LOC': 8, 'B-PER': 3, 'B-MISC': 1}
+
+(loss: 0.6093, epoch: 10, dev F1 = 0.9068, dev acc = 0.9803, F1 on test = 0.8808, acc on test= 0.9747), saving...
+epoch: 10	 in 30 take: 526.0905361175537 s
+ - Tot it 755 (epoch 11): 0it [00:00, ?it/s] - Tot it 755 (epoch 11): 70it [00:02, 34.87it/s] - Tot it 755 (epoch 11): 140it [00:04, 34.89it/s] - Tot it 755 (epoch 11): 202it [00:06, 33.54it/s] - Tot it 755 (epoch 11): 260it [00:08, 31.87it/s] - Tot it 755 (epoch 11): 308it [00:10, 28.97it/s] - Tot it 755 (epoch 11): 356it [00:12, 27.20it/s] - Tot it 755 (epoch 11): 404it [00:14, 25.80it/s] - Tot it 755 (epoch 11): 452it [00:16, 25.22it/s] - Tot it 755 (epoch 11): 500it [00:18, 24.72it/s] - Tot it 755 (epoch 11): 548it [00:21, 19.95it/s] - Tot it 755 (epoch 11): 590it [00:24, 17.62it/s] - Tot it 755 (epoch 11): 628it [00:27, 15.97it/s] - Tot it 755 (epoch 11): 662it [00:31, 12.31it/s] - Tot it 755 (epoch 11): 691it [00:35, 10.74it/s] - Tot it 755 (epoch 11): 716it [00:38,  9.66it/s] - Tot it 755 (epoch 11): 739it [00:41,  9.12it/s]                                                  DEV : total : dev_f1: 0.9064 dev_rec: 0.9037 dev_pre: 0.9091 dev_acc: 0.9800 | 
+
+DEV : B-LOC : dev_f1: 0.9418 dev_rec: 0.9521 dev_pre: 0.9318 dev_acc: 0.0000 | {'B-PER': 13, 'B-ORG': 39, 'O': 12, 'I-PER': 1, 'B-MISC': 19, 'I-LOC': 3, 'I-ORG': 1}
+
+DEV : O : dev_f1: 0.9951 dev_rec: 0.9974 dev_pre: 0.9929 dev_acc: 0.0000 | {'B-MISC': 29, 'I-MISC': 38, 'B-ORG': 15, 'B-LOC': 6, 'I-ORG': 15, 'B-PER': 7, 'I-PER': 1, 'I-LOC': 1}
+
+DEV : B-MISC : dev_f1: 0.8620 dev_rec: 0.8503 dev_pre: 0.8740 dev_acc: 0.0000 | {'O': 57, 'B-LOC': 23, 'B-ORG': 27, 'B-PER': 22, 'I-MISC': 5, 'I-ORG': 3, 'I-LOC': 1}
+
+DEV : I-LOC : dev_f1: 0.7863 dev_rec: 0.8016 dev_pre: 0.7715 dev_acc: 0.0000 | {'O': 12, 'I-ORG': 15, 'B-LOC': 8, 'I-PER': 2, 'B-MISC': 2, 'I-MISC': 12}
+
+DEV : B-ORG : dev_f1: 0.8771 dev_rec: 0.8382 dev_pre: 0.9198 dev_acc: 0.0000 | {'O': 53, 'B-LOC': 54, 'B-MISC': 37, 'B-PER': 55, 'I-ORG': 16, 'I-MISC': 1, 'I-PER': 1}
+
+DEV : I-ORG : dev_f1: 0.7953 dev_rec: 0.7164 dev_pre: 0.8937 dev_acc: 0.0000 | {'O': 79, 'I-LOC': 42, 'B-LOC': 12, 'I-MISC': 33, 'B-ORG': 11, 'I-PER': 33, 'B-PER': 2, 'B-MISC': 1}
+
+DEV : I-MISC : dev_f1: 0.6817 dev_rec: 0.6532 dev_pre: 0.7129 dev_acc: 0.0000 | {'O': 56, 'I-ORG': 12, 'B-MISC': 21, 'B-LOC': 7, 'B-ORG': 2, 'I-PER': 6, 'I-LOC': 13, 'B-PER': 3}
+
+DEV : B-PER : dev_f1: 0.9550 dev_rec: 0.9729 dev_pre: 0.9377 dev_acc: 0.0000 | {'B-LOC': 18, 'O': 21, 'B-ORG': 3, 'B-MISC': 4, 'I-PER': 3, 'I-ORG': 1}
+
+DEV : I-PER : dev_f1: 0.9676 dev_rec: 0.9709 dev_pre: 0.9643 dev_acc: 0.0000 | {'B-PER': 17, 'O': 16, 'B-ORG': 1, 'I-MISC': 2, 'I-ORG': 1, 'I-LOC': 1}
+
+(loss: 0.5726, epoch: 11, dev F1 = 0.9064, dev acc = 0.9800)
+epoch: 11	 in 30 take: 571.144846200943 s
+ - Tot it 755 (epoch 12): 0it [00:00, ?it/s] - Tot it 755 (epoch 12): 70it [00:02, 34.98it/s] - Tot it 755 (epoch 12): 139it [00:04, 34.77it/s] - Tot it 755 (epoch 12): 210it [00:06, 34.87it/s] - Tot it 755 (epoch 12): 265it [00:08, 32.18it/s] - Tot it 755 (epoch 12): 314it [00:10, 29.10it/s] - Tot it 755 (epoch 12): 363it [00:12, 27.32it/s] - Tot it 755 (epoch 12): 412it [00:14, 26.20it/s] - Tot it 755 (epoch 12): 460it [00:16, 25.38it/s] - Tot it 755 (epoch 12): 508it [00:18, 23.77it/s] - Tot it 755 (epoch 12): 554it [00:22, 18.89it/s] - Tot it 755 (epoch 12): 594it [00:25, 16.70it/s] - Tot it 755 (epoch 12): 630it [00:28, 15.28it/s] - Tot it 755 (epoch 12): 663it [00:32, 12.00it/s] - Tot it 755 (epoch 12): 691it [00:35, 10.64it/s] - Tot it 755 (epoch 12): 716it [00:38,  9.59it/s] - Tot it 755 (epoch 12): 738it [00:41,  9.09it/s]                                                  DEV : total : dev_f1: 0.9128 dev_rec: 0.9095 dev_pre: 0.9162 dev_acc: 0.9814 | 
+
+DEV : B-LOC : dev_f1: 0.9467 dev_rec: 0.9434 dev_pre: 0.9501 dev_acc: 0.0000 | {'O': 10, 'B-ORG': 47, 'B-PER': 13, 'B-MISC': 26, 'I-PER': 1, 'I-ORG': 5, 'I-LOC': 2}
+
+DEV : O : dev_f1: 0.9957 dev_rec: 0.9973 dev_pre: 0.9941 dev_acc: 0.0000 | {'B-MISC': 24, 'B-ORG': 19, 'I-MISC': 31, 'B-LOC': 6, 'I-ORG': 28, 'B-PER': 7, 'I-PER': 1, 'I-LOC': 1}
+
+DEV : B-MISC : dev_f1: 0.8676 dev_rec: 0.8633 dev_pre: 0.8719 dev_acc: 0.0000 | {'O': 50, 'B-LOC': 13, 'B-ORG': 32, 'B-PER': 18, 'I-MISC': 9, 'I-ORG': 3, 'I-LOC': 1}
+
+DEV : I-LOC : dev_f1: 0.8174 dev_rec: 0.7665 dev_pre: 0.8756 dev_acc: 0.0000 | {'O': 9, 'I-ORG': 24, 'B-LOC': 7, 'I-MISC': 15, 'B-MISC': 1, 'I-PER': 4}
+
+DEV : B-ORG : dev_f1: 0.8846 dev_rec: 0.8606 dev_pre: 0.9101 dev_acc: 0.0000 | {'O': 45, 'B-LOC': 33, 'I-ORG': 22, 'B-MISC': 37, 'B-PER': 47, 'I-PER': 2, 'I-MISC': 1}
+
+DEV : I-ORG : dev_f1: 0.8089 dev_rec: 0.7723 dev_pre: 0.8492 dev_acc: 0.0000 | {'O': 56, 'I-LOC': 23, 'B-LOC': 10, 'I-MISC': 36, 'B-ORG': 8, 'B-MISC': 2, 'I-PER': 35, 'B-PER': 1}
+
+DEV : I-MISC : dev_f1: 0.7086 dev_rec: 0.6994 dev_pre: 0.7181 dev_acc: 0.0000 | {'O': 48, 'I-ORG': 18, 'B-MISC': 22, 'B-LOC': 6, 'B-ORG': 2, 'I-PER': 6, 'I-LOC': 1, 'B-PER': 1}
+
+DEV : B-PER : dev_f1: 0.9596 dev_rec: 0.9729 dev_pre: 0.9466 dev_acc: 0.0000 | {'B-ORG': 5, 'B-LOC': 16, 'O': 20, 'B-MISC': 5, 'I-PER': 2, 'I-MISC': 1, 'I-ORG': 1}
+
+DEV : I-PER : dev_f1: 0.9669 dev_rec: 0.9725 dev_pre: 0.9614 dev_acc: 0.0000 | {'I-ORG': 2, 'B-PER': 14, 'O': 17, 'B-ORG': 1, 'I-MISC': 2}
+
+TEST : total : test_f1: 0.8813 test_rec: 0.8784 test_pre: 0.8843 test_acc: 0.9747 | 
+
+TEST : B-PER : test_f1: 0.9423 test_rec: 0.9443 test_pre: 0.9403 test_acc: 0.0000 | {'B-ORG': 25, 'O': 22, 'B-LOC': 22, 'I-PER': 14, 'B-MISC': 5, 'I-ORG': 2}
+
+TEST : I-PER : test_f1: 0.9744 test_rec: 0.9879 test_pre: 0.9613 test_acc: 0.0000 | {'O': 4, 'B-PER': 2, 'I-ORG': 8}
+
+TEST : B-LOC : test_f1: 0.9139 test_rec: 0.9191 test_pre: 0.9087 test_acc: 0.0000 | {'B-MISC': 34, 'I-MISC': 1, 'B-ORG': 67, 'I-ORG': 8, 'O': 9, 'B-PER': 13, 'I-PER': 2, 'I-LOC': 1}
+
+TEST : O : test_f1: 0.9935 test_rec: 0.9928 test_pre: 0.9941 test_acc: 0.0000 | {'B-MISC': 60, 'I-MISC': 81, 'B-ORG': 32, 'B-LOC': 15, 'B-PER': 24, 'I-ORG': 48, 'I-LOC': 10, 'I-PER': 5}
+
+TEST : I-LOC : test_f1: 0.7955 test_rec: 0.8327 test_pre: 0.7616 test_acc: 0.0000 | {'I-MISC': 5, 'I-ORG': 22, 'O': 6, 'B-LOC': 4, 'I-PER': 6}
+
+TEST : B-MISC : test_f1: 0.8064 test_rec: 0.8305 test_pre: 0.7836 test_acc: 0.0000 | {'B-ORG': 35, 'O': 35, 'B-LOC': 14, 'B-PER': 20, 'I-MISC': 12, 'I-ORG': 3}
+
+TEST : I-MISC : test_f1: 0.6273 test_rec: 0.7130 test_pre: 0.5600 test_acc: 0.0000 | {'O': 25, 'B-MISC': 7, 'B-PER': 2, 'I-ORG': 18, 'I-PER': 4, 'I-LOC': 6}
+
+TEST : B-ORG : test_f1: 0.8582 test_rec: 0.8308 test_pre: 0.8875 test_acc: 0.0000 | {'B-MISC': 54, 'B-LOC': 92, 'O': 80, 'I-ORG': 19, 'B-PER': 33, 'I-MISC': 3}
+
+TEST : I-ORG : test_f1: 0.8285 test_rec: 0.8156 test_pre: 0.8418 test_acc: 0.0000 | {'I-MISC': 19, 'I-LOC': 50, 'B-ORG': 16, 'I-PER': 15, 'O': 43, 'B-LOC': 7, 'B-PER': 3, 'B-MISC': 1}
+
+(loss: 0.5581, epoch: 12, dev F1 = 0.9128, dev acc = 0.9814, F1 on test = 0.8813, acc on test= 0.9747), saving...
+epoch: 12	 in 30 take: 619.3359298706055 s
+ - Tot it 755 (epoch 13): 0it [00:00, ?it/s] - Tot it 755 (epoch 13): 70it [00:02, 34.55it/s] - Tot it 755 (epoch 13): 140it [00:04, 34.61it/s] - Tot it 755 (epoch 13): 202it [00:06, 33.33it/s] - Tot it 755 (epoch 13): 259it [00:08, 31.64it/s] - Tot it 755 (epoch 13): 307it [00:10, 28.81it/s] - Tot it 755 (epoch 13): 355it [00:12, 27.12it/s] - Tot it 755 (epoch 13): 403it [00:14, 25.98it/s] - Tot it 755 (epoch 13): 452it [00:16, 25.35it/s] - Tot it 755 (epoch 13): 500it [00:18, 24.85it/s] - Tot it 755 (epoch 13): 548it [00:21, 20.11it/s] - Tot it 755 (epoch 13): 590it [00:24, 17.68it/s] - Tot it 755 (epoch 13): 628it [00:27, 16.11it/s] - Tot it 755 (epoch 13): 663it [00:31, 12.36it/s] - Tot it 755 (epoch 13): 692it [00:35, 10.62it/s] - Tot it 755 (epoch 13): 717it [00:38,  9.82it/s] - Tot it 755 (epoch 13): 740it [00:41,  9.17it/s]                                                  DEV : total : dev_f1: 0.9115 dev_rec: 0.9116 dev_pre: 0.9113 dev_acc: 0.9814 | 
+
+DEV : B-LOC : dev_f1: 0.9475 dev_rec: 0.9385 dev_pre: 0.9567 dev_acc: 0.0000 | {'B-PER': 15, 'B-ORG': 58, 'O': 7, 'B-MISC': 24, 'I-PER': 1, 'I-ORG': 6, 'I-LOC': 2}
+
+DEV : O : dev_f1: 0.9958 dev_rec: 0.9967 dev_pre: 0.9949 dev_acc: 0.0000 | {'I-PER': 5, 'B-MISC': 29, 'B-ORG': 27, 'I-ORG': 26, 'I-MISC': 39, 'B-LOC': 6, 'B-PER': 10, 'I-LOC': 1}
+
+DEV : B-MISC : dev_f1: 0.8710 dev_rec: 0.8644 dev_pre: 0.8778 dev_acc: 0.0000 | {'O': 40, 'B-LOC': 9, 'B-PER': 20, 'B-ORG': 43, 'I-MISC': 9, 'I-ORG': 3, 'I-LOC': 1}
+
+DEV : I-LOC : dev_f1: 0.8195 dev_rec: 0.7510 dev_pre: 0.9019 dev_acc: 0.0000 | {'O': 9, 'I-ORG': 29, 'B-LOC': 7, 'I-MISC': 15, 'B-MISC': 1, 'I-PER': 3}
+
+DEV : B-ORG : dev_f1: 0.8849 dev_rec: 0.8829 dev_pre: 0.8869 dev_acc: 0.0000 | {'O': 32, 'I-ORG': 21, 'B-LOC': 23, 'B-MISC': 34, 'B-PER': 44, 'I-MISC': 2, 'I-PER': 1}
+
+DEV : I-ORG : dev_f1: 0.8107 dev_rec: 0.7870 dev_pre: 0.8359 dev_acc: 0.0000 | {'O': 59, 'B-LOC': 8, 'B-ORG': 14, 'B-MISC': 1, 'I-MISC': 31, 'I-PER': 31, 'I-LOC': 14, 'B-PER': 2}
+
+DEV : I-MISC : dev_f1: 0.7074 dev_rec: 0.7023 dev_pre: 0.7126 dev_acc: 0.0000 | {'O': 43, 'I-ORG': 25, 'B-MISC': 17, 'B-LOC': 7, 'I-PER': 6, 'I-LOC': 2, 'B-PER': 3}
+
+DEV : B-PER : dev_f1: 0.9575 dev_rec: 0.9723 dev_pre: 0.9431 dev_acc: 0.0000 | {'B-ORG': 7, 'B-LOC': 18, 'O': 16, 'B-MISC': 5, 'I-PER': 4, 'I-ORG': 1}
+
+DEV : I-PER : dev_f1: 0.9661 dev_rec: 0.9709 dev_pre: 0.9614 dev_acc: 0.0000 | {'I-ORG': 5, 'B-PER': 14, 'O': 14, 'B-ORG': 2, 'I-MISC': 2, 'I-LOC': 1}
+
+(loss: 0.5381, epoch: 13, dev F1 = 0.9115, dev acc = 0.9814)
+epoch: 13	 in 30 take: 664.3252947330475 s
+ - Tot it 755 (epoch 14): 0it [00:00, ?it/s] - Tot it 755 (epoch 14): 70it [00:02, 34.86it/s] - Tot it 755 (epoch 14): 140it [00:04, 34.87it/s] - Tot it 755 (epoch 14): 210it [00:06, 34.87it/s] - Tot it 755 (epoch 14): 266it [00:08, 32.35it/s] - Tot it 755 (epoch 14): 315it [00:10, 29.29it/s] - Tot it 755 (epoch 14): 364it [00:12, 27.26it/s] - Tot it 755 (epoch 14): 413it [00:14, 26.17it/s] - Tot it 755 (epoch 14): 461it [00:16, 25.33it/s] - Tot it 755 (epoch 14): 509it [00:18, 23.90it/s] - Tot it 755 (epoch 14): 556it [00:21, 19.61it/s] - Tot it 755 (epoch 14): 597it [00:24, 17.37it/s] - Tot it 755 (epoch 14): 634it [00:27, 15.38it/s] - Tot it 755 (epoch 14): 667it [00:31, 12.23it/s] - Tot it 755 (epoch 14): 696it [00:35, 10.60it/s] - Tot it 755 (epoch 14): 721it [00:38,  9.70it/s] - Tot it 755 (epoch 14): 743it [00:41,  9.10it/s]                                                  DEV : total : dev_f1: 0.9145 dev_rec: 0.9145 dev_pre: 0.9145 dev_acc: 0.9821 | 
+
+DEV : B-LOC : dev_f1: 0.9502 dev_rec: 0.9445 dev_pre: 0.9559 dev_acc: 0.0000 | {'B-ORG': 57, 'O': 7, 'B-PER': 11, 'I-PER': 1, 'B-MISC': 19, 'I-ORG': 5, 'I-LOC': 2}
+
+DEV : O : dev_f1: 0.9957 dev_rec: 0.9967 dev_pre: 0.9948 dev_acc: 0.0000 | {'I-PER': 6, 'B-MISC': 27, 'B-ORG': 28, 'I-LOC': 2, 'I-MISC': 29, 'B-LOC': 6, 'I-ORG': 31, 'B-PER': 12}
+
+DEV : B-MISC : dev_f1: 0.8690 dev_rec: 0.8492 dev_pre: 0.8898 dev_acc: 0.0000 | {'O': 47, 'B-LOC': 13, 'B-ORG': 50, 'B-PER': 16, 'I-MISC': 9, 'I-ORG': 3, 'I-LOC': 1}
+
+DEV : I-LOC : dev_f1: 0.8093 dev_rec: 0.7432 dev_pre: 0.8884 dev_acc: 0.0000 | {'O': 9, 'I-ORG': 36, 'B-LOC': 7, 'I-PER': 4, 'B-MISC': 2, 'I-MISC': 8}
+
+DEV : B-ORG : dev_f1: 0.8903 dev_rec: 0.8956 dev_pre: 0.8850 dev_acc: 0.0000 | {'O': 32, 'B-PER': 40, 'B-LOC': 23, 'I-ORG': 22, 'B-MISC': 21, 'I-MISC': 1, 'I-PER': 1}
+
+DEV : I-ORG : dev_f1: 0.8257 dev_rec: 0.8229 dev_pre: 0.8284 dev_acc: 0.0000 | {'O': 51, 'B-LOC': 8, 'I-LOC': 17, 'B-ORG': 11, 'B-MISC': 1, 'I-MISC': 21, 'I-PER': 24}
+
+DEV : I-MISC : dev_f1: 0.7209 dev_rec: 0.6792 dev_pre: 0.7680 dev_acc: 0.0000 | {'O': 45, 'I-ORG': 27, 'B-MISC': 22, 'B-LOC': 6, 'B-ORG': 3, 'I-PER': 5, 'I-LOC': 1, 'B-PER': 2}
+
+DEV : B-PER : dev_f1: 0.9611 dev_rec: 0.9734 dev_pre: 0.9492 dev_acc: 0.0000 | {'B-ORG': 6, 'B-LOC': 17, 'O': 16, 'B-MISC': 5, 'I-PER': 3, 'I-MISC': 1, 'I-ORG': 1}
+
+DEV : I-PER : dev_f1: 0.9687 dev_rec: 0.9709 dev_pre: 0.9665 dev_acc: 0.0000 | {'I-ORG': 3, 'B-PER': 15, 'O': 16, 'B-ORG': 1, 'I-MISC': 2, 'I-LOC': 1}
+
+TEST : total : test_f1: 0.8861 test_rec: 0.8881 test_pre: 0.8840 test_acc: 0.9759 | 
+
+TEST : B-PER : test_f1: 0.9450 test_rec: 0.9456 test_pre: 0.9444 test_acc: 0.0000 | {'B-ORG': 35, 'O': 13, 'B-LOC': 20, 'I-PER': 13, 'I-MISC': 1, 'B-MISC': 4, 'I-ORG': 2}
+
+TEST : I-PER : test_f1: 0.9760 test_rec: 0.9870 test_pre: 0.9653 test_acc: 0.0000 | {'O': 4, 'B-PER': 2, 'I-ORG': 8, 'I-MISC': 1}
+
+TEST : B-LOC : test_f1: 0.9207 test_rec: 0.9221 test_pre: 0.9193 test_acc: 0.0000 | {'B-MISC': 29, 'I-MISC': 1, 'B-ORG': 74, 'O': 6, 'I-LOC': 3, 'B-PER': 10, 'I-PER': 2, 'I-ORG': 5}
+
+TEST : O : test_f1: 0.9937 test_rec: 0.9919 test_pre: 0.9956 test_acc: 0.0000 | {'B-MISC': 66, 'I-MISC': 81, 'B-ORG': 46, 'B-LOC': 17, 'I-LOC': 9, 'B-PER': 25, 'I-ORG': 61, 'I-PER': 5}
+
+TEST : I-LOC : test_f1: 0.8374 test_rec: 0.8716 test_pre: 0.8058 test_acc: 0.0000 | {'I-ORG': 25, 'O': 4, 'B-LOC': 2, 'I-PER': 2}
+
+TEST : B-MISC : test_f1: 0.8070 test_rec: 0.8162 test_pre: 0.7981 test_acc: 0.0000 | {'B-ORG': 55, 'B-LOC': 15, 'O': 25, 'B-PER': 20, 'I-MISC': 9, 'I-ORG': 4, 'I-LOC': 1}
+
+TEST : I-MISC : test_f1: 0.6245 test_rec: 0.6852 test_pre: 0.5736 test_acc: 0.0000 | {'I-ORG': 28, 'B-MISC': 7, 'O': 19, 'B-PER': 1, 'I-PER': 5, 'I-LOC': 8}
+
+TEST : B-ORG : test_f1: 0.8656 test_rec: 0.8663 test_pre: 0.8648 test_acc: 0.0000 | {'B-MISC': 38, 'B-LOC': 75, 'O': 60, 'I-ORG': 18, 'B-PER': 29, 'I-MISC': 2}
+
+TEST : I-ORG : test_f1: 0.8373 test_rec: 0.8503 test_pre: 0.8246 test_acc: 0.0000 | {'I-MISC': 15, 'I-LOC': 33, 'B-ORG': 15, 'I-PER': 14, 'O': 38, 'B-LOC': 6, 'B-PER': 3, 'B-MISC': 1}
+
+(loss: 0.4932, epoch: 14, dev F1 = 0.9145, dev acc = 0.9821, F1 on test = 0.8861, acc on test= 0.9759), saving...
+epoch: 14	 in 30 take: 711.9728128910065 s
+ - Tot it 755 (epoch 15): 0it [00:00, ?it/s] - Tot it 755 (epoch 15): 70it [00:02, 34.98it/s] - Tot it 755 (epoch 15): 134it [00:04, 33.93it/s] - Tot it 755 (epoch 15): 200it [00:06, 33.57it/s] - Tot it 755 (epoch 15): 259it [00:08, 32.06it/s] - Tot it 755 (epoch 15): 308it [00:10, 29.20it/s] - Tot it 755 (epoch 15): 356it [00:12, 27.37it/s] - Tot it 755 (epoch 15): 404it [00:14, 26.21it/s] - Tot it 755 (epoch 15): 452it [00:16, 25.50it/s] - Tot it 755 (epoch 15): 500it [00:18, 24.97it/s] - Tot it 755 (epoch 15): 548it [00:21, 20.18it/s] - Tot it 755 (epoch 15): 590it [00:24, 17.72it/s] - Tot it 755 (epoch 15): 628it [00:27, 16.18it/s] - Tot it 755 (epoch 15): 663it [00:31, 12.42it/s] - Tot it 755 (epoch 15): 692it [00:35, 10.67it/s] - Tot it 755 (epoch 15): 718it [00:38,  9.83it/s] - Tot it 755 (epoch 15): 741it [00:41,  9.28it/s]                                                  DEV : total : dev_f1: 0.9153 dev_rec: 0.9135 dev_pre: 0.9170 dev_acc: 0.9821 | 
+
+DEV : B-LOC : dev_f1: 0.9457 dev_rec: 0.9428 dev_pre: 0.9485 dev_acc: 0.0000 | {'B-PER': 11, 'B-ORG': 56, 'O': 7, 'B-MISC': 22, 'I-PER': 1, 'I-ORG': 6, 'I-LOC': 2}
+
+DEV : O : dev_f1: 0.9959 dev_rec: 0.9973 dev_pre: 0.9945 dev_acc: 0.0000 | {'B-ORG': 25, 'B-LOC': 6, 'I-ORG': 27, 'I-MISC': 26, 'B-MISC': 22, 'I-PER': 1, 'B-PER': 7, 'I-LOC': 1}
+
+DEV : B-MISC : dev_f1: 0.8670 dev_rec: 0.8449 dev_pre: 0.8903 dev_acc: 0.0000 | {'O': 53, 'B-LOC': 17, 'B-ORG': 43, 'B-PER': 18, 'I-MISC': 8, 'I-ORG': 3, 'I-LOC': 1}
+
+DEV : I-LOC : dev_f1: 0.8176 dev_rec: 0.7938 dev_pre: 0.8430 dev_acc: 0.0000 | {'O': 9, 'I-ORG': 24, 'B-LOC': 7, 'I-MISC': 10, 'B-MISC': 1, 'I-PER': 2}
+
+DEV : B-ORG : dev_f1: 0.8886 dev_rec: 0.8859 dev_pre: 0.8912 dev_acc: 0.0000 | {'O': 35, 'B-LOC': 35, 'B-PER': 36, 'B-MISC': 26, 'I-ORG': 19, 'I-MISC': 1, 'I-PER': 1}
+
+DEV : I-ORG : dev_f1: 0.8251 dev_rec: 0.7976 dev_pre: 0.8545 dev_acc: 0.0000 | {'O': 50, 'I-LOC': 28, 'B-LOC': 6, 'B-ORG': 10, 'B-MISC': 1, 'I-MISC': 30, 'I-PER': 26, 'B-PER': 1}
+
+DEV : I-MISC : dev_f1: 0.7073 dev_rec: 0.6705 dev_pre: 0.7484 dev_acc: 0.0000 | {'O': 49, 'I-ORG': 20, 'B-MISC': 20, 'B-LOC': 7, 'B-ORG': 4, 'I-LOC': 6, 'I-PER': 6, 'B-PER': 2}
+
+DEV : B-PER : dev_f1: 0.9632 dev_rec: 0.9745 dev_pre: 0.9523 dev_acc: 0.0000 | {'B-ORG': 6, 'B-LOC': 16, 'O': 16, 'B-MISC': 4, 'I-PER': 3, 'I-MISC': 1, 'I-ORG': 1}
+
+DEV : I-PER : dev_f1: 0.9710 dev_rec: 0.9725 dev_pre: 0.9695 dev_acc: 0.0000 | {'I-ORG': 2, 'B-PER': 15, 'O': 16, 'B-ORG': 1, 'I-MISC': 2}
+
+TEST : total : test_f1: 0.8893 test_rec: 0.8893 test_pre: 0.8893 test_acc: 0.9766 | 
+
+TEST : B-PER : test_f1: 0.9428 test_rec: 0.9474 test_pre: 0.9382 test_acc: 0.0000 | {'B-ORG': 26, 'O': 19, 'B-LOC': 21, 'I-PER': 14, 'B-MISC': 3, 'I-ORG': 2}
+
+TEST : I-PER : test_f1: 0.9765 test_rec: 0.9879 test_pre: 0.9653 test_acc: 0.0000 | {'B-PER': 3, 'O': 4, 'I-ORG': 7}
+
+TEST : B-LOC : test_f1: 0.9214 test_rec: 0.9239 test_pre: 0.9189 test_acc: 0.0000 | {'B-MISC': 29, 'I-MISC': 1, 'B-ORG': 71, 'O': 7, 'I-LOC': 2, 'B-PER': 10, 'I-PER': 2, 'I-ORG': 5}
+
+TEST : O : test_f1: 0.9940 test_rec: 0.9931 test_pre: 0.9949 test_acc: 0.0000 | {'B-MISC': 56, 'I-MISC': 61, 'B-ORG': 41, 'B-LOC': 17, 'I-LOC': 13, 'B-PER': 28, 'I-ORG': 42, 'I-PER': 5}
+
+TEST : I-LOC : test_f1: 0.8172 test_rec: 0.8872 test_pre: 0.7575 test_acc: 0.0000 | {'I-ORG': 20, 'O': 4, 'B-LOC': 2, 'I-PER': 2, 'I-MISC': 1}
+
+TEST : B-MISC : test_f1: 0.8162 test_rec: 0.8162 test_pre: 0.8162 test_acc: 0.0000 | {'B-ORG': 50, 'O': 28, 'B-LOC': 13, 'B-PER': 24, 'I-MISC': 10, 'I-ORG': 3, 'I-LOC': 1}
+
+TEST : I-MISC : test_f1: 0.6522 test_rec: 0.6944 test_pre: 0.6148 test_acc: 0.0000 | {'O': 25, 'B-MISC': 6, 'B-PER': 2, 'I-ORG': 20, 'I-PER': 4, 'I-LOC': 8, 'B-LOC': 1}
+
+TEST : B-ORG : test_f1: 0.8693 test_rec: 0.8627 test_pre: 0.8759 test_acc: 0.0000 | {'B-MISC': 35, 'B-LOC': 77, 'O': 65, 'I-ORG': 17, 'B-PER': 31, 'I-MISC': 3}
+
+TEST : I-ORG : test_f1: 0.8402 test_rec: 0.8251 test_pre: 0.8559 test_acc: 0.0000 | {'I-MISC': 18, 'I-LOC': 49, 'B-ORG': 15, 'I-PER': 14, 'O': 42, 'B-PER': 3, 'B-LOC': 5}
+
+(loss: 0.4835, epoch: 15, dev F1 = 0.9153, dev acc = 0.9821, F1 on test = 0.8893, acc on test= 0.9766), saving...
+epoch: 15	 in 30 take: 759.778338432312 s
+ - Tot it 755 (epoch 16): 0it [00:00, ?it/s] - Tot it 755 (epoch 16): 70it [00:02, 34.77it/s] - Tot it 755 (epoch 16): 140it [00:04, 34.67it/s] - Tot it 755 (epoch 16): 201it [00:06, 33.29it/s] - Tot it 755 (epoch 16): 259it [00:08, 31.85it/s] - Tot it 755 (epoch 16): 307it [00:10, 28.91it/s] - Tot it 755 (epoch 16): 355it [00:12, 27.15it/s] - Tot it 755 (epoch 16): 403it [00:14, 25.90it/s] - Tot it 755 (epoch 16): 451it [00:16, 25.29it/s] - Tot it 755 (epoch 16): 499it [00:18, 24.82it/s] - Tot it 755 (epoch 16): 547it [00:21, 20.11it/s] - Tot it 755 (epoch 16): 589it [00:24, 17.75it/s] - Tot it 755 (epoch 16): 627it [00:27, 16.25it/s] - Tot it 755 (epoch 16): 662it [00:31, 12.51it/s] - Tot it 755 (epoch 16): 691it [00:35, 10.82it/s] - Tot it 755 (epoch 16): 717it [00:38,  9.84it/s] - Tot it 755 (epoch 16): 740it [00:41,  9.18it/s]                                                  DEV : total : dev_f1: 0.9163 dev_rec: 0.9153 dev_pre: 0.9172 dev_acc: 0.9824 | 
+
+DEV : B-LOC : dev_f1: 0.9490 dev_rec: 0.9581 dev_pre: 0.9402 dev_acc: 0.0000 | {'B-ORG': 37, 'O': 8, 'B-PER': 10, 'I-PER': 1, 'B-MISC': 15, 'I-ORG': 4, 'I-LOC': 2}
+
+DEV : O : dev_f1: 0.9959 dev_rec: 0.9973 dev_pre: 0.9944 dev_acc: 0.0000 | {'B-MISC': 24, 'B-ORG': 24, 'B-LOC': 6, 'I-ORG': 29, 'I-MISC': 19, 'B-PER': 9, 'I-PER': 2, 'I-LOC': 1}
+
+DEV : B-MISC : dev_f1: 0.8705 dev_rec: 0.8492 dev_pre: 0.8928 dev_acc: 0.0000 | {'O': 51, 'B-LOC': 19, 'B-ORG': 42, 'B-PER': 17, 'I-MISC': 6, 'I-ORG': 3, 'I-LOC': 1}
+
+DEV : I-LOC : dev_f1: 0.8117 dev_rec: 0.8132 dev_pre: 0.8101 dev_acc: 0.0000 | {'O': 11, 'I-ORG': 18, 'B-LOC': 7, 'I-PER': 3, 'B-MISC': 2, 'I-MISC': 7}
+
+DEV : B-ORG : dev_f1: 0.8888 dev_rec: 0.8732 dev_pre: 0.9049 dev_acc: 0.0000 | {'O': 36, 'B-LOC': 48, 'B-MISC': 26, 'B-PER': 38, 'I-ORG': 20, 'I-MISC': 1, 'I-PER': 1}
+
+DEV : I-ORG : dev_f1: 0.8268 dev_rec: 0.7976 dev_pre: 0.8582 dev_acc: 0.0000 | {'O': 53, 'I-LOC': 35, 'B-LOC': 5, 'I-MISC': 26, 'B-ORG': 11, 'B-MISC': 2, 'I-PER': 20}
+
+DEV : I-MISC : dev_f1: 0.7233 dev_rec: 0.6647 dev_pre: 0.7931 dev_acc: 0.0000 | {'O': 48, 'I-ORG': 22, 'B-MISC': 21, 'B-LOC': 7, 'B-ORG': 3, 'I-LOC': 7, 'I-PER': 6, 'B-PER': 2}
+
+DEV : B-PER : dev_f1: 0.9617 dev_rec: 0.9734 dev_pre: 0.9502 dev_acc: 0.0000 | {'B-ORG': 5, 'B-LOC': 20, 'O': 17, 'B-MISC': 4, 'I-PER': 2, 'I-ORG': 1}
+
+DEV : I-PER : dev_f1: 0.9709 dev_rec: 0.9686 dev_pre: 0.9731 dev_acc: 0.0000 | {'I-ORG': 2, 'B-PER': 18, 'O': 16, 'B-ORG': 1, 'I-MISC': 1, 'I-LOC': 3}
+
+TEST : total : test_f1: 0.8844 test_rec: 0.8847 test_pre: 0.8841 test_acc: 0.9756 | 
+
+TEST : B-PER : test_f1: 0.9435 test_rec: 0.9493 test_pre: 0.9377 test_acc: 0.0000 | {'B-ORG': 18, 'O': 19, 'B-LOC': 28, 'B-MISC': 4, 'I-PER': 10, 'I-LOC': 1, 'I-ORG': 2}
+
+TEST : I-PER : test_f1: 0.9773 test_rec: 0.9870 test_pre: 0.9678 test_acc: 0.0000 | {'B-PER': 3, 'O': 2, 'I-ORG': 7, 'I-LOC': 2, 'I-MISC': 1}
+
+TEST : B-LOC : test_f1: 0.9105 test_rec: 0.9329 test_pre: 0.8891 test_acc: 0.0000 | {'B-MISC': 27, 'I-MISC': 1, 'B-ORG': 56, 'O': 8, 'I-LOC': 3, 'B-PER': 11, 'I-PER': 1, 'I-ORG': 5}
+
+TEST : O : test_f1: 0.9940 test_rec: 0.9930 test_pre: 0.9950 test_acc: 0.0000 | {'B-MISC': 54, 'I-MISC': 61, 'B-ORG': 38, 'B-LOC': 22, 'I-LOC': 12, 'B-PER': 25, 'I-ORG': 53, 'I-PER': 5}
+
+TEST : I-LOC : test_f1: 0.7924 test_rec: 0.8911 test_pre: 0.7134 test_acc: 0.0000 | {'I-ORG': 19, 'O': 4, 'B-LOC': 2, 'I-PER': 3}
+
+TEST : B-MISC : test_f1: 0.8159 test_rec: 0.8177 test_pre: 0.8142 test_acc: 0.0000 | {'B-ORG': 46, 'O': 33, 'B-LOC': 17, 'B-PER': 21, 'I-MISC': 6, 'I-ORG': 4, 'I-LOC': 1}
+
+TEST : I-MISC : test_f1: 0.6502 test_rec: 0.6713 test_pre: 0.6304 test_acc: 0.0000 | {'O': 22, 'B-MISC': 8, 'B-PER': 2, 'I-ORG': 23, 'I-PER': 5, 'I-LOC': 11}
+
+TEST : B-ORG : test_f1: 0.8625 test_rec: 0.8362 test_pre: 0.8904 test_acc: 0.0000 | {'B-MISC': 37, 'B-LOC': 118, 'O': 60, 'I-ORG': 18, 'B-PER': 38, 'I-MISC': 1}
+
+TEST : I-ORG : test_f1: 0.8248 test_rec: 0.8120 test_pre: 0.8381 test_acc: 0.0000 | {'I-MISC': 15, 'I-LOC': 62, 'B-ORG': 13, 'I-PER': 14, 'O': 43, 'B-LOC': 7, 'B-PER': 2, 'B-MISC': 1}
+
+(loss: 0.4519, epoch: 16, dev F1 = 0.9163, dev acc = 0.9824, F1 on test = 0.8844, acc on test= 0.9756), saving...
+epoch: 16	 in 30 take: 807.7956788539886 s
+ - Tot it 755 (epoch 17): 0it [00:00, ?it/s] - Tot it 755 (epoch 17): 69it [00:02, 34.22it/s] - Tot it 755 (epoch 17): 137it [00:04, 34.06it/s] - Tot it 755 (epoch 17): 200it [00:06, 33.24it/s] - Tot it 755 (epoch 17): 259it [00:08, 31.94it/s] - Tot it 755 (epoch 17): 307it [00:10, 29.05it/s] - Tot it 755 (epoch 17): 355it [00:12, 27.20it/s] - Tot it 755 (epoch 17): 403it [00:14, 26.05it/s] - Tot it 755 (epoch 17): 451it [00:16, 25.40it/s] - Tot it 755 (epoch 17): 499it [00:18, 24.81it/s] - Tot it 755 (epoch 17): 547it [00:21, 20.07it/s] - Tot it 755 (epoch 17): 589it [00:24, 17.68it/s] - Tot it 755 (epoch 17): 627it [00:27, 16.12it/s] - Tot it 755 (epoch 17): 662it [00:31, 12.37it/s] - Tot it 755 (epoch 17): 691it [00:35, 10.62it/s] - Tot it 755 (epoch 17): 716it [00:38,  9.76it/s] - Tot it 755 (epoch 17): 739it [00:41,  9.24it/s]                                                  DEV : total : dev_f1: 0.9175 dev_rec: 0.9147 dev_pre: 0.9203 dev_acc: 0.9830 | 
+
+DEV : B-LOC : dev_f1: 0.9522 dev_rec: 0.9494 dev_pre: 0.9551 dev_acc: 0.0000 | {'B-ORG': 47, 'O': 10, 'B-PER': 12, 'I-PER': 1, 'B-MISC': 15, 'I-ORG': 6, 'I-LOC': 2}
+
+DEV : O : dev_f1: 0.9960 dev_rec: 0.9974 dev_pre: 0.9946 dev_acc: 0.0000 | {'I-ORG': 37, 'B-PER': 8, 'B-LOC': 5, 'B-ORG': 22, 'I-MISC': 14, 'B-MISC': 21, 'I-PER': 2, 'I-LOC': 1}
+
+DEV : B-MISC : dev_f1: 0.8754 dev_rec: 0.8460 dev_pre: 0.9070 dev_acc: 0.0000 | {'O': 50, 'B-LOC': 17, 'B-ORG': 45, 'B-PER': 20, 'I-MISC': 6, 'I-ORG': 3, 'I-LOC': 1}
+
+DEV : I-LOC : dev_f1: 0.8330 dev_rec: 0.7471 dev_pre: 0.9412 dev_acc: 0.0000 | {'O': 9, 'I-ORG': 37, 'B-LOC': 8, 'I-PER': 2, 'B-MISC': 2, 'I-MISC': 7}
+
+DEV : B-ORG : dev_f1: 0.8895 dev_rec: 0.8792 dev_pre: 0.9000 dev_acc: 0.0000 | {'O': 41, 'B-LOC': 21, 'I-ORG': 26, 'B-PER': 52, 'B-MISC': 20, 'I-MISC': 1, 'I-PER': 1}
+
+DEV : I-ORG : dev_f1: 0.8407 dev_rec: 0.8642 dev_pre: 0.8184 dev_acc: 0.0000 | {'O': 45, 'B-LOC': 7, 'B-ORG': 8, 'B-MISC': 1, 'I-MISC': 15, 'I-PER': 20, 'I-LOC': 5, 'B-PER': 1}
+
+DEV : I-MISC : dev_f1: 0.7387 dev_rec: 0.6618 dev_pre: 0.8358 dev_acc: 0.0000 | {'O': 45, 'I-ORG': 31, 'B-MISC': 18, 'B-LOC': 7, 'B-ORG': 3, 'I-PER': 6, 'B-PER': 4, 'I-LOC': 3}
+
+DEV : B-PER : dev_f1: 0.9584 dev_rec: 0.9761 dev_pre: 0.9414 dev_acc: 0.0000 | {'B-ORG': 5, 'B-LOC': 17, 'O': 17, 'B-MISC': 3, 'I-ORG': 1, 'I-PER': 1}
+
+DEV : I-PER : dev_f1: 0.9732 dev_rec: 0.9717 dev_pre: 0.9747 dev_acc: 0.0000 | {'I-ORG': 3, 'B-PER': 15, 'O': 16, 'B-ORG': 1, 'I-MISC': 2}
+
+TEST : total : test_f1: 0.8870 test_rec: 0.8858 test_pre: 0.8882 test_acc: 0.9764 | 
+
+TEST : B-PER : test_f1: 0.9404 test_rec: 0.9518 test_pre: 0.9293 test_acc: 0.0000 | {'B-ORG': 21, 'O': 20, 'B-LOC': 22, 'B-MISC': 3, 'I-PER': 10, 'I-ORG': 2}
+
+TEST : I-PER : test_f1: 0.9747 test_rec: 0.9836 test_pre: 0.9660 test_acc: 0.0000 | {'O': 5, 'B-PER': 2, 'I-ORG': 11, 'I-MISC': 1}
+
+TEST : B-LOC : test_f1: 0.9199 test_rec: 0.9263 test_pre: 0.9137 test_acc: 0.0000 | {'B-MISC': 27, 'I-MISC': 1, 'B-ORG': 63, 'O': 10, 'I-ORG': 6, 'B-PER': 14, 'I-PER': 1, 'I-LOC': 1}
+
+TEST : O : test_f1: 0.9940 test_rec: 0.9931 test_pre: 0.9949 test_acc: 0.0000 | {'B-MISC': 54, 'I-MISC': 54, 'B-ORG': 37, 'B-LOC': 17, 'I-LOC': 9, 'B-PER': 23, 'I-ORG': 64, 'I-PER': 6}
+
+TEST : I-LOC : test_f1: 0.8333 test_rec: 0.8366 test_pre: 0.8301 test_acc: 0.0000 | {'I-ORG': 27, 'O': 5, 'B-LOC': 4, 'I-PER': 5, 'B-MISC': 1}
+
+TEST : B-MISC : test_f1: 0.8106 test_rec: 0.8077 test_pre: 0.8135 test_acc: 0.0000 | {'B-ORG': 48, 'O': 33, 'B-LOC': 13, 'B-PER': 27, 'I-MISC': 9, 'I-ORG': 4, 'I-LOC': 1}
+
+TEST : I-MISC : test_f1: 0.6606 test_rec: 0.6759 test_pre: 0.6460 test_acc: 0.0000 | {'I-ORG': 29, 'B-MISC': 8, 'O': 20, 'B-PER': 2, 'I-PER': 4, 'I-LOC': 7}
+
+TEST : B-ORG : test_f1: 0.8658 test_rec: 0.8471 test_pre: 0.8855 test_acc: 0.0000 | {'B-MISC': 37, 'B-LOC': 84, 'O': 66, 'I-ORG': 19, 'B-PER': 46, 'I-MISC': 2}
+
+TEST : I-ORG : test_f1: 0.8407 test_rec: 0.8659 test_pre: 0.8169 test_acc: 0.0000 | {'I-MISC': 13, 'I-LOC': 26, 'B-ORG': 13, 'I-PER': 14, 'O': 37, 'B-LOC': 6, 'B-PER': 3}
+
+(loss: 0.4444, epoch: 17, dev F1 = 0.9175, dev acc = 0.9830, F1 on test = 0.8870, acc on test= 0.9764), saving...
+epoch: 17	 in 30 take: 855.752790927887 s
+ - Tot it 755 (epoch 18): 0it [00:00, ?it/s] - Tot it 755 (epoch 18): 71it [00:02, 35.13it/s] - Tot it 755 (epoch 18): 141it [00:04, 35.07it/s] - Tot it 755 (epoch 18): 203it [00:06, 33.69it/s] - Tot it 755 (epoch 18): 261it [00:08, 31.99it/s] - Tot it 755 (epoch 18): 309it [00:10, 29.05it/s] - Tot it 755 (epoch 18): 357it [00:12, 27.25it/s] - Tot it 755 (epoch 18): 406it [00:14, 26.24it/s] - Tot it 755 (epoch 18): 454it [00:16, 25.37it/s] - Tot it 755 (epoch 18): 502it [00:18, 24.71it/s] - Tot it 755 (epoch 18): 550it [00:21, 19.89it/s] - Tot it 755 (epoch 18): 592it [00:24, 17.63it/s] - Tot it 755 (epoch 18): 630it [00:27, 15.91it/s] - Tot it 755 (epoch 18): 664it [00:31, 12.25it/s] - Tot it 755 (epoch 18): 693it [00:35, 10.73it/s] - Tot it 755 (epoch 18): 718it [00:38,  9.74it/s] - Tot it 755 (epoch 18): 741it [00:41,  8.91it/s]                                                  DEV : total : dev_f1: 0.9182 dev_rec: 0.9147 dev_pre: 0.9217 dev_acc: 0.9831 | 
+
+DEV : B-LOC : dev_f1: 0.9515 dev_rec: 0.9407 dev_pre: 0.9627 dev_acc: 0.0000 | {'B-ORG': 60, 'O': 9, 'B-PER': 12, 'I-PER': 1, 'B-MISC': 19, 'I-ORG': 6, 'I-LOC': 2}
+
+DEV : O : dev_f1: 0.9960 dev_rec: 0.9975 dev_pre: 0.9945 dev_acc: 0.0000 | {'B-ORG': 20, 'I-ORG': 26, 'B-LOC': 5, 'B-MISC': 20, 'I-MISC': 22, 'B-PER': 11, 'I-PER': 3, 'I-LOC': 1}
+
+DEV : B-MISC : dev_f1: 0.8718 dev_rec: 0.8482 dev_pre: 0.8968 dev_acc: 0.0000 | {'O': 56, 'B-LOC': 12, 'B-ORG': 45, 'B-PER': 15, 'I-MISC': 8, 'I-ORG': 3, 'I-LOC': 1}
+
+DEV : I-LOC : dev_f1: 0.8355 dev_rec: 0.7510 dev_pre: 0.9415 dev_acc: 0.0000 | {'O': 7, 'I-ORG': 38, 'B-LOC': 6, 'I-PER': 4, 'B-MISC': 2, 'I-MISC': 7}
+
+DEV : B-ORG : dev_f1: 0.8938 dev_rec: 0.8941 dev_pre: 0.8934 dev_acc: 0.0000 | {'O': 41, 'B-LOC': 14, 'I-ORG': 21, 'B-PER': 40, 'I-PER': 2, 'B-MISC': 23, 'I-MISC': 1}
+
+DEV : I-ORG : dev_f1: 0.8447 dev_rec: 0.8509 dev_pre: 0.8386 dev_acc: 0.0000 | {'O': 41, 'B-LOC': 7, 'I-LOC': 7, 'B-ORG': 9, 'B-MISC': 1, 'I-MISC': 19, 'I-PER': 27, 'B-PER': 1}
+
+DEV : I-MISC : dev_f1: 0.7344 dev_rec: 0.6792 dev_pre: 0.7993 dev_acc: 0.0000 | {'O': 46, 'I-ORG': 26, 'B-MISC': 21, 'B-LOC': 6, 'B-ORG': 3, 'I-PER': 6, 'I-LOC': 1, 'B-PER': 2}
+
+DEV : B-PER : dev_f1: 0.9614 dev_rec: 0.9734 dev_pre: 0.9497 dev_acc: 0.0000 | {'B-ORG': 5, 'B-LOC': 17, 'O': 18, 'I-PER': 4, 'B-MISC': 4, 'I-ORG': 1}
+
+DEV : I-PER : dev_f1: 0.9688 dev_rec: 0.9732 dev_pre: 0.9644 dev_acc: 0.0000 | {'I-ORG': 2, 'B-PER': 14, 'O': 16, 'B-ORG': 1, 'I-MISC': 2}
+
+TEST : total : test_f1: 0.8933 test_rec: 0.8918 test_pre: 0.8948 test_acc: 0.9773 | 
+
+TEST : B-PER : test_f1: 0.9467 test_rec: 0.9505 test_pre: 0.9429 test_acc: 0.0000 | {'B-ORG': 24, 'O': 21, 'B-LOC': 19, 'B-MISC': 3, 'I-PER': 11, 'I-ORG': 2}
+
+TEST : I-PER : test_f1: 0.9765 test_rec: 0.9888 test_pre: 0.9646 test_acc: 0.0000 | {'O': 4, 'B-PER': 2, 'I-ORG': 7}
+
+TEST : B-LOC : test_f1: 0.9244 test_rec: 0.9203 test_pre: 0.9286 test_acc: 0.0000 | {'B-MISC': 31, 'I-MISC': 1, 'B-ORG': 69, 'I-ORG': 8, 'O': 8, 'B-PER': 12, 'I-PER': 2, 'I-LOC': 2}
+
+TEST : O : test_f1: 0.9940 test_rec: 0.9930 test_pre: 0.9951 test_acc: 0.0000 | {'B-MISC': 56, 'I-MISC': 71, 'B-ORG': 33, 'B-LOC': 18, 'I-LOC': 9, 'B-PER': 23, 'I-ORG': 54, 'I-PER': 6}
+
+TEST : I-LOC : test_f1: 0.8493 test_rec: 0.8444 test_pre: 0.8543 test_acc: 0.0000 | {'I-ORG': 28, 'O': 4, 'B-LOC': 3, 'I-PER': 4, 'I-MISC': 1}
+
+TEST : B-MISC : test_f1: 0.8125 test_rec: 0.8177 test_pre: 0.8073 test_acc: 0.0000 | {'B-ORG': 52, 'O': 31, 'B-LOC': 11, 'B-PER': 19, 'I-MISC': 11, 'I-ORG': 4}
+
+TEST : I-MISC : test_f1: 0.6438 test_rec: 0.6944 test_pre: 0.6000 test_acc: 0.0000 | {'I-ORG': 29, 'B-MISC': 8, 'O': 19, 'B-PER': 2, 'I-PER': 5, 'I-LOC': 3}
+
+TEST : B-ORG : test_f1: 0.8768 test_rec: 0.8700 test_pre: 0.8838 test_acc: 0.0000 | {'B-PER': 32, 'B-MISC': 38, 'B-LOC': 62, 'O': 63, 'I-ORG': 19, 'I-MISC': 2}
+
+TEST : I-ORG : test_f1: 0.8475 test_rec: 0.8683 test_pre: 0.8276 test_acc: 0.0000 | {'I-MISC': 14, 'I-LOC': 23, 'B-ORG': 12, 'I-PER': 14, 'O': 38, 'B-PER': 3, 'B-MISC': 1, 'B-LOC': 5}
+
+(loss: 0.4229, epoch: 18, dev F1 = 0.9182, dev acc = 0.9831, F1 on test = 0.8933, acc on test= 0.9773), saving...
+epoch: 18	 in 30 take: 903.8750157356262 s
+ - Tot it 755 (epoch 19): 0it [00:00, ?it/s] - Tot it 755 (epoch 19): 71it [00:02, 35.03it/s] - Tot it 755 (epoch 19): 139it [00:04, 34.67it/s] - Tot it 755 (epoch 19): 203it [00:06, 33.77it/s] - Tot it 755 (epoch 19): 261it [00:08, 32.02it/s] - Tot it 755 (epoch 19): 309it [00:10, 29.06it/s] - Tot it 755 (epoch 19): 357it [00:12, 27.26it/s] - Tot it 755 (epoch 19): 405it [00:14, 26.15it/s] - Tot it 755 (epoch 19): 453it [00:16, 25.42it/s] - Tot it 755 (epoch 19): 501it [00:18, 24.72it/s] - Tot it 755 (epoch 19): 549it [00:21, 20.05it/s] - Tot it 755 (epoch 19): 591it [00:24, 17.66it/s] - Tot it 755 (epoch 19): 629it [00:27, 16.01it/s] - Tot it 755 (epoch 19): 664it [00:31, 12.36it/s] - Tot it 755 (epoch 19): 693it [00:35, 10.69it/s] - Tot it 755 (epoch 19): 718it [00:38,  9.82it/s] - Tot it 755 (epoch 19): 741it [00:41,  9.27it/s]                                                  DEV : total : dev_f1: 0.9183 dev_rec: 0.9170 dev_pre: 0.9195 dev_acc: 0.9830 | 
+
+DEV : B-LOC : dev_f1: 0.9513 dev_rec: 0.9456 dev_pre: 0.9570 dev_acc: 0.0000 | {'B-ORG': 55, 'O': 11, 'B-PER': 9, 'I-PER': 1, 'I-ORG': 5, 'B-MISC': 17, 'I-LOC': 2}
+
+DEV : O : dev_f1: 0.9960 dev_rec: 0.9974 dev_pre: 0.9945 dev_acc: 0.0000 | {'B-ORG': 28, 'I-ORG': 30, 'B-LOC': 5, 'B-MISC': 20, 'I-MISC': 15, 'B-PER': 11, 'I-PER': 2, 'I-LOC': 1}
+
+DEV : B-MISC : dev_f1: 0.8737 dev_rec: 0.8482 dev_pre: 0.9009 dev_acc: 0.0000 | {'O': 53, 'B-LOC': 15, 'B-ORG': 45, 'B-PER': 17, 'I-MISC': 6, 'I-ORG': 3, 'I-LOC': 1}
+
+DEV : I-LOC : dev_f1: 0.8378 dev_rec: 0.7938 dev_pre: 0.8870 dev_acc: 0.0000 | {'O': 9, 'I-ORG': 26, 'B-LOC': 7, 'I-PER': 2, 'B-MISC': 2, 'I-MISC': 7}
+
+DEV : B-ORG : dev_f1: 0.8933 dev_rec: 0.8986 dev_pre: 0.8880 dev_acc: 0.0000 | {'O': 30, 'B-LOC': 22, 'B-PER': 39, 'I-ORG': 21, 'I-PER': 2, 'B-MISC': 21, 'I-MISC': 1}
+
+DEV : I-ORG : dev_f1: 0.8318 dev_rec: 0.8162 dev_pre: 0.8479 dev_acc: 0.0000 | {'I-LOC': 18, 'O': 54, 'B-LOC': 5, 'B-ORG': 13, 'B-MISC': 2, 'I-MISC': 22, 'I-PER': 24}
+
+DEV : I-MISC : dev_f1: 0.7413 dev_rec: 0.6792 dev_pre: 0.8160 dev_acc: 0.0000 | {'O': 44, 'I-ORG': 23, 'B-MISC': 20, 'B-LOC': 7, 'B-ORG': 5, 'I-PER': 6, 'I-LOC': 4, 'B-PER': 2}
+
+DEV : B-PER : dev_f1: 0.9619 dev_rec: 0.9734 dev_pre: 0.9507 dev_acc: 0.0000 | {'B-LOC': 17, 'O': 17, 'I-PER': 5, 'B-ORG': 5, 'B-MISC': 4, 'I-ORG': 1}
+
+DEV : I-PER : dev_f1: 0.9706 dev_rec: 0.9732 dev_pre: 0.9680 dev_acc: 0.0000 | {'B-PER': 15, 'O': 16, 'B-ORG': 1, 'I-MISC': 2, 'I-ORG': 1}
+
+TEST : total : test_f1: 0.8901 test_rec: 0.8913 test_pre: 0.8889 test_acc: 0.9767 | 
+
+TEST : B-PER : test_f1: 0.9441 test_rec: 0.9450 test_pre: 0.9432 test_acc: 0.0000 | {'B-ORG': 32, 'O': 18, 'B-LOC': 21, 'I-ORG': 3, 'B-MISC': 3, 'I-PER': 12}
+
+TEST : I-PER : test_f1: 0.9757 test_rec: 0.9879 test_pre: 0.9637 test_acc: 0.0000 | {'B-PER': 3, 'O': 3, 'I-ORG': 8}
+
+TEST : B-LOC : test_f1: 0.9233 test_rec: 0.9239 test_pre: 0.9228 test_acc: 0.0000 | {'B-MISC': 28, 'I-MISC': 1, 'B-ORG': 71, 'O': 6, 'I-ORG': 6, 'B-PER': 11, 'I-PER': 2, 'I-LOC': 2}
+
+TEST : O : test_f1: 0.9940 test_rec: 0.9926 test_pre: 0.9953 test_acc: 0.0000 | {'B-MISC': 58, 'I-MISC': 65, 'B-ORG': 47, 'B-LOC': 17, 'I-LOC': 11, 'B-PER': 24, 'I-ORG': 55, 'I-PER': 6}
+
+TEST : I-LOC : test_f1: 0.8476 test_rec: 0.8872 test_pre: 0.8114 test_acc: 0.0000 | {'I-ORG': 20, 'O': 4, 'B-LOC': 2, 'I-PER': 3}
+
+TEST : B-MISC : test_f1: 0.8097 test_rec: 0.8063 test_pre: 0.8132 test_acc: 0.0000 | {'B-ORG': 54, 'B-LOC': 13, 'O': 33, 'B-PER': 22, 'I-MISC': 10, 'I-ORG': 4}
+
+TEST : I-MISC : test_f1: 0.6494 test_rec: 0.6944 test_pre: 0.6098 test_acc: 0.0000 | {'I-ORG': 27, 'B-MISC': 6, 'O': 19, 'B-LOC': 2, 'B-PER': 2, 'I-PER': 5, 'I-LOC': 5}
+
+TEST : B-ORG : test_f1: 0.8724 test_rec: 0.8766 test_pre: 0.8682 test_acc: 0.0000 | {'B-MISC': 35, 'B-LOC': 68, 'O': 55, 'I-ORG': 17, 'B-PER': 28, 'I-MISC': 2}
+
+TEST : I-ORG : test_f1: 0.8365 test_rec: 0.8395 test_pre: 0.8335 test_acc: 0.0000 | {'I-MISC': 18, 'I-LOC': 35, 'B-ORG': 17, 'I-PER': 15, 'O': 41, 'B-LOC': 6, 'B-PER': 2}
+
+(loss: 0.4301, epoch: 19, dev F1 = 0.9183, dev acc = 0.9830, F1 on test = 0.8901, acc on test= 0.9767), saving...
+epoch: 19	 in 30 take: 951.5977478027344 s
+ - Tot it 755 (epoch 20): 0it [00:00, ?it/s] - Tot it 755 (epoch 20): 70it [00:02, 34.65it/s] - Tot it 755 (epoch 20): 140it [00:04, 34.75it/s] - Tot it 755 (epoch 20): 203it [00:06, 33.62it/s] - Tot it 755 (epoch 20): 261it [00:08, 31.99it/s] - Tot it 755 (epoch 20): 309it [00:10, 28.88it/s] - Tot it 755 (epoch 20): 357it [00:12, 27.11it/s] - Tot it 755 (epoch 20): 406it [00:14, 26.15it/s] - Tot it 755 (epoch 20): 455it [00:16, 25.51it/s] - Tot it 755 (epoch 20): 503it [00:18, 24.70it/s] - Tot it 755 (epoch 20): 551it [00:21, 19.93it/s] - Tot it 755 (epoch 20): 593it [00:24, 17.57it/s] - Tot it 755 (epoch 20): 631it [00:27, 15.78it/s] - Tot it 755 (epoch 20): 665it [00:31, 12.36it/s] - Tot it 755 (epoch 20): 694it [00:35, 10.65it/s] - Tot it 755 (epoch 20): 719it [00:38,  9.69it/s] - Tot it 755 (epoch 20): 742it [00:41,  9.19it/s]                                                  DEV : total : dev_f1: 0.9204 dev_rec: 0.9182 dev_pre: 0.9226 dev_acc: 0.9833 | 
+
+DEV : B-LOC : dev_f1: 0.9542 dev_rec: 0.9467 dev_pre: 0.9618 dev_acc: 0.0000 | {'B-ORG': 56, 'O': 7, 'B-PER': 8, 'I-PER': 1, 'I-ORG': 6, 'B-MISC': 18, 'I-LOC': 2}
+
+DEV : O : dev_f1: 0.9960 dev_rec: 0.9968 dev_pre: 0.9952 dev_acc: 0.0000 | {'B-MISC': 27, 'B-ORG': 22, 'I-ORG': 32, 'I-MISC': 41, 'B-LOC': 5, 'B-PER': 9, 'I-PER': 1, 'I-LOC': 1}
+
+DEV : B-MISC : dev_f1: 0.8670 dev_rec: 0.8416 dev_pre: 0.8940 dev_acc: 0.0000 | {'O': 48, 'B-LOC': 15, 'B-ORG': 50, 'B-PER': 17, 'I-MISC': 12, 'I-ORG': 3, 'I-LOC': 1}
+
+DEV : I-LOC : dev_f1: 0.8541 dev_rec: 0.7860 dev_pre: 0.9352 dev_acc: 0.0000 | {'O': 6, 'I-ORG': 32, 'B-LOC': 5, 'I-PER': 2, 'B-MISC': 2, 'I-MISC': 8}
+
+DEV : B-ORG : dev_f1: 0.8978 dev_rec: 0.9038 dev_pre: 0.8918 dev_acc: 0.0000 | {'O': 33, 'B-LOC': 14, 'B-MISC': 22, 'B-PER': 34, 'I-ORG': 24, 'I-PER': 2}
+
+DEV : I-ORG : dev_f1: 0.8476 dev_rec: 0.8589 dev_pre: 0.8366 dev_acc: 0.0000 | {'O': 38, 'B-LOC': 6, 'I-MISC': 24, 'B-ORG': 9, 'I-PER': 22, 'I-LOC': 7}
+
+DEV : I-MISC : dev_f1: 0.7162 dev_rec: 0.6965 dev_pre: 0.7370 dev_acc: 0.0000 | {'O': 39, 'I-ORG': 26, 'B-MISC': 19, 'B-LOC': 7, 'B-ORG': 4, 'I-PER': 6, 'I-LOC': 3, 'B-PER': 1}
+
+DEV : B-PER : dev_f1: 0.9648 dev_rec: 0.9745 dev_pre: 0.9553 dev_acc: 0.0000 | {'B-ORG': 5, 'B-LOC': 17, 'O': 16, 'B-MISC': 4, 'I-PER': 4, 'I-ORG': 1}
+
+DEV : I-PER : dev_f1: 0.9717 dev_rec: 0.9725 dev_pre: 0.9710 dev_acc: 0.0000 | {'I-ORG': 2, 'B-PER': 15, 'O': 17, 'B-ORG': 1, 'I-MISC': 1}
+
+TEST : total : test_f1: 0.8913 test_rec: 0.8911 test_pre: 0.8914 test_acc: 0.9764 | 
+
+TEST : B-PER : test_f1: 0.9457 test_rec: 0.9487 test_pre: 0.9428 test_acc: 0.0000 | {'B-ORG': 25, 'O': 20, 'B-LOC': 21, 'I-PER': 12, 'I-MISC': 1, 'B-MISC': 2, 'I-ORG': 2}
+
+TEST : I-PER : test_f1: 0.9769 test_rec: 0.9888 test_pre: 0.9654 test_acc: 0.0000 | {'B-PER': 3, 'O': 3, 'I-ORG': 7}
+
+TEST : B-LOC : test_f1: 0.9245 test_rec: 0.9245 test_pre: 0.9245 test_acc: 0.0000 | {'B-MISC': 29, 'I-MISC': 1, 'B-ORG': 68, 'O': 7, 'I-ORG': 6, 'B-PER': 11, 'I-PER': 2, 'I-LOC': 2}
+
+TEST : O : test_f1: 0.9936 test_rec: 0.9920 test_pre: 0.9953 test_acc: 0.0000 | {'B-MISC': 53, 'I-MISC': 83, 'B-ORG': 48, 'I-ORG': 70, 'B-LOC': 17, 'B-PER': 24, 'I-LOC': 8, 'I-PER': 5}
+
+TEST : I-LOC : test_f1: 0.8457 test_rec: 0.8638 test_pre: 0.8284 test_acc: 0.0000 | {'I-ORG': 23, 'O': 5, 'B-LOC': 2, 'I-PER': 4, 'I-MISC': 1}
+
+TEST : B-MISC : test_f1: 0.8143 test_rec: 0.8091 test_pre: 0.8196 test_acc: 0.0000 | {'B-ORG': 53, 'O': 33, 'B-LOC': 12, 'B-PER': 21, 'I-MISC': 11, 'I-ORG': 4}
+
+TEST : I-MISC : test_f1: 0.6255 test_rec: 0.7037 test_pre: 0.5630 test_acc: 0.0000 | {'O': 18, 'B-MISC': 7, 'B-PER': 2, 'I-ORG': 28, 'I-PER': 4, 'I-LOC': 5}
+
+TEST : B-ORG : test_f1: 0.8744 test_rec: 0.8736 test_pre: 0.8752 test_acc: 0.0000 | {'B-MISC': 34, 'B-LOC': 69, 'I-ORG': 22, 'O': 54, 'B-PER': 29, 'I-MISC': 2}
+
+TEST : I-ORG : test_f1: 0.8332 test_rec: 0.8527 test_pre: 0.8146 test_acc: 0.0000 | {'I-MISC': 19, 'I-LOC': 31, 'B-ORG': 13, 'I-PER': 14, 'O': 38, 'B-PER': 3, 'B-LOC': 5}
+
+(loss: 0.3933, epoch: 20, dev F1 = 0.9204, dev acc = 0.9833, F1 on test = 0.8913, acc on test= 0.9764), saving...
+epoch: 20	 in 30 take: 999.4590353965759 s
+ - Tot it 755 (epoch 21): 0it [00:00, ?it/s] - Tot it 755 (epoch 21): 70it [00:02, 34.90it/s] - Tot it 755 (epoch 21): 139it [00:04, 34.75it/s] - Tot it 755 (epoch 21): 202it [00:06, 33.66it/s] - Tot it 755 (epoch 21): 260it [00:08, 32.10it/s] - Tot it 755 (epoch 21): 309it [00:10, 29.28it/s] - Tot it 755 (epoch 21): 358it [00:12, 27.42it/s] - Tot it 755 (epoch 21): 406it [00:14, 26.30it/s] - Tot it 755 (epoch 21): 454it [00:16, 25.24it/s] - Tot it 755 (epoch 21): 502it [00:18, 24.53it/s] - Tot it 755 (epoch 21): 550it [00:21, 19.89it/s] - Tot it 755 (epoch 21): 592it [00:24, 17.60it/s] - Tot it 755 (epoch 21): 630it [00:27, 15.90it/s] - Tot it 755 (epoch 21): 664it [00:31, 12.36it/s] - Tot it 755 (epoch 21): 693it [00:35, 10.66it/s] - Tot it 755 (epoch 21): 718it [00:38,  9.69it/s] - Tot it 755 (epoch 21): 741it [00:41,  9.21it/s]                                                  DEV : total : dev_f1: 0.9208 dev_rec: 0.9197 dev_pre: 0.9219 dev_acc: 0.9834 | 
+
+DEV : B-LOC : dev_f1: 0.9507 dev_rec: 0.9614 dev_pre: 0.9404 dev_acc: 0.0000 | {'O': 9, 'B-ORG': 37, 'B-PER': 8, 'I-PER': 1, 'B-MISC': 10, 'I-ORG': 4, 'I-LOC': 2}
+
+DEV : O : dev_f1: 0.9962 dev_rec: 0.9973 dev_pre: 0.9951 dev_acc: 0.0000 | {'B-MISC': 26, 'B-ORG': 20, 'I-MISC': 24, 'I-ORG': 27, 'B-LOC': 8, 'B-PER': 9, 'I-PER': 1, 'I-LOC': 1}
+
+DEV : B-MISC : dev_f1: 0.8783 dev_rec: 0.8536 dev_pre: 0.9046 dev_acc: 0.0000 | {'O': 44, 'B-LOC': 23, 'B-ORG': 40, 'B-PER': 17, 'I-ORG': 4, 'I-MISC': 6, 'I-LOC': 1}
+
+DEV : I-LOC : dev_f1: 0.8374 dev_rec: 0.8716 dev_pre: 0.8058 dev_acc: 0.0000 | {'O': 7, 'B-LOC': 6, 'B-MISC': 1, 'I-ORG': 17, 'I-PER': 1, 'I-MISC': 1}
+
+DEV : B-ORG : dev_f1: 0.8958 dev_rec: 0.8814 dev_pre: 0.9106 dev_acc: 0.0000 | {'O': 33, 'B-LOC': 42, 'I-ORG': 22, 'B-PER': 39, 'B-MISC': 21, 'I-MISC': 1, 'I-PER': 1}
+
+DEV : I-ORG : dev_f1: 0.8379 dev_rec: 0.8189 dev_pre: 0.8577 dev_acc: 0.0000 | {'I-LOC': 35, 'B-LOC': 5, 'O': 46, 'B-ORG': 9, 'I-PER': 22, 'I-MISC': 18, 'B-MISC': 1}
+
+DEV : I-MISC : dev_f1: 0.7377 dev_rec: 0.6705 dev_pre: 0.8198 dev_acc: 0.0000 | {'O': 44, 'I-ORG': 22, 'B-MISC': 21, 'B-LOC': 7, 'B-ORG': 3, 'I-LOC': 11, 'I-PER': 5, 'B-PER': 1}
+
+DEV : B-PER : dev_f1: 0.9629 dev_rec: 0.9734 dev_pre: 0.9527 dev_acc: 0.0000 | {'B-ORG': 5, 'B-LOC': 21, 'O': 16, 'I-PER': 3, 'B-MISC': 3, 'I-ORG': 1}
+
+DEV : I-PER : dev_f1: 0.9716 dev_rec: 0.9694 dev_pre: 0.9739 dev_acc: 0.0000 | {'I-ORG': 5, 'B-PER': 15, 'O': 13, 'B-ORG': 2, 'I-MISC': 1, 'I-LOC': 4}
+
+TEST : total : test_f1: 0.8867 test_rec: 0.8874 test_pre: 0.8860 test_acc: 0.9763 | 
+
+TEST : B-PER : test_f1: 0.9458 test_rec: 0.9493 test_pre: 0.9423 test_acc: 0.0000 | {'B-ORG': 19, 'O': 17, 'B-LOC': 28, 'I-PER': 10, 'I-MISC': 1, 'B-MISC': 4, 'I-LOC': 1, 'I-ORG': 2}
+
+TEST : I-PER : test_f1: 0.9777 test_rec: 0.9862 test_pre: 0.9694 test_acc: 0.0000 | {'O': 2, 'B-PER': 2, 'I-ORG': 8, 'I-MISC': 1, 'I-LOC': 3}
+
+TEST : B-LOC : test_f1: 0.9118 test_rec: 0.9359 test_pre: 0.8890 test_acc: 0.0000 | {'B-MISC': 24, 'I-MISC': 1, 'B-ORG': 56, 'O': 6, 'I-LOC': 3, 'B-PER': 10, 'I-PER': 2, 'I-ORG': 5}
+
+TEST : O : test_f1: 0.9942 test_rec: 0.9929 test_pre: 0.9954 test_acc: 0.0000 | {'B-MISC': 61, 'I-MISC': 52, 'B-ORG': 41, 'B-LOC': 22, 'I-LOC': 15, 'B-PER': 21, 'I-ORG': 54, 'I-PER': 5}
+
+TEST : I-LOC : test_f1: 0.7959 test_rec: 0.9027 test_pre: 0.7117 test_acc: 0.0000 | {'I-ORG': 17, 'O': 4, 'B-LOC': 2, 'I-PER': 2}
+
+TEST : B-MISC : test_f1: 0.8195 test_rec: 0.8148 test_pre: 0.8242 test_acc: 0.0000 | {'B-ORG': 45, 'O': 31, 'B-LOC': 20, 'B-PER': 21, 'I-MISC': 9, 'I-ORG': 4}
+
+TEST : I-MISC : test_f1: 0.6742 test_rec: 0.6898 test_pre: 0.6593 test_acc: 0.0000 | {'O': 19, 'B-MISC': 6, 'B-LOC': 1, 'B-PER': 2, 'I-ORG': 25, 'I-PER': 3, 'I-LOC': 11}
+
+TEST : B-ORG : test_f1: 0.8676 test_rec: 0.8459 test_pre: 0.8904 test_acc: 0.0000 | {'B-MISC': 27, 'B-LOC': 117, 'O': 57, 'I-ORG': 19, 'B-PER': 35, 'I-MISC': 1}
+
+TEST : I-ORG : test_f1: 0.8311 test_rec: 0.8251 test_pre: 0.8372 test_acc: 0.0000 | {'I-MISC': 12, 'I-LOC': 61, 'B-ORG': 12, 'I-PER': 14, 'O': 39, 'B-PER': 3, 'B-LOC': 5}
+
+(loss: 0.3911, epoch: 21, dev F1 = 0.9208, dev acc = 0.9834, F1 on test = 0.8867, acc on test= 0.9763), saving...
+epoch: 21	 in 30 take: 1047.1839413642883 s
+ - Tot it 755 (epoch 22): 0it [00:00, ?it/s] - Tot it 755 (epoch 22): 71it [00:02, 35.14it/s] - Tot it 755 (epoch 22): 142it [00:04, 35.09it/s] - Tot it 755 (epoch 22): 206it [00:06, 33.99it/s] - Tot it 755 (epoch 22): 262it [00:08, 31.76it/s] - Tot it 755 (epoch 22): 310it [00:10, 28.88it/s] - Tot it 755 (epoch 22): 359it [00:12, 27.30it/s] - Tot it 755 (epoch 22): 408it [00:14, 26.25it/s] - Tot it 755 (epoch 22): 456it [00:16, 25.44it/s] - Tot it 755 (epoch 22): 504it [00:18, 24.40it/s] - Tot it 755 (epoch 22): 551it [00:21, 19.78it/s] - Tot it 755 (epoch 22): 592it [00:24, 17.44it/s] - Tot it 755 (epoch 22): 629it [00:27, 15.90it/s] - Tot it 755 (epoch 22): 663it [00:31, 12.28it/s] - Tot it 755 (epoch 22): 692it [00:35, 10.65it/s] - Tot it 755 (epoch 22): 717it [00:38,  9.72it/s] - Tot it 755 (epoch 22): 740it [00:41,  9.19it/s]                                                  DEV : total : dev_f1: 0.9225 dev_rec: 0.9172 dev_pre: 0.9278 dev_acc: 0.9838 | 
+
+DEV : B-LOC : dev_f1: 0.9522 dev_rec: 0.9434 dev_pre: 0.9612 dev_acc: 0.0000 | {'O': 13, 'B-ORG': 55, 'B-MISC': 20, 'I-PER': 1, 'B-PER': 7, 'I-ORG': 6, 'I-LOC': 2}
+
+DEV : O : dev_f1: 0.9960 dev_rec: 0.9980 dev_pre: 0.9941 dev_acc: 0.0000 | {'B-ORG': 16, 'I-ORG': 25, 'B-LOC': 5, 'I-MISC': 17, 'B-MISC': 17, 'I-PER': 1, 'B-PER': 4, 'I-LOC': 1}
+
+DEV : B-MISC : dev_f1: 0.8772 dev_rec: 0.8601 dev_pre: 0.8950 dev_acc: 0.0000 | {'O': 56, 'B-LOC': 14, 'B-ORG': 36, 'B-PER': 13, 'I-MISC': 6, 'I-ORG': 3, 'I-LOC': 1}
+
+DEV : I-LOC : dev_f1: 0.8362 dev_rec: 0.7549 dev_pre: 0.9372 dev_acc: 0.0000 | {'O': 11, 'I-ORG': 34, 'B-LOC': 7, 'I-MISC': 9, 'B-MISC': 1, 'I-PER': 1}
+
+DEV : B-ORG : dev_f1: 0.9007 dev_rec: 0.8963 dev_pre: 0.9051 dev_acc: 0.0000 | {'O': 49, 'B-LOC': 13, 'B-MISC': 27, 'B-PER': 28, 'I-ORG': 20, 'I-MISC': 1, 'I-PER': 1}
+
+DEV : I-ORG : dev_f1: 0.8528 dev_rec: 0.8562 dev_pre: 0.8494 dev_acc: 0.0000 | {'O': 37, 'B-LOC': 7, 'I-MISC': 32, 'B-ORG': 9, 'B-MISC': 1, 'I-PER': 14, 'B-PER': 1, 'I-LOC': 7}
+
+DEV : I-MISC : dev_f1: 0.7262 dev_rec: 0.6821 dev_pre: 0.7763 dev_acc: 0.0000 | {'O': 50, 'I-ORG': 22, 'B-MISC': 21, 'B-LOC': 7, 'B-ORG': 3, 'I-LOC': 2, 'B-PER': 1, 'I-PER': 4}
+
+DEV : B-PER : dev_f1: 0.9673 dev_rec: 0.9712 dev_pre: 0.9634 dev_acc: 0.0000 | {'O': 22, 'B-ORG': 6, 'B-LOC': 17, 'B-MISC': 6, 'I-ORG': 1, 'I-PER': 1}
+
+DEV : I-PER : dev_f1: 0.9765 dev_rec: 0.9709 dev_pre: 0.9822 dev_acc: 0.0000 | {'I-ORG': 3, 'B-PER': 14, 'O': 17, 'B-ORG': 1, 'I-MISC': 3}
+
+TEST : total : test_f1: 0.8940 test_rec: 0.8890 test_pre: 0.8990 test_acc: 0.9774 | 
+
+TEST : B-PER : test_f1: 0.9492 test_rec: 0.9412 test_pre: 0.9572 test_acc: 0.0000 | {'B-ORG': 35, 'O': 27, 'B-LOC': 19, 'I-PER': 9, 'I-LOC': 1, 'B-MISC': 2, 'I-ORG': 2}
+
+TEST : I-PER : test_f1: 0.9768 test_rec: 0.9818 test_pre: 0.9717 test_acc: 0.0000 | {'I-ORG': 13, 'B-PER': 3, 'O': 4, 'I-LOC': 1}
+
+TEST : B-LOC : test_f1: 0.9279 test_rec: 0.9263 test_pre: 0.9296 test_acc: 0.0000 | {'B-MISC': 31, 'I-MISC': 1, 'B-ORG': 66, 'O': 10, 'I-ORG': 6, 'B-PER': 7, 'I-PER': 1, 'I-LOC': 1}
+
+TEST : O : test_f1: 0.9938 test_rec: 0.9939 test_pre: 0.9936 test_acc: 0.0000 | {'B-MISC': 51, 'I-MISC': 49, 'B-ORG': 35, 'B-LOC': 13, 'I-ORG': 52, 'B-PER': 17, 'I-PER': 6, 'I-LOC': 9}
+
+TEST : I-LOC : test_f1: 0.8473 test_rec: 0.8638 test_pre: 0.8315 test_acc: 0.0000 | {'I-ORG': 24, 'O': 6, 'B-LOC': 3, 'I-PER': 1, 'I-MISC': 1}
+
+TEST : B-MISC : test_f1: 0.8242 test_rec: 0.8248 test_pre: 0.8236 test_acc: 0.0000 | {'B-ORG': 43, 'O': 44, 'B-LOC': 13, 'B-PER': 9, 'I-MISC': 10, 'I-ORG': 4}
+
+TEST : I-MISC : test_f1: 0.6741 test_rec: 0.6991 test_pre: 0.6509 test_acc: 0.0000 | {'O': 27, 'B-MISC': 7, 'B-LOC': 1, 'I-ORG': 21, 'B-PER': 1, 'I-PER': 2, 'I-LOC': 6}
+
+TEST : B-ORG : test_f1: 0.8715 test_rec: 0.8633 test_pre: 0.8798 test_acc: 0.0000 | {'B-PER': 28, 'B-MISC': 32, 'B-LOC': 64, 'O': 85, 'I-ORG': 17, 'I-MISC': 1}
+
+TEST : I-ORG : test_f1: 0.8405 test_rec: 0.8455 test_pre: 0.8355 test_acc: 0.0000 | {'I-MISC': 19, 'I-LOC': 27, 'B-ORG': 17, 'I-PER': 14, 'O': 44, 'B-PER': 3, 'B-MISC': 1, 'B-LOC': 4}
+
+(loss: 0.3943, epoch: 22, dev F1 = 0.9225, dev acc = 0.9838, F1 on test = 0.8940, acc on test= 0.9774), saving...
+epoch: 22	 in 30 take: 1095.0076031684875 s
+ - Tot it 755 (epoch 23): 0it [00:00, ?it/s] - Tot it 755 (epoch 23): 70it [00:02, 34.61it/s] - Tot it 755 (epoch 23): 136it [00:04, 34.01it/s] - Tot it 755 (epoch 23): 202it [00:06, 33.68it/s] - Tot it 755 (epoch 23): 260it [00:08, 32.06it/s] - Tot it 755 (epoch 23): 308it [00:10, 28.97it/s] - Tot it 755 (epoch 23): 356it [00:12, 27.21it/s] - Tot it 755 (epoch 23): 405it [00:14, 26.25it/s] - Tot it 755 (epoch 23): 453it [00:16, 25.49it/s] - Tot it 755 (epoch 23): 501it [00:18, 24.72it/s] - Tot it 755 (epoch 23): 549it [00:21, 19.94it/s] - Tot it 755 (epoch 23): 591it [00:24, 17.53it/s] - Tot it 755 (epoch 23): 629it [00:27, 15.86it/s] - Tot it 755 (epoch 23): 663it [00:31, 12.27it/s] - Tot it 755 (epoch 23): 692it [00:35, 10.81it/s] - Tot it 755 (epoch 23): 718it [00:38,  9.79it/s] - Tot it 755 (epoch 23): 741it [00:41,  9.17it/s]                                                  DEV : total : dev_f1: 0.9236 dev_rec: 0.9217 dev_pre: 0.9255 dev_acc: 0.9845 | 
+
+DEV : B-LOC : dev_f1: 0.9544 dev_rec: 0.9565 dev_pre: 0.9523 dev_acc: 0.0000 | {'B-ORG': 47, 'O': 8, 'B-MISC': 11, 'I-PER': 1, 'B-PER': 6, 'I-ORG': 5, 'I-LOC': 2}
+
+DEV : O : dev_f1: 0.9965 dev_rec: 0.9979 dev_pre: 0.9951 dev_acc: 0.0000 | {'B-ORG': 24, 'I-ORG': 21, 'B-LOC': 7, 'I-MISC': 11, 'B-MISC': 15, 'B-PER': 9, 'I-PER': 2, 'I-LOC': 1}
+
+DEV : B-MISC : dev_f1: 0.8810 dev_rec: 0.8395 dev_pre: 0.9269 dev_acc: 0.0000 | {'O': 50, 'B-LOC': 19, 'B-ORG': 55, 'B-PER': 14, 'I-MISC': 5, 'I-LOC': 2, 'I-ORG': 3}
+
+DEV : I-LOC : dev_f1: 0.8398 dev_rec: 0.8054 dev_pre: 0.8771 dev_acc: 0.0000 | {'O': 9, 'I-ORG': 23, 'B-LOC': 7, 'I-MISC': 9, 'B-MISC': 1, 'I-PER': 1}
+
+DEV : B-ORG : dev_f1: 0.8983 dev_rec: 0.9060 dev_pre: 0.8908 dev_acc: 0.0000 | {'O': 33, 'B-LOC': 23, 'B-PER': 37, 'I-ORG': 21, 'B-MISC': 11, 'I-PER': 1}
+
+DEV : I-ORG : dev_f1: 0.8624 dev_rec: 0.8682 dev_pre: 0.8568 dev_acc: 0.0000 | {'O': 33, 'B-LOC': 4, 'B-ORG': 13, 'I-PER': 24, 'I-LOC': 18, 'I-MISC': 7}
+
+DEV : I-MISC : dev_f1: 0.7430 dev_rec: 0.6474 dev_pre: 0.8716 dev_acc: 0.0000 | {'O': 44, 'I-ORG': 33, 'B-MISC': 20, 'B-LOC': 7, 'B-ORG': 4, 'I-PER': 6, 'I-LOC': 6, 'B-PER': 2}
+
+DEV : B-PER : dev_f1: 0.9645 dev_rec: 0.9729 dev_pre: 0.9562 dev_acc: 0.0000 | {'B-LOC': 21, 'O': 17, 'B-ORG': 5, 'I-PER': 3, 'B-MISC': 3, 'I-ORG': 1}
+
+DEV : I-PER : dev_f1: 0.9733 dev_rec: 0.9755 dev_pre: 0.9711 dev_acc: 0.0000 | {'B-PER': 14, 'O': 14, 'B-ORG': 1, 'I-ORG': 2, 'I-MISC': 1}
+
+TEST : total : test_f1: 0.8935 test_rec: 0.8941 test_pre: 0.8929 test_acc: 0.9776 | 
+
+TEST : B-PER : test_f1: 0.9473 test_rec: 0.9443 test_pre: 0.9502 test_acc: 0.0000 | {'B-ORG': 32, 'O': 18, 'B-LOC': 25, 'I-ORG': 3, 'I-PER': 10, 'I-LOC': 1, 'B-MISC': 1}
+
+TEST : I-PER : test_f1: 0.9768 test_rec: 0.9844 test_pre: 0.9693 test_acc: 0.0000 | {'B-PER': 3, 'O': 4, 'I-ORG': 10, 'I-LOC': 1}
+
+TEST : B-LOC : test_f1: 0.9220 test_rec: 0.9353 test_pre: 0.9091 test_acc: 0.0000 | {'B-MISC': 21, 'I-MISC': 1, 'B-ORG': 61, 'O': 7, 'I-LOC': 3, 'B-PER': 8, 'I-PER': 2, 'I-ORG': 5}
+
+TEST : O : test_f1: 0.9941 test_rec: 0.9930 test_pre: 0.9951 test_acc: 0.0000 | {'B-MISC': 53, 'I-MISC': 53, 'B-ORG': 45, 'B-LOC': 21, 'I-LOC': 11, 'B-PER': 23, 'I-ORG': 56, 'I-PER': 5}
+
+TEST : I-LOC : test_f1: 0.8508 test_rec: 0.8988 test_pre: 0.8077 test_acc: 0.0000 | {'I-ORG': 18, 'O': 4, 'B-LOC': 2, 'I-PER': 2}
+
+TEST : B-MISC : test_f1: 0.8224 test_rec: 0.8048 test_pre: 0.8408 test_acc: 0.0000 | {'B-ORG': 56, 'O': 34, 'B-LOC': 19, 'B-PER': 15, 'I-MISC': 9, 'I-ORG': 4}
+
+TEST : I-MISC : test_f1: 0.6712 test_rec: 0.6806 test_pre: 0.6622 test_acc: 0.0000 | {'O': 21, 'B-MISC': 7, 'B-LOC': 1, 'B-PER': 2, 'I-ORG': 27, 'I-PER': 3, 'I-LOC': 8}
+
+TEST : B-ORG : test_f1: 0.8748 test_rec: 0.8748 test_pre: 0.8748 test_acc: 0.0000 | {'B-PER': 26, 'B-MISC': 24, 'B-LOC': 82, 'O': 59, 'I-ORG': 16, 'I-MISC': 1}
+
+TEST : I-ORG : test_f1: 0.8473 test_rec: 0.8575 test_pre: 0.8374 test_acc: 0.0000 | {'I-MISC': 11, 'I-LOC': 31, 'B-ORG': 14, 'I-PER': 14, 'O': 39, 'B-LOC': 6, 'B-PER': 3, 'B-MISC': 1}
+
+(loss: 0.3696, epoch: 23, dev F1 = 0.9236, dev acc = 0.9845, F1 on test = 0.8935, acc on test= 0.9776), saving...
+epoch: 23	 in 30 take: 1142.9393329620361 s
+ - Tot it 755 (epoch 24): 0it [00:00, ?it/s] - Tot it 755 (epoch 24): 70it [00:02, 34.92it/s] - Tot it 755 (epoch 24): 139it [00:04, 34.70it/s] - Tot it 755 (epoch 24): 202it [00:06, 33.62it/s] - Tot it 755 (epoch 24): 260it [00:08, 31.91it/s] - Tot it 755 (epoch 24): 308it [00:10, 28.80it/s] - Tot it 755 (epoch 24): 356it [00:12, 27.13it/s] - Tot it 755 (epoch 24): 404it [00:14, 26.05it/s] - Tot it 755 (epoch 24): 452it [00:16, 25.36it/s] - Tot it 755 (epoch 24): 500it [00:18, 24.90it/s] - Tot it 755 (epoch 24): 548it [00:21, 20.13it/s] - Tot it 755 (epoch 24): 590it [00:24, 17.69it/s] - Tot it 755 (epoch 24): 628it [00:27, 16.21it/s] - Tot it 755 (epoch 24): 663it [00:31, 12.52it/s] - Tot it 755 (epoch 24): 692it [00:35, 10.72it/s] - Tot it 755 (epoch 24): 718it [00:38,  9.74it/s] - Tot it 755 (epoch 24): 741it [00:41,  9.21it/s]                                                  DEV : total : dev_f1: 0.9230 dev_rec: 0.9214 dev_pre: 0.9247 dev_acc: 0.9839 | 
+
+DEV : B-LOC : dev_f1: 0.9557 dev_rec: 0.9510 dev_pre: 0.9604 dev_acc: 0.0000 | {'B-ORG': 51, 'O': 8, 'B-MISC': 16, 'I-PER': 1, 'B-PER': 7, 'I-ORG': 5, 'I-LOC': 2}
+
+DEV : O : dev_f1: 0.9962 dev_rec: 0.9971 dev_pre: 0.9952 dev_acc: 0.0000 | {'B-ORG': 22, 'I-ORG': 31, 'I-MISC': 31, 'B-MISC': 26, 'B-LOC': 5, 'I-PER': 1, 'B-PER': 5, 'I-LOC': 1}
+
+DEV : B-MISC : dev_f1: 0.8763 dev_rec: 0.8568 dev_pre: 0.8967 dev_acc: 0.0000 | {'O': 44, 'B-LOC': 13, 'B-ORG': 48, 'B-PER': 15, 'I-MISC': 8, 'I-ORG': 3, 'I-LOC': 1}
+
+DEV : I-LOC : dev_f1: 0.8333 dev_rec: 0.7588 dev_pre: 0.9242 dev_acc: 0.0000 | {'O': 8, 'I-ORG': 34, 'B-LOC': 7, 'I-MISC': 10, 'B-MISC': 1, 'I-PER': 2}
+
+DEV : B-ORG : dev_f1: 0.9006 dev_rec: 0.9053 dev_pre: 0.8959 dev_acc: 0.0000 | {'O': 31, 'B-LOC': 19, 'I-ORG': 24, 'B-PER': 28, 'B-MISC': 24, 'I-PER': 1}
+
+DEV : I-ORG : dev_f1: 0.8407 dev_rec: 0.8469 dev_pre: 0.8346 dev_acc: 0.0000 | {'O': 48, 'B-LOC': 4, 'B-ORG': 10, 'B-MISC': 1, 'I-MISC': 25, 'I-PER': 17, 'I-LOC': 10}
+
+DEV : I-MISC : dev_f1: 0.7389 dev_rec: 0.7197 dev_pre: 0.7591 dev_acc: 0.0000 | {'O': 37, 'I-ORG': 25, 'B-MISC': 18, 'B-LOC': 7, 'B-ORG': 3, 'I-LOC': 2, 'B-PER': 1, 'I-PER': 4}
+
+DEV : B-PER : dev_f1: 0.9687 dev_rec: 0.9750 dev_pre: 0.9625 dev_acc: 0.0000 | {'B-ORG': 6, 'B-LOC': 17, 'O': 16, 'B-MISC': 4, 'I-MISC': 1, 'I-ORG': 1, 'I-PER': 1}
+
+DEV : I-PER : dev_f1: 0.9754 dev_rec: 0.9717 dev_pre: 0.9792 dev_acc: 0.0000 | {'I-ORG': 3, 'B-PER': 14, 'O': 14, 'B-MISC': 1, 'I-MISC': 4, 'B-ORG': 1}
+
+(loss: 0.3328, epoch: 24, dev F1 = 0.9230, dev acc = 0.9839)
+epoch: 24	 in 30 take: 1187.7274055480957 s
+ - Tot it 755 (epoch 25): 0it [00:00, ?it/s] - Tot it 755 (epoch 25): 70it [00:02, 34.99it/s] - Tot it 755 (epoch 25): 140it [00:04, 34.89it/s] - Tot it 755 (epoch 25): 210it [00:06, 34.91it/s] - Tot it 755 (epoch 25): 266it [00:08, 32.30it/s] - Tot it 755 (epoch 25): 315it [00:10, 29.25it/s] - Tot it 755 (epoch 25): 364it [00:12, 26.11it/s] - Tot it 755 (epoch 25): 411it [00:14, 25.12it/s] - Tot it 755 (epoch 25): 459it [00:16, 24.75it/s] - Tot it 755 (epoch 25): 506it [00:18, 23.68it/s] - Tot it 755 (epoch 25): 552it [00:22, 19.52it/s] - Tot it 755 (epoch 25): 593it [00:24, 17.41it/s] - Tot it 755 (epoch 25): 630it [00:27, 15.71it/s] - Tot it 755 (epoch 25): 664it [00:32, 12.27it/s] - Tot it 755 (epoch 25): 693it [00:35, 10.72it/s] - Tot it 755 (epoch 25): 718it [00:38,  9.74it/s] - Tot it 755 (epoch 25): 741it [00:41,  9.19it/s]                                                  DEV : total : dev_f1: 0.9235 dev_rec: 0.9229 dev_pre: 0.9242 dev_acc: 0.9843 | 
+
+DEV : B-LOC : dev_f1: 0.9538 dev_rec: 0.9450 dev_pre: 0.9628 dev_acc: 0.0000 | {'B-ORG': 57, 'O': 8, 'B-MISC': 20, 'I-PER': 1, 'B-PER': 7, 'I-ORG': 6, 'I-LOC': 2}
+
+DEV : O : dev_f1: 0.9965 dev_rec: 0.9970 dev_pre: 0.9959 dev_acc: 0.0000 | {'I-PER': 3, 'B-ORG': 26, 'I-ORG': 29, 'B-LOC': 5, 'B-MISC': 28, 'I-MISC': 32, 'B-PER': 4, 'I-LOC': 1}
+
+DEV : B-MISC : dev_f1: 0.8718 dev_rec: 0.8482 dev_pre: 0.8968 dev_acc: 0.0000 | {'O': 40, 'B-LOC': 13, 'B-ORG': 60, 'B-PER': 14, 'I-MISC': 9, 'I-ORG': 3, 'I-LOC': 1}
+
+DEV : I-LOC : dev_f1: 0.8439 dev_rec: 0.7782 dev_pre: 0.9217 dev_acc: 0.0000 | {'O': 6, 'I-ORG': 33, 'B-LOC': 6, 'I-MISC': 10, 'B-MISC': 1, 'I-PER': 1}
+
+DEV : B-ORG : dev_f1: 0.9007 dev_rec: 0.9202 dev_pre: 0.8821 dev_acc: 0.0000 | {'O': 24, 'B-LOC': 17, 'B-MISC': 20, 'B-PER': 24, 'I-ORG': 21, 'I-PER': 1}
+
+DEV : I-ORG : dev_f1: 0.8594 dev_rec: 0.8828 dev_pre: 0.8371 dev_acc: 0.0000 | {'I-LOC': 11, 'B-LOC': 3, 'O': 30, 'B-ORG': 10, 'I-MISC': 21, 'I-PER': 13}
+
+DEV : I-MISC : dev_f1: 0.7330 dev_rec: 0.7023 dev_pre: 0.7666 dev_acc: 0.0000 | {'O': 38, 'I-ORG': 31, 'B-MISC': 16, 'B-LOC': 7, 'B-ORG': 3, 'I-PER': 5, 'I-LOC': 2, 'B-PER': 1}
+
+DEV : B-PER : dev_f1: 0.9703 dev_rec: 0.9750 dev_pre: 0.9656 dev_acc: 0.0000 | {'B-ORG': 7, 'B-LOC': 16, 'O': 15, 'I-MISC': 1, 'B-MISC': 5, 'I-ORG': 1, 'I-PER': 1}
+
+DEV : I-PER : dev_f1: 0.9770 dev_rec: 0.9732 dev_pre: 0.9807 dev_acc: 0.0000 | {'I-ORG': 5, 'B-PER': 14, 'O': 13, 'B-ORG': 2, 'I-MISC': 1}
+
+(loss: 0.3422, epoch: 25, dev F1 = 0.9235, dev acc = 0.9843)
+epoch: 25	 in 30 take: 1232.6853005886078 s
+ - Tot it 755 (epoch 26): 0it [00:00, ?it/s] - Tot it 755 (epoch 26): 70it [00:02, 34.68it/s] - Tot it 755 (epoch 26): 139it [00:04, 34.55it/s] - Tot it 755 (epoch 26): 208it [00:06, 34.52it/s] - Tot it 755 (epoch 26): 264it [00:08, 32.08it/s] - Tot it 755 (epoch 26): 313it [00:10, 29.14it/s] - Tot it 755 (epoch 26): 362it [00:12, 27.25it/s] - Tot it 755 (epoch 26): 410it [00:14, 25.95it/s] - Tot it 755 (epoch 26): 458it [00:16, 25.31it/s] - Tot it 755 (epoch 26): 506it [00:18, 24.18it/s] - Tot it 755 (epoch 26): 553it [00:21, 19.73it/s] - Tot it 755 (epoch 26): 594it [00:24, 17.45it/s] - Tot it 755 (epoch 26): 631it [00:27, 15.63it/s] - Tot it 755 (epoch 26): 665it [00:31, 12.31it/s] - Tot it 755 (epoch 26): 694it [00:35, 10.65it/s] - Tot it 755 (epoch 26): 719it [00:38,  9.74it/s] - Tot it 755 (epoch 26): 742it [00:41,  9.17it/s]                                                  DEV : total : dev_f1: 0.9243 dev_rec: 0.9221 dev_pre: 0.9264 dev_acc: 0.9842 | 
+
+DEV : B-LOC : dev_f1: 0.9552 dev_rec: 0.9575 dev_pre: 0.9529 dev_acc: 0.0000 | {'O': 10, 'B-ORG': 39, 'B-MISC': 15, 'I-PER': 1, 'B-PER': 5, 'I-ORG': 6, 'I-LOC': 2}
+
+DEV : O : dev_f1: 0.9963 dev_rec: 0.9974 dev_pre: 0.9951 dev_acc: 0.0000 | {'B-ORG': 20, 'I-ORG': 33, 'B-LOC': 5, 'B-MISC': 24, 'I-MISC': 22, 'B-PER': 7, 'I-PER': 1, 'I-LOC': 1}
+
+DEV : B-MISC : dev_f1: 0.8785 dev_rec: 0.8590 dev_pre: 0.8990 dev_acc: 0.0000 | {'O': 44, 'B-LOC': 15, 'B-ORG': 48, 'B-PER': 12, 'I-MISC': 7, 'I-ORG': 3, 'I-LOC': 1}
+
+DEV : I-LOC : dev_f1: 0.8543 dev_rec: 0.8327 dev_pre: 0.8770 dev_acc: 0.0000 | {'O': 7, 'B-LOC': 5, 'I-MISC': 9, 'B-MISC': 1, 'I-ORG': 21}
+
+DEV : B-ORG : dev_f1: 0.9022 dev_rec: 0.9008 dev_pre: 0.9035 dev_acc: 0.0000 | {'O': 31, 'B-LOC': 29, 'B-PER': 27, 'I-ORG': 22, 'B-MISC': 23, 'I-PER': 1}
+
+DEV : I-ORG : dev_f1: 0.8461 dev_rec: 0.8455 dev_pre: 0.8467 dev_acc: 0.0000 | {'O': 44, 'I-LOC': 21, 'B-LOC': 3, 'B-ORG': 10, 'B-MISC': 2, 'I-MISC': 21, 'I-PER': 15}
+
+DEV : I-MISC : dev_f1: 0.7388 dev_rec: 0.6908 dev_pre: 0.7940 dev_acc: 0.0000 | {'O': 42, 'I-ORG': 25, 'B-MISC': 18, 'B-LOC': 7, 'B-ORG': 4, 'I-PER': 5, 'I-LOC': 5, 'B-PER': 1}
+
+DEV : B-PER : dev_f1: 0.9670 dev_rec: 0.9691 dev_pre: 0.9649 dev_acc: 0.0000 | {'B-LOC': 23, 'O': 17, 'I-PER': 4, 'B-ORG': 5, 'B-MISC': 6, 'I-MISC': 1, 'I-ORG': 1}
+
+DEV : I-PER : dev_f1: 0.9762 dev_rec: 0.9732 dev_pre: 0.9792 dev_acc: 0.0000 | {'B-PER': 13, 'O': 13, 'B-ORG': 3, 'I-ORG': 4, 'I-MISC': 2}
+
+TEST : total : test_f1: 0.8931 test_rec: 0.8939 test_pre: 0.8922 test_acc: 0.9771 | 
+
+TEST : B-PER : test_f1: 0.9501 test_rec: 0.9369 test_pre: 0.9637 test_acc: 0.0000 | {'B-ORG': 37, 'O': 19, 'B-LOC': 29, 'B-MISC': 5, 'I-PER': 9, 'I-LOC': 1, 'I-ORG': 2}
+
+TEST : I-PER : test_f1: 0.9767 test_rec: 0.9810 test_pre: 0.9726 test_acc: 0.0000 | {'O': 4, 'B-PER': 2, 'I-ORG': 11, 'I-MISC': 1, 'I-LOC': 4}
+
+TEST : B-LOC : test_f1: 0.9217 test_rec: 0.9347 test_pre: 0.9090 test_acc: 0.0000 | {'B-MISC': 27, 'I-MISC': 1, 'B-ORG': 58, 'O': 7, 'I-LOC': 3, 'B-PER': 6, 'I-PER': 1, 'I-ORG': 6}
+
+TEST : O : test_f1: 0.9939 test_rec: 0.9925 test_pre: 0.9954 test_acc: 0.0000 | {'B-MISC': 64, 'I-MISC': 60, 'B-ORG': 47, 'B-LOC': 20, 'I-LOC': 12, 'I-ORG': 64, 'B-PER': 17, 'I-PER': 5}
+
+TEST : I-LOC : test_f1: 0.8381 test_rec: 0.9066 test_pre: 0.7793 test_acc: 0.0000 | {'I-ORG': 18, 'O': 3, 'B-LOC': 1, 'I-PER': 2}
+
+TEST : B-MISC : test_f1: 0.8177 test_rec: 0.8276 test_pre: 0.8081 test_acc: 0.0000 | {'B-ORG': 49, 'O': 30, 'B-LOC': 16, 'B-PER': 12, 'I-MISC': 10, 'I-ORG': 4}
+
+TEST : I-MISC : test_f1: 0.6593 test_rec: 0.6898 test_pre: 0.6314 test_acc: 0.0000 | {'O': 22, 'B-MISC': 7, 'B-LOC': 1, 'B-PER': 2, 'I-ORG': 24, 'I-PER': 3, 'I-LOC': 8}
+
+TEST : B-ORG : test_f1: 0.8745 test_rec: 0.8724 test_pre: 0.8766 test_acc: 0.0000 | {'B-PER': 17, 'B-MISC': 35, 'B-LOC': 84, 'O': 56, 'I-ORG': 18, 'I-MISC': 2}
+
+TEST : I-ORG : test_f1: 0.8440 test_rec: 0.8587 test_pre: 0.8299 test_acc: 0.0000 | {'I-MISC': 13, 'I-LOC': 38, 'B-ORG': 13, 'I-PER': 12, 'O': 36, 'B-LOC': 5, 'B-PER': 1}
+
+(loss: 0.3310, epoch: 26, dev F1 = 0.9243, dev acc = 0.9842, F1 on test = 0.8931, acc on test= 0.9771), saving...
+epoch: 26	 in 30 take: 1280.3852140903473 s
+ - Tot it 755 (epoch 27): 0it [00:00, ?it/s] - Tot it 755 (epoch 27): 70it [00:02, 34.71it/s] - Tot it 755 (epoch 27): 136it [00:04, 34.05it/s] - Tot it 755 (epoch 27): 203it [00:06, 33.78it/s] - Tot it 755 (epoch 27): 262it [00:08, 32.23it/s] - Tot it 755 (epoch 27): 311it [00:10, 29.05it/s] - Tot it 755 (epoch 27): 359it [00:12, 27.29it/s] - Tot it 755 (epoch 27): 408it [00:14, 26.24it/s] - Tot it 755 (epoch 27): 456it [00:16, 25.46it/s] - Tot it 755 (epoch 27): 504it [00:18, 24.49it/s] - Tot it 755 (epoch 27): 551it [00:21, 19.83it/s] - Tot it 755 (epoch 27): 593it [00:24, 17.54it/s] - Tot it 755 (epoch 27): 631it [00:27, 15.68it/s] - Tot it 755 (epoch 27): 665it [00:32, 12.23it/s] - Tot it 755 (epoch 27): 694it [00:35, 10.50it/s] - Tot it 755 (epoch 27): 719it [00:38,  9.57it/s] - Tot it 755 (epoch 27): 741it [00:41,  9.13it/s]                                                  DEV : total : dev_f1: 0.9230 dev_rec: 0.9219 dev_pre: 0.9241 dev_acc: 0.9838 | 
+
+DEV : B-LOC : dev_f1: 0.9529 dev_rec: 0.9581 dev_pre: 0.9478 dev_acc: 0.0000 | {'B-ORG': 37, 'O': 10, 'B-PER': 8, 'I-PER': 1, 'B-MISC': 16, 'I-ORG': 3, 'I-LOC': 2}
+
+DEV : O : dev_f1: 0.9963 dev_rec: 0.9977 dev_pre: 0.9949 dev_acc: 0.0000 | {'B-ORG': 19, 'I-MISC': 25, 'I-ORG': 16, 'B-LOC': 5, 'B-MISC': 26, 'I-PER': 2, 'B-PER': 5, 'I-LOC': 1}
+
+DEV : B-MISC : dev_f1: 0.8747 dev_rec: 0.8633 dev_pre: 0.8864 dev_acc: 0.0000 | {'O': 48, 'B-LOC': 16, 'B-ORG': 37, 'B-PER': 15, 'I-MISC': 7, 'I-ORG': 2, 'I-LOC': 1}
+
+DEV : I-LOC : dev_f1: 0.8266 dev_rec: 0.7977 dev_pre: 0.8577 dev_acc: 0.0000 | {'O': 9, 'I-ORG': 22, 'B-LOC': 9, 'I-PER': 3, 'B-MISC': 2, 'I-MISC': 7}
+
+DEV : B-ORG : dev_f1: 0.9006 dev_rec: 0.8881 dev_pre: 0.9133 dev_acc: 0.0000 | {'O': 34, 'B-LOC': 37, 'B-PER': 31, 'I-ORG': 18, 'B-MISC': 28, 'I-MISC': 1, 'I-PER': 1}
+
+DEV : I-ORG : dev_f1: 0.8443 dev_rec: 0.8123 dev_pre: 0.8790 dev_acc: 0.0000 | {'O': 43, 'I-LOC': 27, 'B-LOC': 6, 'B-ORG': 10, 'B-MISC': 3, 'I-MISC': 32, 'I-PER': 20}
+
+DEV : I-MISC : dev_f1: 0.7357 dev_rec: 0.7081 dev_pre: 0.7656 dev_acc: 0.0000 | {'O': 42, 'I-ORG': 19, 'B-MISC': 21, 'B-LOC': 7, 'B-ORG': 3, 'I-PER': 5, 'I-LOC': 3, 'B-PER': 1}
+
+DEV : B-PER : dev_f1: 0.9669 dev_rec: 0.9739 dev_pre: 0.9599 dev_acc: 0.0000 | {'B-ORG': 6, 'B-LOC': 17, 'B-MISC': 6, 'O': 16, 'I-PER': 2, 'I-ORG': 1}
+
+DEV : I-PER : dev_f1: 0.9724 dev_rec: 0.9709 dev_pre: 0.9739 dev_acc: 0.0000 | {'I-ORG': 3, 'I-MISC': 3, 'B-PER': 15, 'O': 16, 'B-ORG': 1}
+
+(loss: 0.3350, epoch: 27, dev F1 = 0.9230, dev acc = 0.9838)
+epoch: 27	 in 30 take: 1325.271891593933 s
+ - Tot it 755 (epoch 28): 0it [00:00, ?it/s] - Tot it 755 (epoch 28): 70it [00:02, 34.85it/s] - Tot it 755 (epoch 28): 140it [00:04, 34.82it/s] - Tot it 755 (epoch 28): 210it [00:06, 34.86it/s] - Tot it 755 (epoch 28): 265it [00:08, 32.27it/s] - Tot it 755 (epoch 28): 314it [00:10, 29.17it/s] - Tot it 755 (epoch 28): 363it [00:12, 27.48it/s] - Tot it 755 (epoch 28): 412it [00:14, 26.29it/s] - Tot it 755 (epoch 28): 461it [00:16, 25.41it/s] - Tot it 755 (epoch 28): 509it [00:18, 23.89it/s] - Tot it 755 (epoch 28): 556it [00:21, 19.58it/s] - Tot it 755 (epoch 28): 597it [00:24, 17.45it/s] - Tot it 755 (epoch 28): 634it [00:27, 15.32it/s] - Tot it 755 (epoch 28): 667it [00:32, 12.03it/s] - Tot it 755 (epoch 28): 695it [00:35, 10.54it/s] - Tot it 755 (epoch 28): 720it [00:38,  9.65it/s] - Tot it 755 (epoch 28): 742it [00:41,  9.14it/s]                                                  DEV : total : dev_f1: 0.9233 dev_rec: 0.9236 dev_pre: 0.9230 dev_acc: 0.9840 | 
+
+DEV : B-LOC : dev_f1: 0.9546 dev_rec: 0.9510 dev_pre: 0.9583 dev_acc: 0.0000 | {'B-ORG': 53, 'O': 9, 'B-PER': 7, 'I-PER': 1, 'I-ORG': 5, 'B-MISC': 13, 'I-LOC': 2}
+
+DEV : O : dev_f1: 0.9964 dev_rec: 0.9970 dev_pre: 0.9959 dev_acc: 0.0000 | {'B-MISC': 27, 'B-ORG': 27, 'I-ORG': 22, 'I-MISC': 33, 'B-LOC': 7, 'B-PER': 8, 'I-PER': 2, 'I-LOC': 1}
+
+DEV : B-MISC : dev_f1: 0.8716 dev_rec: 0.8427 dev_pre: 0.9024 dev_acc: 0.0000 | {'O': 41, 'B-LOC': 18, 'B-PER': 20, 'B-ORG': 53, 'I-MISC': 8, 'I-ORG': 4, 'I-LOC': 1}
+
+DEV : I-LOC : dev_f1: 0.8458 dev_rec: 0.7899 dev_pre: 0.9103 dev_acc: 0.0000 | {'O': 6, 'I-ORG': 32, 'B-LOC': 5, 'I-PER': 2, 'B-MISC': 2, 'I-MISC': 7}
+
+DEV : B-ORG : dev_f1: 0.9000 dev_rec: 0.9128 dev_pre: 0.8876 dev_acc: 0.0000 | {'O': 26, 'B-LOC': 19, 'B-PER': 33, 'I-ORG': 21, 'I-PER': 2, 'B-MISC': 16}
+
+DEV : I-ORG : dev_f1: 0.8568 dev_rec: 0.8682 dev_pre: 0.8457 dev_acc: 0.0000 | {'I-LOC': 13, 'B-LOC': 3, 'O': 30, 'B-ORG': 11, 'I-PER': 26, 'B-PER': 1, 'I-MISC': 14, 'B-MISC': 1}
+
+DEV : I-MISC : dev_f1: 0.7259 dev_rec: 0.6734 dev_pre: 0.7872 dev_acc: 0.0000 | {'O': 39, 'I-ORG': 30, 'B-MISC': 21, 'B-LOC': 7, 'B-ORG': 4, 'I-PER': 7, 'I-LOC': 3, 'B-PER': 2}
+
+DEV : B-PER : dev_f1: 0.9659 dev_rec: 0.9767 dev_pre: 0.9554 dev_acc: 0.0000 | {'B-LOC': 17, 'O': 13, 'B-ORG': 5, 'B-MISC': 4, 'I-PER': 3, 'I-ORG': 1}
+
+DEV : I-PER : dev_f1: 0.9710 dev_rec: 0.9748 dev_pre: 0.9674 dev_acc: 0.0000 | {'B-PER': 13, 'O': 13, 'B-ORG': 2, 'I-ORG': 4, 'I-MISC': 1}
+
+(loss: 0.3246, epoch: 28, dev F1 = 0.9233, dev acc = 0.9840)
+epoch: 28	 in 30 take: 1369.8948645591736 s
+ - Tot it 755 (epoch 29): 0it [00:00, ?it/s] - Tot it 755 (epoch 29): 69it [00:02, 34.27it/s] - Tot it 755 (epoch 29): 138it [00:04, 34.29it/s] - Tot it 755 (epoch 29): 206it [00:06, 34.18it/s] - Tot it 755 (epoch 29): 262it [00:08, 32.04it/s] - Tot it 755 (epoch 29): 311it [00:10, 28.96it/s] - Tot it 755 (epoch 29): 359it [00:12, 27.12it/s] - Tot it 755 (epoch 29): 407it [00:14, 26.10it/s] - Tot it 755 (epoch 29): 456it [00:16, 25.46it/s] - Tot it 755 (epoch 29): 504it [00:18, 24.46it/s] - Tot it 755 (epoch 29): 551it [00:21, 19.80it/s] - Tot it 755 (epoch 29): 593it [00:24, 17.48it/s] - Tot it 755 (epoch 29): 631it [00:27, 15.62it/s] - Tot it 755 (epoch 29): 665it [00:32, 12.16it/s] - Tot it 755 (epoch 29): 694it [00:35, 10.57it/s] - Tot it 755 (epoch 29): 719it [00:38,  9.70it/s] - Tot it 755 (epoch 29): 742it [00:41,  9.24it/s]                                                  DEV : total : dev_f1: 0.9235 dev_rec: 0.9236 dev_pre: 0.9234 dev_acc: 0.9844 | 
+
+DEV : B-LOC : dev_f1: 0.9544 dev_rec: 0.9624 dev_pre: 0.9465 dev_acc: 0.0000 | {'O': 9, 'B-ORG': 40, 'B-PER': 7, 'I-PER': 1, 'I-ORG': 3, 'B-MISC': 7, 'I-LOC': 2}
+
+DEV : O : dev_f1: 0.9964 dev_rec: 0.9975 dev_pre: 0.9953 dev_acc: 0.0000 | {'B-ORG': 25, 'I-MISC': 26, 'I-ORG': 17, 'B-LOC': 7, 'B-MISC': 23, 'I-PER': 2, 'B-PER': 6, 'I-LOC': 1}
+
+DEV : B-MISC : dev_f1: 0.8787 dev_rec: 0.8449 dev_pre: 0.9154 dev_acc: 0.0000 | {'O': 45, 'B-LOC': 20, 'B-ORG': 49, 'B-PER': 18, 'I-MISC': 8, 'I-ORG': 2, 'I-LOC': 1}
+
+DEV : I-LOC : dev_f1: 0.8566 dev_rec: 0.8482 dev_pre: 0.8651 dev_acc: 0.0000 | {'O': 9, 'B-LOC': 8, 'B-MISC': 1, 'I-ORG': 19, 'I-PER': 1, 'I-MISC': 1}
+
+DEV : B-ORG : dev_f1: 0.9005 dev_rec: 0.9008 dev_pre: 0.9001 dev_acc: 0.0000 | {'O': 30, 'B-LOC': 32, 'B-PER': 35, 'I-ORG': 18, 'B-MISC': 17, 'I-PER': 1}
+
+DEV : I-ORG : dev_f1: 0.8530 dev_rec: 0.8269 dev_pre: 0.8809 dev_acc: 0.0000 | {'I-LOC': 25, 'O': 41, 'B-LOC': 8, 'B-ORG': 10, 'I-PER': 23, 'B-PER': 1, 'I-MISC': 20, 'B-MISC': 2}
+
+DEV : I-MISC : dev_f1: 0.7496 dev_rec: 0.6965 dev_pre: 0.8114 dev_acc: 0.0000 | {'O': 41, 'I-ORG': 22, 'B-MISC': 19, 'B-LOC': 7, 'B-ORG': 4, 'I-PER': 6, 'I-LOC': 5, 'B-PER': 1}
+
+DEV : B-PER : dev_f1: 0.9656 dev_rec: 0.9761 dev_pre: 0.9554 dev_acc: 0.0000 | {'B-LOC': 18, 'O': 15, 'B-ORG': 5, 'I-PER': 2, 'B-MISC': 3, 'I-ORG': 1}
+
+DEV : I-PER : dev_f1: 0.9736 dev_rec: 0.9748 dev_pre: 0.9725 dev_acc: 0.0000 | {'B-PER': 16, 'O': 13, 'B-ORG': 1, 'I-ORG': 2, 'I-MISC': 1}
+
+(loss: 0.3158, epoch: 29, dev F1 = 0.9235, dev acc = 0.9844)
+epoch: 29	 in 30 take: 1414.669159412384 s
+setting:
+Namespace(batch_size=10, caseless=True, char_dim=30, char_hidden=300, char_layers=1, checkpoint='checkpoint/ner_', clip_grad=5.0, co_train=True, dev_file='/kaggle/input/conll003-englishversion/valid.txt', drop_out=0.55, emb_file='/kaggle/input/glove6b100dtxt/glove.6B.100d.txt', epoch=30, eva_matrix='fa', fine_tune=False, gpu=0, high_way=True, highway_layers=1, lambda0=1, least_iters=100, load_check_point='', load_opt=False, lr=0.015, lr_decay=0.05, mini_count=5, momentum=0.9, patience=15, rand_embedding=False, shrink_embedding=False, small_crf=True, start_epoch=29, test_file='/kaggle/input/conll003-englishversion/test.txt', train_file='./inputs/train04.txt', unk='unk', update='sgd', word_dim=100, word_hidden=300, word_layers=1)

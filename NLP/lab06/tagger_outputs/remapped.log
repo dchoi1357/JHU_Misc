@@ -1,0 +1,464 @@
+setting:
+Namespace(batch_size=10, caseless=True, char_dim=30, char_hidden=300, char_layers=1, checkpoint='checkpoint/ner_', clip_grad=5.0, co_train=True, dev_file='./inputs/remapped/valid.txt', drop_out=0.55, emb_file='/kaggle/input/glove6b100dtxt/glove.6B.100d.txt', epoch=30, eva_matrix='fa', fine_tune=False, gpu=0, high_way=True, highway_layers=1, lambda0=1, least_iters=100, load_check_point='', load_opt=False, lr=0.015, lr_decay=0.05, mini_count=5, momentum=0.9, patience=15, rand_embedding=False, shrink_embedding=False, small_crf=True, start_epoch=0, test_file='./inputs/remapped/test.txt', train_file='./inputs/remapped/train.txt', unk='unk', update='sgd', word_dim=100, word_hidden=300, word_layers=1)
+loading corpus
+constructing coding table
+feature size: '4915'
+loading embedding
+embedding size: '400060'
+constructing dataset
+building model
+device: 0
+ - Tot it 1406 (epoch 0): 0it [00:00, ?it/s] - Tot it 1406 (epoch 0): 64it [00:02, 31.58it/s] - Tot it 1406 (epoch 0): 130it [00:04, 31.85it/s] - Tot it 1406 (epoch 0): 195it [00:06, 32.03it/s] - Tot it 1406 (epoch 0): 261it [00:08, 32.26it/s] - Tot it 1406 (epoch 0): 327it [00:10, 32.35it/s] - Tot it 1406 (epoch 0): 393it [00:12, 32.48it/s] - Tot it 1406 (epoch 0): 451it [00:14, 29.19it/s] - Tot it 1406 (epoch 0): 506it [00:17, 26.47it/s] - Tot it 1406 (epoch 0): 558it [00:19, 24.73it/s] - Tot it 1406 (epoch 0): 607it [00:21, 23.73it/s] - Tot it 1406 (epoch 0): 655it [00:23, 23.19it/s] - Tot it 1406 (epoch 0): 702it [00:26, 22.87it/s] - Tot it 1406 (epoch 0): 748it [00:28, 22.59it/s] - Tot it 1406 (epoch 0): 794it [00:30, 22.13it/s] - Tot it 1406 (epoch 0): 839it [00:32, 22.02it/s] - Tot it 1406 (epoch 0): 884it [00:34, 21.48it/s] - Tot it 1406 (epoch 0): 928it [00:38, 17.89it/s] - Tot it 1406 (epoch 0): 966it [00:41, 16.02it/s] - Tot it 1406 (epoch 0): 1001it [00:43, 15.01it/s] - Tot it 1406 (epoch 0): 1033it [00:46, 14.34it/s] - Tot it 1406 (epoch 0): 1064it [00:48, 13.86it/s] - Tot it 1406 (epoch 0): 1093it [00:50, 13.54it/s] - Tot it 1406 (epoch 0): 1121it [00:52, 13.42it/s] - Tot it 1406 (epoch 0): 1149it [00:55, 12.70it/s] - Tot it 1406 (epoch 0): 1175it [00:59, 10.31it/s] - Tot it 1406 (epoch 0): 1198it [01:02,  9.12it/s] - Tot it 1406 (epoch 0): 1219it [01:05,  8.40it/s] - Tot it 1406 (epoch 0): 1238it [01:07,  8.06it/s] - Tot it 1406 (epoch 0): 1256it [01:10,  7.73it/s] - Tot it 1406 (epoch 0): 1273it [01:12,  7.55it/s] - Tot it 1406 (epoch 0): 1289it [01:14,  7.48it/s] - Tot it 1406 (epoch 0): 1305it [01:17,  7.38it/s] - Tot it 1406 (epoch 0): 1321it [01:19,  7.26it/s] - Tot it 1406 (epoch 0): 1336it [01:21,  7.32it/s] - Tot it 1406 (epoch 0): 1351it [01:23,  7.28it/s] - Tot it 1406 (epoch 0): 1366it [01:25,  7.26it/s] - Tot it 1406 (epoch 0): 1381it [01:27,  7.21it/s] - Tot it 1406 (epoch 0): 1396it [01:29,  7.10it/s]                                                   DEV : total : dev_f1: 0.8058 dev_rec: 0.7386 dev_pre: 0.8863 dev_acc: 0.9546 | 
+
+DEV : B-ENT : dev_f1: 0.8678 dev_rec: 0.7955 dev_pre: 0.9546 dev_acc: 0.0000 | {'O': 1142, 'I-ENT': 73}
+
+DEV : O : dev_f1: 0.9755 dev_rec: 0.9937 dev_pre: 0.9580 dev_acc: 0.0000 | {'B-ENT': 101, 'I-ENT': 169}
+
+DEV : I-ENT : dev_f1: 0.7694 dev_rec: 0.6821 dev_pre: 0.8824 dev_acc: 0.0000 | {'O': 722, 'B-ENT': 124}
+
+TEST : total : test_f1: 0.8051 test_rec: 0.7440 test_pre: 0.8772 test_acc: 0.9544 | 
+
+TEST : B-ENT : test_f1: 0.8632 test_rec: 0.7976 test_pre: 0.9405 test_acc: 0.0000 | {'O': 1048, 'I-ENT': 95}
+
+TEST : I-ENT : test_f1: 0.8046 test_rec: 0.7512 test_pre: 0.8662 test_acc: 0.0000 | {'B-ENT': 114, 'O': 499}
+
+TEST : O : test_f1: 0.9755 test_rec: 0.9906 test_pre: 0.9608 test_acc: 0.0000 | {'I-ENT': 191, 'B-ENT': 171}
+
+(loss: 2.8167, epoch: 0, dev F1 = 0.8058, dev acc = 0.9546, F1 on test = 0.8051, acc on test= 0.9544), saving...
+epoch: 0	 in 30 take: 96.12031030654907 s
+ - Tot it 1406 (epoch 1): 0it [00:00, ?it/s] - Tot it 1406 (epoch 1): 67it [00:02, 33.17it/s] - Tot it 1406 (epoch 1): 131it [00:04, 32.52it/s] - Tot it 1406 (epoch 1): 192it [00:06, 31.86it/s] - Tot it 1406 (epoch 1): 259it [00:08, 32.33it/s] - Tot it 1406 (epoch 1): 327it [00:10, 32.68it/s] - Tot it 1406 (epoch 1): 395it [00:12, 32.94it/s] - Tot it 1406 (epoch 1): 454it [00:14, 29.22it/s] - Tot it 1406 (epoch 1): 509it [00:17, 26.54it/s] - Tot it 1406 (epoch 1): 561it [00:19, 25.04it/s] - Tot it 1406 (epoch 1): 611it [00:21, 23.92it/s] - Tot it 1406 (epoch 1): 659it [00:24, 23.30it/s] - Tot it 1406 (epoch 1): 706it [00:26, 22.92it/s] - Tot it 1406 (epoch 1): 752it [00:28, 22.70it/s] - Tot it 1406 (epoch 1): 798it [00:30, 22.29it/s] - Tot it 1406 (epoch 1): 843it [00:32, 22.22it/s] - Tot it 1406 (epoch 1): 888it [00:34, 21.25it/s] - Tot it 1406 (epoch 1): 931it [00:38, 17.87it/s] - Tot it 1406 (epoch 1): 969it [00:41, 16.03it/s] - Tot it 1406 (epoch 1): 1004it [00:43, 14.95it/s] - Tot it 1406 (epoch 1): 1036it [00:46, 14.27it/s] - Tot it 1406 (epoch 1): 1066it [00:48, 13.85it/s] - Tot it 1406 (epoch 1): 1095it [00:50, 13.57it/s] - Tot it 1406 (epoch 1): 1123it [00:52, 13.45it/s] - Tot it 1406 (epoch 1): 1151it [00:55, 12.47it/s] - Tot it 1406 (epoch 1): 1177it [00:59, 10.33it/s] - Tot it 1406 (epoch 1): 1200it [01:02,  9.19it/s] - Tot it 1406 (epoch 1): 1221it [01:05,  8.42it/s] - Tot it 1406 (epoch 1): 1240it [01:07,  8.04it/s] - Tot it 1406 (epoch 1): 1258it [01:10,  7.63it/s] - Tot it 1406 (epoch 1): 1275it [01:12,  7.43it/s] - Tot it 1406 (epoch 1): 1291it [01:15,  7.36it/s] - Tot it 1406 (epoch 1): 1307it [01:17,  7.36it/s] - Tot it 1406 (epoch 1): 1323it [01:19,  7.26it/s] - Tot it 1406 (epoch 1): 1338it [01:21,  7.26it/s] - Tot it 1406 (epoch 1): 1353it [01:23,  7.22it/s] - Tot it 1406 (epoch 1): 1368it [01:25,  7.18it/s] - Tot it 1406 (epoch 1): 1383it [01:27,  7.16it/s] - Tot it 1406 (epoch 1): 1398it [01:30,  7.11it/s]                                                   DEV : total : dev_f1: 0.8773 dev_rec: 0.8613 dev_pre: 0.8938 dev_acc: 0.9712 | 
+
+DEV : B-ENT : dev_f1: 0.9292 dev_rec: 0.9123 dev_pre: 0.9467 dev_acc: 0.0000 | {'O': 455, 'I-ENT': 66}
+
+DEV : O : dev_f1: 0.9850 dev_rec: 0.9907 dev_pre: 0.9793 dev_acc: 0.0000 | {'I-ENT': 213, 'B-ENT': 184}
+
+DEV : I-ENT : dev_f1: 0.8329 dev_rec: 0.7884 dev_pre: 0.8826 dev_acc: 0.0000 | {'O': 442, 'B-ENT': 121}
+
+TEST : total : test_f1: 0.8609 test_rec: 0.8472 test_pre: 0.8751 test_acc: 0.9675 | 
+
+TEST : B-ENT : test_f1: 0.9171 test_rec: 0.9024 test_pre: 0.9322 test_acc: 0.0000 | {'O': 461, 'I-ENT': 90}
+
+TEST : I-ENT : test_f1: 0.8413 test_rec: 0.8348 test_pre: 0.8479 test_acc: 0.0000 | {'B-ENT': 98, 'O': 309}
+
+TEST : O : test_f1: 0.9828 test_rec: 0.9856 test_pre: 0.9800 test_acc: 0.0000 | {'I-ENT': 279, 'B-ENT': 273}
+
+(loss: 1.7900, epoch: 1, dev F1 = 0.8773, dev acc = 0.9712, F1 on test = 0.8609, acc on test= 0.9675), saving...
+epoch: 1	 in 30 take: 192.12731289863586 s
+ - Tot it 1406 (epoch 2): 0it [00:00, ?it/s] - Tot it 1406 (epoch 2): 68it [00:02, 33.66it/s] - Tot it 1406 (epoch 2): 125it [00:04, 31.82it/s] - Tot it 1406 (epoch 2): 192it [00:06, 32.23it/s] - Tot it 1406 (epoch 2): 258it [00:08, 32.39it/s] - Tot it 1406 (epoch 2): 326it [00:10, 32.79it/s] - Tot it 1406 (epoch 2): 394it [00:12, 33.02it/s] - Tot it 1406 (epoch 2): 453it [00:14, 29.55it/s] - Tot it 1406 (epoch 2): 509it [00:17, 26.61it/s] - Tot it 1406 (epoch 2): 561it [00:19, 24.99it/s] - Tot it 1406 (epoch 2): 611it [00:21, 24.00it/s] - Tot it 1406 (epoch 2): 659it [00:24, 23.30it/s] - Tot it 1406 (epoch 2): 706it [00:26, 22.85it/s] - Tot it 1406 (epoch 2): 752it [00:28, 22.52it/s] - Tot it 1406 (epoch 2): 797it [00:30, 22.36it/s] - Tot it 1406 (epoch 2): 842it [00:32, 22.29it/s] - Tot it 1406 (epoch 2): 887it [00:34, 21.49it/s] - Tot it 1406 (epoch 2): 931it [00:38, 17.86it/s] - Tot it 1406 (epoch 2): 969it [00:40, 16.09it/s] - Tot it 1406 (epoch 2): 1004it [00:43, 14.97it/s] - Tot it 1406 (epoch 2): 1036it [00:46, 13.71it/s] - Tot it 1406 (epoch 2): 1066it [00:48, 13.38it/s] - Tot it 1406 (epoch 2): 1094it [00:50, 13.32it/s] - Tot it 1406 (epoch 2): 1122it [00:53, 13.16it/s] - Tot it 1406 (epoch 2): 1149it [00:55, 12.51it/s] - Tot it 1406 (epoch 2): 1175it [00:59, 10.24it/s] - Tot it 1406 (epoch 2): 1198it [01:02,  9.07it/s] - Tot it 1406 (epoch 2): 1218it [01:05,  8.49it/s] - Tot it 1406 (epoch 2): 1237it [01:07,  8.05it/s] - Tot it 1406 (epoch 2): 1255it [01:10,  7.78it/s] - Tot it 1406 (epoch 2): 1272it [01:12,  7.66it/s] - Tot it 1406 (epoch 2): 1288it [01:14,  7.52it/s] - Tot it 1406 (epoch 2): 1304it [01:17,  7.36it/s] - Tot it 1406 (epoch 2): 1320it [01:19,  7.22it/s] - Tot it 1406 (epoch 2): 1335it [01:21,  7.23it/s] - Tot it 1406 (epoch 2): 1350it [01:23,  7.19it/s] - Tot it 1406 (epoch 2): 1365it [01:25,  7.04it/s] - Tot it 1406 (epoch 2): 1380it [01:27,  7.09it/s] - Tot it 1406 (epoch 2): 1395it [01:29,  7.19it/s]                                                   DEV : total : dev_f1: 0.9065 dev_rec: 0.8908 dev_pre: 0.9228 dev_acc: 0.9780 | 
+
+DEV : B-ENT : dev_f1: 0.9462 dev_rec: 0.9298 dev_pre: 0.9632 dev_acc: 0.0000 | {'O': 378, 'I-ENT': 39}
+
+DEV : O : dev_f1: 0.9886 dev_rec: 0.9956 dev_pre: 0.9816 dev_acc: 0.0000 | {'B-ENT': 104, 'I-ENT': 84}
+
+DEV : I-ENT : dev_f1: 0.8681 dev_rec: 0.8023 dev_pre: 0.9455 dev_acc: 0.0000 | {'O': 419, 'B-ENT': 107}
+
+TEST : total : test_f1: 0.8839 test_rec: 0.8711 test_pre: 0.8972 test_acc: 0.9722 | 
+
+TEST : B-ENT : test_f1: 0.9323 test_rec: 0.9187 test_pre: 0.9462 test_acc: 0.0000 | {'I-ENT': 65, 'O': 394}
+
+TEST : I-ENT : test_f1: 0.8550 test_rec: 0.8316 test_pre: 0.8798 test_acc: 0.0000 | {'O': 320, 'B-ENT': 95}
+
+TEST : O : test_f1: 0.9853 test_rec: 0.9892 test_pre: 0.9815 test_acc: 0.0000 | {'B-ENT': 200, 'I-ENT': 215}
+
+(loss: 1.4524, epoch: 2, dev F1 = 0.9065, dev acc = 0.9780, F1 on test = 0.8839, acc on test= 0.9722), saving...
+epoch: 2	 in 30 take: 288.3341841697693 s
+ - Tot it 1406 (epoch 3): 0it [00:00, ?it/s] - Tot it 1406 (epoch 3): 67it [00:02, 33.06it/s] - Tot it 1406 (epoch 3): 125it [00:04, 31.53it/s] - Tot it 1406 (epoch 3): 191it [00:06, 31.88it/s] - Tot it 1406 (epoch 3): 259it [00:08, 32.35it/s] - Tot it 1406 (epoch 3): 326it [00:10, 32.66it/s] - Tot it 1406 (epoch 3): 394it [00:12, 32.93it/s] - Tot it 1406 (epoch 3): 453it [00:14, 29.39it/s] - Tot it 1406 (epoch 3): 508it [00:17, 26.61it/s] - Tot it 1406 (epoch 3): 560it [00:19, 25.03it/s] - Tot it 1406 (epoch 3): 610it [00:21, 24.09it/s] - Tot it 1406 (epoch 3): 658it [00:24, 23.33it/s] - Tot it 1406 (epoch 3): 705it [00:26, 22.90it/s] - Tot it 1406 (epoch 3): 751it [00:28, 22.59it/s] - Tot it 1406 (epoch 3): 797it [00:30, 22.34it/s] - Tot it 1406 (epoch 3): 842it [00:32, 22.21it/s] - Tot it 1406 (epoch 3): 887it [00:34, 21.35it/s] - Tot it 1406 (epoch 3): 930it [00:38, 17.87it/s] - Tot it 1406 (epoch 3): 968it [00:40, 15.97it/s] - Tot it 1406 (epoch 3): 1003it [00:43, 14.94it/s] - Tot it 1406 (epoch 3): 1035it [00:46, 14.33it/s] - Tot it 1406 (epoch 3): 1066it [00:48, 13.88it/s] - Tot it 1406 (epoch 3): 1095it [00:50, 13.60it/s] - Tot it 1406 (epoch 3): 1123it [00:52, 13.42it/s] - Tot it 1406 (epoch 3): 1151it [00:55, 12.55it/s] - Tot it 1406 (epoch 3): 1177it [00:59, 10.23it/s] - Tot it 1406 (epoch 3): 1200it [01:02,  9.06it/s] - Tot it 1406 (epoch 3): 1220it [01:05,  8.39it/s] - Tot it 1406 (epoch 3): 1239it [01:07,  7.95it/s] - Tot it 1406 (epoch 3): 1257it [01:10,  7.76it/s] - Tot it 1406 (epoch 3): 1274it [01:12,  7.58it/s] - Tot it 1406 (epoch 3): 1290it [01:14,  7.51it/s] - Tot it 1406 (epoch 3): 1306it [01:17,  7.44it/s] - Tot it 1406 (epoch 3): 1322it [01:19,  7.33it/s] - Tot it 1406 (epoch 3): 1337it [01:21,  7.21it/s] - Tot it 1406 (epoch 3): 1352it [01:23,  7.14it/s] - Tot it 1406 (epoch 3): 1367it [01:25,  7.19it/s] - Tot it 1406 (epoch 3): 1382it [01:27,  7.27it/s] - Tot it 1406 (epoch 3): 1397it [01:29,  7.14it/s]                                                   DEV : total : dev_f1: 0.9408 dev_rec: 0.9429 dev_pre: 0.9387 dev_acc: 0.9876 | 
+
+DEV : B-ENT : dev_f1: 0.9705 dev_rec: 0.9727 dev_pre: 0.9683 dev_acc: 0.0000 | {'O': 120, 'I-ENT': 42}
+
+DEV : O : dev_f1: 0.9941 dev_rec: 0.9947 dev_pre: 0.9934 dev_acc: 0.0000 | {'I-ENT': 126, 'B-ENT': 101}
+
+DEV : I-ENT : dev_f1: 0.9202 dev_rec: 0.9061 dev_pre: 0.9349 dev_acc: 0.0000 | {'O': 162, 'B-ENT': 88}
+
+TEST : total : test_f1: 0.9235 test_rec: 0.9285 test_pre: 0.9185 test_acc: 0.9825 | 
+
+TEST : B-ENT : test_f1: 0.9576 test_rec: 0.9628 test_pre: 0.9525 test_acc: 0.0000 | {'I-ENT': 76, 'O': 134}
+
+TEST : I-ENT : test_f1: 0.9076 test_rec: 0.9383 test_pre: 0.8788 test_acc: 0.0000 | {'B-ENT': 62, 'O': 90}
+
+TEST : O : test_f1: 0.9912 test_rec: 0.9882 test_pre: 0.9941 test_acc: 0.0000 | {'I-ENT': 243, 'B-ENT': 209}
+
+(loss: 0.8333, epoch: 3, dev F1 = 0.9408, dev acc = 0.9876, F1 on test = 0.9235, acc on test= 0.9825), saving...
+epoch: 3	 in 30 take: 384.18333888053894 s
+ - Tot it 1406 (epoch 4): 0it [00:00, ?it/s] - Tot it 1406 (epoch 4): 67it [00:02, 33.31it/s] - Tot it 1406 (epoch 4): 127it [00:04, 32.05it/s] - Tot it 1406 (epoch 4): 193it [00:06, 32.20it/s] - Tot it 1406 (epoch 4): 261it [00:08, 32.59it/s] - Tot it 1406 (epoch 4): 329it [00:10, 32.96it/s] - Tot it 1406 (epoch 4): 396it [00:12, 33.11it/s] - Tot it 1406 (epoch 4): 455it [00:14, 29.38it/s] - Tot it 1406 (epoch 4): 510it [00:17, 26.64it/s] - Tot it 1406 (epoch 4): 562it [00:19, 25.06it/s] - Tot it 1406 (epoch 4): 612it [00:21, 23.90it/s] - Tot it 1406 (epoch 4): 660it [00:24, 23.30it/s] - Tot it 1406 (epoch 4): 707it [00:26, 22.87it/s] - Tot it 1406 (epoch 4): 753it [00:28, 22.66it/s] - Tot it 1406 (epoch 4): 799it [00:30, 22.31it/s] - Tot it 1406 (epoch 4): 844it [00:32, 22.14it/s] - Tot it 1406 (epoch 4): 889it [00:34, 20.97it/s] - Tot it 1406 (epoch 4): 932it [00:38, 17.66it/s] - Tot it 1406 (epoch 4): 970it [00:41, 16.02it/s] - Tot it 1406 (epoch 4): 1004it [00:43, 14.95it/s] - Tot it 1406 (epoch 4): 1036it [00:46, 14.26it/s] - Tot it 1406 (epoch 4): 1066it [00:48, 13.86it/s] - Tot it 1406 (epoch 4): 1095it [00:50, 13.58it/s] - Tot it 1406 (epoch 4): 1123it [00:52, 13.47it/s] - Tot it 1406 (epoch 4): 1151it [00:55, 12.46it/s] - Tot it 1406 (epoch 4): 1177it [00:58, 10.35it/s] - Tot it 1406 (epoch 4): 1200it [01:02,  9.17it/s] - Tot it 1406 (epoch 4): 1220it [01:04,  8.46it/s] - Tot it 1406 (epoch 4): 1239it [01:07,  7.94it/s] - Tot it 1406 (epoch 4): 1256it [01:09,  7.81it/s] - Tot it 1406 (epoch 4): 1273it [01:12,  7.53it/s] - Tot it 1406 (epoch 4): 1289it [01:14,  7.36it/s] - Tot it 1406 (epoch 4): 1305it [01:16,  7.34it/s] - Tot it 1406 (epoch 4): 1320it [01:18,  7.28it/s] - Tot it 1406 (epoch 4): 1335it [01:21,  7.28it/s] - Tot it 1406 (epoch 4): 1350it [01:23,  7.24it/s] - Tot it 1406 (epoch 4): 1365it [01:25,  7.21it/s] - Tot it 1406 (epoch 4): 1380it [01:27,  7.20it/s] - Tot it 1406 (epoch 4): 1395it [01:29,  7.23it/s]                                                   DEV : total : dev_f1: 0.9494 dev_rec: 0.9514 dev_pre: 0.9474 dev_acc: 0.9899 | 
+
+DEV : B-ENT : dev_f1: 0.9742 dev_rec: 0.9763 dev_pre: 0.9722 dev_acc: 0.0000 | {'O': 93, 'I-ENT': 48}
+
+DEV : O : dev_f1: 0.9954 dev_rec: 0.9961 dev_pre: 0.9946 dev_acc: 0.0000 | {'B-ENT': 91, 'I-ENT': 75}
+
+DEV : I-ENT : dev_f1: 0.9360 dev_rec: 0.9203 dev_pre: 0.9522 dev_acc: 0.0000 | {'O': 137, 'B-ENT': 75}
+
+TEST : total : test_f1: 0.9358 test_rec: 0.9407 test_pre: 0.9310 test_acc: 0.9862 | 
+
+TEST : B-ENT : test_f1: 0.9656 test_rec: 0.9706 test_pre: 0.9606 test_acc: 0.0000 | {'I-ENT': 69, 'O': 97}
+
+TEST : I-ENT : test_f1: 0.9295 test_rec: 0.9550 test_pre: 0.9053 test_acc: 0.0000 | {'B-ENT': 39, 'O': 72}
+
+TEST : O : test_f1: 0.9930 test_rec: 0.9905 test_pre: 0.9956 test_acc: 0.0000 | {'I-ENT': 177, 'B-ENT': 186}
+
+(loss: 0.5292, epoch: 4, dev F1 = 0.9494, dev acc = 0.9899, F1 on test = 0.9358, acc on test= 0.9862), saving...
+epoch: 4	 in 30 take: 479.940256357193 s
+ - Tot it 1406 (epoch 5): 0it [00:00, ?it/s] - Tot it 1406 (epoch 5): 67it [00:02, 33.32it/s] - Tot it 1406 (epoch 5): 124it [00:04, 31.67it/s] - Tot it 1406 (epoch 5): 190it [00:06, 31.92it/s] - Tot it 1406 (epoch 5): 256it [00:08, 32.21it/s] - Tot it 1406 (epoch 5): 322it [00:10, 32.42it/s] - Tot it 1406 (epoch 5): 388it [00:12, 32.54it/s] - Tot it 1406 (epoch 5): 446it [00:14, 29.55it/s] - Tot it 1406 (epoch 5): 501it [00:17, 26.57it/s] - Tot it 1406 (epoch 5): 553it [00:19, 25.23it/s] - Tot it 1406 (epoch 5): 603it [00:21, 24.14it/s] - Tot it 1406 (epoch 5): 651it [00:23, 23.57it/s] - Tot it 1406 (epoch 5): 698it [00:25, 22.94it/s] - Tot it 1406 (epoch 5): 744it [00:28, 22.60it/s] - Tot it 1406 (epoch 5): 790it [00:30, 22.35it/s] - Tot it 1406 (epoch 5): 835it [00:32, 22.28it/s] - Tot it 1406 (epoch 5): 880it [00:34, 22.07it/s] - Tot it 1406 (epoch 5): 925it [00:37, 18.28it/s] - Tot it 1406 (epoch 5): 964it [00:40, 16.28it/s] - Tot it 1406 (epoch 5): 999it [00:43, 15.17it/s] - Tot it 1406 (epoch 5): 1032it [00:45, 14.46it/s] - Tot it 1406 (epoch 5): 1063it [00:48, 14.00it/s] - Tot it 1406 (epoch 5): 1093it [00:50, 13.64it/s] - Tot it 1406 (epoch 5): 1122it [00:52, 13.40it/s] - Tot it 1406 (epoch 5): 1150it [00:55, 12.64it/s] - Tot it 1406 (epoch 5): 1176it [00:59, 10.25it/s] - Tot it 1406 (epoch 5): 1199it [01:02,  8.93it/s] - Tot it 1406 (epoch 5): 1219it [01:05,  8.35it/s] - Tot it 1406 (epoch 5): 1238it [01:07,  7.91it/s] - Tot it 1406 (epoch 5): 1255it [01:10,  7.76it/s] - Tot it 1406 (epoch 5): 1272it [01:12,  7.58it/s] - Tot it 1406 (epoch 5): 1288it [01:14,  7.52it/s] - Tot it 1406 (epoch 5): 1304it [01:16,  7.35it/s] - Tot it 1406 (epoch 5): 1319it [01:19,  7.15it/s] - Tot it 1406 (epoch 5): 1334it [01:21,  7.17it/s] - Tot it 1406 (epoch 5): 1349it [01:23,  7.13it/s] - Tot it 1406 (epoch 5): 1364it [01:25,  7.18it/s] - Tot it 1406 (epoch 5): 1379it [01:27,  7.12it/s] - Tot it 1406 (epoch 5): 1394it [01:29,  7.15it/s]                                                   DEV : total : dev_f1: 0.9490 dev_rec: 0.9549 dev_pre: 0.9432 dev_acc: 0.9897 | 
+
+DEV : B-ENT : dev_f1: 0.9737 dev_rec: 0.9798 dev_pre: 0.9678 dev_acc: 0.0000 | {'O': 81, 'I-ENT': 39}
+
+DEV : O : dev_f1: 0.9953 dev_rec: 0.9956 dev_pre: 0.9950 dev_acc: 0.0000 | {'B-ENT': 109, 'I-ENT': 80}
+
+DEV : I-ENT : dev_f1: 0.9351 dev_rec: 0.9173 dev_pre: 0.9535 dev_acc: 0.0000 | {'O': 135, 'B-ENT': 85}
+
+(loss: 0.4580, epoch: 5, dev F1 = 0.9490, dev acc = 0.9897)
+epoch: 5	 in 30 take: 572.90194439888 s
+ - Tot it 1406 (epoch 6): 0it [00:00, ?it/s] - Tot it 1406 (epoch 6): 67it [00:02, 32.98it/s] - Tot it 1406 (epoch 6): 134it [00:04, 33.12it/s] - Tot it 1406 (epoch 6): 202it [00:06, 33.29it/s] - Tot it 1406 (epoch 6): 269it [00:08, 33.26it/s] - Tot it 1406 (epoch 6): 336it [00:10, 33.25it/s] - Tot it 1406 (epoch 6): 403it [00:12, 33.30it/s] - Tot it 1406 (epoch 6): 462it [00:14, 28.91it/s] - Tot it 1406 (epoch 6): 517it [00:17, 26.31it/s] - Tot it 1406 (epoch 6): 569it [00:19, 24.81it/s] - Tot it 1406 (epoch 6): 618it [00:21, 23.90it/s] - Tot it 1406 (epoch 6): 666it [00:24, 23.31it/s] - Tot it 1406 (epoch 6): 713it [00:26, 22.69it/s] - Tot it 1406 (epoch 6): 759it [00:28, 22.39it/s] - Tot it 1406 (epoch 6): 804it [00:30, 22.18it/s] - Tot it 1406 (epoch 6): 849it [00:32, 22.12it/s] - Tot it 1406 (epoch 6): 894it [00:34, 20.74it/s] - Tot it 1406 (epoch 6): 936it [00:38, 17.51it/s] - Tot it 1406 (epoch 6): 973it [00:41, 15.85it/s] - Tot it 1406 (epoch 6): 1007it [00:43, 14.92it/s] - Tot it 1406 (epoch 6): 1039it [00:46, 14.31it/s] - Tot it 1406 (epoch 6): 1069it [00:48, 13.89it/s] - Tot it 1406 (epoch 6): 1098it [00:50, 13.65it/s] - Tot it 1406 (epoch 6): 1126it [00:52, 13.40it/s] - Tot it 1406 (epoch 6): 1154it [00:55, 12.22it/s] - Tot it 1406 (epoch 6): 1180it [00:59, 10.14it/s] - Tot it 1406 (epoch 6): 1202it [01:02,  9.00it/s] - Tot it 1406 (epoch 6): 1222it [01:05,  8.38it/s] - Tot it 1406 (epoch 6): 1241it [01:07,  8.00it/s] - Tot it 1406 (epoch 6): 1259it [01:10,  7.79it/s] - Tot it 1406 (epoch 6): 1276it [01:12,  7.53it/s] - Tot it 1406 (epoch 6): 1292it [01:14,  7.38it/s] - Tot it 1406 (epoch 6): 1308it [01:17,  7.29it/s] - Tot it 1406 (epoch 6): 1323it [01:19,  7.05it/s] - Tot it 1406 (epoch 6): 1338it [01:21,  7.13it/s] - Tot it 1406 (epoch 6): 1353it [01:23,  7.13it/s] - Tot it 1406 (epoch 6): 1368it [01:25,  7.21it/s] - Tot it 1406 (epoch 6): 1383it [01:27,  7.26it/s] - Tot it 1406 (epoch 6): 1398it [01:29,  7.24it/s]                                                   DEV : total : dev_f1: 0.9545 dev_rec: 0.9519 dev_pre: 0.9572 dev_acc: 0.9908 | 
+
+DEV : B-ENT : dev_f1: 0.9761 dev_rec: 0.9734 dev_pre: 0.9788 dev_acc: 0.0000 | {'O': 108, 'I-ENT': 50}
+
+DEV : O : dev_f1: 0.9958 dev_rec: 0.9970 dev_pre: 0.9947 dev_acc: 0.0000 | {'I-ENT': 67, 'B-ENT': 63}
+
+DEV : I-ENT : dev_f1: 0.9429 dev_rec: 0.9312 dev_pre: 0.9549 dev_acc: 0.0000 | {'O': 121, 'B-ENT': 62}
+
+TEST : total : test_f1: 0.9381 test_rec: 0.9375 test_pre: 0.9387 test_acc: 0.9865 | 
+
+TEST : B-ENT : test_f1: 0.9655 test_rec: 0.9649 test_pre: 0.9661 test_acc: 0.0000 | {'I-ENT': 72, 'O': 126}
+
+TEST : I-ENT : test_f1: 0.9313 test_rec: 0.9602 test_pre: 0.9041 test_acc: 0.0000 | {'B-ENT': 38, 'O': 60}
+
+TEST : O : test_f1: 0.9932 test_rec: 0.9913 test_pre: 0.9951 test_acc: 0.0000 | {'I-ENT': 179, 'B-ENT': 153}
+
+(loss: 0.4346, epoch: 6, dev F1 = 0.9545, dev acc = 0.9908, F1 on test = 0.9381, acc on test= 0.9865), saving...
+epoch: 6	 in 30 take: 668.4413344860077 s
+ - Tot it 1406 (epoch 7): 0it [00:00, ?it/s] - Tot it 1406 (epoch 7): 67it [00:02, 33.34it/s] - Tot it 1406 (epoch 7): 134it [00:04, 33.38it/s] - Tot it 1406 (epoch 7): 191it [00:06, 31.68it/s] - Tot it 1406 (epoch 7): 258it [00:08, 32.14it/s] - Tot it 1406 (epoch 7): 325it [00:10, 32.53it/s] - Tot it 1406 (epoch 7): 391it [00:12, 32.61it/s] - Tot it 1406 (epoch 7): 449it [00:14, 29.43it/s] - Tot it 1406 (epoch 7): 504it [00:16, 26.90it/s] - Tot it 1406 (epoch 7): 556it [00:19, 25.11it/s] - Tot it 1406 (epoch 7): 606it [00:21, 24.01it/s] - Tot it 1406 (epoch 7): 654it [00:23, 23.38it/s] - Tot it 1406 (epoch 7): 701it [00:25, 22.87it/s] - Tot it 1406 (epoch 7): 747it [00:28, 22.63it/s] - Tot it 1406 (epoch 7): 793it [00:30, 22.50it/s] - Tot it 1406 (epoch 7): 838it [00:32, 22.35it/s] - Tot it 1406 (epoch 7): 883it [00:34, 21.82it/s] - Tot it 1406 (epoch 7): 927it [00:37, 18.23it/s] - Tot it 1406 (epoch 7): 966it [00:40, 16.27it/s] - Tot it 1406 (epoch 7): 1001it [00:43, 15.12it/s] - Tot it 1406 (epoch 7): 1034it [00:45, 14.42it/s] - Tot it 1406 (epoch 7): 1065it [00:48, 13.96it/s] - Tot it 1406 (epoch 7): 1094it [00:50, 13.64it/s] - Tot it 1406 (epoch 7): 1123it [00:52, 13.41it/s] - Tot it 1406 (epoch 7): 1151it [00:55, 12.48it/s] - Tot it 1406 (epoch 7): 1177it [00:59, 10.22it/s] - Tot it 1406 (epoch 7): 1200it [01:02,  9.11it/s] - Tot it 1406 (epoch 7): 1220it [01:04,  8.41it/s] - Tot it 1406 (epoch 7): 1239it [01:07,  8.06it/s] - Tot it 1406 (epoch 7): 1257it [01:10,  7.83it/s] - Tot it 1406 (epoch 7): 1274it [01:12,  7.61it/s] - Tot it 1406 (epoch 7): 1290it [01:14,  7.49it/s] - Tot it 1406 (epoch 7): 1306it [01:16,  7.38it/s] - Tot it 1406 (epoch 7): 1322it [01:18,  7.41it/s] - Tot it 1406 (epoch 7): 1338it [01:21,  7.25it/s] - Tot it 1406 (epoch 7): 1353it [01:23,  7.20it/s] - Tot it 1406 (epoch 7): 1368it [01:25,  7.17it/s] - Tot it 1406 (epoch 7): 1383it [01:27,  7.11it/s] - Tot it 1406 (epoch 7): 1398it [01:29,  7.15it/s]                                                   DEV : total : dev_f1: 0.9559 dev_rec: 0.9561 dev_pre: 0.9558 dev_acc: 0.9911 | 
+
+DEV : B-ENT : dev_f1: 0.9771 dev_rec: 0.9773 dev_pre: 0.9770 dev_acc: 0.0000 | {'O': 88, 'I-ENT': 47}
+
+DEV : O : dev_f1: 0.9960 dev_rec: 0.9968 dev_pre: 0.9952 dev_acc: 0.0000 | {'B-ENT': 73, 'I-ENT': 65}
+
+DEV : I-ENT : dev_f1: 0.9438 dev_rec: 0.9312 dev_pre: 0.9568 dev_acc: 0.0000 | {'O': 119, 'B-ENT': 64}
+
+TEST : total : test_f1: 0.9413 test_rec: 0.9439 test_pre: 0.9387 test_acc: 0.9868 | 
+
+TEST : B-ENT : test_f1: 0.9664 test_rec: 0.9690 test_pre: 0.9637 test_acc: 0.0000 | {'I-ENT': 65, 'O': 110}
+
+TEST : I-ENT : test_f1: 0.9352 test_rec: 0.9663 test_pre: 0.9060 test_acc: 0.0000 | {'B-ENT': 31, 'O': 52}
+
+TEST : O : test_f1: 0.9932 test_rec: 0.9907 test_pre: 0.9958 test_acc: 0.0000 | {'B-ENT': 175, 'I-ENT': 182}
+
+(loss: 0.3997, epoch: 7, dev F1 = 0.9559, dev acc = 0.9911, F1 on test = 0.9413, acc on test= 0.9868), saving...
+epoch: 7	 in 30 take: 764.0693411827087 s
+ - Tot it 1406 (epoch 8): 0it [00:00, ?it/s] - Tot it 1406 (epoch 8): 68it [00:02, 33.93it/s] - Tot it 1406 (epoch 8): 131it [00:04, 32.93it/s] - Tot it 1406 (epoch 8): 192it [00:06, 32.04it/s] - Tot it 1406 (epoch 8): 259it [00:08, 32.43it/s] - Tot it 1406 (epoch 8): 326it [00:10, 32.66it/s] - Tot it 1406 (epoch 8): 393it [00:12, 32.90it/s] - Tot it 1406 (epoch 8): 451it [00:14, 29.60it/s] - Tot it 1406 (epoch 8): 506it [00:17, 26.77it/s] - Tot it 1406 (epoch 8): 558it [00:19, 25.10it/s] - Tot it 1406 (epoch 8): 608it [00:21, 24.03it/s] - Tot it 1406 (epoch 8): 656it [00:23, 23.44it/s] - Tot it 1406 (epoch 8): 703it [00:25, 23.00it/s] - Tot it 1406 (epoch 8): 749it [00:28, 22.55it/s] - Tot it 1406 (epoch 8): 795it [00:30, 22.35it/s] - Tot it 1406 (epoch 8): 840it [00:32, 22.25it/s] - Tot it 1406 (epoch 8): 885it [00:34, 21.74it/s] - Tot it 1406 (epoch 8): 929it [00:37, 18.05it/s] - Tot it 1406 (epoch 8): 968it [00:40, 16.15it/s] - Tot it 1406 (epoch 8): 1003it [00:43, 15.02it/s] - Tot it 1406 (epoch 8): 1035it [00:46, 14.31it/s] - Tot it 1406 (epoch 8): 1066it [00:48, 13.84it/s] - Tot it 1406 (epoch 8): 1095it [00:50, 13.56it/s] - Tot it 1406 (epoch 8): 1123it [00:52, 13.38it/s] - Tot it 1406 (epoch 8): 1151it [00:55, 12.39it/s] - Tot it 1406 (epoch 8): 1177it [00:59, 10.31it/s] - Tot it 1406 (epoch 8): 1200it [01:02,  9.08it/s] - Tot it 1406 (epoch 8): 1220it [01:05,  8.44it/s] - Tot it 1406 (epoch 8): 1239it [01:07,  8.05it/s] - Tot it 1406 (epoch 8): 1257it [01:10,  7.80it/s] - Tot it 1406 (epoch 8): 1274it [01:12,  7.61it/s] - Tot it 1406 (epoch 8): 1290it [01:14,  7.51it/s] - Tot it 1406 (epoch 8): 1306it [01:16,  7.34it/s] - Tot it 1406 (epoch 8): 1321it [01:19,  7.30it/s] - Tot it 1406 (epoch 8): 1336it [01:21,  7.02it/s] - Tot it 1406 (epoch 8): 1351it [01:23,  7.07it/s] - Tot it 1406 (epoch 8): 1366it [01:25,  7.16it/s] - Tot it 1406 (epoch 8): 1381it [01:27,  7.19it/s] - Tot it 1406 (epoch 8): 1396it [01:29,  7.13it/s]                                                   DEV : total : dev_f1: 0.9565 dev_rec: 0.9567 dev_pre: 0.9563 dev_acc: 0.9914 | 
+
+DEV : B-ENT : dev_f1: 0.9780 dev_rec: 0.9783 dev_pre: 0.9778 dev_acc: 0.0000 | {'O': 82, 'I-ENT': 47}
+
+DEV : O : dev_f1: 0.9961 dev_rec: 0.9968 dev_pre: 0.9954 dev_acc: 0.0000 | {'B-ENT': 71, 'I-ENT': 66}
+
+DEV : I-ENT : dev_f1: 0.9450 dev_rec: 0.9339 dev_pre: 0.9565 dev_acc: 0.0000 | {'O': 115, 'B-ENT': 61}
+
+TEST : total : test_f1: 0.9416 test_rec: 0.9435 test_pre: 0.9397 test_acc: 0.9870 | 
+
+TEST : B-ENT : test_f1: 0.9665 test_rec: 0.9685 test_pre: 0.9646 test_acc: 0.0000 | {'I-ENT': 66, 'O': 112}
+
+TEST : I-ENT : test_f1: 0.9356 test_rec: 0.9635 test_pre: 0.9092 test_acc: 0.0000 | {'B-ENT': 35, 'O': 55}
+
+TEST : O : test_f1: 0.9934 test_rec: 0.9912 test_pre: 0.9956 test_acc: 0.0000 | {'B-ENT': 166, 'I-ENT': 171}
+
+(loss: 0.3734, epoch: 8, dev F1 = 0.9565, dev acc = 0.9914, F1 on test = 0.9416, acc on test= 0.9870), saving...
+epoch: 8	 in 30 take: 859.987119436264 s
+ - Tot it 1406 (epoch 9): 0it [00:00, ?it/s] - Tot it 1406 (epoch 9): 67it [00:02, 33.33it/s] - Tot it 1406 (epoch 9): 125it [00:04, 31.79it/s] - Tot it 1406 (epoch 9): 191it [00:06, 32.05it/s] - Tot it 1406 (epoch 9): 259it [00:08, 32.55it/s] - Tot it 1406 (epoch 9): 326it [00:10, 32.77it/s] - Tot it 1406 (epoch 9): 393it [00:12, 32.95it/s] - Tot it 1406 (epoch 9): 452it [00:14, 29.38it/s] - Tot it 1406 (epoch 9): 507it [00:17, 26.68it/s] - Tot it 1406 (epoch 9): 559it [00:19, 25.16it/s] - Tot it 1406 (epoch 9): 609it [00:21, 24.01it/s] - Tot it 1406 (epoch 9): 657it [00:23, 23.23it/s] - Tot it 1406 (epoch 9): 704it [00:26, 22.90it/s] - Tot it 1406 (epoch 9): 750it [00:28, 22.59it/s] - Tot it 1406 (epoch 9): 796it [00:30, 22.45it/s] - Tot it 1406 (epoch 9): 841it [00:32, 22.24it/s] - Tot it 1406 (epoch 9): 886it [00:34, 21.41it/s] - Tot it 1406 (epoch 9): 929it [00:37, 17.80it/s] - Tot it 1406 (epoch 9): 967it [00:40, 16.03it/s] - Tot it 1406 (epoch 9): 1002it [00:43, 15.01it/s] - Tot it 1406 (epoch 9): 1034it [00:46, 14.34it/s] - Tot it 1406 (epoch 9): 1065it [00:48, 13.94it/s] - Tot it 1406 (epoch 9): 1094it [00:50, 13.65it/s] - Tot it 1406 (epoch 9): 1123it [00:52, 13.46it/s] - Tot it 1406 (epoch 9): 1151it [00:55, 12.53it/s] - Tot it 1406 (epoch 9): 1177it [00:59, 10.05it/s] - Tot it 1406 (epoch 9): 1200it [01:02,  9.05it/s] - Tot it 1406 (epoch 9): 1220it [01:05,  8.42it/s] - Tot it 1406 (epoch 9): 1239it [01:07,  8.06it/s] - Tot it 1406 (epoch 9): 1257it [01:10,  7.75it/s] - Tot it 1406 (epoch 9): 1274it [01:12,  7.45it/s] - Tot it 1406 (epoch 9): 1290it [01:14,  7.35it/s] - Tot it 1406 (epoch 9): 1306it [01:17,  7.24it/s] - Tot it 1406 (epoch 9): 1321it [01:19,  7.24it/s] - Tot it 1406 (epoch 9): 1336it [01:21,  7.22it/s] - Tot it 1406 (epoch 9): 1351it [01:23,  7.23it/s] - Tot it 1406 (epoch 9): 1366it [01:25,  7.28it/s] - Tot it 1406 (epoch 9): 1381it [01:27,  7.26it/s] - Tot it 1406 (epoch 9): 1396it [01:29,  7.27it/s]                                                   DEV : total : dev_f1: 0.9580 dev_rec: 0.9566 dev_pre: 0.9595 dev_acc: 0.9916 | 
+
+DEV : B-ENT : dev_f1: 0.9783 dev_rec: 0.9768 dev_pre: 0.9797 dev_acc: 0.0000 | {'O': 93, 'I-ENT': 45}
+
+DEV : O : dev_f1: 0.9962 dev_rec: 0.9975 dev_pre: 0.9949 dev_acc: 0.0000 | {'B-ENT': 58, 'I-ENT': 47}
+
+DEV : I-ENT : dev_f1: 0.9466 dev_rec: 0.9297 dev_pre: 0.9641 dev_acc: 0.0000 | {'O': 125, 'B-ENT': 62}
+
+TEST : total : test_f1: 0.9447 test_rec: 0.9444 test_pre: 0.9449 test_acc: 0.9878 | 
+
+TEST : B-ENT : test_f1: 0.9682 test_rec: 0.9680 test_pre: 0.9685 test_acc: 0.0000 | {'I-ENT': 59, 'O': 122}
+
+TEST : I-ENT : test_f1: 0.9409 test_rec: 0.9631 test_pre: 0.9198 test_acc: 0.0000 | {'B-ENT': 32, 'O': 59}
+
+TEST : O : test_f1: 0.9938 test_rec: 0.9923 test_pre: 0.9953 test_acc: 0.0000 | {'B-ENT': 146, 'I-ENT': 148}
+
+(loss: 0.3539, epoch: 9, dev F1 = 0.9580, dev acc = 0.9916, F1 on test = 0.9447, acc on test= 0.9878), saving...
+epoch: 9	 in 30 take: 955.830489397049 s
+ - Tot it 1406 (epoch 10): 0it [00:00, ?it/s] - Tot it 1406 (epoch 10): 67it [00:02, 33.18it/s] - Tot it 1406 (epoch 10): 133it [00:04, 33.06it/s] - Tot it 1406 (epoch 10): 193it [00:06, 32.04it/s] - Tot it 1406 (epoch 10): 260it [00:08, 32.40it/s] - Tot it 1406 (epoch 10): 328it [00:10, 32.74it/s] - Tot it 1406 (epoch 10): 395it [00:12, 32.90it/s] - Tot it 1406 (epoch 10): 454it [00:14, 29.36it/s] - Tot it 1406 (epoch 10): 509it [00:17, 26.61it/s] - Tot it 1406 (epoch 10): 561it [00:19, 25.10it/s] - Tot it 1406 (epoch 10): 611it [00:21, 23.96it/s] - Tot it 1406 (epoch 10): 659it [00:23, 23.37it/s] - Tot it 1406 (epoch 10): 706it [00:26, 22.92it/s] - Tot it 1406 (epoch 10): 752it [00:28, 22.64it/s] - Tot it 1406 (epoch 10): 798it [00:30, 22.41it/s] - Tot it 1406 (epoch 10): 843it [00:32, 22.25it/s] - Tot it 1406 (epoch 10): 888it [00:34, 21.16it/s] - Tot it 1406 (epoch 10): 931it [00:37, 17.86it/s] - Tot it 1406 (epoch 10): 969it [00:40, 16.08it/s] - Tot it 1406 (epoch 10): 1004it [00:43, 15.04it/s] - Tot it 1406 (epoch 10): 1036it [00:46, 14.34it/s] - Tot it 1406 (epoch 10): 1066it [00:48, 13.90it/s] - Tot it 1406 (epoch 10): 1095it [00:50, 13.60it/s] - Tot it 1406 (epoch 10): 1123it [00:52, 13.39it/s] - Tot it 1406 (epoch 10): 1151it [00:55, 12.51it/s] - Tot it 1406 (epoch 10): 1177it [00:58, 10.30it/s] - Tot it 1406 (epoch 10): 1200it [01:02,  9.00it/s] - Tot it 1406 (epoch 10): 1220it [01:05,  8.32it/s] - Tot it 1406 (epoch 10): 1239it [01:07,  7.98it/s] - Tot it 1406 (epoch 10): 1257it [01:10,  7.61it/s] - Tot it 1406 (epoch 10): 1274it [01:12,  7.40it/s] - Tot it 1406 (epoch 10): 1290it [01:14,  7.35it/s] - Tot it 1406 (epoch 10): 1306it [01:17,  7.30it/s] - Tot it 1406 (epoch 10): 1321it [01:19,  7.23it/s] - Tot it 1406 (epoch 10): 1336it [01:21,  7.29it/s] - Tot it 1406 (epoch 10): 1351it [01:23,  7.28it/s] - Tot it 1406 (epoch 10): 1366it [01:25,  7.26it/s] - Tot it 1406 (epoch 10): 1382it [01:27,  7.32it/s] - Tot it 1406 (epoch 10): 1397it [01:29,  7.31it/s]                                                    DEV : total : dev_f1: 0.9596 dev_rec: 0.9598 dev_pre: 0.9595 dev_acc: 0.9920 | 
+
+DEV : B-ENT : dev_f1: 0.9786 dev_rec: 0.9788 dev_pre: 0.9785 dev_acc: 0.0000 | {'O': 82, 'I-ENT': 44}
+
+DEV : O : dev_f1: 0.9965 dev_rec: 0.9976 dev_pre: 0.9954 dev_acc: 0.0000 | {'B-ENT': 64, 'I-ENT': 40}
+
+DEV : I-ENT : dev_f1: 0.9497 dev_rec: 0.9327 dev_pre: 0.9673 dev_acc: 0.0000 | {'O': 115, 'B-ENT': 64}
+
+TEST : total : test_f1: 0.9438 test_rec: 0.9458 test_pre: 0.9418 test_acc: 0.9880 | 
+
+TEST : B-ENT : test_f1: 0.9680 test_rec: 0.9701 test_pre: 0.9660 test_acc: 0.0000 | {'I-ENT': 63, 'O': 106}
+
+TEST : I-ENT : test_f1: 0.9422 test_rec: 0.9623 test_pre: 0.9229 test_acc: 0.0000 | {'B-ENT': 35, 'O': 58}
+
+TEST : O : test_f1: 0.9940 test_rec: 0.9924 test_pre: 0.9957 test_acc: 0.0000 | {'B-ENT': 158, 'I-ENT': 135}
+
+(loss: 0.3317, epoch: 10, dev F1 = 0.9596, dev acc = 0.9920, F1 on test = 0.9438, acc on test= 0.9880), saving...
+epoch: 10	 in 30 take: 1051.5991768836975 s
+ - Tot it 1406 (epoch 11): 0it [00:00, ?it/s] - Tot it 1406 (epoch 11): 67it [00:02, 33.25it/s] - Tot it 1406 (epoch 11): 134it [00:04, 33.25it/s] - Tot it 1406 (epoch 11): 189it [00:06, 31.26it/s] - Tot it 1406 (epoch 11): 256it [00:08, 31.83it/s] - Tot it 1406 (epoch 11): 323it [00:10, 32.25it/s] - Tot it 1406 (epoch 11): 391it [00:12, 32.64it/s] - Tot it 1406 (epoch 11): 449it [00:14, 29.48it/s] - Tot it 1406 (epoch 11): 504it [00:16, 26.81it/s] - Tot it 1406 (epoch 11): 556it [00:19, 25.20it/s] - Tot it 1406 (epoch 11): 606it [00:21, 24.16it/s] - Tot it 1406 (epoch 11): 654it [00:23, 23.36it/s] - Tot it 1406 (epoch 11): 701it [00:25, 23.05it/s] - Tot it 1406 (epoch 11): 747it [00:28, 22.62it/s] - Tot it 1406 (epoch 11): 793it [00:30, 22.33it/s] - Tot it 1406 (epoch 11): 838it [00:32, 22.25it/s] - Tot it 1406 (epoch 11): 883it [00:34, 21.73it/s] - Tot it 1406 (epoch 11): 927it [00:37, 18.09it/s] - Tot it 1406 (epoch 11): 966it [00:40, 16.24it/s] - Tot it 1406 (epoch 11): 1001it [00:43, 15.06it/s] - Tot it 1406 (epoch 11): 1033it [00:45, 14.39it/s] - Tot it 1406 (epoch 11): 1064it [00:48, 13.95it/s] - Tot it 1406 (epoch 11): 1093it [00:50, 13.69it/s] - Tot it 1406 (epoch 11): 1122it [00:52, 13.55it/s] - Tot it 1406 (epoch 11): 1150it [00:55, 12.67it/s] - Tot it 1406 (epoch 11): 1176it [00:58, 10.23it/s] - Tot it 1406 (epoch 11): 1199it [01:02,  9.09it/s] - Tot it 1406 (epoch 11): 1220it [01:04,  8.46it/s] - Tot it 1406 (epoch 11): 1239it [01:07,  8.02it/s] - Tot it 1406 (epoch 11): 1257it [01:10,  7.81it/s] - Tot it 1406 (epoch 11): 1274it [01:12,  7.63it/s] - Tot it 1406 (epoch 11): 1290it [01:14,  7.59it/s] - Tot it 1406 (epoch 11): 1306it [01:16,  7.52it/s] - Tot it 1406 (epoch 11): 1322it [01:18,  7.45it/s] - Tot it 1406 (epoch 11): 1338it [01:21,  7.35it/s] - Tot it 1406 (epoch 11): 1353it [01:23,  7.32it/s] - Tot it 1406 (epoch 11): 1368it [01:25,  7.12it/s] - Tot it 1406 (epoch 11): 1383it [01:27,  7.13it/s] - Tot it 1406 (epoch 11): 1398it [01:29,  7.17it/s]                                                    DEV : total : dev_f1: 0.9612 dev_rec: 0.9594 dev_pre: 0.9630 dev_acc: 0.9924 | 
+
+DEV : B-ENT : dev_f1: 0.9798 dev_rec: 0.9780 dev_pre: 0.9816 dev_acc: 0.0000 | {'O': 83, 'I-ENT': 48}
+
+DEV : O : dev_f1: 0.9966 dev_rec: 0.9976 dev_pre: 0.9956 dev_acc: 0.0000 | {'B-ENT': 57, 'I-ENT': 44}
+
+DEV : I-ENT : dev_f1: 0.9528 dev_rec: 0.9414 dev_pre: 0.9646 dev_acc: 0.0000 | {'O': 104, 'B-ENT': 52}
+
+TEST : total : test_f1: 0.9461 test_rec: 0.9471 test_pre: 0.9451 test_acc: 0.9882 | 
+
+TEST : B-ENT : test_f1: 0.9696 test_rec: 0.9706 test_pre: 0.9686 test_acc: 0.0000 | {'I-ENT': 63, 'O': 103}
+
+TEST : I-ENT : test_f1: 0.9434 test_rec: 0.9700 test_pre: 0.9182 test_acc: 0.0000 | {'B-ENT': 22, 'O': 52}
+
+TEST : O : test_f1: 0.9940 test_rec: 0.9920 test_pre: 0.9959 test_acc: 0.0000 | {'B-ENT': 156, 'I-ENT': 150}
+
+(loss: 0.3256, epoch: 11, dev F1 = 0.9612, dev acc = 0.9924, F1 on test = 0.9461, acc on test= 0.9882), saving...
+epoch: 11	 in 30 take: 1147.2814230918884 s
+ - Tot it 1406 (epoch 12): 0it [00:00, ?it/s] - Tot it 1406 (epoch 12): 62it [00:02, 30.82it/s] - Tot it 1406 (epoch 12): 121it [00:04, 30.28it/s] - Tot it 1406 (epoch 12): 186it [00:06, 30.90it/s] - Tot it 1406 (epoch 12): 254it [00:08, 31.66it/s] - Tot it 1406 (epoch 12): 322it [00:10, 32.21it/s] - Tot it 1406 (epoch 12): 389it [00:12, 32.52it/s] - Tot it 1406 (epoch 12): 447it [00:14, 29.37it/s] - Tot it 1406 (epoch 12): 502it [00:17, 26.58it/s] - Tot it 1406 (epoch 12): 554it [00:19, 25.04it/s] - Tot it 1406 (epoch 12): 604it [00:21, 24.14it/s] - Tot it 1406 (epoch 12): 652it [00:23, 23.39it/s] - Tot it 1406 (epoch 12): 699it [00:26, 22.93it/s] - Tot it 1406 (epoch 12): 745it [00:28, 22.63it/s] - Tot it 1406 (epoch 12): 791it [00:30, 22.63it/s] - Tot it 1406 (epoch 12): 837it [00:32, 22.39it/s] - Tot it 1406 (epoch 12): 882it [00:34, 21.98it/s] - Tot it 1406 (epoch 12): 926it [00:37, 18.31it/s] - Tot it 1406 (epoch 12): 965it [00:40, 16.30it/s] - Tot it 1406 (epoch 12): 1000it [00:43, 15.09it/s] - Tot it 1406 (epoch 12): 1033it [00:45, 14.40it/s] - Tot it 1406 (epoch 12): 1064it [00:48, 13.98it/s] - Tot it 1406 (epoch 12): 1094it [00:50, 13.65it/s] - Tot it 1406 (epoch 12): 1123it [00:52, 13.40it/s] - Tot it 1406 (epoch 12): 1151it [00:55, 12.58it/s] - Tot it 1406 (epoch 12): 1177it [00:59, 10.23it/s] - Tot it 1406 (epoch 12): 1200it [01:02,  9.11it/s] - Tot it 1406 (epoch 12): 1220it [01:04,  8.53it/s] - Tot it 1406 (epoch 12): 1239it [01:07,  8.13it/s] - Tot it 1406 (epoch 12): 1257it [01:10,  7.85it/s] - Tot it 1406 (epoch 12): 1274it [01:12,  7.59it/s] - Tot it 1406 (epoch 12): 1290it [01:14,  7.42it/s] - Tot it 1406 (epoch 12): 1306it [01:16,  7.41it/s] - Tot it 1406 (epoch 12): 1322it [01:19,  7.38it/s] - Tot it 1406 (epoch 12): 1337it [01:21,  7.20it/s] - Tot it 1406 (epoch 12): 1352it [01:23,  7.21it/s] - Tot it 1406 (epoch 12): 1367it [01:25,  7.19it/s] - Tot it 1406 (epoch 12): 1382it [01:27,  7.26it/s] - Tot it 1406 (epoch 12): 1397it [01:29,  7.25it/s]                                                    DEV : total : dev_f1: 0.9596 dev_rec: 0.9623 dev_pre: 0.9570 dev_acc: 0.9921 | 
+
+DEV : B-ENT : dev_f1: 0.9784 dev_rec: 0.9812 dev_pre: 0.9757 dev_acc: 0.0000 | {'O': 79, 'I-ENT': 33}
+
+DEV : O : dev_f1: 0.9965 dev_rec: 0.9978 dev_pre: 0.9953 dev_acc: 0.0000 | {'B-ENT': 68, 'I-ENT': 27}
+
+DEV : I-ENT : dev_f1: 0.9498 dev_rec: 0.9248 dev_pre: 0.9762 dev_acc: 0.0000 | {'O': 123, 'B-ENT': 77}
+
+(loss: 0.3057, epoch: 12, dev F1 = 0.9596, dev acc = 0.9921)
+epoch: 12	 in 30 take: 1239.662044286728 s
+ - Tot it 1406 (epoch 13): 0it [00:00, ?it/s] - Tot it 1406 (epoch 13): 66it [00:02, 32.79it/s] - Tot it 1406 (epoch 13): 133it [00:04, 32.93it/s] - Tot it 1406 (epoch 13): 200it [00:06, 33.09it/s] - Tot it 1406 (epoch 13): 268it [00:08, 33.26it/s] - Tot it 1406 (epoch 13): 335it [00:10, 33.30it/s] - Tot it 1406 (epoch 13): 402it [00:12, 33.34it/s] - Tot it 1406 (epoch 13): 461it [00:14, 29.17it/s] - Tot it 1406 (epoch 13): 516it [00:17, 26.55it/s] - Tot it 1406 (epoch 13): 568it [00:19, 24.93it/s] - Tot it 1406 (epoch 13): 618it [00:21, 23.93it/s] - Tot it 1406 (epoch 13): 666it [00:24, 23.25it/s] - Tot it 1406 (epoch 13): 713it [00:26, 22.78it/s] - Tot it 1406 (epoch 13): 759it [00:28, 22.53it/s] - Tot it 1406 (epoch 13): 805it [00:30, 22.30it/s] - Tot it 1406 (epoch 13): 850it [00:32, 22.26it/s] - Tot it 1406 (epoch 13): 895it [00:35, 20.59it/s] - Tot it 1406 (epoch 13): 937it [00:38, 17.49it/s] - Tot it 1406 (epoch 13): 974it [00:41, 15.82it/s] - Tot it 1406 (epoch 13): 1008it [00:43, 14.94it/s] - Tot it 1406 (epoch 13): 1040it [00:46, 14.27it/s] - Tot it 1406 (epoch 13): 1070it [00:48, 13.88it/s] - Tot it 1406 (epoch 13): 1099it [00:50, 13.58it/s] - Tot it 1406 (epoch 13): 1127it [00:52, 13.38it/s] - Tot it 1406 (epoch 13): 1155it [00:55, 12.19it/s] - Tot it 1406 (epoch 13): 1181it [00:59,  9.99it/s] - Tot it 1406 (epoch 13): 1203it [01:02,  8.94it/s] - Tot it 1406 (epoch 13): 1223it [01:05,  8.33it/s] - Tot it 1406 (epoch 13): 1242it [01:07,  8.03it/s] - Tot it 1406 (epoch 13): 1260it [01:10,  7.68it/s] - Tot it 1406 (epoch 13): 1277it [01:12,  7.54it/s] - Tot it 1406 (epoch 13): 1293it [01:14,  7.53it/s] - Tot it 1406 (epoch 13): 1309it [01:17,  7.43it/s] - Tot it 1406 (epoch 13): 1325it [01:19,  7.32it/s] - Tot it 1406 (epoch 13): 1340it [01:21,  7.24it/s] - Tot it 1406 (epoch 13): 1355it [01:23,  7.27it/s] - Tot it 1406 (epoch 13): 1370it [01:25,  7.24it/s] - Tot it 1406 (epoch 13): 1385it [01:27,  7.21it/s] - Tot it 1406 (epoch 13): 1400it [01:29,  7.25it/s]                                                    DEV : total : dev_f1: 0.9593 dev_rec: 0.9618 dev_pre: 0.9568 dev_acc: 0.9921 | 
+
+DEV : B-ENT : dev_f1: 0.9783 dev_rec: 0.9808 dev_pre: 0.9757 dev_acc: 0.0000 | {'O': 75, 'I-ENT': 39}
+
+DEV : O : dev_f1: 0.9965 dev_rec: 0.9974 dev_pre: 0.9956 dev_acc: 0.0000 | {'B-ENT': 74, 'I-ENT': 36}
+
+DEV : I-ENT : dev_f1: 0.9503 dev_rec: 0.9309 dev_pre: 0.9706 dev_acc: 0.0000 | {'O': 113, 'B-ENT': 71}
+
+(loss: 0.2889, epoch: 13, dev F1 = 0.9593, dev acc = 0.9921)
+epoch: 13	 in 30 take: 1331.8157441616058 s
+ - Tot it 1406 (epoch 14): 0it [00:00, ?it/s] - Tot it 1406 (epoch 14): 67it [00:02, 33.35it/s] - Tot it 1406 (epoch 14): 135it [00:04, 33.41it/s] - Tot it 1406 (epoch 14): 202it [00:06, 33.37it/s] - Tot it 1406 (epoch 14): 269it [00:08, 33.28it/s] - Tot it 1406 (epoch 14): 336it [00:10, 33.32it/s] - Tot it 1406 (epoch 14): 403it [00:12, 33.35it/s] - Tot it 1406 (epoch 14): 462it [00:14, 29.06it/s] - Tot it 1406 (epoch 14): 517it [00:17, 26.41it/s] - Tot it 1406 (epoch 14): 569it [00:19, 24.81it/s] - Tot it 1406 (epoch 14): 618it [00:21, 23.84it/s] - Tot it 1406 (epoch 14): 666it [00:24, 23.23it/s] - Tot it 1406 (epoch 14): 713it [00:26, 22.86it/s] - Tot it 1406 (epoch 14): 759it [00:28, 22.60it/s] - Tot it 1406 (epoch 14): 805it [00:30, 22.43it/s] - Tot it 1406 (epoch 14): 850it [00:32, 22.27it/s] - Tot it 1406 (epoch 14): 895it [00:34, 20.80it/s] - Tot it 1406 (epoch 14): 937it [00:38, 17.62it/s] - Tot it 1406 (epoch 14): 975it [00:41, 15.85it/s] - Tot it 1406 (epoch 14): 1009it [00:43, 14.84it/s] - Tot it 1406 (epoch 14): 1041it [00:46, 14.15it/s] - Tot it 1406 (epoch 14): 1071it [00:48, 13.71it/s] - Tot it 1406 (epoch 14): 1100it [00:50, 13.45it/s] - Tot it 1406 (epoch 14): 1128it [00:53, 13.31it/s] - Tot it 1406 (epoch 14): 1156it [00:55, 11.87it/s] - Tot it 1406 (epoch 14): 1181it [00:59,  9.91it/s] - Tot it 1406 (epoch 14): 1203it [01:02,  8.98it/s] - Tot it 1406 (epoch 14): 1223it [01:05,  8.33it/s] - Tot it 1406 (epoch 14): 1241it [01:07,  7.86it/s] - Tot it 1406 (epoch 14): 1258it [01:10,  7.61it/s] - Tot it 1406 (epoch 14): 1274it [01:12,  7.46it/s] - Tot it 1406 (epoch 14): 1290it [01:14,  7.40it/s] - Tot it 1406 (epoch 14): 1306it [01:17,  7.18it/s] - Tot it 1406 (epoch 14): 1321it [01:19,  7.16it/s] - Tot it 1406 (epoch 14): 1336it [01:21,  7.16it/s] - Tot it 1406 (epoch 14): 1351it [01:23,  7.15it/s] - Tot it 1406 (epoch 14): 1366it [01:25,  7.11it/s] - Tot it 1406 (epoch 14): 1381it [01:27,  7.14it/s] - Tot it 1406 (epoch 14): 1396it [01:29,  7.22it/s]                                                    DEV : total : dev_f1: 0.9625 dev_rec: 0.9613 dev_pre: 0.9637 dev_acc: 0.9928 | 
+
+DEV : B-ENT : dev_f1: 0.9804 dev_rec: 0.9791 dev_pre: 0.9816 dev_acc: 0.0000 | {'O': 72, 'I-ENT': 52}
+
+DEV : O : dev_f1: 0.9968 dev_rec: 0.9973 dev_pre: 0.9963 dev_acc: 0.0000 | {'B-ENT': 65, 'I-ENT': 49}
+
+DEV : I-ENT : dev_f1: 0.9560 dev_rec: 0.9504 dev_pre: 0.9616 dev_acc: 0.0000 | {'O': 88, 'B-ENT': 44}
+
+TEST : total : test_f1: 0.9454 test_rec: 0.9456 test_pre: 0.9451 test_acc: 0.9879 | 
+
+TEST : B-ENT : test_f1: 0.9688 test_rec: 0.9690 test_pre: 0.9685 test_acc: 0.0000 | {'I-ENT': 69, 'O': 106}
+
+TEST : I-ENT : test_f1: 0.9415 test_rec: 0.9724 test_pre: 0.9124 test_acc: 0.0000 | {'B-ENT': 20, 'O': 48}
+
+TEST : O : test_f1: 0.9938 test_rec: 0.9917 test_pre: 0.9960 test_acc: 0.0000 | {'B-ENT': 158, 'I-ENT': 161}
+
+(loss: 0.2857, epoch: 14, dev F1 = 0.9625, dev acc = 0.9928, F1 on test = 0.9454, acc on test= 0.9879), saving...
+epoch: 14	 in 30 take: 1427.7333953380585 s
+ - Tot it 1406 (epoch 15): 0it [00:00, ?it/s] - Tot it 1406 (epoch 15): 66it [00:02, 32.73it/s] - Tot it 1406 (epoch 15): 133it [00:04, 32.85it/s] - Tot it 1406 (epoch 15): 190it [00:06, 31.32it/s] - Tot it 1406 (epoch 15): 256it [00:08, 31.76it/s] - Tot it 1406 (epoch 15): 323it [00:10, 32.24it/s] - Tot it 1406 (epoch 15): 389it [00:12, 32.41it/s] - Tot it 1406 (epoch 15): 447it [00:14, 29.28it/s] - Tot it 1406 (epoch 15): 502it [00:17, 26.65it/s] - Tot it 1406 (epoch 15): 554it [00:19, 25.10it/s] - Tot it 1406 (epoch 15): 604it [00:21, 24.05it/s] - Tot it 1406 (epoch 15): 652it [00:24, 22.57it/s] - Tot it 1406 (epoch 15): 698it [00:26, 22.10it/s] - Tot it 1406 (epoch 15): 743it [00:28, 21.98it/s] - Tot it 1406 (epoch 15): 788it [00:30, 21.99it/s] - Tot it 1406 (epoch 15): 833it [00:32, 21.85it/s] - Tot it 1406 (epoch 15): 878it [00:34, 21.97it/s] - Tot it 1406 (epoch 15): 922it [00:37, 18.26it/s] - Tot it 1406 (epoch 15): 961it [00:40, 16.25it/s] - Tot it 1406 (epoch 15): 996it [00:43, 15.02it/s] - Tot it 1406 (epoch 15): 1029it [00:46, 14.26it/s] - Tot it 1406 (epoch 15): 1060it [00:48, 13.87it/s] - Tot it 1406 (epoch 15): 1089it [00:50, 13.68it/s] - Tot it 1406 (epoch 15): 1118it [00:53, 13.41it/s] - Tot it 1406 (epoch 15): 1146it [00:55, 12.99it/s] - Tot it 1406 (epoch 15): 1173it [00:59, 10.49it/s] - Tot it 1406 (epoch 15): 1196it [01:02,  9.19it/s] - Tot it 1406 (epoch 15): 1217it [01:05,  8.38it/s] - Tot it 1406 (epoch 15): 1236it [01:08,  7.89it/s] - Tot it 1406 (epoch 15): 1254it [01:10,  7.61it/s] - Tot it 1406 (epoch 15): 1271it [01:12,  7.55it/s] - Tot it 1406 (epoch 15): 1287it [01:15,  7.40it/s] - Tot it 1406 (epoch 15): 1303it [01:17,  7.29it/s] - Tot it 1406 (epoch 15): 1318it [01:19,  7.26it/s] - Tot it 1406 (epoch 15): 1333it [01:21,  7.19it/s] - Tot it 1406 (epoch 15): 1348it [01:23,  7.21it/s] - Tot it 1406 (epoch 15): 1363it [01:25,  7.24it/s] - Tot it 1406 (epoch 15): 1378it [01:27,  7.27it/s] - Tot it 1406 (epoch 15): 1393it [01:29,  7.29it/s]                                                    DEV : total : dev_f1: 0.9619 dev_rec: 0.9613 dev_pre: 0.9624 dev_acc: 0.9925 | 
+
+DEV : B-ENT : dev_f1: 0.9794 dev_rec: 0.9788 dev_pre: 0.9799 dev_acc: 0.0000 | {'O': 84, 'I-ENT': 42}
+
+DEV : O : dev_f1: 0.9967 dev_rec: 0.9978 dev_pre: 0.9955 dev_acc: 0.0000 | {'B-ENT': 59, 'I-ENT': 33}
+
+DEV : I-ENT : dev_f1: 0.9537 dev_rec: 0.9372 dev_pre: 0.9708 dev_acc: 0.0000 | {'O': 107, 'B-ENT': 60}
+
+(loss: 0.2773, epoch: 15, dev F1 = 0.9619, dev acc = 0.9925)
+epoch: 15	 in 30 take: 1520.9966888427734 s
+ - Tot it 1406 (epoch 16): 0it [00:00, ?it/s] - Tot it 1406 (epoch 16): 67it [00:02, 33.16it/s] - Tot it 1406 (epoch 16): 134it [00:04, 33.13it/s] - Tot it 1406 (epoch 16): 202it [00:06, 33.24it/s] - Tot it 1406 (epoch 16): 269it [00:08, 33.30it/s] - Tot it 1406 (epoch 16): 335it [00:10, 33.19it/s] - Tot it 1406 (epoch 16): 402it [00:12, 33.21it/s] - Tot it 1406 (epoch 16): 461it [00:14, 28.91it/s] - Tot it 1406 (epoch 16): 516it [00:17, 26.32it/s] - Tot it 1406 (epoch 16): 568it [00:19, 24.74it/s] - Tot it 1406 (epoch 16): 617it [00:21, 24.00it/s] - Tot it 1406 (epoch 16): 665it [00:24, 23.36it/s] - Tot it 1406 (epoch 16): 712it [00:26, 22.99it/s] - Tot it 1406 (epoch 16): 758it [00:28, 22.61it/s] - Tot it 1406 (epoch 16): 804it [00:30, 22.44it/s] - Tot it 1406 (epoch 16): 849it [00:32, 22.22it/s] - Tot it 1406 (epoch 16): 894it [00:34, 20.81it/s] - Tot it 1406 (epoch 16): 936it [00:38, 17.59it/s] - Tot it 1406 (epoch 16): 974it [00:41, 15.91it/s] - Tot it 1406 (epoch 16): 1008it [00:43, 14.95it/s] - Tot it 1406 (epoch 16): 1040it [00:46, 14.39it/s] - Tot it 1406 (epoch 16): 1071it [00:48, 13.96it/s] - Tot it 1406 (epoch 16): 1100it [00:50, 13.66it/s] - Tot it 1406 (epoch 16): 1128it [00:52, 13.39it/s] - Tot it 1406 (epoch 16): 1156it [00:55, 11.98it/s] - Tot it 1406 (epoch 16): 1181it [00:59,  9.98it/s] - Tot it 1406 (epoch 16): 1203it [01:02,  8.87it/s] - Tot it 1406 (epoch 16): 1223it [01:05,  8.22it/s] - Tot it 1406 (epoch 16): 1241it [01:07,  7.91it/s] - Tot it 1406 (epoch 16): 1258it [01:10,  7.74it/s] - Tot it 1406 (epoch 16): 1275it [01:12,  7.62it/s] - Tot it 1406 (epoch 16): 1291it [01:14,  7.49it/s] - Tot it 1406 (epoch 16): 1307it [01:16,  7.48it/s] - Tot it 1406 (epoch 16): 1323it [01:18,  7.36it/s] - Tot it 1406 (epoch 16): 1338it [01:21,  7.34it/s] - Tot it 1406 (epoch 16): 1353it [01:23,  7.26it/s] - Tot it 1406 (epoch 16): 1368it [01:25,  7.20it/s] - Tot it 1406 (epoch 16): 1383it [01:27,  7.15it/s] - Tot it 1406 (epoch 16): 1398it [01:29,  7.17it/s]                                                    DEV : total : dev_f1: 0.9637 dev_rec: 0.9631 dev_pre: 0.9643 dev_acc: 0.9929 | 
+
+DEV : B-ENT : dev_f1: 0.9794 dev_rec: 0.9788 dev_pre: 0.9799 dev_acc: 0.0000 | {'O': 87, 'I-ENT': 39}
+
+DEV : O : dev_f1: 0.9969 dev_rec: 0.9979 dev_pre: 0.9960 dev_acc: 0.0000 | {'B-ENT': 58, 'I-ENT': 32}
+
+DEV : I-ENT : dev_f1: 0.9584 dev_rec: 0.9448 dev_pre: 0.9725 dev_acc: 0.0000 | {'O': 86, 'B-ENT': 61}
+
+TEST : total : test_f1: 0.9478 test_rec: 0.9499 test_pre: 0.9457 test_acc: 0.9885 | 
+
+TEST : B-ENT : test_f1: 0.9697 test_rec: 0.9718 test_pre: 0.9676 test_acc: 0.0000 | {'I-ENT': 48, 'O': 111}
+
+TEST : I-ENT : test_f1: 0.9452 test_rec: 0.9619 test_pre: 0.9290 test_acc: 0.0000 | {'O': 57, 'B-ENT': 37}
+
+TEST : O : test_f1: 0.9941 test_rec: 0.9927 test_pre: 0.9956 test_acc: 0.0000 | {'B-ENT': 147, 'I-ENT': 133}
+
+(loss: 0.2600, epoch: 16, dev F1 = 0.9637, dev acc = 0.9929, F1 on test = 0.9478, acc on test= 0.9885), saving...
+epoch: 16	 in 30 take: 1616.4081013202667 s
+ - Tot it 1406 (epoch 17): 0it [00:00, ?it/s] - Tot it 1406 (epoch 17): 67it [00:02, 33.29it/s] - Tot it 1406 (epoch 17): 134it [00:04, 33.22it/s] - Tot it 1406 (epoch 17): 194it [00:06, 32.14it/s] - Tot it 1406 (epoch 17): 261it [00:08, 32.49it/s] - Tot it 1406 (epoch 17): 329it [00:10, 32.83it/s] - Tot it 1406 (epoch 17): 396it [00:12, 32.89it/s] - Tot it 1406 (epoch 17): 455it [00:14, 29.20it/s] - Tot it 1406 (epoch 17): 510it [00:17, 26.50it/s] - Tot it 1406 (epoch 17): 562it [00:19, 25.03it/s] - Tot it 1406 (epoch 17): 612it [00:21, 24.16it/s] - Tot it 1406 (epoch 17): 660it [00:23, 23.47it/s] - Tot it 1406 (epoch 17): 707it [00:26, 22.93it/s] - Tot it 1406 (epoch 17): 753it [00:28, 22.68it/s] - Tot it 1406 (epoch 17): 799it [00:30, 22.48it/s] - Tot it 1406 (epoch 17): 844it [00:32, 22.30it/s] - Tot it 1406 (epoch 17): 889it [00:34, 21.11it/s] - Tot it 1406 (epoch 17): 932it [00:38, 17.78it/s] - Tot it 1406 (epoch 17): 970it [00:40, 15.94it/s] - Tot it 1406 (epoch 17): 1004it [00:43, 14.99it/s] - Tot it 1406 (epoch 17): 1036it [00:46, 14.37it/s] - Tot it 1406 (epoch 17): 1067it [00:48, 14.00it/s] - Tot it 1406 (epoch 17): 1096it [00:50, 13.68it/s] - Tot it 1406 (epoch 17): 1125it [00:52, 13.48it/s] - Tot it 1406 (epoch 17): 1153it [00:55, 12.25it/s] - Tot it 1406 (epoch 17): 1179it [00:59, 10.14it/s] - Tot it 1406 (epoch 17): 1202it [01:02,  9.00it/s] - Tot it 1406 (epoch 17): 1222it [01:05,  8.27it/s] - Tot it 1406 (epoch 17): 1240it [01:07,  7.93it/s] - Tot it 1406 (epoch 17): 1257it [01:10,  7.73it/s] - Tot it 1406 (epoch 17): 1274it [01:12,  7.62it/s] - Tot it 1406 (epoch 17): 1290it [01:14,  7.40it/s] - Tot it 1406 (epoch 17): 1306it [01:16,  7.35it/s] - Tot it 1406 (epoch 17): 1321it [01:19,  7.28it/s] - Tot it 1406 (epoch 17): 1336it [01:21,  7.21it/s] - Tot it 1406 (epoch 17): 1351it [01:23,  7.20it/s] - Tot it 1406 (epoch 17): 1366it [01:25,  7.28it/s] - Tot it 1406 (epoch 17): 1381it [01:27,  7.29it/s] - Tot it 1406 (epoch 17): 1396it [01:29,  7.31it/s]                                                    DEV : total : dev_f1: 0.9616 dev_rec: 0.9613 dev_pre: 0.9619 dev_acc: 0.9925 | 
+
+DEV : B-ENT : dev_f1: 0.9790 dev_rec: 0.9786 dev_pre: 0.9793 dev_acc: 0.0000 | {'O': 79, 'I-ENT': 48}
+
+DEV : O : dev_f1: 0.9967 dev_rec: 0.9975 dev_pre: 0.9960 dev_acc: 0.0000 | {'B-ENT': 67, 'I-ENT': 42}
+
+DEV : I-ENT : dev_f1: 0.9546 dev_rec: 0.9440 dev_pre: 0.9654 dev_acc: 0.0000 | {'O': 93, 'B-ENT': 56}
+
+(loss: 0.2618, epoch: 17, dev F1 = 0.9616, dev acc = 0.9925)
+epoch: 17	 in 30 take: 1708.7399425506592 s
+ - Tot it 1406 (epoch 18): 0it [00:00, ?it/s] - Tot it 1406 (epoch 18): 67it [00:02, 33.17it/s] - Tot it 1406 (epoch 18): 135it [00:04, 33.33it/s] - Tot it 1406 (epoch 18): 202it [00:06, 33.31it/s] - Tot it 1406 (epoch 18): 269it [00:08, 33.26it/s] - Tot it 1406 (epoch 18): 336it [00:10, 33.20it/s] - Tot it 1406 (epoch 18): 403it [00:12, 33.26it/s] - Tot it 1406 (epoch 18): 462it [00:14, 28.90it/s] - Tot it 1406 (epoch 18): 517it [00:17, 26.36it/s] - Tot it 1406 (epoch 18): 569it [00:19, 24.96it/s] - Tot it 1406 (epoch 18): 619it [00:21, 24.04it/s] - Tot it 1406 (epoch 18): 667it [00:24, 23.36it/s] - Tot it 1406 (epoch 18): 714it [00:26, 22.82it/s] - Tot it 1406 (epoch 18): 760it [00:28, 22.67it/s] - Tot it 1406 (epoch 18): 806it [00:30, 22.26it/s] - Tot it 1406 (epoch 18): 851it [00:32, 22.09it/s] - Tot it 1406 (epoch 18): 896it [00:35, 20.56it/s] - Tot it 1406 (epoch 18): 938it [00:38, 17.49it/s] - Tot it 1406 (epoch 18): 975it [00:41, 15.86it/s] - Tot it 1406 (epoch 18): 1009it [00:43, 14.95it/s] - Tot it 1406 (epoch 18): 1041it [00:46, 13.78it/s] - Tot it 1406 (epoch 18): 1070it [00:48, 13.45it/s] - Tot it 1406 (epoch 18): 1098it [00:50, 13.30it/s] - Tot it 1406 (epoch 18): 1126it [00:53, 13.17it/s] - Tot it 1406 (epoch 18): 1153it [00:55, 12.06it/s] - Tot it 1406 (epoch 18): 1178it [00:59,  9.95it/s] - Tot it 1406 (epoch 18): 1200it [01:02,  8.86it/s] - Tot it 1406 (epoch 18): 1220it [01:05,  8.29it/s] - Tot it 1406 (epoch 18): 1238it [01:07,  7.96it/s] - Tot it 1406 (epoch 18): 1255it [01:10,  7.74it/s] - Tot it 1406 (epoch 18): 1272it [01:12,  7.57it/s] - Tot it 1406 (epoch 18): 1288it [01:14,  7.42it/s] - Tot it 1406 (epoch 18): 1304it [01:16,  7.34it/s] - Tot it 1406 (epoch 18): 1319it [01:18,  7.36it/s] - Tot it 1406 (epoch 18): 1334it [01:20,  7.31it/s] - Tot it 1406 (epoch 18): 1349it [01:23,  7.32it/s] - Tot it 1406 (epoch 18): 1364it [01:25,  7.26it/s] - Tot it 1406 (epoch 18): 1379it [01:27,  7.32it/s] - Tot it 1406 (epoch 18): 1394it [01:29,  7.22it/s]                                                    DEV : total : dev_f1: 0.9641 dev_rec: 0.9638 dev_pre: 0.9643 dev_acc: 0.9931 | 
+
+DEV : B-ENT : dev_f1: 0.9806 dev_rec: 0.9803 dev_pre: 0.9808 dev_acc: 0.0000 | {'O': 67, 'I-ENT': 50}
+
+DEV : O : dev_f1: 0.9970 dev_rec: 0.9972 dev_pre: 0.9968 dev_acc: 0.0000 | {'B-ENT': 64, 'I-ENT': 54}
+
+DEV : I-ENT : dev_f1: 0.9578 dev_rec: 0.9549 dev_pre: 0.9607 dev_acc: 0.0000 | {'O': 70, 'B-ENT': 50}
+
+TEST : total : test_f1: 0.9486 test_rec: 0.9506 test_pre: 0.9466 test_acc: 0.9884 | 
+
+TEST : B-ENT : test_f1: 0.9708 test_rec: 0.9729 test_pre: 0.9688 test_acc: 0.0000 | {'I-ENT': 61, 'O': 92}
+
+TEST : I-ENT : test_f1: 0.9426 test_rec: 0.9728 test_pre: 0.9142 test_acc: 0.0000 | {'B-ENT': 21, 'O': 46}
+
+TEST : O : test_f1: 0.9940 test_rec: 0.9916 test_pre: 0.9964 test_acc: 0.0000 | {'B-ENT': 156, 'I-ENT': 164}
+
+(loss: 0.2467, epoch: 18, dev F1 = 0.9641, dev acc = 0.9931, F1 on test = 0.9486, acc on test= 0.9884), saving...
+epoch: 18	 in 30 take: 1804.4544007778168 s
+ - Tot it 1406 (epoch 19): 0it [00:00, ?it/s] - Tot it 1406 (epoch 19): 67it [00:02, 33.35it/s] - Tot it 1406 (epoch 19): 134it [00:04, 33.30it/s] - Tot it 1406 (epoch 19): 193it [00:06, 31.91it/s] - Tot it 1406 (epoch 19): 261it [00:08, 32.44it/s] - Tot it 1406 (epoch 19): 329it [00:10, 32.79it/s] - Tot it 1406 (epoch 19): 396it [00:12, 32.93it/s] - Tot it 1406 (epoch 19): 455it [00:14, 29.23it/s] - Tot it 1406 (epoch 19): 510it [00:17, 26.58it/s] - Tot it 1406 (epoch 19): 562it [00:19, 24.95it/s] - Tot it 1406 (epoch 19): 612it [00:21, 24.09it/s] - Tot it 1406 (epoch 19): 660it [00:23, 23.48it/s] - Tot it 1406 (epoch 19): 707it [00:26, 22.96it/s] - Tot it 1406 (epoch 19): 753it [00:28, 22.79it/s] - Tot it 1406 (epoch 19): 799it [00:30, 22.48it/s] - Tot it 1406 (epoch 19): 844it [00:32, 22.29it/s] - Tot it 1406 (epoch 19): 889it [00:34, 21.26it/s] - Tot it 1406 (epoch 19): 932it [00:37, 17.84it/s] - Tot it 1406 (epoch 19): 970it [00:40, 16.08it/s] - Tot it 1406 (epoch 19): 1005it [00:43, 15.01it/s] - Tot it 1406 (epoch 19): 1037it [00:46, 14.34it/s] - Tot it 1406 (epoch 19): 1068it [00:48, 13.83it/s] - Tot it 1406 (epoch 19): 1097it [00:50, 13.53it/s] - Tot it 1406 (epoch 19): 1125it [00:52, 13.40it/s] - Tot it 1406 (epoch 19): 1153it [00:55, 12.30it/s] - Tot it 1406 (epoch 19): 1179it [00:59, 10.14it/s] - Tot it 1406 (epoch 19): 1202it [01:02,  9.08it/s] - Tot it 1406 (epoch 19): 1222it [01:05,  8.40it/s] - Tot it 1406 (epoch 19): 1241it [01:07,  8.01it/s] - Tot it 1406 (epoch 19): 1259it [01:10,  7.82it/s] - Tot it 1406 (epoch 19): 1276it [01:12,  7.61it/s] - Tot it 1406 (epoch 19): 1292it [01:14,  7.49it/s] - Tot it 1406 (epoch 19): 1308it [01:17,  7.41it/s] - Tot it 1406 (epoch 19): 1324it [01:19,  7.36it/s] - Tot it 1406 (epoch 19): 1339it [01:21,  7.27it/s] - Tot it 1406 (epoch 19): 1354it [01:23,  7.22it/s] - Tot it 1406 (epoch 19): 1369it [01:25,  7.21it/s] - Tot it 1406 (epoch 19): 1384it [01:27,  7.25it/s] - Tot it 1406 (epoch 19): 1399it [01:29,  7.23it/s]                                                    DEV : total : dev_f1: 0.9629 dev_rec: 0.9626 dev_pre: 0.9631 dev_acc: 0.9929 | 
+
+DEV : B-ENT : dev_f1: 0.9804 dev_rec: 0.9801 dev_pre: 0.9806 dev_acc: 0.0000 | {'O': 74, 'I-ENT': 44}
+
+DEV : O : dev_f1: 0.9969 dev_rec: 0.9977 dev_pre: 0.9961 dev_acc: 0.0000 | {'B-ENT': 59, 'I-ENT': 39}
+
+DEV : I-ENT : dev_f1: 0.9561 dev_rec: 0.9444 dev_pre: 0.9680 dev_acc: 0.0000 | {'O': 92, 'B-ENT': 56}
+
+(loss: 0.2515, epoch: 19, dev F1 = 0.9629, dev acc = 0.9929)
+epoch: 19	 in 30 take: 1896.664677619934 s
+ - Tot it 1406 (epoch 20): 0it [00:00, ?it/s] - Tot it 1406 (epoch 20): 68it [00:02, 33.53it/s] - Tot it 1406 (epoch 20): 135it [00:04, 33.48it/s] - Tot it 1406 (epoch 20): 202it [00:06, 33.39it/s] - Tot it 1406 (epoch 20): 270it [00:08, 33.47it/s] - Tot it 1406 (epoch 20): 337it [00:10, 33.41it/s] - Tot it 1406 (epoch 20): 404it [00:12, 33.42it/s] - Tot it 1406 (epoch 20): 463it [00:14, 29.02it/s] - Tot it 1406 (epoch 20): 518it [00:17, 26.29it/s] - Tot it 1406 (epoch 20): 570it [00:19, 24.77it/s] - Tot it 1406 (epoch 20): 619it [00:21, 23.90it/s] - Tot it 1406 (epoch 20): 667it [00:24, 23.27it/s] - Tot it 1406 (epoch 20): 714it [00:26, 22.92it/s] - Tot it 1406 (epoch 20): 760it [00:28, 22.67it/s] - Tot it 1406 (epoch 20): 806it [00:30, 22.37it/s] - Tot it 1406 (epoch 20): 851it [00:32, 22.30it/s] - Tot it 1406 (epoch 20): 896it [00:35, 20.47it/s] - Tot it 1406 (epoch 20): 938it [00:38, 17.50it/s] - Tot it 1406 (epoch 20): 975it [00:41, 15.86it/s] - Tot it 1406 (epoch 20): 1009it [00:43, 14.75it/s] - Tot it 1406 (epoch 20): 1041it [00:46, 14.14it/s] - Tot it 1406 (epoch 20): 1071it [00:48, 13.77it/s] - Tot it 1406 (epoch 20): 1100it [00:50, 13.54it/s] - Tot it 1406 (epoch 20): 1128it [00:52, 13.38it/s] - Tot it 1406 (epoch 20): 1156it [00:55, 12.09it/s] - Tot it 1406 (epoch 20): 1181it [00:59,  9.93it/s] - Tot it 1406 (epoch 20): 1203it [01:02,  8.87it/s] - Tot it 1406 (epoch 20): 1223it [01:05,  8.32it/s] - Tot it 1406 (epoch 20): 1241it [01:07,  7.88it/s] - Tot it 1406 (epoch 20): 1258it [01:10,  7.64it/s] - Tot it 1406 (epoch 20): 1275it [01:12,  7.60it/s] - Tot it 1406 (epoch 20): 1291it [01:14,  7.38it/s] - Tot it 1406 (epoch 20): 1307it [01:17,  7.26it/s] - Tot it 1406 (epoch 20): 1322it [01:19,  7.22it/s] - Tot it 1406 (epoch 20): 1337it [01:21,  7.25it/s] - Tot it 1406 (epoch 20): 1352it [01:23,  7.28it/s] - Tot it 1406 (epoch 20): 1367it [01:25,  7.25it/s] - Tot it 1406 (epoch 20): 1382it [01:27,  7.27it/s] - Tot it 1406 (epoch 20): 1397it [01:29,  7.32it/s]                                                    DEV : total : dev_f1: 0.9646 dev_rec: 0.9650 dev_pre: 0.9642 dev_acc: 0.9930 | 
+
+DEV : B-ENT : dev_f1: 0.9802 dev_rec: 0.9806 dev_pre: 0.9798 dev_acc: 0.0000 | {'O': 75, 'I-ENT': 40}
+
+DEV : O : dev_f1: 0.9970 dev_rec: 0.9976 dev_pre: 0.9963 dev_acc: 0.0000 | {'B-ENT': 62, 'I-ENT': 40}
+
+DEV : I-ENT : dev_f1: 0.9580 dev_rec: 0.9470 dev_pre: 0.9692 dev_acc: 0.0000 | {'O': 83, 'B-ENT': 58}
+
+TEST : total : test_f1: 0.9500 test_rec: 0.9533 test_pre: 0.9467 test_acc: 0.9888 | 
+
+TEST : B-ENT : test_f1: 0.9710 test_rec: 0.9743 test_pre: 0.9676 test_acc: 0.0000 | {'I-ENT': 50, 'O': 95}
+
+TEST : I-ENT : test_f1: 0.9463 test_rec: 0.9659 test_pre: 0.9275 test_acc: 0.0000 | {'B-ENT': 30, 'O': 54}
+
+TEST : O : test_f1: 0.9943 test_rec: 0.9924 test_pre: 0.9961 test_acc: 0.0000 | {'B-ENT': 154, 'I-ENT': 136}
+
+(loss: 0.2456, epoch: 20, dev F1 = 0.9646, dev acc = 0.9930, F1 on test = 0.9500, acc on test= 0.9888), saving...
+epoch: 20	 in 30 take: 1992.0740585327148 s
+ - Tot it 1406 (epoch 21): 0it [00:00, ?it/s] - Tot it 1406 (epoch 21): 67it [00:02, 33.11it/s] - Tot it 1406 (epoch 21): 128it [00:04, 32.27it/s] - Tot it 1406 (epoch 21): 195it [00:06, 32.57it/s] - Tot it 1406 (epoch 21): 262it [00:08, 32.80it/s] - Tot it 1406 (epoch 21): 329it [00:10, 32.89it/s] - Tot it 1406 (epoch 21): 396it [00:12, 33.00it/s] - Tot it 1406 (epoch 21): 455it [00:14, 29.38it/s] - Tot it 1406 (epoch 21): 510it [00:17, 26.59it/s] - Tot it 1406 (epoch 21): 562it [00:19, 24.81it/s] - Tot it 1406 (epoch 21): 611it [00:21, 23.86it/s] - Tot it 1406 (epoch 21): 659it [00:23, 23.29it/s] - Tot it 1406 (epoch 21): 706it [00:26, 22.91it/s] - Tot it 1406 (epoch 21): 752it [00:28, 22.65it/s] - Tot it 1406 (epoch 21): 798it [00:30, 22.36it/s] - Tot it 1406 (epoch 21): 843it [00:32, 22.31it/s] - Tot it 1406 (epoch 21): 888it [00:34, 21.34it/s] - Tot it 1406 (epoch 21): 931it [00:37, 17.92it/s] - Tot it 1406 (epoch 21): 969it [00:40, 16.11it/s] - Tot it 1406 (epoch 21): 1004it [00:43, 15.02it/s] - Tot it 1406 (epoch 21): 1036it [00:46, 14.29it/s] - Tot it 1406 (epoch 21): 1066it [00:48, 13.82it/s] - Tot it 1406 (epoch 21): 1095it [00:50, 13.57it/s] - Tot it 1406 (epoch 21): 1123it [00:52, 13.45it/s] - Tot it 1406 (epoch 21): 1151it [00:55, 12.52it/s] - Tot it 1406 (epoch 21): 1177it [00:59, 10.13it/s] - Tot it 1406 (epoch 21): 1200it [01:02,  9.03it/s] - Tot it 1406 (epoch 21): 1220it [01:04,  8.43it/s] - Tot it 1406 (epoch 21): 1239it [01:07,  7.82it/s] - Tot it 1406 (epoch 21): 1256it [01:10,  7.64it/s] - Tot it 1406 (epoch 21): 1273it [01:12,  7.55it/s] - Tot it 1406 (epoch 21): 1289it [01:14,  7.47it/s] - Tot it 1406 (epoch 21): 1305it [01:16,  7.34it/s] - Tot it 1406 (epoch 21): 1320it [01:19,  7.31it/s] - Tot it 1406 (epoch 21): 1335it [01:21,  7.17it/s] - Tot it 1406 (epoch 21): 1350it [01:23,  7.20it/s] - Tot it 1406 (epoch 21): 1365it [01:25,  7.20it/s] - Tot it 1406 (epoch 21): 1380it [01:27,  7.22it/s] - Tot it 1406 (epoch 21): 1395it [01:29,  7.16it/s]                                                    DEV : total : dev_f1: 0.9653 dev_rec: 0.9647 dev_pre: 0.9660 dev_acc: 0.9933 | 
+
+DEV : B-ENT : dev_f1: 0.9810 dev_rec: 0.9803 dev_pre: 0.9816 dev_acc: 0.0000 | {'O': 72, 'I-ENT': 45}
+
+DEV : O : dev_f1: 0.9970 dev_rec: 0.9975 dev_pre: 0.9966 dev_acc: 0.0000 | {'B-ENT': 63, 'I-ENT': 46}
+
+DEV : I-ENT : dev_f1: 0.9603 dev_rec: 0.9553 dev_pre: 0.9654 dev_acc: 0.0000 | {'O': 73, 'B-ENT': 46}
+
+TEST : total : test_f1: 0.9492 test_rec: 0.9513 test_pre: 0.9471 test_acc: 0.9885 | 
+
+TEST : B-ENT : test_f1: 0.9706 test_rec: 0.9727 test_pre: 0.9684 test_acc: 0.0000 | {'I-ENT': 59, 'O': 95}
+
+TEST : I-ENT : test_f1: 0.9435 test_rec: 0.9692 test_pre: 0.9192 test_acc: 0.0000 | {'B-ENT': 26, 'O': 50}
+
+TEST : O : test_f1: 0.9941 test_rec: 0.9921 test_pre: 0.9962 test_acc: 0.0000 | {'B-ENT': 153, 'I-ENT': 151}
+
+(loss: 0.2304, epoch: 21, dev F1 = 0.9653, dev acc = 0.9933, F1 on test = 0.9492, acc on test= 0.9885), saving...
+epoch: 21	 in 30 take: 2087.885468482971 s
+ - Tot it 1406 (epoch 22): 0it [00:00, ?it/s] - Tot it 1406 (epoch 22): 68it [00:02, 33.76it/s] - Tot it 1406 (epoch 22): 128it [00:04, 32.50it/s] - Tot it 1406 (epoch 22): 194it [00:06, 32.50it/s] - Tot it 1406 (epoch 22): 261it [00:08, 32.69it/s] - Tot it 1406 (epoch 22): 328it [00:10, 32.87it/s] - Tot it 1406 (epoch 22): 393it [00:12, 32.75it/s] - Tot it 1406 (epoch 22): 451it [00:14, 29.36it/s] - Tot it 1406 (epoch 22): 506it [00:17, 26.64it/s] - Tot it 1406 (epoch 22): 558it [00:19, 25.13it/s] - Tot it 1406 (epoch 22): 608it [00:21, 24.14it/s] - Tot it 1406 (epoch 22): 656it [00:23, 23.50it/s] - Tot it 1406 (epoch 22): 703it [00:25, 23.03it/s] - Tot it 1406 (epoch 22): 749it [00:28, 22.74it/s] - Tot it 1406 (epoch 22): 795it [00:30, 22.50it/s] - Tot it 1406 (epoch 22): 840it [00:32, 22.25it/s] - Tot it 1406 (epoch 22): 885it [00:34, 21.50it/s] - Tot it 1406 (epoch 22): 929it [00:37, 17.93it/s] - Tot it 1406 (epoch 22): 967it [00:40, 16.07it/s] - Tot it 1406 (epoch 22): 1002it [00:43, 15.01it/s] - Tot it 1406 (epoch 22): 1034it [00:45, 14.36it/s] - Tot it 1406 (epoch 22): 1065it [00:48, 13.92it/s] - Tot it 1406 (epoch 22): 1094it [00:50, 13.71it/s] - Tot it 1406 (epoch 22): 1123it [00:52, 13.54it/s] - Tot it 1406 (epoch 22): 1151it [00:55, 12.41it/s] - Tot it 1406 (epoch 22): 1177it [00:59, 10.19it/s] - Tot it 1406 (epoch 22): 1200it [01:02,  9.07it/s] - Tot it 1406 (epoch 22): 1220it [01:05,  8.41it/s] - Tot it 1406 (epoch 22): 1239it [01:07,  8.03it/s] - Tot it 1406 (epoch 22): 1257it [01:10,  7.81it/s] - Tot it 1406 (epoch 22): 1274it [01:12,  7.65it/s] - Tot it 1406 (epoch 22): 1290it [01:14,  7.49it/s] - Tot it 1406 (epoch 22): 1306it [01:16,  7.47it/s] - Tot it 1406 (epoch 22): 1322it [01:19,  7.39it/s] - Tot it 1406 (epoch 22): 1337it [01:21,  7.33it/s] - Tot it 1406 (epoch 22): 1353it [01:23,  7.38it/s] - Tot it 1406 (epoch 22): 1368it [01:25,  7.21it/s] - Tot it 1406 (epoch 22): 1383it [01:27,  7.26it/s] - Tot it 1406 (epoch 22): 1398it [01:29,  7.19it/s]                                                    DEV : total : dev_f1: 0.9652 dev_rec: 0.9650 dev_pre: 0.9653 dev_acc: 0.9931 | 
+
+DEV : B-ENT : dev_f1: 0.9811 dev_rec: 0.9810 dev_pre: 0.9813 dev_acc: 0.0000 | {'O': 66, 'I-ENT': 47}
+
+DEV : O : dev_f1: 0.9969 dev_rec: 0.9972 dev_pre: 0.9967 dev_acc: 0.0000 | {'B-ENT': 63, 'I-ENT': 57}
+
+DEV : I-ENT : dev_f1: 0.9572 dev_rec: 0.9538 dev_pre: 0.9606 dev_acc: 0.0000 | {'O': 75, 'B-ENT': 48}
+
+(loss: 0.2214, epoch: 22, dev F1 = 0.9652, dev acc = 0.9931)
+epoch: 22	 in 30 take: 2180.258781194687 s
+ - Tot it 1406 (epoch 23): 0it [00:00, ?it/s] - Tot it 1406 (epoch 23): 67it [00:02, 33.42it/s] - Tot it 1406 (epoch 23): 134it [00:04, 33.37it/s] - Tot it 1406 (epoch 23): 201it [00:06, 33.35it/s] - Tot it 1406 (epoch 23): 269it [00:08, 33.44it/s] - Tot it 1406 (epoch 23): 336it [00:10, 33.33it/s] - Tot it 1406 (epoch 23): 403it [00:12, 33.25it/s] - Tot it 1406 (epoch 23): 462it [00:14, 29.05it/s] - Tot it 1406 (epoch 23): 517it [00:17, 26.57it/s] - Tot it 1406 (epoch 23): 569it [00:19, 25.02it/s] - Tot it 1406 (epoch 23): 619it [00:21, 24.11it/s] - Tot it 1406 (epoch 23): 667it [00:24, 23.39it/s] - Tot it 1406 (epoch 23): 714it [00:26, 22.95it/s] - Tot it 1406 (epoch 23): 760it [00:28, 22.68it/s] - Tot it 1406 (epoch 23): 806it [00:30, 22.37it/s] - Tot it 1406 (epoch 23): 851it [00:32, 22.22it/s] - Tot it 1406 (epoch 23): 896it [00:34, 20.57it/s] - Tot it 1406 (epoch 23): 938it [00:38, 17.49it/s] - Tot it 1406 (epoch 23): 975it [00:41, 15.77it/s] - Tot it 1406 (epoch 23): 1009it [00:43, 14.84it/s] - Tot it 1406 (epoch 23): 1041it [00:46, 14.36it/s] - Tot it 1406 (epoch 23): 1071it [00:48, 13.90it/s] - Tot it 1406 (epoch 23): 1100it [00:50, 13.58it/s] - Tot it 1406 (epoch 23): 1128it [00:52, 13.49it/s] - Tot it 1406 (epoch 23): 1156it [00:55, 12.16it/s] - Tot it 1406 (epoch 23): 1182it [00:59, 10.08it/s] - Tot it 1406 (epoch 23): 1204it [01:02,  9.02it/s] - Tot it 1406 (epoch 23): 1224it [01:05,  8.33it/s] - Tot it 1406 (epoch 23): 1243it [01:07,  8.01it/s] - Tot it 1406 (epoch 23): 1261it [01:10,  7.83it/s] - Tot it 1406 (epoch 23): 1278it [01:12,  7.67it/s] - Tot it 1406 (epoch 23): 1294it [01:14,  7.47it/s] - Tot it 1406 (epoch 23): 1310it [01:16,  7.50it/s] - Tot it 1406 (epoch 23): 1326it [01:19,  7.32it/s] - Tot it 1406 (epoch 23): 1341it [01:21,  7.27it/s] - Tot it 1406 (epoch 23): 1356it [01:23,  7.17it/s] - Tot it 1406 (epoch 23): 1371it [01:25,  7.11it/s] - Tot it 1406 (epoch 23): 1386it [01:27,  7.17it/s] - Tot it 1406 (epoch 23): 1402it [01:29,  7.25it/s]                                                    DEV : total : dev_f1: 0.9645 dev_rec: 0.9635 dev_pre: 0.9656 dev_acc: 0.9930 | 
+
+DEV : B-ENT : dev_f1: 0.9800 dev_rec: 0.9790 dev_pre: 0.9811 dev_acc: 0.0000 | {'O': 81, 'I-ENT': 44}
+
+DEV : O : dev_f1: 0.9969 dev_rec: 0.9975 dev_pre: 0.9964 dev_acc: 0.0000 | {'B-ENT': 60, 'I-ENT': 47}
+
+DEV : I-ENT : dev_f1: 0.9590 dev_rec: 0.9526 dev_pre: 0.9653 dev_acc: 0.0000 | {'O': 74, 'B-ENT': 52}
+
+(loss: 0.2266, epoch: 23, dev F1 = 0.9645, dev acc = 0.9930)
+epoch: 23	 in 30 take: 2272.231614112854 s
+ - Tot it 1406 (epoch 24): 0it [00:00, ?it/s] - Tot it 1406 (epoch 24): 67it [00:02, 33.25it/s] - Tot it 1406 (epoch 24): 135it [00:04, 33.38it/s] - Tot it 1406 (epoch 24): 202it [00:06, 33.31it/s] - Tot it 1406 (epoch 24): 269it [00:08, 33.30it/s] - Tot it 1406 (epoch 24): 337it [00:10, 33.36it/s] - Tot it 1406 (epoch 24): 405it [00:12, 33.49it/s] - Tot it 1406 (epoch 24): 465it [00:14, 29.05it/s] - Tot it 1406 (epoch 24): 520it [00:17, 26.48it/s] - Tot it 1406 (epoch 24): 572it [00:19, 24.92it/s] - Tot it 1406 (epoch 24): 622it [00:21, 23.87it/s] - Tot it 1406 (epoch 24): 670it [00:24, 23.33it/s] - Tot it 1406 (epoch 24): 717it [00:26, 22.77it/s] - Tot it 1406 (epoch 24): 763it [00:28, 22.64it/s] - Tot it 1406 (epoch 24): 809it [00:30, 22.53it/s] - Tot it 1406 (epoch 24): 855it [00:32, 22.37it/s] - Tot it 1406 (epoch 24): 900it [00:35, 20.30it/s] - Tot it 1406 (epoch 24): 942it [00:38, 17.33it/s] - Tot it 1406 (epoch 24): 979it [00:41, 15.79it/s] - Tot it 1406 (epoch 24): 1013it [00:43, 14.91it/s] - Tot it 1406 (epoch 24): 1045it [00:46, 14.30it/s] - Tot it 1406 (epoch 24): 1075it [00:48, 13.89it/s] - Tot it 1406 (epoch 24): 1104it [00:50, 13.57it/s] - Tot it 1406 (epoch 24): 1132it [00:53, 13.32it/s] - Tot it 1406 (epoch 24): 1160it [00:56, 11.63it/s] - Tot it 1406 (epoch 24): 1185it [00:59,  9.78it/s] - Tot it 1406 (epoch 24): 1207it [01:02,  8.91it/s] - Tot it 1406 (epoch 24): 1227it [01:05,  8.32it/s] - Tot it 1406 (epoch 24): 1245it [01:07,  7.94it/s] - Tot it 1406 (epoch 24): 1262it [01:10,  7.76it/s] - Tot it 1406 (epoch 24): 1279it [01:12,  7.59it/s] - Tot it 1406 (epoch 24): 1295it [01:14,  7.50it/s] - Tot it 1406 (epoch 24): 1311it [01:17,  7.43it/s] - Tot it 1406 (epoch 24): 1327it [01:19,  7.36it/s] - Tot it 1406 (epoch 24): 1342it [01:21,  7.32it/s] - Tot it 1406 (epoch 24): 1357it [01:23,  7.31it/s] - Tot it 1406 (epoch 24): 1372it [01:25,  7.13it/s] - Tot it 1406 (epoch 24): 1387it [01:27,  7.12it/s] - Tot it 1406 (epoch 24): 1402it [01:30,  6.85it/s]                                                    DEV : total : dev_f1: 0.9642 dev_rec: 0.9642 dev_pre: 0.9643 dev_acc: 0.9931 | 
+
+DEV : B-ENT : dev_f1: 0.9802 dev_rec: 0.9801 dev_pre: 0.9803 dev_acc: 0.0000 | {'O': 75, 'I-ENT': 43}
+
+DEV : O : dev_f1: 0.9970 dev_rec: 0.9975 dev_pre: 0.9964 dev_acc: 0.0000 | {'B-ENT': 64, 'I-ENT': 41}
+
+DEV : I-ENT : dev_f1: 0.9590 dev_rec: 0.9504 dev_pre: 0.9679 dev_acc: 0.0000 | {'O': 79, 'B-ENT': 53}
+
+(loss: 0.2097, epoch: 24, dev F1 = 0.9642, dev acc = 0.9931)
+epoch: 24	 in 30 take: 2364.6177690029144 s
+ - Tot it 1406 (epoch 25): 0it [00:00, ?it/s] - Tot it 1406 (epoch 25): 68it [00:02, 33.67it/s] - Tot it 1406 (epoch 25): 135it [00:04, 33.59it/s] - Tot it 1406 (epoch 25): 202it [00:06, 33.46it/s] - Tot it 1406 (epoch 25): 269it [00:08, 33.46it/s] - Tot it 1406 (epoch 25): 336it [00:10, 33.44it/s] - Tot it 1406 (epoch 25): 404it [00:12, 33.47it/s] - Tot it 1406 (epoch 25): 464it [00:14, 29.08it/s] - Tot it 1406 (epoch 25): 519it [00:17, 26.44it/s] - Tot it 1406 (epoch 25): 571it [00:19, 24.83it/s] - Tot it 1406 (epoch 25): 620it [00:21, 23.96it/s] - Tot it 1406 (epoch 25): 668it [00:24, 23.36it/s] - Tot it 1406 (epoch 25): 715it [00:26, 22.94it/s] - Tot it 1406 (epoch 25): 761it [00:28, 22.60it/s] - Tot it 1406 (epoch 25): 807it [00:30, 22.38it/s] - Tot it 1406 (epoch 25): 852it [00:32, 22.30it/s] - Tot it 1406 (epoch 25): 897it [00:35, 20.32it/s] - Tot it 1406 (epoch 25): 939it [00:38, 17.35it/s] - Tot it 1406 (epoch 25): 976it [00:41, 15.73it/s] - Tot it 1406 (epoch 25): 1010it [00:43, 14.83it/s] - Tot it 1406 (epoch 25): 1042it [00:46, 14.27it/s] - Tot it 1406 (epoch 25): 1072it [00:48, 13.83it/s] - Tot it 1406 (epoch 25): 1101it [00:50, 13.55it/s] - Tot it 1406 (epoch 25): 1129it [00:52, 13.46it/s] - Tot it 1406 (epoch 25): 1157it [00:55, 11.93it/s] - Tot it 1406 (epoch 25): 1182it [00:59,  9.99it/s] - Tot it 1406 (epoch 25): 1204it [01:02,  8.88it/s] - Tot it 1406 (epoch 25): 1224it [01:05,  8.32it/s] - Tot it 1406 (epoch 25): 1242it [01:07,  7.93it/s] - Tot it 1406 (epoch 25): 1259it [01:10,  7.71it/s] - Tot it 1406 (epoch 25): 1276it [01:12,  7.53it/s] - Tot it 1406 (epoch 25): 1292it [01:14,  7.44it/s] - Tot it 1406 (epoch 25): 1308it [01:16,  7.35it/s] - Tot it 1406 (epoch 25): 1323it [01:19,  7.28it/s] - Tot it 1406 (epoch 25): 1338it [01:21,  7.31it/s] - Tot it 1406 (epoch 25): 1353it [01:23,  7.20it/s] - Tot it 1406 (epoch 25): 1368it [01:25,  7.24it/s] - Tot it 1406 (epoch 25): 1383it [01:27,  7.29it/s] - Tot it 1406 (epoch 25): 1398it [01:29,  7.27it/s]                                                    DEV : total : dev_f1: 0.9654 dev_rec: 0.9662 dev_pre: 0.9645 dev_acc: 0.9935 | 
+
+DEV : B-ENT : dev_f1: 0.9810 dev_rec: 0.9818 dev_pre: 0.9802 dev_acc: 0.0000 | {'O': 68, 'I-ENT': 40}
+
+DEV : O : dev_f1: 0.9972 dev_rec: 0.9977 dev_pre: 0.9967 dev_acc: 0.0000 | {'B-ENT': 62, 'I-ENT': 35}
+
+DEV : I-ENT : dev_f1: 0.9609 dev_rec: 0.9508 dev_pre: 0.9712 dev_acc: 0.0000 | {'O': 75, 'B-ENT': 56}
+
+TEST : total : test_f1: 0.9498 test_rec: 0.9538 test_pre: 0.9459 test_acc: 0.9887 | 
+
+TEST : B-ENT : test_f1: 0.9710 test_rec: 0.9750 test_pre: 0.9670 test_acc: 0.0000 | {'I-ENT': 52, 'O': 89}
+
+TEST : I-ENT : test_f1: 0.9451 test_rec: 0.9675 test_pre: 0.9237 test_acc: 0.0000 | {'B-ENT': 27, 'O': 53}
+
+TEST : O : test_f1: 0.9941 test_rec: 0.9920 test_pre: 0.9963 test_acc: 0.0000 | {'B-ENT': 161, 'I-ENT': 145}
+
+(loss: 0.2121, epoch: 25, dev F1 = 0.9654, dev acc = 0.9935, F1 on test = 0.9498, acc on test= 0.9887), saving...
+epoch: 25	 in 30 take: 2459.93505191803 s
+ - Tot it 1406 (epoch 26): 0it [00:00, ?it/s] - Tot it 1406 (epoch 26): 67it [00:02, 33.27it/s] - Tot it 1406 (epoch 26): 129it [00:04, 32.47it/s] - Tot it 1406 (epoch 26): 195it [00:06, 32.52it/s] - Tot it 1406 (epoch 26): 262it [00:08, 32.71it/s] - Tot it 1406 (epoch 26): 329it [00:10, 32.88it/s] - Tot it 1406 (epoch 26): 397it [00:12, 33.09it/s] - Tot it 1406 (epoch 26): 456it [00:14, 29.42it/s] - Tot it 1406 (epoch 26): 511it [00:17, 26.77it/s] - Tot it 1406 (epoch 26): 563it [00:19, 25.12it/s] - Tot it 1406 (epoch 26): 613it [00:21, 24.09it/s] - Tot it 1406 (epoch 26): 661it [00:23, 23.50it/s] - Tot it 1406 (epoch 26): 708it [00:26, 23.09it/s] - Tot it 1406 (epoch 26): 755it [00:28, 22.72it/s] - Tot it 1406 (epoch 26): 801it [00:30, 22.56it/s] - Tot it 1406 (epoch 26): 847it [00:32, 22.28it/s] - Tot it 1406 (epoch 26): 892it [00:34, 20.89it/s] - Tot it 1406 (epoch 26): 935it [00:38, 17.62it/s] - Tot it 1406 (epoch 26): 973it [00:41, 15.82it/s] - Tot it 1406 (epoch 26): 1007it [00:43, 14.82it/s] - Tot it 1406 (epoch 26): 1039it [00:46, 14.18it/s] - Tot it 1406 (epoch 26): 1069it [00:48, 13.84it/s] - Tot it 1406 (epoch 26): 1098it [00:50, 13.59it/s] - Tot it 1406 (epoch 26): 1126it [00:52, 13.43it/s] - Tot it 1406 (epoch 26): 1154it [00:55, 12.21it/s] - Tot it 1406 (epoch 26): 1180it [00:59, 10.15it/s] - Tot it 1406 (epoch 26): 1202it [01:02,  9.00it/s] - Tot it 1406 (epoch 26): 1222it [01:05,  8.34it/s] - Tot it 1406 (epoch 26): 1241it [01:07,  8.01it/s] - Tot it 1406 (epoch 26): 1259it [01:10,  7.66it/s] - Tot it 1406 (epoch 26): 1276it [01:12,  7.51it/s] - Tot it 1406 (epoch 26): 1292it [01:14,  7.48it/s] - Tot it 1406 (epoch 26): 1308it [01:17,  7.39it/s] - Tot it 1406 (epoch 26): 1324it [01:19,  7.32it/s] - Tot it 1406 (epoch 26): 1339it [01:21,  7.29it/s] - Tot it 1406 (epoch 26): 1354it [01:23,  7.31it/s] - Tot it 1406 (epoch 26): 1369it [01:25,  7.24it/s] - Tot it 1406 (epoch 26): 1384it [01:27,  7.28it/s] - Tot it 1406 (epoch 26): 1399it [01:29,  7.30it/s]                                                    DEV : total : dev_f1: 0.9644 dev_rec: 0.9648 dev_pre: 0.9640 dev_acc: 0.9933 | 
+
+DEV : B-ENT : dev_f1: 0.9812 dev_rec: 0.9817 dev_pre: 0.9808 dev_acc: 0.0000 | {'O': 64, 'I-ENT': 45}
+
+DEV : O : dev_f1: 0.9971 dev_rec: 0.9975 dev_pre: 0.9968 dev_acc: 0.0000 | {'B-ENT': 62, 'I-ENT': 45}
+
+DEV : I-ENT : dev_f1: 0.9591 dev_rec: 0.9526 dev_pre: 0.9657 dev_acc: 0.0000 | {'O': 74, 'B-ENT': 52}
+
+(loss: 0.2119, epoch: 26, dev F1 = 0.9644, dev acc = 0.9933)
+epoch: 26	 in 30 take: 2552.2570855617523 s
+ - Tot it 1406 (epoch 27): 0it [00:00, ?it/s] - Tot it 1406 (epoch 27): 67it [00:02, 33.33it/s] - Tot it 1406 (epoch 27): 134it [00:04, 33.38it/s] - Tot it 1406 (epoch 27): 201it [00:06, 33.33it/s] - Tot it 1406 (epoch 27): 268it [00:08, 33.37it/s] - Tot it 1406 (epoch 27): 335it [00:10, 33.27it/s] - Tot it 1406 (epoch 27): 403it [00:12, 33.35it/s] - Tot it 1406 (epoch 27): 462it [00:14, 28.99it/s] - Tot it 1406 (epoch 27): 517it [00:17, 26.44it/s] - Tot it 1406 (epoch 27): 569it [00:19, 24.76it/s] - Tot it 1406 (epoch 27): 618it [00:21, 23.82it/s] - Tot it 1406 (epoch 27): 666it [00:24, 23.31it/s] - Tot it 1406 (epoch 27): 713it [00:26, 22.88it/s] - Tot it 1406 (epoch 27): 759it [00:28, 22.52it/s] - Tot it 1406 (epoch 27): 805it [00:30, 22.40it/s] - Tot it 1406 (epoch 27): 850it [00:32, 22.17it/s] - Tot it 1406 (epoch 27): 895it [00:35, 20.56it/s] - Tot it 1406 (epoch 27): 937it [00:38, 17.48it/s] - Tot it 1406 (epoch 27): 974it [00:41, 15.93it/s] - Tot it 1406 (epoch 27): 1008it [00:43, 14.96it/s] - Tot it 1406 (epoch 27): 1040it [00:46, 14.31it/s] - Tot it 1406 (epoch 27): 1070it [00:48, 13.93it/s] - Tot it 1406 (epoch 27): 1099it [00:50, 13.67it/s] - Tot it 1406 (epoch 27): 1127it [00:52, 13.43it/s] - Tot it 1406 (epoch 27): 1155it [00:55, 12.14it/s] - Tot it 1406 (epoch 27): 1181it [00:59, 10.14it/s] - Tot it 1406 (epoch 27): 1203it [01:02,  9.10it/s] - Tot it 1406 (epoch 27): 1223it [01:04,  8.46it/s] - Tot it 1406 (epoch 27): 1242it [01:07,  7.98it/s] - Tot it 1406 (epoch 27): 1259it [01:09,  7.83it/s] - Tot it 1406 (epoch 27): 1276it [01:12,  7.62it/s] - Tot it 1406 (epoch 27): 1292it [01:14,  7.51it/s] - Tot it 1406 (epoch 27): 1308it [01:16,  7.22it/s] - Tot it 1406 (epoch 27): 1323it [01:18,  7.22it/s] - Tot it 1406 (epoch 27): 1338it [01:21,  7.23it/s] - Tot it 1406 (epoch 27): 1353it [01:23,  7.18it/s] - Tot it 1406 (epoch 27): 1368it [01:25,  7.19it/s] - Tot it 1406 (epoch 27): 1383it [01:27,  7.22it/s] - Tot it 1406 (epoch 27): 1398it [01:29,  7.28it/s]                                                    DEV : total : dev_f1: 0.9656 dev_rec: 0.9647 dev_pre: 0.9666 dev_acc: 0.9933 | 
+
+DEV : B-ENT : dev_f1: 0.9808 dev_rec: 0.9798 dev_pre: 0.9818 dev_acc: 0.0000 | {'O': 76, 'I-ENT': 44}
+
+DEV : O : dev_f1: 0.9971 dev_rec: 0.9978 dev_pre: 0.9964 dev_acc: 0.0000 | {'B-ENT': 58, 'I-ENT': 38}
+
+DEV : I-ENT : dev_f1: 0.9598 dev_rec: 0.9511 dev_pre: 0.9686 dev_acc: 0.0000 | {'O': 80, 'B-ENT': 50}
+
+TEST : total : test_f1: 0.9506 test_rec: 0.9531 test_pre: 0.9480 test_acc: 0.9888 | 
+
+TEST : B-ENT : test_f1: 0.9714 test_rec: 0.9740 test_pre: 0.9688 test_acc: 0.0000 | {'I-ENT': 54, 'O': 93}
+
+TEST : I-ENT : test_f1: 0.9465 test_rec: 0.9700 test_pre: 0.9242 test_acc: 0.0000 | {'B-ENT': 22, 'O': 52}
+
+TEST : O : test_f1: 0.9942 test_rec: 0.9923 test_pre: 0.9962 test_acc: 0.0000 | {'B-ENT': 155, 'I-ENT': 142}
+
+(loss: 0.1992, epoch: 27, dev F1 = 0.9656, dev acc = 0.9933, F1 on test = 0.9506, acc on test= 0.9888), saving...
+epoch: 27	 in 30 take: 2647.4710965156555 s
+ - Tot it 1406 (epoch 28): 0it [00:00, ?it/s] - Tot it 1406 (epoch 28): 68it [00:02, 33.63it/s] - Tot it 1406 (epoch 28): 136it [00:04, 33.61it/s] - Tot it 1406 (epoch 28): 196it [00:06, 32.37it/s] - Tot it 1406 (epoch 28): 263it [00:08, 32.59it/s] - Tot it 1406 (epoch 28): 330it [00:10, 32.79it/s] - Tot it 1406 (epoch 28): 397it [00:12, 32.89it/s] - Tot it 1406 (epoch 28): 455it [00:14, 29.17it/s] - Tot it 1406 (epoch 28): 510it [00:17, 25.24it/s] - Tot it 1406 (epoch 28): 560it [00:19, 23.62it/s] - Tot it 1406 (epoch 28): 608it [00:22, 23.08it/s] - Tot it 1406 (epoch 28): 655it [00:24, 22.63it/s] - Tot it 1406 (epoch 28): 701it [00:26, 22.35it/s] - Tot it 1406 (epoch 28): 746it [00:28, 22.29it/s] - Tot it 1406 (epoch 28): 791it [00:30, 22.30it/s] - Tot it 1406 (epoch 28): 836it [00:32, 22.18it/s] - Tot it 1406 (epoch 28): 881it [00:34, 21.92it/s] - Tot it 1406 (epoch 28): 925it [00:38, 18.18it/s] - Tot it 1406 (epoch 28): 964it [00:40, 16.31it/s] - Tot it 1406 (epoch 28): 999it [00:43, 15.21it/s] - Tot it 1406 (epoch 28): 1032it [00:46, 14.46it/s] - Tot it 1406 (epoch 28): 1063it [00:48, 13.92it/s] - Tot it 1406 (epoch 28): 1092it [00:50, 13.63it/s] - Tot it 1406 (epoch 28): 1121it [00:53, 13.43it/s] - Tot it 1406 (epoch 28): 1149it [00:55, 12.74it/s] - Tot it 1406 (epoch 28): 1176it [00:59, 10.31it/s] - Tot it 1406 (epoch 28): 1199it [01:02,  9.14it/s] - Tot it 1406 (epoch 28): 1220it [01:05,  8.47it/s] - Tot it 1406 (epoch 28): 1239it [01:08,  8.06it/s] - Tot it 1406 (epoch 28): 1257it [01:10,  7.61it/s] - Tot it 1406 (epoch 28): 1274it [01:13,  7.39it/s] - Tot it 1406 (epoch 28): 1290it [01:15,  7.37it/s] - Tot it 1406 (epoch 28): 1306it [01:17,  7.29it/s] - Tot it 1406 (epoch 28): 1321it [01:19,  7.29it/s] - Tot it 1406 (epoch 28): 1336it [01:21,  7.26it/s] - Tot it 1406 (epoch 28): 1351it [01:23,  7.31it/s] - Tot it 1406 (epoch 28): 1366it [01:25,  7.33it/s] - Tot it 1406 (epoch 28): 1381it [01:27,  7.29it/s] - Tot it 1406 (epoch 28): 1396it [01:29,  7.21it/s]                                                    DEV : total : dev_f1: 0.9650 dev_rec: 0.9648 dev_pre: 0.9652 dev_acc: 0.9932 | 
+
+DEV : B-ENT : dev_f1: 0.9806 dev_rec: 0.9805 dev_pre: 0.9808 dev_acc: 0.0000 | {'O': 73, 'I-ENT': 43}
+
+DEV : O : dev_f1: 0.9970 dev_rec: 0.9976 dev_pre: 0.9964 dev_acc: 0.0000 | {'B-ENT': 63, 'I-ENT': 40}
+
+DEV : I-ENT : dev_f1: 0.9596 dev_rec: 0.9511 dev_pre: 0.9682 dev_acc: 0.0000 | {'O': 79, 'B-ENT': 51}
+
+(loss: 0.1989, epoch: 28, dev F1 = 0.9650, dev acc = 0.9932)
+epoch: 28	 in 30 take: 2740.482766389847 s
+ - Tot it 1406 (epoch 29): 0it [00:00, ?it/s] - Tot it 1406 (epoch 29): 67it [00:02, 33.12it/s] - Tot it 1406 (epoch 29): 133it [00:04, 33.04it/s] - Tot it 1406 (epoch 29): 201it [00:06, 33.24it/s] - Tot it 1406 (epoch 29): 268it [00:08, 33.25it/s] - Tot it 1406 (epoch 29): 335it [00:10, 33.28it/s] - Tot it 1406 (epoch 29): 402it [00:12, 33.25it/s] - Tot it 1406 (epoch 29): 461it [00:14, 28.97it/s] - Tot it 1406 (epoch 29): 516it [00:17, 26.32it/s] - Tot it 1406 (epoch 29): 568it [00:19, 24.85it/s] - Tot it 1406 (epoch 29): 617it [00:21, 23.97it/s] - Tot it 1406 (epoch 29): 665it [00:24, 23.34it/s] - Tot it 1406 (epoch 29): 712it [00:26, 23.03it/s] - Tot it 1406 (epoch 29): 758it [00:28, 22.76it/s] - Tot it 1406 (epoch 29): 804it [00:30, 22.46it/s] - Tot it 1406 (epoch 29): 849it [00:32, 22.26it/s] - Tot it 1406 (epoch 29): 894it [00:34, 20.66it/s] - Tot it 1406 (epoch 29): 936it [00:38, 17.58it/s] - Tot it 1406 (epoch 29): 974it [00:41, 15.81it/s] - Tot it 1406 (epoch 29): 1008it [00:43, 14.81it/s] - Tot it 1406 (epoch 29): 1040it [00:46, 14.26it/s] - Tot it 1406 (epoch 29): 1070it [00:48, 13.90it/s] - Tot it 1406 (epoch 29): 1099it [00:50, 13.61it/s] - Tot it 1406 (epoch 29): 1127it [00:52, 13.45it/s] - Tot it 1406 (epoch 29): 1155it [00:55, 12.15it/s] - Tot it 1406 (epoch 29): 1181it [00:59, 10.07it/s] - Tot it 1406 (epoch 29): 1203it [01:02,  9.08it/s] - Tot it 1406 (epoch 29): 1223it [01:05,  8.27it/s] - Tot it 1406 (epoch 29): 1241it [01:07,  7.96it/s] - Tot it 1406 (epoch 29): 1258it [01:10,  7.65it/s] - Tot it 1406 (epoch 29): 1275it [01:12,  7.60it/s] - Tot it 1406 (epoch 29): 1291it [01:14,  7.49it/s] - Tot it 1406 (epoch 29): 1307it [01:16,  7.45it/s] - Tot it 1406 (epoch 29): 1323it [01:18,  7.39it/s] - Tot it 1406 (epoch 29): 1338it [01:20,  7.36it/s] - Tot it 1406 (epoch 29): 1353it [01:23,  7.32it/s] - Tot it 1406 (epoch 29): 1368it [01:25,  7.27it/s] - Tot it 1406 (epoch 29): 1383it [01:27,  7.23it/s] - Tot it 1406 (epoch 29): 1398it [01:29,  7.13it/s]                                                    DEV : total : dev_f1: 0.9671 dev_rec: 0.9670 dev_pre: 0.9672 dev_acc: 0.9936 | 
+
+DEV : B-ENT : dev_f1: 0.9819 dev_rec: 0.9818 dev_pre: 0.9820 dev_acc: 0.0000 | {'O': 67, 'I-ENT': 41}
+
+DEV : O : dev_f1: 0.9972 dev_rec: 0.9976 dev_pre: 0.9968 dev_acc: 0.0000 | {'B-ENT': 59, 'I-ENT': 43}
+
+DEV : I-ENT : dev_f1: 0.9620 dev_rec: 0.9560 dev_pre: 0.9680 dev_acc: 0.0000 | {'O': 69, 'B-ENT': 48}
+
+TEST : total : test_f1: 0.9523 test_rec: 0.9552 test_pre: 0.9493 test_acc: 0.9892 | 
+
+TEST : B-ENT : test_f1: 0.9724 test_rec: 0.9754 test_pre: 0.9694 test_acc: 0.0000 | {'I-ENT': 54, 'O': 85}
+
+TEST : I-ENT : test_f1: 0.9480 test_rec: 0.9720 test_pre: 0.9251 test_acc: 0.0000 | {'B-ENT': 19, 'O': 50}
+
+TEST : O : test_f1: 0.9944 test_rec: 0.9923 test_pre: 0.9965 test_acc: 0.0000 | {'B-ENT': 155, 'I-ENT': 140}
+
+(loss: 0.1965, epoch: 29, dev F1 = 0.9671, dev acc = 0.9936, F1 on test = 0.9523, acc on test= 0.9892), saving...
+epoch: 29	 in 30 take: 2835.843050956726 s
+setting:
+Namespace(batch_size=10, caseless=True, char_dim=30, char_hidden=300, char_layers=1, checkpoint='checkpoint/ner_', clip_grad=5.0, co_train=True, dev_file='./inputs/remapped/valid.txt', drop_out=0.55, emb_file='/kaggle/input/glove6b100dtxt/glove.6B.100d.txt', epoch=30, eva_matrix='fa', fine_tune=False, gpu=0, high_way=True, highway_layers=1, lambda0=1, least_iters=100, load_check_point='', load_opt=False, lr=0.015, lr_decay=0.05, mini_count=5, momentum=0.9, patience=15, rand_embedding=False, shrink_embedding=False, small_crf=True, start_epoch=29, test_file='./inputs/remapped/test.txt', train_file='./inputs/remapped/train.txt', unk='unk', update='sgd', word_dim=100, word_hidden=300, word_layers=1)
