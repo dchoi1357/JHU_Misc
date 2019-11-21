@@ -1,0 +1,29 @@
+nvcc --version
+wget https://raw.githubusercontent.com/awslabs/sockeye/master/requirements/requirements.gpu-cu100.txt
+sudo pip3 install sockeye --no-deps -r requirements.gpu-cu100.txt
+
+unzip tutorial.zip
+
+python3 -m sockeye.train -d ~/tutorial/train_data \
+    -vs ~/tutorial/newstest2016.tc.BPE.de \
+    -vt ~/tutorial/newstest2016.tc.BPE.en \
+    --encoder rnn --decoder rnn --num-embed 256 \
+    --rnn-num-hidden 256 --rnn-attention-type dot \
+    --rnn-cell-type lstm --initial-learning-rate 0.00025 \
+    --num-layers 4 --max-seq-len 40 --decode-and-evaluate 500 \
+    --decode-and-evaluate-use-cpu --optimizer adam \
+    --batch-size 512 --checkpoint-frequency 2000 \
+    --max-num-checkpoint-not-improved 20 \
+    --keep-last-params 10 \
+    -o wmt_model
+
+sudo pip3 install subword-nmt
+
+echo "wir sagen es sehr deutlich: illegaler Grenzübergang ist ein Verbrechen." \
+    | subword-nmt apply-bpe -c ~/tutorial/bpe.codes \
+    --vocabulary ~/tutorial/bpe.vocab.en --vocabulary-threshold 50 \
+    | python3 -m sockeye.translate -m wmt_model 
+
+
+
+
